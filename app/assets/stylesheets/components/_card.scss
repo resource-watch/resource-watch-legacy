@@ -1,0 +1,104 @@
+.cards {
+  margin-bottom: 1rem;
+}
+
+.card {
+  margin-bottom: 2rem;
+
+  background: $bg-color-4;
+
+  border: 1px solid $border-color-1;
+
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.09);
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h3,
+  h3 > a {
+    color: $text-color-2;
+  }
+
+  p {
+    font-size: $small-font-size;
+    font-weight: 400;
+    color: $text-color-5;
+    margin-top: rem(6px);
+    margin-bottom: rem(8px);
+    line-height: $normal-font-size;
+  }
+
+  .chart {
+    height: 190px;
+    background-color: $bg-color-3;
+  }
+
+  .detail {
+    padding: 1rem;
+
+    > .actions {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      
+      > .action {
+        margin-right: rem(10px);
+
+        &.favorite {
+          font-size: $small-font-size;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  > .actions {
+    padding: rem(4);
+
+    > .action {
+      width: 100%;
+      height: auto;
+      padding: rem(8px);
+    }
+  }
+
+  &.list {
+    width: 100%;
+    display: inline-block;
+    box-shadow: none;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    margin-bottom: 0;
+
+    .chart {
+      display: none;
+    }
+
+    .detail {
+      width: 50%;
+      display: inline-block;
+      float: left;
+
+      > .actions {
+        > .action {
+          margin-left: 0;
+        }
+      }
+    }
+
+    > .actions {
+      width: 50%;
+      display: inline-block;
+      float: right;
+
+      > .action {
+        max-width: rem(220px);
+        float: right;
+        margin-top: rem(15px);
+      }
+    }
+  }
+}

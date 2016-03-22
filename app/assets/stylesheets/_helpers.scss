@@ -1,0 +1,19 @@
+.-vcenter {
+  display: flex;
+  align-items: center;
+}
+
+.-center {
+  display: flex;
+  justify-content: center;
+}
+
+.-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.-right {
+  display: flex;
+  justify-content: flex-end;
+}

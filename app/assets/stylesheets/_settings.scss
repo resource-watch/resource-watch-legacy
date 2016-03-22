@@ -1,0 +1,56 @@
+// Fonts
+$global-font-family: 'Lato', Arial, sans-serif;
+$global-line-height: 1.5;
+
+$xlarge-font-size: rem(48);
+$large-font-size: rem(26);
+$medium-font-size: rem(19);
+$normal-font-size: rem(16);
+$small-font-size: rem(14);
+$tiny-font-size: rem(12);
+$ultra-small-font-size: rem(11);
+
+// Sizes
+$global-width: rem(1200);
+$global-radius: 4px;
+
+$small-screen: rem(768);
+$medium-screen: rem(992);
+$large-screen: rem(1200);
+
+
+// Colors
+$dark-pink: #c32d7b;
+$light-blue: #3bb2d0;
+$frog-green: #65b60d;
+$mango: #fab72e;
+
+$blue-gray: #3A3F44;
+$dark-gray: #999ba1;
+$medium-gray: #e3e4e6;
+$light-medium-gray: #C5C8CC;
+$light-gray: #f4f5f6;
+$white: #fefefe;
+$black: #393f44;
+
+// Theme
+$body-background: $white;
+$body-font-color: $black;
+
+$text-color-1: $black;
+$text-color-2: $light-blue;
+$text-color-3: $white;
+$text-color-4: $dark-gray;
+$text-color-5: $blue-gray;
+$text-color-6: $frog-green;
+$text-color-7: $dark-pink;
+
+$bg-color-1: $dark-pink;
+$bg-color-2: $light-blue;
+$bg-color-3: $light-gray;
+$bg-color-4: $white;
+$bg-color-5: $medium-gray;
+$bg-color-6: $light-medium-gray;
+$bg-color-7: $blue-gray;
+
+$border-color-1: $medium-gray;

@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col -xs-12">
+    <h1>Countries dashboard</h1>
+    <%= form_tag nil, id: 'searchForm' do %>
+      <div class="input-group">
+        <%= search_field_tag :q, nil, placeholder: 'Search country' %>
+        <%= submit_tag "Search" %>
+      </div>
+    <% end %>
+    <div id="countries"></div>
+  </div>
+</div>

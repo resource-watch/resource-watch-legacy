@@ -1,0 +1,40 @@
+<header class="l-header">
+
+  <%# Header top %>
+  <div class="l-top-header">
+    <div class="row">
+      <div class="col -xs-12 -sm-6 -sm-offset-6">
+        <%# Language navigation %>
+        <ul class="lang-nav">
+          <li><%= link_to 'English', '/en' %></li>
+          <li><%= link_to 'France', '/fr' %></li>
+          <li><%= link_to 'Germany', '/ge' %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <%# Header navigation bar %>
+  <div class="l-nav-header -vcenter">
+    <div class="row -vcenter">
+      <div class="col -xs-12 -sm-4">
+        <%# Brand zone %>
+        <%= link_to root_path, class: "brand" do %>
+          <svg class="icon icon-logo">
+            <use xlink:href="#icon-logo"></use>
+          </svg>
+        <% end %>
+      </div>
+      <div class="col -xs-12 -sm-8">
+        <%# Main navigation %>
+        <nav class="main-nav">
+          <ul>
+            <li><%= link_to t('titles.explore'), explore_index_path %></li>
+            <li><%= link_to t('titles.dashboards'), countries_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</header>

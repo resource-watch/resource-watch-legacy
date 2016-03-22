@@ -1,0 +1,36 @@
+// http://bourbon.io/docs/#text-inputs
+#{$all-text-inputs} {
+  padding: 0 rem(15);
+  height: 45px;
+
+  font-size: $medium-font-size;
+
+  border: 1px solid $border-color-1;
+  border-radius: $global-radius;
+
+  background-color: white;
+
+  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+
+  vertical-align: middle;
+
+  @include placeholder {
+    color: $text-color-4;
+  }
+}
+
+#{$all-text-inputs-focus} {
+  outline: 0;
+}
+
+.input-group {
+  #{$all-text-inputs} {
+    width: calc(100% - 144px);
+  }
+  input + #{$all-buttons} {
+    margin-left: -5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

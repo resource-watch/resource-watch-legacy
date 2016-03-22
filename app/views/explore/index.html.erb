@@ -1,0 +1,17 @@
+<div class="row -expanded">
+  <div class="col -xs-12 -sm-7">
+    <h1><%= t('titles.explore') %></h1>
+    <%= form_tag nil, id: 'searchForm' do %>
+      <div class="input-group">
+        <%= search_field_tag :q, nil, placeholder: 'Search datasets' %>
+        <%= submit_tag "Search" %>
+      </div>
+    <% end %>
+    <div id="exploreNavigation"></div>
+    <div id="exploreDashboard"></div>
+    <div id="pagination"></div>
+  </div>
+  <div class="col -xs-12 -sm-5">
+    <div id="map"></div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+.l-header {
+  background-color: $bg-color-1;
+
+  a {
+    color: $text-color-3;
+  }
+}
+
+.l-top-header {
+  display: flex;
+  height: rem(30);
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.10);
+
+  .lang-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    list-style: none;
+  }
+}
+
+.l-nav-header {
+  height: rem(100);
+
+  .brand {
+    display: block;
+  }
+
+  .main-nav ul {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    list-style: none;
+
+    li {
+      margin-left: 2rem;
+    }
+  }
+}

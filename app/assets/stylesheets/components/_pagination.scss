@@ -1,0 +1,30 @@
+.pagination {
+  ul {
+    display: flex;
+    justify-content: center;
+    margin: 1rem -0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 0 0.5rem;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+
+    color: $text-color-4;
+
+    border-radius: $global-radius;
+  }
+
+  .current a {
+    background-color: $bg-color-2;
+    color: $text-color-3;
+  }
+}

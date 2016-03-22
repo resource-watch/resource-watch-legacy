@@ -1,0 +1,89 @@
+<footer class="l-footer">
+
+  <%# Footer top %>
+  <div class="l-top-footer">
+    <div class="row">
+      <div class="col -xs-12 -sm-1">
+        <svg class="icon icon-symbol-grey">
+          <use xlink:href="#icon-symbol-grey"></use>
+        </svg>
+      </div>
+      <div class="col -xs-12 -sm-11">
+        <%# Footer navigation %>
+        <ul class="footer-nav">
+          <li>
+            <a href="#">Insights</a>
+            <ul>
+              <li><a href="#">Popular insights</a></li>
+              <li><a href="#">Collections</a></li>
+              <li><a href="#">Create an insight</a></li>
+            </ul>
+          </li>
+          <li>
+            <%= link_to t('titles.explore'), explore_index_path %>
+            <ul>
+              <li><a href="#">Data map</a></li>
+              <li><a href="#">Dataset</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Apps</a>
+            <ul>
+              <li><a href="#">Popular apps</a></li>
+              <li><a href="#">iOS apps</a></li>
+              <li><a href="#">Android apps</a></li>
+              <li><a href="#">Web apps</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Get Involved</a>
+            <ul>
+              <li><a href="#">Create insights</a></li>
+              <li><a href="#">Share data</a></li>
+              <li><a href="#">Develop an app</a></li>
+              <li><a href="#">Help improve the data</a></li>
+              <li><a href="#">Become a partner</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Help</a>
+            <ul>
+              <li><a href="#">Site tour</a></li>
+              <li><a href="#">Help center</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">More</a>
+            <ul>
+              <li><%= link_to t('titles.dashboards'), countries_path %></li>
+              <li><a href="#">Planet pulse</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <%# Footer bottom %>
+  <div class="l-bottom-footer">
+    <div class="row">
+      <div class="col -xs-12 -sm-6">
+        <%# Bottom navigation %>
+        <ul class="bottom-nav">
+          <li><%= link_to t('titles.terms'), terms_path %></li>
+          <li>-</li>
+          <li><%= link_to t('titles.privacy'), privacy_path %></li>
+        </ul>
+      </div>
+      <div class="col -xs-12 -sm-6">
+        <%# Copy %>
+        <p class="copy">© <%= Time.now.strftime('%Y') %> - <%= @site_name %></p>
+      </div>
+    </div>
+  </div>
+
+</footer>

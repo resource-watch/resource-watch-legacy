@@ -1,0 +1,59 @@
+.filters {
+  margin-top: rem(22px);
+  padding: rem(15px) 0 rem(10px) 0;
+
+  .results {
+    font-size: $small-font-size;
+    color: $text-color-5;
+    margin-top: rem(5px);
+  }
+
+  .view-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > .action {
+      width: rem(30px);
+      height: rem(20px);
+      display: flex;
+      justify-content: center;
+      padding-top: rem(3px);
+      cursor: pointer;
+
+      > .icon {
+        width: rem(15px);
+        height: rem(13px);
+        fill: $bg-color-6;
+        pointer-events: none;
+
+        &.icon-list {
+          width: rem(14px);
+        }
+      }
+
+      &.selected {
+        > .icon {
+          fill: $bg-color-7;
+        }
+      }
+
+      &:hover {
+        > .icon {
+          fill: $bg-color-7;
+        }
+      }
+    }
+  }
+
+  .filter {
+    margin-left: rem(15px);
+    margin-right: rem(2px);
+
+    .action {
+      padding: rem(5px) rem(12px);
+      min-width: auto;
+      height: auto;
+    }
+  }
+}

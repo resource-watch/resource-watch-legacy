@@ -1,0 +1,59 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: auto;
+
+  color: $body-font-color;
+  font-family: $global-font-family;
+  font-size: $normal-font-size;
+  line-height: $global-line-height;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: $body-background;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: $xlarge-font-size;
+  font-weight: lighter;
+}
+
+h2 {
+  font-size: $large-font-size;
+}
+
+h3 {
+  font-size: $normal-font-size;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+a {
+  color: $text-color-2;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

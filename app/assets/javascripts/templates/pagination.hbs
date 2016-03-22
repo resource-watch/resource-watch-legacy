@@ -1,0 +1,11 @@
+{{#if pages.length}}
+  <ul role="navigation">
+    {{#each pages}}
+      {{#if current}}
+        <li class="current"><a href="#page:{{page}}" data-page="{{page}}">{{page}}</a></li>
+      {{else}}
+        <li><a href="#page:{{page}}" data-page="{{page}}">{{page}}</a></li>
+      {{/if}}
+    {{/each}}
+  </ul>
+{{/if}}

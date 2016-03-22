@@ -1,0 +1,17 @@
+.card-detail {
+  width: 100%;
+
+  .chart {
+    width: 100%;
+    height: rem(350px);
+    background: $bg-color-2;
+  }
+
+  .actions {
+    margin: rem(15px) 0;
+
+    .action {
+      margin-bottom: rem(15px);
+    }
+  }
+}

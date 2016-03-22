@@ -1,0 +1,72 @@
+// http://bourbon.io/docs/#buttons-variable
+#{$all-buttons} {
+  min-width: rem(144);
+  height: rem(45);
+  padding: 0;
+
+  color: $text-color-3;
+  font-size: $tiny-font-size;
+  font-weight: 700;
+  letter-spacing: rem(0.92px);
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+
+  border: 0;
+  border-radius: $global-radius;
+
+  background-color: $bg-color-1;
+  @include background(linear-gradient($bg-color-1, darken($bg-color-1, 5)));
+
+  vertical-align: middle;
+  transition: background .3s ease;
+
+  &.-gray {
+    color: $text-color-4;
+    text-shadow: none;
+    background: $bg-color-5;
+
+    &:hover {
+      color: $text-color-3;
+      background-color: $bg-color-1;
+      @include background(linear-gradient($bg-color-1, darken($bg-color-1, 5)));
+    }
+  }
+
+  &.-plain {
+    background: none;
+    text-shadow: none;
+    min-width: initial;
+    height: auto;
+    color: $light-medium-gray;
+    font-size: $ultra-small-font-size;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  &.-wicon {
+    .icon {
+      width: rem(19px);
+      height: rem(14px);
+    }
+  }
+
+  &.-disabled {
+    color: $text-color-4;
+    text-shadow: none;
+    background: $bg-color-5;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.-green {
+    color: $text-color-6;
+  }
+
+  &.-pink {
+    color: $text-color-7;
+  }
+}
+
+#{$all-buttons-focus} {
+  outline: 0;
+}

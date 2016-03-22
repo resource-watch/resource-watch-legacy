@@ -1,0 +1,88 @@
+$grid-columns: 12;
+$grid-gutter: 1.875rem;
+
+@mixin column($column) {
+  flex: 0 0 (100% / $grid-columns * $column);
+  max-width: (100% / $grid-columns * $column);
+}
+
+@mixin offset($column) {
+  margin-left: (100% / $grid-columns * $column);
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+  flex-basis: 100%;
+  max-width: $global-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include clearfix;
+
+  .row {
+    margin-left: -($grid-gutter / 2);
+    margin-right: -($grid-gutter / 2);
+  }
+
+  &.-expanded {
+    max-width: none;
+  }
+
+  &.-vcenter {
+    align-items: center;
+  }
+}
+
+.col {
+  position: relative;
+  flex: 1 1 0px;
+  padding-left: $grid-gutter / 2;
+  padding-right: $grid-gutter / 2;
+
+  &.-right {
+    margin-left: auto;
+  }
+}
+
+@for $column from 1 through $grid-columns {
+  .col.-xs-#{$column} {
+    @include column($column);
+  }
+  .col.-xs-offset-#{$column} {
+    @include offset($column);
+  }
+}
+
+@media screen and (min-width: $small-screen) {
+  @for $column from 1 through $grid-columns {
+    .col.-sm-#{$column} {
+      @include column($column);
+    }
+    .col.-sm-offset-#{$column} {
+      @include offset($column);
+    }
+  }
+}
+
+@media screen and (min-width: $medium-screen) {
+  @for $column from 1 through $grid-columns {
+    .col.-md-#{$column} {
+      @include column($column);
+    }
+    .col.-md-offset-#{$column} {
+      @include offset($column);
+    }
+  }
+}
+
+@media screen and (min-width: $large-screen) {
+  @for $column from 1 through $grid-columns {
+    .col.-lg-#{$column} {
+      @include column($column);
+    }
+    .col.-lg-offset-#{$column} {
+      @include offset($column);
+    }
+  }
+}

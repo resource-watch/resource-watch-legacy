@@ -1,0 +1,13 @@
+<div class="row">
+  {{#if countries.length}}
+    {{#each countries}}
+      <div class="col -xs-6 -sm-6 -md-4 -lg-3">
+        <div class="js-country"></div>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="col -xs-12">
+      <p>No countries found.</p>
+    </div>
+  {{/if}}
+</div>
