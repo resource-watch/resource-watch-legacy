@@ -68,6 +68,10 @@
 
       // Creating map
       this.map = new App.View.Map({ el: '#map' });
+      this.lenged = new App.View.Legend({
+        el: '#legend',
+        data: []
+      });
 
       // Settings events
       this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
