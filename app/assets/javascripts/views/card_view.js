@@ -16,7 +16,7 @@
 
     state: {
       mode: 'grid'
-    },    
+    },
 
     initialize: function(settings) {
       if (!settings.data) {
@@ -57,8 +57,8 @@
     },
 
     _addToMap: function() {
-      var layers = this.data.attributes.layers;
-      this.trigger('card:layers');
+      var layer = this.data.attributes.layer;
+      App.Core.Events.trigger('card:layer', layer);
     }
 
   });

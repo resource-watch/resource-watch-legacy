@@ -10,13 +10,17 @@
       '(q::q)/(page::page)(/)': 'exploreDashboard'
     },
 
+    props: {
+      itemsPerPage: 6
+    },
+
     /**
-     * Render cards and charts
-     * @param {Number} page
+     * Set main parameters and starts
+     * the explore section
+     * @param {String} query search
+     * @param {Number} page number
      */
     exploreDashboard: function(q, page) {
-      var ITEMS_PER_PAGE = 6;
-
       // Converting q and page param
       if (!page && q) {
         page = q;
@@ -24,16 +28,36 @@
       }
       this.params.set({ page: Number(page || 1), q: q });
 
+      // Get data
+      this._getData();
+
+      // Shared components
+      this._sharedComponents();
+
+      // Creating dashboard
+      this._dashboardComponents();
+
+      // Create map components
+      this._mapComponents();
+
+      // Settings events
+      this.listenTo(this.params, 'change', this.updateParams);
+    },
+
+    _getData() {
       // Complete widgets collection
       // TODO: fetch data instead fixtures data
-      var widgetsData = this.widgets = new App.Collection.Widgets();
+      this.widgetsData = new App.Collection.Widgets();
       // Generating fixtures
-      widgetsData.fixtures();
-      if (this.params.attributes.q) {
-        widgetsData = widgetsData.search(this.params.attributes.q);
-      }
+      this.widgetsData.fixtures();
 
-      // Creating search form
+      if (this.params.attributes.q) {
+        this.widgetsData = this.widgetsData.search(this.params.attributes.q);
+      }
+    },
+
+    _sharedComponents: function() {
+      // Search form
       this.searchForm = new App.View.SearchForm({
         el: '#searchForm',
         props: {
@@ -41,43 +65,49 @@
         }
       });
 
-      // Creating pagination
+      // Filters navigation
+      this.exploreNavigation = new App.View.ExploreNavigation({
+        el: '#exploreNavigation',
+        data: this.widgetsData
+      });
+
+      // Pagination
       this.pagination = new App.View.Pagination({
         el: '#pagination',
         props: {
-          itemsPerPage: ITEMS_PER_PAGE,
+          itemsPerPage: this.props.itemsPerPage,
           current: this.params.attributes.page,
-          pages: Math.ceil(widgetsData.length / ITEMS_PER_PAGE)
+          pages: Math.ceil(this.widgetsData.length / this.props.itemsPerPage)
         }
       });
 
-      // Creating dashboard
+      // Setting events
+      this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
+      this.listenTo(this.pagination.state, 'change:current', this.setPage);
+      this.listenTo(this.exploreNavigation.state, 'change:mode', this.setMode);
+    },
+
+    _dashboardComponents: function() {
       var pageRange = this.pagination.getPageRange();
       // Slicing collection by current page
-      widgetsData = widgetsData
+      this.widgetsData
         .slice(pageRange.startIndex, pageRange.endIndex);
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
-        data: widgetsData
+        data: this.widgetsData
       });
+    },
 
-      this.exploreNavigation = new App.View.ExploreNavigation({
-        el: '#exploreNavigation',
-        data: widgetsData
-      });
-
+    _mapComponents: function() {
       // Creating map
-      this.map = new App.View.Map({ el: '#map' });
+      this.map = new App.View.Map({
+        el: '#map'
+      });
+
       this.lenged = new App.View.Legend({
         el: '#legend',
         data: []
       });
-
-      // Settings events
-      this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
-      this.listenTo(this.pagination.state, 'change:current', this.setPage);
-      this.listenTo(this.exploreNavigation.state, 'change:mode', this.setMode);
-      this.listenTo(this.params, 'change', this.updateParams);
     },
 
     /**
