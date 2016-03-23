@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :explore, only: [:index, :show]
   resources :countries, only: [:index, :show]
 
+  # Planet pulse
+  get 'planet-pulse', to: 'planet_pulse#index', as: 'planet_pulse'
+
   # Static pages
   get 'terms-of-service', to: 'static#terms', as: 'terms'
   get 'privacy', to: 'static#privacy', as: 'privacy'
