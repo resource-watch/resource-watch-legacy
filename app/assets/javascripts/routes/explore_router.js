@@ -15,7 +15,7 @@
     },
 
     /**
-     * Set main parameters and starts
+     * Sets main parameters and starts
      * the explore section
      * @param {String} query search
      * @param {Number} page number
@@ -44,18 +44,26 @@
       this.listenTo(this.params, 'change', this.updateParams);
     },
 
+    /**
+     * Gets main data for the components
+     */
     _getData() {
       // Complete widgets collection
       // TODO: fetch data instead fixtures data
-      this.widgetsData = new App.Collection.Widgets();
+      this.widgets = new App.Collection.Widgets();
       // Generating fixtures
-      this.widgetsData.fixtures();
+      this.widgets.fixtures();
+      this.widgetsData = this.widgets;
 
       if (this.params.attributes.q) {
-        this.widgetsData = this.widgetsData.search(this.params.attributes.q);
+        this.widgetsData = this.widgets.search(this.params.attributes.q);
       }
     },
 
+    /**
+     * Intializes shared components
+     * and sets their events
+     */
     _sharedComponents: function() {
       // Search form
       this.searchForm = new App.View.SearchForm({
@@ -68,7 +76,7 @@
       // Filters navigation
       this.exploreNavigation = new App.View.ExploreNavigation({
         el: '#exploreNavigation',
-        data: this.widgetsData
+        data: this.widgets.toJSON()
       });
 
       // Pagination
@@ -83,31 +91,38 @@
 
       // Setting events
       this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
-      this.listenTo(this.pagination.state, 'change:current', this.setPage);
       this.listenTo(this.exploreNavigation.state, 'change:mode', this.setMode);
+      this.listenTo(this.pagination.state, 'change:current', this.setPage);
     },
 
+    /**
+     * Dashboard initialization
+     */
     _dashboardComponents: function() {
-      var pageRange = this.pagination.getPageRange();
       // Slicing collection by current page
-      this.widgetsData
-        .slice(pageRange.startIndex, pageRange.endIndex);
+      var pageRange = this.pagination.getPageRange();
+      var widgetsData = this.widgetsData.models ?
+        this.widgetsData.toJSON() : this.widgetsData;
+      widgetsData.slice(pageRange.startIndex,
+        pageRange.endIndex);
+
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
-        data: this.widgetsData
+        data: widgetsData
       });
     },
 
+    /**
+     * Initializes the map and
+     * related components
+     */
     _mapComponents: function() {
       // Creating map
       this.map = new App.View.Map({
         el: '#map'
       });
 
-      this.lenged = new App.View.Legend({
-        el: '#legend',
-        data: []
-      });
+      // WIP Legend
     },
 
     /**
@@ -162,6 +177,7 @@
         widgetsData = widgetsData.search(this.params.attributes.q);
         // Reseting to page 1 when user search by query
         this.pagination.state.set('current', 1);
+        this.exploreNavigation.data.reset(widgetsData);
       }
       if (itemsPerPage) {
         this.pagination.state
@@ -170,10 +186,8 @@
           .slice(pageRange.startIndex, pageRange.endIndex);
         // Reseting cards collection and render it
         this.cards.data.reset(widgetsData);
-        this.exploreNavigation.data.reset(widgetsData);
       }
     }
-
   });
 
 }).call(this, this.App);
