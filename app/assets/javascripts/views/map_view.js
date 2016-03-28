@@ -38,6 +38,14 @@
       var basemap = this.props.basemap;
       this.basemap = L.tileLayer(basemap.url, basemap.options);
       this.basemap.addTo(this.map);
+    },
+
+    setOrder: function() {
+
+    },
+
+    setActive: function() {
+      
     }
 
   });
