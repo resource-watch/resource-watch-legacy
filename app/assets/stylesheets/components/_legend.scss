@@ -1,12 +1,19 @@
 .legend {
+  $bg-legend: $bg-color-4;
+  $bg-handle: $bg-color-4;
+  $bg-active: $bg-color-2;
+  $bg-empty: $bg-color-3;
+  $bg-inactive: $bg-color-7;
+  $color-legend: $text-color-1;
+
   width: rem(200);
   min-height: rem(150);
-  background: #FFF;
+  background: $bg-legend;
   position: absolute;
   z-index: 1;
   top: rem(300);
   right: 0;
-  color: #000;
+  color: $color-legend;;
 
   > .list {
     display: flex;;
@@ -24,7 +31,7 @@
       justify-content: flex-start;
 
       &.empty {
-        background: #F6F6F6;
+        background: $bg-empty;
         display: none;
 
         &.visible {
@@ -61,7 +68,7 @@
           padding: 0;
           line-height: rem(10);
           border-radius: rem(12);
-          background-color: #BABFC4;
+          background-color: $bg-inactive;
           transition: background-color 0.2s ease-in;
 
           &:before {
@@ -70,22 +77,22 @@
             width: rem(8);
             height: rem(8);
             margin: 0;
-            background: #FFFFFF;
+            background: $bg-handle;
             position: absolute;
-            top: 1px;
+            top: rem(1);
             bottom: 0;
             right: rem(11);
-            border: rem(1) solid #FFFFFF;
+            border: rem(1) solid $bg-handle;
             border-radius: rem(7);
             transition: all 0.2s ease-in 0s;
           }
         }
         .switch-checkbox:checked + .switch-label {
-          background-color: #34A7C1;
+          background-color: $bg-active;
         }
 
         .switch-checkbox:checked + .switch-label:before {
-          right: 1px;
+          right: rem(1);
         }
       }
     }
