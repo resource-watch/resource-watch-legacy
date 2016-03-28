@@ -16,7 +16,6 @@
 //= require backbone/backbone
 //= require d3
 //= require vega
-//= require leaflet
 //= require handlebars.runtime
 //= require_self
 //= require_tree ./core/
