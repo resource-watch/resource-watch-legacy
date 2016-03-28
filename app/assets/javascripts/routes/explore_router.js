@@ -122,7 +122,31 @@
         el: '#map'
       });
 
-      // WIP Legend
+      // Create map popup
+      this.mapPopup = new App.View.MapPopup({});
+
+      // Providers
+      this._mapProviders();
+
+      // TESTNG
+      this.mapCartoDB.createLayer(this.map.getMap(), {
+        user: 'geriux',
+        sql: 'SELECT * FROM ny_policeprecints',
+        cartocss: '#ny_policeprecints{ polygon-fill: #FFFFCC; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}#ny_policeprecints [ precinct <= 123] { polygon-fill: #0C2C84;}#ny_policeprecints [ precinct <= 108.5] { polygon-fill: #225EA8;}#ny_policeprecints [ precinct <= 89] { polygon-fill: #1D91C0;}#ny_policeprecints [ precinct <= 71.5] { polygon-fill: #41B6C4;}#ny_policeprecints [ precinct <= 51] { polygon-fill: #7FCDBB;}#ny_policeprecints [ precinct <= 37] { polygon-fill: #C7E9B4;}#ny_policeprecints [ precinct <= 19.5] { polygon-fill: #FFFFCC;}',
+        interactivity: 'precinct'
+      });
+
+      // Events
+      App.Core.Events.on('mapPopup:update', this.mapPopup.update.bind(this.mapPopup));
+      this.listenTo(this.mapCartoDB, 'cartodb:addLayer', this.map.addLayer.bind(this.map));
+    },
+
+    /**
+     * Initializes the layers
+     * providers for initializations
+     */
+    _mapProviders: function() {
+      this.mapCartoDB = new App.View.MapCartoDB({});
     },
 
     /**
@@ -187,6 +211,15 @@
         // Reseting cards collection and render it
         this.cards.data.reset(widgetsData);
       }
+    },
+
+    /**
+     * Show popup
+     */
+    _showPopup: function(data) {
+      this.popup.state.set({
+        data: data
+      });
     }
   });
 

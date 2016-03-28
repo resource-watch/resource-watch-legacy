@@ -24,9 +24,16 @@
       }
     },
 
+    state: {
+      layers: []
+    },
+
     initialize: function() {
       // At beginning create map
       this.createMap();
+    },
+
+    render: function() {
     },
 
     createMap: function() {
@@ -38,6 +45,19 @@
       var basemap = this.props.basemap;
       this.basemap = L.tileLayer(basemap.url, basemap.options);
       this.basemap.addTo(this.map);
+    },
+
+    getMap: function() {
+      return this.map;
+    },
+
+    addLayer: function(layer) {
+      var layers = this.state.attributes.layers;
+      layers.push(layer);
+
+      this.state.set({
+        layers: layers
+      });
     }
 
   });
