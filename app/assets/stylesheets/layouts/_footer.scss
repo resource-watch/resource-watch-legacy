@@ -5,6 +5,10 @@
   a {
     color: $text-color-4;
   }
+
+  body.page-explore & {
+    display: none;
+  }
 }
 
 .l-top-footer {
