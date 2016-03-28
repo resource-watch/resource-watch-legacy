@@ -42,11 +42,17 @@
       this._start();
     },
 
+    /**
+     * Starts the legend after initialization
+     */
     _start: function() {
       this._formatLegend();
       this.render();
     },
 
+    /**
+     * Formats the data with extra needed attributes
+     */
     _formatLegend: function() {
       var _this = this;
       var data = {};
@@ -59,6 +65,9 @@
       }, { silent: true });
     },
 
+    /**
+     * Renders the legend
+     */
     render: function() {
       this.$el.html(this.template({
         data: this.state.attributes.data,
@@ -70,6 +79,9 @@
       }
     },
 
+    /**
+     * Sets the dragging listeners
+     */
     _setDragListeners: function() {
       this.dragSourceEl = null;
       var items = this.el.querySelectorAll('.' + this.props.itemClass);
@@ -84,10 +96,17 @@
       }
     },
 
+    /**
+     * Sets the dragging direction coordinate position
+     */
     _setDraggingDirection(ev) {
       this.currentYPost = ev.screenY;
     },
 
+    /**
+     * Stores the current dragging element
+     * @param {Object} event
+     */
     _onDragStart: function(ev) {
       this._setDraggingDirection(ev);
       ev.currentTarget.classList.add(this.props.draggingClass);
@@ -97,6 +116,11 @@
       ev.dataTransfer.setData('text/html', this.dragSourceEl.innerHTML);
     },
 
+    /**
+     * When dragging over an element it shows a placeholder and
+     * leaves a space for the new position
+     * @param {Object} event
+     */
     _onDragEnter: function(ev) {
       if (!ev.currentTarget.classList.contains(this.props.draggingClass)) {
         var list = this.el.querySelector('.' + this.props.listClass);
@@ -115,15 +139,29 @@
       }
     },
 
+    /**
+     * On Drag over prevent default, special case
+     * for links, etc.
+     * @param {Object} event
+     */
     _onDragOver: function(ev) {
       ev.preventDefault();
       return false;
     },
 
+    /**
+     * On Drag leave, remove custom over class
+     * @param {Object} event
+     */
     _onDragLeave: function(ev) {
       ev.currentTarget.classList.remove(this.props.overClass);
     },
 
+    /**
+     * On Drag drop check if it's not the same element
+     * then moves the element to the new position
+     * @param {Object} event
+     */
     _onDragDrop: function(ev) {
       if (this.dragSourceEl !== ev.currentTarget) {
         var list = this.el.querySelector('.' + this.props.listClass);
@@ -134,6 +172,10 @@
       return false;
     },
 
+    /**
+     * On Drag end removes all of the interaction classes
+     * @param {Object} event
+     */
     _onDragEnd: function(ev) {
       var items = this.el.querySelectorAll('.' + this.props.itemClass);
       var emptyEl = this.el.querySelector('.'+ this.props.emptyClass);
@@ -147,6 +189,11 @@
       this._onOrderChanged(ev);
     },
 
+    /**
+     * After a drag event, it stores the new position
+     * of all of the elements
+     * @param {Object} event
+     */
     _onOrderChanged: function(ev) {
       var elements = this.el.querySelectorAll('.' + this.props.layerClass);
       var data = this.state.attributes.data;
@@ -169,6 +216,10 @@
       this.trigger('legend:order', newList);
     },
 
+    /**
+     * On a switch toggle, it stores the new state
+     * @param {Object} event
+     */
     _onSwitch: function(ev) {
       var active = ev.currentTarget.checked;
       var data = this.state.attributes.data;
