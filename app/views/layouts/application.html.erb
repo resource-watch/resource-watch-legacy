@@ -10,10 +10,10 @@
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:400,300,700" %>
     <%= stylesheet_link_tag "application", media: "all" %>
   </head>
-  <body>
+  <body class="-<%= controller_name %>">
     <%= render "shared/symbol-defs" %>
     <%= render "shared/header" %>
-    <div class="l-main">
+    <div class="l-main <%= @content_class if defined?(@content_class) %>">
       <%= yield %>
     </div>
     <%= render "shared/footer" %>

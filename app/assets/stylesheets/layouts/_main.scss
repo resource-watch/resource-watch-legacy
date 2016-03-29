@@ -1,3 +1,16 @@
+$full_height: calc(100vh - 100px); // vertical height - header height
+
 .l-main {
+  position: relative;
   flex: 1;
+  min-height: 600px;
+
+  &.-dark {
+    color: $text-color-3;
+    background-color: $bg-color-8;
+  }
+
+  body.-planet_pulse & {
+    height: $full_height;
+  }
 }

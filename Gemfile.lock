@@ -115,6 +115,7 @@ GEM
     rails-assets-d3 (3.5.16)
     rails-assets-leaflet (0.7.7)
     rails-assets-normalize-css (4.0.0)
+    rails-assets-three.js (0.75.0)
     rails-assets-underscore (1.8.3)
     rails-assets-vega (2.5.2)
       rails-assets-d3 (>= 3.5.6, < 4)
@@ -180,6 +181,7 @@ DEPENDENCIES
   rails-assets-d3!
   rails-assets-leaflet!
   rails-assets-normalize-css!
+  rails-assets-three.js!
   rails-assets-underscore!
   rails-assets-vega!
   rails_12factor
