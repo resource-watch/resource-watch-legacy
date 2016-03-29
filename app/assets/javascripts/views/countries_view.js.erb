@@ -22,8 +22,9 @@
 
     render: function() {
       var _this = this;
+      var baseUrl = '<%= ResourceWatch::Application.routes.url_helpers.countries_path %>';
       this.$el
-        .html(this.template({ countries: this.data.toJSON() }))
+        .html(this.template({ countries: this.data.toJSON(), baseUrl: baseUrl }))
         .find('.js-country').each(function(i, el) {
           var m = _this.data.models[i];
           var country = new App.View.Country({ data: m.attributes });

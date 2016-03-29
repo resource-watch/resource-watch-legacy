@@ -1,0 +1,37 @@
+(function(App) {
+
+  'use strict';
+
+  App.Router.CountryDashboard = App.Core.Router.extend({
+
+    routes: {
+      '(/)': 'dashboard',
+    },
+
+    initialize: function(iso) {
+      this.iso = iso;
+
+      if(!iso) {
+        console.error('An ISO is expected as parameter of the router.');
+      }
+    },
+
+    dashboard: function() {
+      this.countriesData = new App.Collection.Countries();
+      this.countriesData.fetch().done(function() {
+        this.country = this.countriesData.searchISO(this.iso);
+
+        if(!this.country) {
+          window.location = '<%= ResourceWatch::Application.routes.url_helpers.countries_path %>';
+        } else {
+          this.countryDashboard = new App.View.CountryDashboard({
+            el: '#dashboard',
+            data: this.country
+          });
+        }
+      }.bind(this));
+    }
+
+  });
+
+}).call(this, this.App);

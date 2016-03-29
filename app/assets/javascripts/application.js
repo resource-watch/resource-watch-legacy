@@ -21,6 +21,7 @@
 //= require_self
 //= require_tree ./core/
 //= require_tree ./templates/
+//= require_tree ./helpers/
 //= require_tree ./routes/
 //= require_tree ./models/
 //= require_tree ./collections/
