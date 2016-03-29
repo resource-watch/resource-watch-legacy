@@ -8,6 +8,7 @@
     <title><%= @title ? @title + ' | ' : nil %><%= @site_name %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:400,300,700" %>
+    <%= stylesheet_link_tag "http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css", media: "all" %>
     <%= stylesheet_link_tag "application", media: "all" %>
   </head>
   <body class="-<%= controller_name %>">
@@ -17,6 +18,7 @@
       <%= yield %>
     </div>
     <%= render "shared/footer" %>
+    <%= javascript_include_tag "http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js" %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

@@ -26,20 +26,19 @@
       dropEffect: 'move'
     },
 
-    defaultAttributes: {
-      zIndex: 1,
-      active: true
+    state: {
+      data: null,
+      orderChanged: false
     },
 
     initialize: function(settings) {
-      if (!settings.data) {
-        throw new Error('"data" param is required.');
-      }
-      this.state.set({
-        data: settings.data
-      });
+      if (settings.data) {
+        this.state.set({
+          data: settings.data
+        }, { silent: true });
 
-      this._start();
+        this._start();
+      }
     },
 
     /**
@@ -57,7 +56,7 @@
       var _this = this;
       var data = {};
       _.each(this.state.attributes.data, function(d) {
-        data[d.name] = _.extend(_.clone(_this.defaultAttributes), d);
+        data[d.name] = d;
       });
 
       this.state.set({
@@ -69,14 +68,34 @@
      * Renders the legend
      */
     render: function() {
+      var data = this._getSortedData();
       this.$el.html(this.template({
-        data: this.state.attributes.data,
+        data: data,
         isDraggable: this.props.isDraggable
       }));
 
       if (this.props.isDraggable) {
         this._setDragListeners();
       }
+    },
+
+    /**
+     * Sorts the data depending
+     * on the current order and
+     * after it has changed
+     */
+    _getSortedData: function() {
+      var data = this.state.attributes.data;
+      var list = [];
+
+      _.each(data, function(d) {
+        list.push(d);
+      });
+
+      if (!this.state.attributes.orderChanged) {
+        list.reverse();
+      }
+      return list;
     },
 
     /**
@@ -202,16 +221,14 @@
 
       for (var i = 0; i < elements.length; i++) {
         var current = elements[i];
-        if (current.dataset.name === el.dataset.name) {
-          data[current.dataset.name].zIndex = elements.length + 1;
-        } else {
+        if (current) {
           data[current.dataset.name].zIndex = elements.length - i;
+          newList[current.dataset.name] = data[current.dataset.name];
         }
-        newList[current.dataset.name] = data[current.dataset.name];
       }
-
       this.state.set({
-        data: newList
+        data: newList,
+        orderChanged: true
       }, { silent: true });
       this.trigger('legend:order', newList);
     },
@@ -233,6 +250,23 @@
         name: ev.currentTarget.dataset.name,
         active: active
       });
+    },
+
+    /**
+     * Updates the legend data width
+     * the layers list
+     * @param {Object} layers
+     */
+    update: function(data) {
+      var dataList = [];
+      _.each(data, function(d) {
+        dataList.push(d.data);
+      });
+
+      this.state.set({
+        data: dataList
+      }, { silent: true });
+      this._start();
     }
   });
 
