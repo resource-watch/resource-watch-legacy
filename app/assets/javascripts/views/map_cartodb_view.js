@@ -35,7 +35,7 @@
             if (data.interactivity) {
               _this._activateInteractivity(map, layer);
             }
-            _this.trigger('cartodb:addLayer', layer);
+            _this.trigger('cartodb:addLayer', data, layer);
           });
       });
     },
