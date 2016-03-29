@@ -1,0 +1,100 @@
+.legend {
+  $bg-legend: $bg-color-4;
+  $bg-handle: $bg-color-4;
+  $bg-active: $bg-color-2;
+  $bg-empty: $bg-color-3;
+  $bg-inactive: $bg-color-7;
+  $color-legend: $text-color-1;
+
+  width: rem(200);
+  min-height: rem(150);
+  background: $bg-legend;
+  position: absolute;
+  z-index: 1;
+  top: rem(300);
+  right: 0;
+  color: $color-legend;;
+
+  > .list {
+    display: flex;;
+    padding: rem(10);
+    flex-wrap: wrap;
+
+    > .item {
+      width: 98%;
+      padding-left: 1%;
+      min-height: rem(30);
+      user-select: none;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      &.empty {
+        background: $bg-empty;
+        display: none;
+
+        &.visible {
+          display: block;
+        }
+      }
+
+      &.dragging {
+        opacity: 0.6;
+      }
+
+      &.over {
+      }
+
+      > .name {
+        font-size: $tiny-font-size;
+      }
+
+      > .switch {
+        width: rem(20);
+        position: relative;
+        user-select: none;
+        margin-left: auto;
+
+        > .switch-checkbox {
+          display: none;
+        }
+
+        > .switch-label {
+          display: block;
+          overflow: hidden;
+          cursor: pointer;
+          height: rem(9.5);
+          padding: 0;
+          line-height: rem(10);
+          border-radius: rem(12);
+          background-color: $bg-inactive;
+          transition: background-color 0.2s ease-in;
+
+          &:before {
+            content: '';
+            display: block;
+            width: rem(8);
+            height: rem(8);
+            margin: 0;
+            background: $bg-handle;
+            position: absolute;
+            top: rem(1);
+            bottom: 0;
+            right: rem(11);
+            border: rem(1) solid $bg-handle;
+            border-radius: rem(7);
+            transition: all 0.2s ease-in 0s;
+          }
+        }
+        .switch-checkbox:checked + .switch-label {
+          background-color: $bg-active;
+        }
+
+        .switch-checkbox:checked + .switch-label:before {
+          right: rem(1);
+        }
+      }
+    }
+  }
+}

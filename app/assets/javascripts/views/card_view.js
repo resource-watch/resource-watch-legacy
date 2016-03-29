@@ -10,9 +10,13 @@
 
     template: this.HandlebarsTemplates.card,
 
+    events: {
+      'click .action': '_addToMap'
+    },
+
     state: {
       mode: 'grid'
-    },    
+    },
 
     initialize: function(settings) {
       if (!settings.data) {
@@ -50,6 +54,11 @@
       if (this.chart) {
         this.chart.update();
       }
+    },
+
+    _addToMap: function() {
+      var layer = this.data.attributes.layer;
+      App.Core.Events.trigger('card:layer', layer);
     }
 
   });

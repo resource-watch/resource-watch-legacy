@@ -58,6 +58,13 @@
       this.state.set({
         layers: layers
       });
+
+    setOrder: function() {
+
+    },
+
+    setActive: function() {
+
     }
 
   });
