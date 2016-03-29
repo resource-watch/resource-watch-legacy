@@ -23,6 +23,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-backbone'
   gem 'rails-assets-d3'
   gem 'rails-assets-vega'
+  gem 'rails-assets-leaflet'
+  gem 'rails-assets-three.js'
 end
 
 group :development, :test do

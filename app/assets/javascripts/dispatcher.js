@@ -15,7 +15,8 @@
     routes: {
       'explore': 'Explore',
       'explore(/:slug)': 'ExploreDetail',
-      'countries': 'Countries'
+      'countries': 'Countries',
+      'planet-pulse': 'PlanetPulse'
     }
 
   });
