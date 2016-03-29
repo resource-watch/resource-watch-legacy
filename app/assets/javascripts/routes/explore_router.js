@@ -26,7 +26,10 @@
         page = q;
         q = null;
       }
-      this.params.set({ page: Number(page || 1), q: q });
+      this.params.set({
+        page: Number(page || 1),
+        q: q
+      });
 
       // Get data
       this._getData();
@@ -122,7 +125,33 @@
         el: '#map'
       });
 
-      // WIP Legend
+      var legendData = [
+        {
+          name: 'Layer 1',
+          color: '#AA2ECC'
+        },
+        {
+          name: 'Layer 2',
+          color: '#CC2E2E'
+        },
+        {
+          name: 'Layer 3',
+          color: '#2E66CC'
+        },
+        {
+          name: 'Layer 4',
+          color: '#92CC2E'
+        }
+      ];
+      // Legend
+      this.legend = new App.View.Legend({
+        el: '#legend',
+        data: legendData
+      });
+
+      // Events
+      this.listenTo(this.legend, 'legend:order', this.map.setOrder.bind(this.map));
+      this.listenTo(this.legend, 'legend:active', this.map.setActive.bind(this.map));
     },
 
     /**
@@ -141,7 +170,9 @@
       if (!q && page) {
         route = 'page:' + page;
       }
-      this.navigate(route, { trigger: false });
+      this.navigate(route, {
+        trigger: false
+      });
       this.updateCards();
     },
 
@@ -181,8 +212,8 @@
       }
       if (itemsPerPage) {
         this.pagination.state
-            .set('pages', Math.ceil(widgetsData.length / itemsPerPage));
-        widgetsData= widgetsData
+          .set('pages', Math.ceil(widgetsData.length / itemsPerPage));
+        widgetsData = widgetsData
           .slice(pageRange.startIndex, pageRange.endIndex);
         // Reseting cards collection and render it
         this.cards.data.reset(widgetsData);
