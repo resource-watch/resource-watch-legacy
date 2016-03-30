@@ -18,7 +18,6 @@
 //= require vega
 //= require three.js/three
 //= require globe/OrbitControls
-//= require leaflet
 //= require handlebars.runtime
 //= require_self
 //= require helpers
