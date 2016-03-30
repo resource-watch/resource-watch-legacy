@@ -13,6 +13,7 @@ $ultra-small-font-size: rem(11);
 // Sizes
 $global-width: rem(1200);
 $global-radius: 4px;
+$header-height: rem(130);
 
 $small-screen: rem(768);
 $medium-screen: rem(992);
@@ -32,6 +33,7 @@ $light-medium-gray: #C5C8CC;
 $light-gray: #f4f5f6;
 $white: #fefefe;
 $black: #393f44;
+$real-black: #000;
 
 // Theme
 $body-background: $white;
@@ -52,5 +54,7 @@ $bg-color-4: $white;
 $bg-color-5: $medium-gray;
 $bg-color-6: $light-medium-gray;
 $bg-color-7: $blue-gray;
+$bg-color-8: $frog-green;
+$bg-color-9: $real-black;
 
 $border-color-1: $medium-gray;

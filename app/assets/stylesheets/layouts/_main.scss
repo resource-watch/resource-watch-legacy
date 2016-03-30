@@ -1,3 +1,10 @@
 .l-main {
+  position: relative;
   flex: 1;
+  min-height: 600px;
+
+  &.-dark {
+    color: $text-color-3;
+    background-color: $bg-color-9;
+  }
 }

@@ -1,0 +1,158 @@
+(function(App) {
+
+  'use strict';
+
+  App.View.Globe = App.Core.View.extend({
+
+    tagName: 'div',
+
+    className: 'globe',
+
+    props: {
+      perspective: 45,
+      maxRadius: 1000,
+      minRadius: 1,
+      initialRadius: 1,
+      segments: 32,
+      renderer: { antialias: true, alpha: true },
+      cameraPosition: { z: 3 }
+    },
+
+    initialize: function() {
+      this._createScene();
+      this._addAmbientLight();
+      this.render();
+    },
+
+    /**
+     * Creating Three js scene
+     * http://threejs.org/docs/index.html
+     */
+    _createScene: function() {
+      this.size = App.helpers.calcSize(this.el);
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.PerspectiveCamera(
+        this.props.perspective,
+        this.size.width / this.size.height,
+        this.props.minRadius,
+        this.props.maxRadius
+      );
+      this.controls = new THREE.OrbitControls(this.camera);
+      this.renderer = new THREE.WebGLRenderer(this.props.renderer);
+
+      // Initial settings
+      this.controls.minDistance = 2;
+      this.controls.maxDistance = 10;
+      this.camera.position.z = this.props.cameraPosition.z;
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(this.size.width, this.size.height);
+    },
+
+    _addAmbientLight: function() {
+      var ambientLight = new THREE.AmbientLight(0x666666);
+      var light = new THREE.DirectionalLight(0xffffff, 0.5);
+      light.position.set(-5, 3, 5);
+
+      this.scene.add(ambientLight);
+      this.scene.add(light);
+    },
+
+    /**
+     * Draw all the elements in canvas
+     */
+    render: function() {
+      var _this = this;
+
+      this.el.appendChild(this.renderer.domElement);
+
+      var animate = function () {
+        requestAnimationFrame(animate);
+        _this.controls.update();
+        _this.renderer.render(_this.scene, _this.camera);
+      };
+
+      $.when(
+        this.createStars(),
+        this.createEarth()
+      ).done(function(stars, earth) {
+        _this.scene.add(stars);
+        _this.scene.add(earth);
+        animate();
+      });
+    },
+
+    /**
+     * Create stars in background
+     * @return {[type]} [description]
+     */
+    createStars: function() {
+      var deferred = new $.Deferred();
+      var radius = this.props.maxRadius;
+      var segments = this.props.segments;
+      var scene = this.scene;
+
+      this._loadTexture('<%= asset_path("planet_pulse/galaxy_starfield_4k.png") %>')
+        .done(function(texture) {
+          var geometry = new THREE.SphereGeometry(radius, segments, segments);
+          var material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.BackSide
+          });
+          deferred.resolve(new THREE.Mesh(geometry, material));
+        });
+      return deferred.promise();
+    },
+
+    /**
+     * Create earth
+     */
+    createEarth: function() {
+      var deferred = new $.Deferred();
+      var scene = this.scene;
+      var radius = this.props.initialRadius;
+      var segments = this.props.segments;
+      var geometry = new THREE.SphereGeometry(radius, segments, segments);
+
+      $.when(
+        this._loadTexture('<%= asset_path("planet_pulse/earth_no_clouds_4k.jpg") %>'),
+        this._loadTexture('<%= asset_path("planet_pulse/elev_bump_4k.jpg") %>'),
+        this._loadTexture('<%= asset_path("planet_pulse/water_4k.png") %>')
+      ).done(function(basemapTexture, bumpTexture, specularTexture) {
+          var geometry = new THREE.SphereGeometry(radius, segments, segments);
+          var material = new THREE.MeshPhongMaterial({
+            map: basemapTexture,
+            bumpMap: bumpTexture,
+            bumpScale: 0.001,
+            specularMap: specularTexture,
+            specular: new THREE.Color('grey')
+          });
+          deferred.resolve(new THREE.Mesh(geometry, material));
+        });
+
+      return deferred.promise();
+    },
+
+    /**
+     * A promise to load textures
+     * @param  {String} texturePath
+     * @return {Promise}
+     */
+    _loadTexture: function(texturePath) {
+      var deferred = new $.Deferred();
+      var loader = new THREE.TextureLoader();
+      loader.load(
+        texturePath,
+        function(texture) {
+          deferred.resolve(texture);
+        }, // Success
+        function(xhr) {
+          console.log( (xhr.loaded / xhr.total * 100) + '% loaded' )
+        },
+        function() { console.log('And error happened') }
+      );
+      return deferred.promise();
+    }
+
+  });
+
+}).call(this, this.App);
