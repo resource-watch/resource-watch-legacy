@@ -11,7 +11,7 @@
     template: this.HandlebarsTemplates.card,
 
     events: {
-      'click .action': '_addToMap'
+      'click .js-toggle-layer': '_addToMap'
     },
 
     props: {
