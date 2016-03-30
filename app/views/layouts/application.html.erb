@@ -11,13 +11,13 @@
     <%= stylesheet_link_tag "http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css", media: "all" %>
     <%= stylesheet_link_tag "application", media: "all" %>
   </head>
-  <body class="-<%= controller_name %>">
+  <body class="-<%= controller_name %> <%= '-fitscreen' if @is_fitscreen %>">
     <%= render "shared/symbol-defs" %>
     <%= render "shared/header" %>
     <div class="l-main <%= @content_class if defined?(@content_class) %>">
       <%= yield %>
     </div>
-    <%= render "shared/footer" %>
+    <%= render "shared/footer" unless @is_fitscreen %>
     <%= javascript_include_tag "http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js" %>
     <%= javascript_include_tag "application" %>
   </body>

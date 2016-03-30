@@ -3,12 +3,17 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :site_name
+  before_action :site_name, :set_fitscreen
 
   private
-  
+
     def site_name
       @site_name = 'Resource Watch'
+    end
+
+    def set_fitscreen
+      pages_fitscreen = ['explore', 'planet_pulse']
+      @is_fitscreen = pages_fitscreen.include?(controller_name)
     end
 
 end
