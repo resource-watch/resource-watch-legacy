@@ -19,9 +19,10 @@
     },
 
     initialize: function() {
+      this.data = new App.Model.PlanetLayer();
       this._createScene();
       this._addAmbientLight();
-      this.render();
+      this.draw();
     },
 
     /**
@@ -48,37 +49,90 @@
       this.renderer.setSize(this.size.width, this.size.height);
     },
 
+    /**
+     * An ambient light
+     */
     _addAmbientLight: function() {
-      var ambientLight = new THREE.AmbientLight(0x666666);
-      var light = new THREE.DirectionalLight(0xffffff, 0.5);
-      light.position.set(-5, 3, 5);
+      var light = new THREE.HemisphereLight( 0xffffff, 0x080808, 1 );
+      var ambientLight = new THREE.AmbientLight(0x444444);
 
-      this.scene.add(ambientLight);
+      light.position.set(-10, 3, 5);
       this.scene.add(light);
+      this.scene.add(ambientLight);
     },
 
     /**
      * Draw all the elements in canvas
      */
-    render: function() {
+    draw: function() {
       var _this = this;
 
       this.el.appendChild(this.renderer.domElement);
 
-      var animate = function () {
+      var animate = function() {
         requestAnimationFrame(animate);
+        _this.earth.rotation.y += 0.0005;
+        if (_this.layer) {
+          _this.layer.rotation.y += 0.0005;
+        }
         _this.controls.update();
         _this.renderer.render(_this.scene, _this.camera);
       };
 
       $.when(
         this.createStars(),
-        this.createEarth()
-      ).done(function(stars, earth) {
-        _this.scene.add(stars);
-        _this.scene.add(earth);
-        animate();
+        this.createEarth(),
+        this.setLayer('tree_cover_2000', { opacity: 0.2 })
+      ).done(animate);
+    },
+
+    /**
+     * Update current layer
+     */
+    render: function() {},
+
+    /**
+     * Setting planet layer from API
+     */
+    setLayer: function(currentSlug, options) {
+      var deferred = new $.Deferred();
+      var _this = this;
+      var radius = this.props.initialRadius;
+      var segments = this.props.segments;
+      var settings = options || {};
+
+      // Fetching data
+      this.data.fetch({
+        data: this.data.getDataParams({ slug: currentSlug }),
+        success: function() {
+          _this._loadTexture(_this.data.attributes.link)
+            .done(function(texture) {
+              var geometry = new THREE.SphereGeometry(radius + 0.001, segments, segments);
+              var material = new THREE.MeshBasicMaterial({
+                map: texture,
+                side: THREE.DoubleSide,
+                transparent: true
+              });
+              material.opacity = settings.opacity || 0.5;
+              _this.layer = new THREE.Mesh(geometry, material);
+              _this.scene.add(_this.layer);
+              deferred.resolve(_this.layer);
+            });
+        },
+        error: function(err) {
+          throw err.responseText;
+        }
       });
+      return deferred.promise();
+    },
+
+    /**
+     * Method to remove current layer
+     */
+    removeLayer: function() {
+      if (this.layer) {
+        this.scene.remove(this.layer);
+      }
     },
 
     /**
@@ -98,8 +152,10 @@
             map: texture,
             side: THREE.BackSide
           });
-          deferred.resolve(new THREE.Mesh(geometry, material));
-        });
+          this.stars = new THREE.Mesh(geometry, material);
+          this.scene.add(this.stars);
+          deferred.resolve(this.stars);
+        }.bind(this));
       return deferred.promise();
     },
 
@@ -126,8 +182,10 @@
             specularMap: specularTexture,
             specular: new THREE.Color('grey')
           });
-          deferred.resolve(new THREE.Mesh(geometry, material));
-        });
+          this.earth = new THREE.Mesh(geometry, material);
+          this.scene.add(this.earth);
+          deferred.resolve(this.earth);
+        }.bind(this));
 
       return deferred.promise();
     },
@@ -140,6 +198,7 @@
     _loadTexture: function(texturePath) {
       var deferred = new $.Deferred();
       var loader = new THREE.TextureLoader();
+      loader.setCrossOrigin('*');
       loader.load(
         texturePath,
         function(texture) {
