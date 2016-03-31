@@ -48,11 +48,6 @@
     _sharedComponents: function() {
       // Geo map
       this.geo = new App.View.Geo({});
-
-      // Chart selector
-      this.chartSelector = new App.View.ChartSelector({
-        el: '#chartsSelector'
-      });
     },
 
     /**
@@ -74,6 +69,11 @@
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
         data: widgetsData
+      });
+
+      // Chart selector
+      this.chartSelector = new App.View.ChartSelector({
+        el: '#chartsSelector'
       });
 
       // Events
