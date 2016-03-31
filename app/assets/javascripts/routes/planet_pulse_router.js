@@ -5,13 +5,30 @@
   App.Router.PlanetPulse = App.Core.Router.extend({
 
     routes: {
-      '(/)': 'start'
+      '(:pulse)': 'start'
     },
 
-    start: function() {
-      this.globe = new App.View.Globe({
-        el: '#globeView'
-      });
+    start: function(pulse) {
+
+      if (!this.globe){
+        this.globe = new App.View.Globe({
+          el: '#globeView'
+        });
+      }
+      
+      if (!this.pulses ) {
+        this.pulses = new App.View.PlanetPulses({
+          el: '#planetPulsesView',
+          pulse: pulse
+        });
+
+        this.listenTo(this.pulses.state, 'change:pulseSelected', this.setPulse);
+      }
+
+    },
+
+    setPulse: function() {
+      this.navigate(this.pulses.state.attributes.pulseSelected, { trigger: false });
     }
 
   });

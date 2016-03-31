@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col -xs-12">
+    <div class="rw-planet-pulse">
+      <header class="planet-pulse-header">
+        {{#unless pulseSelected}}
+          <h1 class="planet-pulse-title">Planet pulse</h1>
+        {{/unless}}
+        <ul class="planet-pulse-nav">
+          {{#each categories}}
+            <li class="planet-pulse-nav-link">
+            {{#if this.isActive}}
+              <a class="is-active" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
+            {{else}}
+              <a class="" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
+            {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+        <div class="planet-pulse-toolbar">
+          <a href="#">Back</a>
+          <button id="fullscreenBtn">Fullscreen</button>
+        </div>
+      </header>
+      <div class="planet-pulse-content">
+        {{#each category}}
+        {{/each}}
+        <article id="paco">
+          <h2>Title</h2>
+          <p>Lorem fistrum amatomaa commodo laboris papaar papaar condemor a peich benemeritaar. Quis adipisicing condemor tiene musho peligro labore nisi consectetur. Cillum ut pupita qui diodeno eiusmod magna ut. Dolor incididunt apetecan ut. Benemeritaar a wan no te digo trigo por no llamarte Rodrigor esse exercitation mamaar aliquip incididunt no puedor sit amet. Qui está la cosa muy malar qui amatomaa exercitation commodo. Laboris sexuarl por la gloria de mi madre aliquip eiusmod.</p>
+          <h3>Layers</h3>
+          <ul>
+            {{#each layers}}
+            {{/each}}
+            <li><a class="is-disabled is-link">Droughts (SPEI)</a></li>
+            <li><a class="planet-pulse-layer" href="#drought/agriculture">Agricultural areas (EarthStat)</a></li>
+            <li><a class="planet-pulse-layer" href="#drought/grace">GRACE Groundwater trend<span data-modal="grace" class="btn-info modal-link"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use></svg></span></a></li>
+            <li><a class="planet-pulse-layer" href="#drought/temperature">Forecasts / Climate projections<span data-modal="forecasts" class="btn-info modal-link"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use></svg></span></a></li>
+          </ul>
+        </article>
+    </div>
+  </div>
+</div>
