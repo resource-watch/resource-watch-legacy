@@ -12,7 +12,8 @@
       map: {
         center: [40, -3],
         zoom: 2,
-        maxZoom: 19
+        maxZoom: 19,
+        scrollWheelZoom: false
       },
       basemap: {
         url: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
