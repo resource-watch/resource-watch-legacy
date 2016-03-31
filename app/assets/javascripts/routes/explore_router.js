@@ -26,7 +26,10 @@
         page = q;
         q = null;
       }
-      this.params.set({ page: Number(page || 1), q: q });
+      this.params.set({
+        page: Number(page || 1),
+        q: q
+      });
 
       // Get data
       this._getData();
@@ -37,9 +40,6 @@
       // Creating dashboard
       this._dashboardComponents();
 
-      // Create map components
-      this._mapComponents();
-
       // Settings events
       this.listenTo(this.params, 'change', this.updateParams);
     },
@@ -47,7 +47,7 @@
     /**
      * Gets main data for the components
      */
-    _getData() {
+    _getData: function() {
       // Complete widgets collection
       // TODO: fetch data instead fixtures data
       this.widgets = new App.Collection.Widgets();
@@ -89,6 +89,9 @@
         }
       });
 
+      // Geo map
+      this.geo = new App.View.Geo({});
+
       // Setting events
       this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
       this.listenTo(this.exploreNavigation.state, 'change:mode', this.setMode);
@@ -110,19 +113,10 @@
         el: '#exploreDashboard',
         data: widgetsData
       });
-    },
 
-    /**
-     * Initializes the map and
-     * related components
-     */
-    _mapComponents: function() {
-      // Creating map
-      this.map = new App.View.Map({
-        el: '#map'
-      });
-
-      // WIP Legend
+      // Events
+      App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
+      App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
     },
 
     /**
@@ -141,7 +135,9 @@
       if (!q && page) {
         route = 'page:' + page;
       }
-      this.navigate(route, { trigger: false });
+      this.navigate(route, {
+        trigger: false
+      });
       this.updateCards();
     },
 
@@ -181,8 +177,8 @@
       }
       if (itemsPerPage) {
         this.pagination.state
-            .set('pages', Math.ceil(widgetsData.length / itemsPerPage));
-        widgetsData= widgetsData
+          .set('pages', Math.ceil(widgetsData.length / itemsPerPage));
+        widgetsData = widgetsData
           .slice(pageRange.startIndex, pageRange.endIndex);
         // Reseting cards collection and render it
         this.cards.data.reset(widgetsData);

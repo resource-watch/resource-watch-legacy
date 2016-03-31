@@ -8,6 +8,9 @@ gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 gem 'puma'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Serving static files
+gem 'high_voltage', github: 'thoughtbot/high_voltage', branch: 'master'
+
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -23,7 +26,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-backbone'
   gem 'rails-assets-d3'
   gem 'rails-assets-vega'
-  gem 'rails-assets-leaflet'
+  gem 'rails-assets-three.js'
 end
 
 group :development, :test do

@@ -24,6 +24,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: $body-background;
+
+  &.-fitscreen {
+    overflow: hidden;
+  }
 }
 
 h1,

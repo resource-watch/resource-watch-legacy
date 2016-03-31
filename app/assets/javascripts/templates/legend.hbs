@@ -1,0 +1,16 @@
+{{#if data}}
+  <div class="content">
+    <div class="list">
+      <div class="item empty"></div>
+      {{#each data}}
+        <div class="item" draggable="{{../isDraggable}}">
+          <div class="name">{{name}}</div>
+          <div class="switch">
+            <input type="checkbox" name="switch" class="switch-checkbox layerSwitch" id="switch-{{@index}}" data-name="{{name}}" {{#if active}}checked{{/if}}>
+            <label class="switch-label" for="switch-{{@index}}" style="{{#if active}}background-color:{{color}};border-color:{{color}};{{/if}}"></label>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+{{/if}}

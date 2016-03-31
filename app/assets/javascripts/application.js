@@ -16,9 +16,11 @@
 //= require backbone/backbone
 //= require d3
 //= require vega
-//= require leaflet
+//= require three.js/three
+//= require globe/OrbitControls
 //= require handlebars.runtime
 //= require_self
+//= require helpers
 //= require_tree ./core/
 //= require_tree ./templates/
 //= require_tree ./helpers/
@@ -37,7 +39,8 @@
     Model: {},
     Collection: {},
     View: {},
-    Router: {}
+    Router: {},
+    helpers: {}
   };
 
 }).call(this);

@@ -58,6 +58,11 @@
     pointer-events: none;
   }
 
+  &.-active {
+    color: $text-color-3;
+    background: $bg-color-8;
+  }
+
   &.-green {
     color: $text-color-6;
   }
