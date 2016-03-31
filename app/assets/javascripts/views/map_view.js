@@ -15,12 +15,23 @@
         maxZoom: 19,
         scrollWheelZoom: false
       },
-      basemap: {
-        url: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-        options: {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
+      basemap: 'dark',
+      basemapsList: {
+        light: {
+          url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+          options: {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }
+        },
+        dark: {
+          url: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+          options: {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }
         }
       }
     },
@@ -51,7 +62,7 @@
      * Sets the map's basemap
      */
     setBasemap: function() {
-      var basemap = this.props.basemap;
+      var basemap = this.props.basemapsList[this.props.basemap];
       this.basemap = L.tileLayer(basemap.url, basemap.options);
       this.basemap.addTo(this.map);
     },
