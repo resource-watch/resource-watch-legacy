@@ -18,12 +18,11 @@
 //= require vega
 //= require three.js/three
 //= require globe/OrbitControls
+//= require jiminy/datalib.min
+//= require jiminy/jiminy.min
 //= require handlebars.runtime
 //= require_self
 //= require helpers
-
-//= require ./libs/datalib.min
-//= require ./libs/jiminy.min
 //= require_tree ./core/
 //= require_tree ./templates/
 //= require_tree ./routes/
