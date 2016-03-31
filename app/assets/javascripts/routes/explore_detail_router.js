@@ -72,8 +72,10 @@
       });
 
       // Chart selector
+      var chartData = _.pluck(data.chart.data, 'values')[0];
       this.chartSelector = new App.View.ChartSelector({
-        el: '#chartsSelector'
+        el: '#chartsSelector',
+        data: chartData || []
       });
 
       // Events
