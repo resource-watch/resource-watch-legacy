@@ -118,7 +118,7 @@
     /**
      * Sets the dragging direction coordinate position
      */
-    _setDraggingDirection(ev) {
+    _setDraggingDirection: function(ev) {
       this.currentYPost = ev.screenY;
     },
 

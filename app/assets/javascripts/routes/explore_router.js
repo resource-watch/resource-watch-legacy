@@ -40,9 +40,6 @@
       // Creating dashboard
       this._dashboardComponents();
 
-      // Create map components
-      this._mapComponents();
-
       // Settings events
       this.listenTo(this.params, 'change', this.updateParams);
     },
@@ -50,7 +47,7 @@
     /**
      * Gets main data for the components
      */
-    _getData() {
+    _getData: function() {
       // Complete widgets collection
       // TODO: fetch data instead fixtures data
       this.widgets = new App.Collection.Widgets();
@@ -92,6 +89,9 @@
         }
       });
 
+      // Geo map
+      this.geo = new App.View.Geo({});
+
       // Setting events
       this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
       this.listenTo(this.exploreNavigation.state, 'change:mode', this.setMode);
@@ -115,47 +115,8 @@
       });
 
       // Events
-      App.Core.Events.on('card:layer:add', this._mapAddLayer.bind(this));
-      App.Core.Events.on('card:layer:remove', this._mapRemoveLayer.bind(this));
-    },
-
-    /**
-     * Initializes the map and
-     * related components
-     */
-    _mapComponents: function() {
-      // Creating map
-      this.map = new App.View.Map({
-        el: '#map'
-      });
-
-      // Create map popup
-      this.mapPopup = new App.View.MapPopup({});
-
-      // Legend
-      this.legend = new App.View.Legend({
-        el: '#legend'
-      });
-
-      // Providers
-      this._mapProviders();
-
-      // Events
-      App.Core.Events.on('mapPopup:update', this.mapPopup.update.bind(this.mapPopup));
-      this.listenTo(this.legend, 'legend:order', this.map.setOrder.bind(this.map));
-      this.listenTo(this.legend, 'legend:active', this.map.setActive.bind(this.map));
-      this.listenTo(this.map, 'map:layers', this.legend.update.bind(this.legend));
-    },
-
-    /**
-     * Initializes the layers
-     * providers for initializations
-     */
-    _mapProviders: function() {
-      this.mapCartoDB = new App.View.MapCartoDB({});
-
-      // Events
-      this.listenTo(this.mapCartoDB, 'cartodb:addLayer', this.map.addLayer.bind(this.map));
+      App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
+      App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
     },
 
     /**
@@ -222,32 +183,6 @@
         // Reseting cards collection and render it
         this.cards.data.reset(widgetsData);
       }
-    },
-
-    /**
-     * Show popup
-     */
-    _showPopup: function(data) {
-      this.popup.state.set({
-        data: data
-      });
-    },
-
-    /**
-     * Creates a layer and adds it to
-     * the map after checking its type
-     */
-    _mapAddLayer: function(layer) {
-      if (layer.type === 'cartodb') {
-        this.mapCartoDB.createLayer(this.map.getMap(), layer);
-      }
-    },
-
-    /**
-     * Removes the layer from the map
-     */
-    _mapRemoveLayer: function(layer) {
-      this.map.removeLayer(layer);
     }
   });
 
