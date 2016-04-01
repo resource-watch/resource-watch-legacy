@@ -6,8 +6,6 @@
 
     tagName: 'div',
 
-    className: 'chart-card',
-
     template: this.HandlebarsTemplates.chart_card,
 
     state: {

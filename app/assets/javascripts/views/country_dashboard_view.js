@@ -8,7 +8,7 @@
 
     className: 'dashboard',
 
-    template: this.HandlebarsTemplates.dashboard_country,
+    template: this.HandlebarsTemplates.country_dashboard,
 
     state: {
       /* Index of the card currently rendering */
@@ -49,7 +49,12 @@
 
         this.$el.html(this.template({
           country: this.data.toJSON(),
-          cardsCount: this.collection.models.length
+          cards: this.collection.toJSON().map(function(card) {
+            return {
+              class: card.configuration.importance ?
+                (card.configuration.importance === 1 ? '-red': '-blue') : ''
+            };
+          })
         }));
 
         this.$cards = this.$el.find('.js-card');
