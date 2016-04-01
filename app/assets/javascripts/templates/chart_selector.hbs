@@ -2,24 +2,21 @@
   <h4 class="heading">Chart type</h4>
   <select class="type">
     {{#each recomms}}
-      <option value="">{{this}} Chart</option>
+      <option value="{{type}}" {{#if selected}}selected{{/if}}>{{type}} Chart</option>
     {{/each}}
   </select>
 </div>
 
 <div class="content">
-  <div class="action">
-    <label class="label">X axis:</label>
-    <select class="value">
-      <option value="">Line Chart</option>
-      <option value="">Bar Chart</option>
-    </select>
-  </div>
-  <div class="action">
-    <label class="label">Y axis:</label>
-    <select class="value">
-      <option value="">Line Chart</option>
-      <option value="">Bar Chart</option>
-    </select>
-  </div>
+  {{#each columns}}
+    <div class="action">
+      <label class="label">{{label}}:</label>
+      <select class="value">
+        <option value="">Select...</option>
+        {{#each options}}
+          <option value="{{column}}" {{#if selected}}selected{{/if}}>{{column.label}}</option>
+        {{/each}}
+      </select>
+    </div>
+  {{/each}}
 </div>
