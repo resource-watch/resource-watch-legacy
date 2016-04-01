@@ -92,7 +92,7 @@
       } else {
         cardModel.data.fetch()
           .done(function() {
-            cardModel.chart = this.collection.models[cardNb].getChartConfiguration();
+            cardModel.chart = this.collection.models[cardNb].getChartConfiguration(this.data.toJSON());
             var card = new App.View.ChartCard({
               data: cardModel,
             });
