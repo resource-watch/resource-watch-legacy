@@ -13,7 +13,12 @@
     },
 
     setListeners: function() {
-      $(window).on('resize', _.debounce(_.bind(this.update, this), 30));
+      this.refreshEvent = _.debounce(_.bind(this.update, this), 30);
+      $(window).on('resize', this.refreshEvent, false);
+    },
+
+    unsetListeners: function() {
+      window.removeEventListener('resize', this.refreshEvent, false);
     },
 
     /**
@@ -69,8 +74,12 @@
         width: this.el.clientWidth - widthSpace,
         height: this.el.clientHeight - heightSpace
       };
-    }
+    },
 
+    remove: function() {
+      this.unsetListeners();
+      this.chart = null;
+    }
   });
 
 }).call(this, this.App);

@@ -11,10 +11,10 @@
   {{#each columns}}
     <div class="action">
       <label class="label">{{label}}:</label>
-      <select class="value">
+      <select class="value" data-name="{{name}}">
         <option value="">Select...</option>
         {{#each options}}
-          <option value="{{column}}" {{#if selected}}selected{{/if}}>{{column.label}}</option>
+          <option value="{{column}}" {{#if selected}}selected{{/if}}>{{column}}</option>
         {{/each}}
       </select>
     </div>

@@ -28,16 +28,7 @@
 
     render: function() {
       this.$el.html(this.template(this.data.attributes));
-      this.renderChart();
       return this;
-    },
-
-    renderChart: function() {
-      this.chart = new App.View.Chart({
-        el: this.$('.chart'),
-        data: this.data.attributes.chart
-      });
-      this.chart.render();
     },
 
     /**

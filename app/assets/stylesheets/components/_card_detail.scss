@@ -1,10 +1,13 @@
 .card-detail {
   width: 100%;
+  padding: rem(15);
 
   .chart {
     width: 100%;
     height: rem(350px);
-    background: $bg-color-2;
+    // background: $bg-color-2;
+    border-top: 1px solid $bg-color-6;
+    border-bottom: 1px solid $bg-color-6;
   }
 
   .actions {
