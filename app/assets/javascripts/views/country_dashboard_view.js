@@ -70,14 +70,6 @@
         this.state.set({ renderIndex: 0 });
 
       }.bind(this));
-
-        // .find('.js-country').each(function(i, el) {
-          // var m = _this.data.models[i];
-      //     var country = new App.View.Country({ data: m.attributes });
-      //     $(el).html(country.render().el);
-      //     country.draw();
-      //   });
-      // return this;
     },
 
     /* Fetch the card number renderIndex and render it */
@@ -93,13 +85,14 @@
         cardModel.data.fetch()
           .done(function() {
             cardModel.chart = this.collection.models[cardNb].getChartConfiguration(this.data.toJSON());
-            var card = new App.View.ChartCard({
-              data: cardModel,
-            });
+            var card = new App.View.ChartCard({ data: cardModel });
             $(this.$cards[cardNb]).html(card.render().el);
           }.bind(this))
           .fail(function() {
-            this.$cards[cardNb].innerHTML = 'Unable to load the data';
+            var configuration = this.collection.models[cardNb].get('configuration');
+            cardModel.chart = this.collection.models[cardNb].noneParser([], configuration);
+            var card = new App.View.ChartCard({ data: cardModel });
+            $(this.$cards[cardNb]).html(card.render().el);
           }.bind(this))
           .always(function() { this.renderNextCard(); }.bind(this));
       }
