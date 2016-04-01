@@ -10,7 +10,9 @@
 
     props: {
       elMap: '#map',
-      elLegend: '#legend'
+      elLegend: '#legend',
+      basemap: 'dark',
+      legend: true
     },
 
     initialize: function() {
@@ -27,22 +29,38 @@
     _start: function() {
       // Creating map
       this.map = new App.View.Map({
-        el: this.props.elMap
+        el: this.props.elMap,
+        props: {
+          basemap: this.props.basemap
+        }
       });
 
       // Create map popup
       this.mapPopup = new App.View.MapPopup({});
 
       // Legend
-      this.legend = new App.View.Legend({
-        el: this.props.elLegend
-      });
+      if (this.props.legend) {
+        this._createLegend();
+      }
 
       // Providers
       this._mapProviders();
 
       // Events
       App.Core.Events.on('mapPopup:update', this.mapPopup.update.bind(this.mapPopup));
+    },
+
+    /**
+     * Initializes or not the legend depending
+     * on the props
+     */
+    _createLegend: function() {
+      // Legend
+      this.legend = new App.View.Legend({
+        el: this.props.elLegend
+      });
+
+      // Events
       this.listenTo(this.legend, 'legend:order', this.map.setOrder.bind(this.map));
       this.listenTo(this.legend, 'legend:active', this.map.setActive.bind(this.map));
       this.listenTo(this.map, 'map:layers', this.legend.update.bind(this.legend));
