@@ -21,76 +21,121 @@
         throw new Error('"data" param is required.');
       }
       this.data = settings.data;
-      this.collection = new App.Collection.CountryDashboard();
+      this.configurationCollection = new App.Collection.CountryDashboard();
 
-      this.listenTo(this.state, 'change:renderIndex', this.renderCard);
+      this.listenTo(this.state, 'change:renderIndex', this.renderInnerCard);
       // First render
       this.render();
     },
 
     render: function() {
-      /* We don't want to render the view again if we update the renderIndex
-       * attribute */
-      if(this.state.get('rendered')) return this;
+      if(!this.canRender()) return;
+      this.preventFutureRender();
 
-      this.state.set('rendered', true);
+      /* We build the skeleton of the dashboard */
+      this.renderSkeleton();
+      this.setLoadingState(this.$cardsContainer, true);
 
-      this.$el
-        .html(this.template({ country: this.data.toJSON() }));
-
-      this.$cardsContainer = this.$el.find('.js-cards');
-      this.$cardsContainer.html('Loading');
-
-      /* We need to pass the ISO to the collection so it can return for each
-       * card the associated model with the data for the selected country */
-      this.collection.iso = this.data.toJSON().iso;
-
-      this.collection.fetch().done(function() {
-
-        this.$el.html(this.template({
-          country: this.data.toJSON(),
-          cards: this.collection.toJSON().map(function(card) {
-            return {
-              class: card.configuration.importance ?
-                (card.configuration.importance === 1 ? '-red': '-blue') : ''
-            };
-          })
-        }));
-
-        this.$cards = this.$el.find('.js-card');
-
-        this.$cards.each(function(i, el) {
-          $(el).html('Loading');
-          // var card = new App.View.ChartCard({
-          //   data: this.collection.models[i].toJSON()
-          // });
-          // $(el).html(card.render().el);
-        }.bind(this));
-
-        this.state.set({ renderIndex: 0 });
-
-      }.bind(this));
+      /* We fetch the configuration of the cards */
+      this.fetchConfiguration()
+        .then(this.renderCardsSkeleton.bind(this))
+        .then(function() {
+          this.setLoadingState(this.$cards, true);
+        }.bind(this))
+        .then(this.startInnerCardRendering.bind(this))
+        .fail(this.displayError.bind(this));
     },
 
-    /* Fetch the card number renderIndex and render it */
-    renderCard: function() {
+    /* Render the skeleton of the dashboard and cache the container of the
+     * cards */
+    renderSkeleton: function() {
+      this.$el.html(this.template({ country: this.data.toJSON() }));
+      this.$cardsContainer = this.$el.find('.js-cards');
+    },
+
+    /* Render all the cards skeleton and cache them */
+    renderCardsSkeleton: function() {
+      this.$el.html(this.template({
+        country: this.data.toJSON(),
+        cards: this.configurationCollection.toJSON().map(function(card) {
+          /* Depending on each card's configuration, we need to set some
+           * classes to the container in order to change its styles */
+          return {
+            class: card.configuration.importance ?
+              (card.configuration.importance === 1 ? '-red': '-blue') : ''
+          };
+        })
+      }));
+
+      this.$cards = this.$el.find('.js-card');
+    },
+
+    /* Render the inner of a card with a chart or a map */
+    renderInnerCard: function() {
       var cardNb = this.state.get('renderIndex');
-      var cardModel = this.collection.models[cardNb].toJSON();
+      var cardModel = this.configurationCollection.models[cardNb];
+      var cardTypes = _.pluck(cardModel.get('configuration').y, 'type');
+
+      var createInnerView = _.contains(cardTypes, 'map') ?
+        this.getMapInstance : this.getChartInstance;
+
+      $.when(createInnerView.call(this, cardModel))
+        .then(function(view) {
+          $(this.$cards[cardNb]).html(view.render().el);
+        }.bind(this))
+        /* There's no fail callback because createInnerView will always return
+         * an inner view */
+        .always(this.renderNextInnerCard.bind(this));
+    },
+
+    /* Instance a chart view and return a deferred object with it */
+    getChartInstance: function(cardModel) {
+      var deferred = $.Deferred();
+
+      cardModel.get('data').fetch()
+        .done(function() {
+          cardModel.set('chart',
+            cardModel.getChartConfiguration(this.data.toJSON()));
+        }.bind(this))
+
+        .fail(function() {
+          var configuration = cardModel.get('configuration');
+          cardModel.set('chart', cardModel.noneParser([], configuration));
+        }.bind(this))
+
+        .always(function() {
+          deferred.resolve(new App.View.ChartCard({ data: cardModel.toJSON() }));
+        });
+
+      return deferred;
+    },
+
+    getMapInstance: function(cardModel) {
+      var deferred = $.Deferred();
+      deferred.reject();
+      return deferred;
+    },
+
+    /* Fetch the data for the chart of card number renderIndex and render it */
+    renderChart: function() {
+      var cardNb = this.state.get('renderIndex');
+      var cardModel = this.configurationCollection.models[cardNb].toJSON();
       var cardTypes = _.pluck(cardModel.configuration.y, 'type');
 
       if(_.contains(cardTypes, 'map')) {
+        console.log(cardModel);
         this.$cards[cardNb].innerHTML = 'MAP';
         this.renderNextCard();
       } else {
         cardModel.data.fetch()
           .done(function() {
-            cardModel.chart = this.collection.models[cardNb].getChartConfiguration(this.data.toJSON());
+            cardModel.chart = this.configurationCollection.models[cardNb].getChartConfiguration(this.data.toJSON());
             var card = new App.View.ChartCard({ data: cardModel });
             $(this.$cards[cardNb]).html(card.render().el);
           }.bind(this))
           .fail(function() {
-            var configuration = this.collection.models[cardNb].get('configuration');
-            cardModel.chart = this.collection.models[cardNb].noneParser([], configuration);
+            var configuration = cardModel.configuration;
+            cardModel.chart = this.configurationCollection.models[cardNb].noneParser([], configuration);
             var card = new App.View.ChartCard({ data: cardModel });
             $(this.$cards[cardNb]).html(card.render().el);
           }.bind(this))
@@ -98,15 +143,53 @@
       }
     },
 
+    /* Prevent future calls to render */
+    preventFutureRender: function() {
+      /* We don't want to render the view again if we update the renderIndex
+       * attribute */
+      if(this.state.get('rendered')) return this;
+      this.state.set('rendered', true);
+    },
+
+    /* Return whether the dashboard can be rendered depening on if it's been
+     * previously rendered */
+    canRender: function() {
+      return !this.state.get('rendered');
+    },
+
+    /* Toggle the loading state of the passed element */
+    setLoadingState: function($el, isLoading) {
+      /* TODO: use the real component; shouldn't remove the content */
+      if(isLoading) { $el.html('Loading'); }
+    },
+
+    /* Fetch the configuration of the cards; return a jqXHR object */
+    fetchConfiguration: function() {
+      /* We need to pass the ISO to the collection so it can return for each
+       * card the associated model with the data for the selected country */
+      this.configurationCollection.iso = this.data.toJSON().iso;
+      return this.configurationCollection.fetch();
+    },
+
+    /* Display an error that it's been impossible to render the dashboard */
+    displayError: function() {
+      /* TODO: the error needs to appear in the UI */
+      console.error('Unable to fetch the configuration of the charts.');
+    },
+
+    /* Start the rendering chain of the inner of the cards; it's done one by one
+     * to avoid requests congestion */
+    startInnerCardRendering: function() {
+      this.state.set({ renderIndex: 0 });
+    },
+
     /* Check if renderIndex doesn't point to the last card number and if don't,
      * update renderIndex to renderIndex + 1 to trigger the rendering of the
-     * next card */
-    renderNextCard: function() {
+     * next card's inner content */
+    renderNextInnerCard: function() {
       var cardNb = this.state.get('renderIndex');
-      if(cardNb < this.collection.models.length - 1) {
-        this.state.set({
-          renderIndex: cardNb + 1
-        });
+      if(cardNb < this.configurationCollection.models.length - 1) {
+        this.state.set({ renderIndex: cardNb + 1 });
       }
     }
 

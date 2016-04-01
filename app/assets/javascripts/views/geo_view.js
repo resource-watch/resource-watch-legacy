@@ -43,7 +43,7 @@
         this._createLegend();
       }
 
-      // Providers
+      // Providers*/
       this._mapProviders();
 
       // Events
