@@ -22,21 +22,24 @@
         </div>
       </header>
       <div class="planet-pulse-content">
-        {{#each category}}
+        {{#each categories}}
+        {{#if this.isActive}}
+          <article class="is-active" id="{{this.category}}">
+        {{else}}
+          <article id="{{this.category}}">
+        {{/if}}
+            <h2>{{this.category}}</h2>
+            <p> {{description}} </p>
+            <h3> Layers </h3>
+            <ul>
+              {{#each this.layers}}
+                <li> <a href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}</a></li>
+              {{ else }}
+                <p> There are no layers in this category </p>
+              {{/each}}
+            </ul>
+          </article>
         {{/each}}
-        <article id="paco">
-          <h2>Title</h2>
-          <p>Lorem fistrum amatomaa commodo laboris papaar papaar condemor a peich benemeritaar. Quis adipisicing condemor tiene musho peligro labore nisi consectetur. Cillum ut pupita qui diodeno eiusmod magna ut. Dolor incididunt apetecan ut. Benemeritaar a wan no te digo trigo por no llamarte Rodrigor esse exercitation mamaar aliquip incididunt no puedor sit amet. Qui está la cosa muy malar qui amatomaa exercitation commodo. Laboris sexuarl por la gloria de mi madre aliquip eiusmod.</p>
-          <h3>Layers</h3>
-          <ul>
-            {{#each layers}}
-            {{/each}}
-            <li><a class="is-disabled is-link">Droughts (SPEI)</a></li>
-            <li><a class="planet-pulse-layer" href="#drought/agriculture">Agricultural areas (EarthStat)</a></li>
-            <li><a class="planet-pulse-layer" href="#drought/grace">GRACE Groundwater trend<span data-modal="grace" class="btn-info modal-link"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use></svg></span></a></li>
-            <li><a class="planet-pulse-layer" href="#drought/temperature">Forecasts / Climate projections<span data-modal="forecasts" class="btn-info modal-link"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use></svg></span></a></li>
-          </ul>
-        </article>
     </div>
   </div>
 </div>

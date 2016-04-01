@@ -25,14 +25,8 @@
       this.data = new App.Collection.PlanetPulses();
       this.data.fetch()
         .done(function(data){
-          this.categories = _.groupBy(data.rows,'category');
-          this.navigation = _.map(Object.keys(this.categories), function(category) {
-            var isActive = this.state.attributes.pulseSelected === category ? true:false;
-            return {
-              category:category,
-              isActive:isActive
-            };
-          }.bind(this));
+          this.categories = this._parsePulses(data.rows);
+          console.log(this.categories);
           this.render();
         }.bind(this))
         .error(function(error){
@@ -45,7 +39,7 @@
         .html(this.template({
           pulseSelected: this.state.attributes.pulseSelected,
           layerSelected: this.state.attributes.layerSelected,
-          categories: this.navigation
+          categories: this.categories
         }));
       this.initFullScreen();
       return this;
@@ -61,9 +55,29 @@
       this.setCategorySelected(null);
     },
 
+    _parsePulses: function(data){
+      var categories = {};
+      var pulses = _.groupBy(data,'category');
+      _.each(pulses, function(pulse, key) {
+        categories[key] = {};
+        categories[key].category = key;
+        categories[key].description = this.getCatDescription(key);
+        categories[key].isActive = this.state.attributes.pulseSelected === key;
+        categories[key].layers = [];
+        _.each(pulse, function(pulse) {
+          categories[key].layers.push(pulse);
+        }.bind(this));
+      }.bind(this));
+      return categories;
+    },
+
+    getCatDescription: function(key){
+      return key + ' category description';
+    },
+
     setCategorySelected: function(cat){
-      _.each(this.navigation, function(category) {
-        category.isActive = category.category === cat;
+      _.each(this.categories, function(category, key) {
+        category.isActive = key === cat;
       });
       this.state.set({pulseSelected:cat});
     },
