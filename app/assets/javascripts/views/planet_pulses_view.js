@@ -9,36 +9,39 @@
     className: 'rw-categories',
 
     events: {
-      'click .planet-pulse-nav-link a':'_onCategoryClick',
+      'click .planet-pulse-nav-link a.category-selector':'_onCategoryClick',
+      'click .planet-pulse-content a.layer-selector':'_onLayerClick',
       'click .planet-pulse-toolbar a':'_onBackClick'
     },
 
     template: this.HandlebarsTemplates.planet_pulses,
 
     state: {
-      pulseSelected: null,
+      categorySelected: null,
       layerSelected: null
     },
 
     initialize: function(settings) {
-      this.state.set({pulseSelected:settings.pulse},{silent:true});
+      this.state.set({
+        categorySelected:settings.category,
+        layerSelected:settings.layer
+      },{silent:true});
       this.data = new App.Collection.PlanetPulses();
       this.data.fetch()
         .done(function(data){
           this.categories = this._parsePulses(data.rows);
-          console.log(this.categories);
           this.render();
         }.bind(this))
         .error(function(error){
-          console.log(error);
+          console.warn('Error getting pulses: '+ error);
         }.bind(this));
     },
 
     render: function() {
+      console.log(this.categories);
       this.$el
         .html(this.template({
-          pulseSelected: this.state.attributes.pulseSelected,
-          layerSelected: this.state.attributes.layerSelected,
+          categorySelected: this.state.attributes.categorySelected,
           categories: this.categories
         }));
       this.initFullScreen();
@@ -48,6 +51,12 @@
     _onCategoryClick: function(e) {
       e.preventDefault();
       this.setCategorySelected(e.currentTarget.id);
+      this.setLayerSelected(null);
+    },
+
+    _onLayerClick: function(e) {
+      e.preventDefault();
+      this.setLayerSelected(e.currentTarget.id);
     },
 
     _onBackClick: function(e) {
@@ -62,10 +71,11 @@
         categories[key] = {};
         categories[key].category = key;
         categories[key].description = this.getCatDescription(key);
-        categories[key].isActive = this.state.attributes.pulseSelected === key;
+        categories[key].isActive = this.state.attributes.categorySelected === key;
         categories[key].layers = [];
-        _.each(pulse, function(pulse) {
-          categories[key].layers.push(pulse);
+        _.each(pulse, function(layer) {
+          layer.isActive = this.state.attributes.layerSelected === layer.slug;
+          categories[key].layers.push(layer);
         }.bind(this));
       }.bind(this));
       return categories;
@@ -76,10 +86,19 @@
     },
 
     setCategorySelected: function(cat){
-      _.each(this.categories, function(category, key) {
-        category.isActive = key === cat;
+      _.each(this.categories, function(category) {
+        category.isActive = category.category === cat;
       });
-      this.state.set({pulseSelected:cat});
+      this.state.set({categorySelected:cat});
+    },
+
+    setLayerSelected: function(layer){
+      _.each(this.categories, function(category) {
+        _.each(category.layers, function(pulse) {
+          pulse.isActive = pulse.slug === layer;
+        }.bind(this));
+      }.bind(this));
+      this.state.set({layerSelected:layer});
     },
 
     initFullScreen: function(){

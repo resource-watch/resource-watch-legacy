@@ -5,30 +5,35 @@
   App.Router.PlanetPulse = App.Core.Router.extend({
 
     routes: {
-      '(:pulse)': 'start'
+      '': 'start',
+      '(:category)/(:layer)': 'start'
     },
 
-    start: function(pulse) {
+    start: function(category, layer) {
 
-      // if (!this.globe){
-      //   this.globe = new App.View.Globe({
-      //     el: '#globeView'
-      //   });
-      // }
+      if (!this.globe){
+        this.globe = new App.View.Globe({
+          el: '#globeView'
+        });
+      }
 
       if (!this.pulses ) {
         this.pulses = new App.View.PlanetPulses({
           el: '#planetPulsesView',
-          pulse: pulse
+          category: category,
+          layer: layer
         });
 
-        this.listenTo(this.pulses.state, 'change:pulseSelected', this.setPulse);
+        this.listenTo(this.pulses.state, 'change', this.setPulse);
       }
 
     },
 
     setPulse: function() {
-      this.navigate(this.pulses.state.attributes.pulseSelected, { trigger: false });
+      var route = this.pulses.state.attributes.layerSelected ?
+        this.pulses.state.attributes.categorySelected + '/' + this.pulses.state.attributes.layerSelected
+        : this.pulses.state.attributes.categorySelected;
+      this.navigate( route , { trigger: false });
     }
 
   });

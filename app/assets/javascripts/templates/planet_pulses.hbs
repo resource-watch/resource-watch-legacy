@@ -9,9 +9,9 @@
           {{#each categories}}
             <li class="planet-pulse-nav-link">
             {{#if this.isActive}}
-              <a class="is-active" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
+              <a class="category-selector is-active" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
             {{else}}
-              <a class="" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
+              <a class="category-selector" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
             {{/if}}
             </li>
           {{/each}}
@@ -33,12 +33,18 @@
             <h3> Layers </h3>
             <ul>
               {{#each this.layers}}
-                <li> <a href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}</a></li>
+              {{#if this.isActive}}
+                <li> <a class="layer-selector is-active" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}</a></li>
+              {{else}}
+                <li> <a class="layer-selector" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}</a></li>
+              {{/if}}
               {{ else }}
                 <p> There are no layers in this category </p>
               {{/each}}
             </ul>
           </article>
+        {{else}}
+          <p> There are no pulses in this category </p>
         {{/each}}
     </div>
   </div>

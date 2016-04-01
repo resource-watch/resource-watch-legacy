@@ -21,7 +21,6 @@
     },
 
     fullscreenWatcher: function() {
-      console.log('watched');
       var isEnteringFullscreen = this.fullscreenCount % 2 === 0;
       this.fullscreenCount++;
 
@@ -33,14 +32,12 @@
     },
 
     enableFullscreen: function() {
-      console.log('enabled fs');
       this.setFullscreen(true);
       this.container.classList.add('is-fullscreen');
       this.fullscreenBtn.textContent = 'Exit Full screen';
     },
 
     disableFullscreen: function() {
-      console.log('disabled fs');
       this.setFullscreen(false);
       this.container.classList.remove('is-fullscreen');
       this.fullscreenBtn.textContent = 'Full screen';
