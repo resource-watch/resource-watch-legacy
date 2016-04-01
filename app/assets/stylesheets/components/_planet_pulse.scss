@@ -1,11 +1,6 @@
 .rw-planet-pulse {
   color: $text-color-4;
 
-  &.is-fullscreen {
-    height: 100vh;
-    width: 100%;
-  }
-
   > .planet-pulse-header {
     margin-top: 3rem;
     position: relative;

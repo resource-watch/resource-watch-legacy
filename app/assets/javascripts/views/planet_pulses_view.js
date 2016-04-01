@@ -9,7 +9,8 @@
     className: 'rw-categories',
 
     events: {
-      'click .planet-pulse-nav-link a':'_onCategoryClick'
+      'click .planet-pulse-nav-link a':'_onCategoryClick',
+      'click .planet-pulse-toolbar a':'_onBackClick'
     },
 
     template: this.HandlebarsTemplates.planet_pulses,
@@ -46,16 +47,32 @@
           layerSelected: this.state.attributes.layerSelected,
           categories: this.navigation
         }));
+      this.initFullScreen();
       return this;
     },
 
     _onCategoryClick: function(e) {
       e.preventDefault();
-      var cat = e.currentTarget.id;
+      this.setCategorySelected(e.currentTarget.id);
+    },
+
+    _onBackClick: function(e) {
+      e.preventDefault();
+      this.setCategorySelected(null);
+    },
+
+    setCategorySelected: function(cat){
       _.each(this.navigation, function(category) {
         category.isActive = category.category === cat;
       });
       this.state.set({pulseSelected:cat});
+    },
+
+    initFullScreen: function(){
+      this.fullScreen = new App.View.FullScreen({
+        fullscreenBtn: 'fullscreenBtn',
+        container: 'content'
+      });
     }
 
   });

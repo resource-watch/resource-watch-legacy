@@ -10,12 +10,12 @@
 
     start: function(pulse) {
 
-      if (!this.globe){
-        this.globe = new App.View.Globe({
-          el: '#globeView'
-        });
-      }
-      
+      // if (!this.globe){
+      //   this.globe = new App.View.Globe({
+      //     el: '#globeView'
+      //   });
+      // }
+
       if (!this.pulses ) {
         this.pulses = new App.View.PlanetPulses({
           el: '#planetPulsesView',
