@@ -84,11 +84,24 @@
       var yNamespace = configuration.y[0].name;
 
       var values = [];
+      var invalidData = false;
       for(var i = 0, j = data.length; i < j; i++) {
+        /* If some data is missing, we break the parser */
+        if(data[i][yNamespace] === null || data[i][xNamespace] === null) {
+          invalidData = true;
+          break;
+        }
+
         values.push({
           value: data[i][yNamespace],
           category: _.capitalize(data[i][xNamespace])
         });
+      }
+
+      /* If the dataset is invalid, we prefer to display a message "no data"
+       * instead of a wrong/buggy chart */
+      if(invalidData) {
+        return this.noneParser(data, configuration);
       }
 
       return {"name":"arc","padding":{"top":25,"left":25,"bottom":25,"right":25},"data":[{"name":"table","values":values},{"name":"summary","source":"table","transform":[{"type":"aggregate","summarize":{"value":"sum"}}]},{"name":"layout","source":"table","transform":[{"type":"cross","with":"summary"},{"type":"pie","field":"a.value","sort":true},{"type":"formula","field":"percentage","expr":"round(datum.a.value / datum.b.sum_value * 100) === 0 ? '<1' : round(datum.a.value / datum.b.sum_value * 100)"},{"type":"formula","field":"angle_start","expr":"2*PI-datum.layout_end"},{"type":"formula","field":"angle_end","expr":"datum.angle_start+datum.layout_end-datum.layout_start"},{"type":"formula","field":"angle_mid","expr":"2*PI-datum.layout_mid"}]},{"name":"categories","source":"table","transform":[{"type":"formula","field":"reverse_value","expr":"-1 * datum.value"}]}],"scales":[{"name":"r","type":"sqrt","domain":{"data":"table","field":"value"},"range":[0,100]},{"name":"color","type":"ordinal","domain":{"data":"categories","field":"category","sort":{"field":"reverse_value","op":"min"}},"range":["#72B800","#F1B900","#B72A7E","#D4E329","#5BB1D2"]},{"name":"vertical","type":"ordinal","range":"height","domain":{"data":"categories","field":"category","sort":{"field":"reverse_value","op":"min"}},"points":true,"padding":10}],"marks":[{"type":"arc","from":{"data":"layout"},"properties":{"enter":{"x":{"field":{"group":"width"},"mult":0.5},"y":{"field":{"group":"height"},"mult":0.5},"startAngle":{"field":"angle_start"},"endAngle":{"field":"angle_end"},"innerRadius":{"field":{"group":"height"},"mult":0.38},"outerRadius":{"field":{"group":"height"},"mult":0.47},"fill":{"scale":"color","field":"a.category"}}}},{"type":"text","from":{"data":"layout"},"properties":{"enter":{"x":{"field":{"group":"width"},"mult":0.5},"y":{"field":{"group":"height"},"mult":0.5},"radius":{"field":{"group":"height"},"mult":0.55},"theta":{"field":"angle_mid"},"fontSize":{"value":10},"fill":{"value":"#9aa2a9"},"align":{"value":"center"},"baseline":{"value":"middle"},"text":{"template":"{{datum.percentage}}%"}}}},{"type":"symbol","from":{"data":"categories"},"properties":{"enter":{"x":{"field":{"group":"width"},"mult":0.5,"offset":-45},"y":{"scale":"vertical","field":"category"}},"update":{"fill":{"field":"category","scale":"color"},"size":{"value":50}}}},{"type":"text","from":{"data":"categories"},"properties":{"enter":{"x":{"field":{"group":"width"},"mult":0.5,"offset":-37},"y":{"scale":"vertical","field":"category","offset":1}},"update":{"fontSize":{"value":10},"fill":{"value":"#9aa2a9"},"text":{"template":"{{datum.category|truncate:20}}"},"baseline":{"value":"middle"}}}}]};
