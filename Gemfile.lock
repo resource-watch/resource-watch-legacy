@@ -8,6 +8,13 @@ GIT
     teaspoon-mocha (2.3.3)
       teaspoon (>= 1.0.0)
 
+GIT
+  remote: git://github.com/thoughtbot/high_voltage.git
+  revision: 3235c857c986fa5177039e7190e77965989621f7
+  branch: master
+  specs:
+    high_voltage (2.4.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -174,6 +181,7 @@ DEPENDENCIES
   bourbon
   coffee-rails (~> 4.1.0)
   handlebars_assets
+  high_voltage!
   jquery-rails
   puma
   quiet_assets
