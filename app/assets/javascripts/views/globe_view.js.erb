@@ -74,11 +74,13 @@
      */
     draw: function() {
       var _this = this;
+      this.initLoader();
 
       this.el.appendChild(this.renderer.domElement);
 
       var loaded = function() {
         _this.el.classList.remove('-loading');
+        _this.setLoaderState(false);
         animate();
       };
       var animate = function() {
@@ -97,6 +99,20 @@
         this.setLayer(this.currentLayer)
       ).done(loaded);
     },
+
+    initLoader: function() {
+      this.loader = new App.View.Loader({
+        el: this.el,
+        loading: true
+      });
+    },
+
+    setLoaderState: function(state) {
+      this.loader.state.set({
+        loading: state
+      });
+    },
+
 
     /**
      * Update current layer
@@ -126,6 +142,8 @@
       var segments = this.props.segments;
       var settings = options || {};
 
+      _this.setLoaderState(true);
+
       _this._loadTexture(currentLayer.link)
       .done(function(texture) {
         var geometry = new THREE.SphereGeometry(radius + radiusDistance, segments, segments);
@@ -137,6 +155,7 @@
         material.opacity = settings.opacity || 0.5;
         _this.layer = new THREE.Mesh(geometry, material);
         _this.scene.add(_this.layer);
+        _this.setLoaderState(false);
         deferred.resolve(_this.layer);
       });
       return deferred.promise();
