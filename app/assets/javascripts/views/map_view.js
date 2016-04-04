@@ -13,6 +13,7 @@
         center: [40, -3],
         zoom: 2,
         maxZoom: 19,
+        minZoom: 2,
         scrollWheelZoom: false
       },
       basemap: 'dark',
