@@ -22,6 +22,7 @@
       this.$body = document.body;
 
       this.state.set({ html: settings.html, view: settings.view });
+      this.render();
     },
 
     render: function() {
