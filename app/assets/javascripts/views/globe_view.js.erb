@@ -18,7 +18,16 @@
       cameraPosition: { z: 3 }
     },
 
-    initialize: function() {
+    defaults: {
+      baseLayer: {
+        slug:'tree_cover_2000',
+        link: 'http://50.18.182.188:6080/arcgis/rest/services/TreeCover2000/ImageServer/exportImage?bbox=-180%2C-90%2C180%2C90&bboxSR=4326&size=4096%2C+2048&imageSR=4326&time=&format=png8&pixelType=U1&noData=&noDataInterpretation=esriNoDataMatchAll&interpolation=+RSP_BilinearInterpolation&compression=&compressionQuality=&bandIds=&mosaicRule=&renderingRule=&f=image',
+        opacity: 0.2
+      }
+    },
+
+    initialize: function(settings) {
+      this.currentLayer = settings.layer || this.defaults.baseLayer;
       this.data = new App.Model.PlanetLayer();
       this._createScene();
       this._addAmbientLight();
@@ -66,15 +75,18 @@
      */
     draw: function() {
       var _this = this;
+      this.currentLayerOptions = {
+        opacity: this.currentLayer.slug === this.defaults.baseLayer.slug ? this.defaults.baseLayer.opacity:1
+      }
 
       this.el.appendChild(this.renderer.domElement);
 
       var animate = function() {
         requestAnimationFrame(animate);
-        _this.earth.rotation.y += 0.0005;
-        if (_this.layer) {
-          _this.layer.rotation.y += 0.0005;
-        }
+        // _this.earth.rotation.y += 0.0005;
+        // if (_this.layer) {
+        //   _this.layer.rotation.y += 0.0005;
+        // }
         _this.controls.update();
         _this.renderer.render(_this.scene, _this.camera);
       };
@@ -82,7 +94,7 @@
       $.when(
         this.createStars(),
         this.createEarth(),
-        this.setLayer('tree_cover_2000', { opacity: 0.2 })
+        this.setLayer(this.currentLayer, this.currentLayerOptions)
       ).done(animate);
     },
 
@@ -92,36 +104,41 @@
     render: function() {},
 
     /**
+     * Update current layer
+     */
+    updateLayer: function(newLayer, options) {
+      newLayer = newLayer || this.defaults.baseLayer;
+      if (this.currentLayer.slug!==newLayer.slug) {
+        this.currentLayerOptions = options || {} ;
+        this.currentLayerOptions.opacity = newLayer.slug === this.defaults.baseLayer.slug ? this.defaults.baseLayer.opacity:1;
+        this.currentLayer = newLayer;
+        this.removeLayer();
+        this.setLayer(newLayer, this.currentLayerOptions);
+      }
+    },
+
+    /**
      * Setting planet layer from API
      */
-    setLayer: function(currentSlug, options) {
+    setLayer: function(currentLayer, options) {
       var deferred = new $.Deferred();
       var _this = this;
       var radius = this.props.initialRadius;
       var segments = this.props.segments;
       var settings = options || {};
 
-      // Fetching data
-      this.data.fetch({
-        data: this.data.getDataParams({ slug: currentSlug }),
-        success: function() {
-          _this._loadTexture(_this.data.attributes.link)
-            .done(function(texture) {
-              var geometry = new THREE.SphereGeometry(radius + 0.001, segments, segments);
-              var material = new THREE.MeshBasicMaterial({
-                map: texture,
-                side: THREE.DoubleSide,
-                transparent: true
-              });
-              material.opacity = settings.opacity || 0.5;
-              _this.layer = new THREE.Mesh(geometry, material);
-              _this.scene.add(_this.layer);
-              deferred.resolve(_this.layer);
-            });
-        },
-        error: function(err) {
-          throw err.responseText;
-        }
+      _this._loadTexture(currentLayer.link)
+      .done(function(texture) {
+        var geometry = new THREE.SphereGeometry(radius + 0.001, segments, segments);
+        var material = new THREE.MeshBasicMaterial({
+          map: texture,
+          side: THREE.DoubleSide,
+          transparent: true
+        });
+        material.opacity = settings.opacity || 0.5;
+        _this.layer = new THREE.Mesh(geometry, material);
+        _this.scene.add(_this.layer);
+        deferred.resolve(_this.layer);
       });
       return deferred.promise();
     },

@@ -31,6 +31,7 @@
         .done(function(data){
           this.categories = this._parsePulses(data.rows);
           this.render();
+          this.trigger('pulses:loaded', data.rows);
         }.bind(this))
         .error(function(error){
           console.warn('Error getting pulses: '+ error);
@@ -38,7 +39,6 @@
     },
 
     render: function() {
-      console.log(this.categories);
       this.$el
         .html(this.template({
           categorySelected: this.state.attributes.categorySelected,
@@ -61,6 +61,7 @@
 
     _onBackClick: function(e) {
       e.preventDefault();
+      this.setLayerSelected(null);
       this.setCategorySelected(null);
     },
 
