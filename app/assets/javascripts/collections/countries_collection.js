@@ -32,6 +32,17 @@
       return this.filter(function(m) {
         return m.attributes.name.search(regex) !== -1;
       });
+    },
+
+    /**
+     * Method to search a country by ISO
+     * @param  {String} ISO
+     */
+    searchISO: function(iso) {
+      var country = this.filter(function(m) {
+        return m.attributes.iso.toLowerCase() === iso.toLowerCase();
+      });
+      return country.length > 0 ? country[0] : null;
     }
 
   });

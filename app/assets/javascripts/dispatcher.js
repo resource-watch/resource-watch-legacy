@@ -16,6 +16,7 @@
       'explore(/)': 'Explore',
       'explore/:slug': 'ExploreDetail',
       'countries(/)': 'Countries',
+      'countries/:iso': 'CountryDashboard',
       'planet-pulse(/)': 'PlanetPulse'
     }
 

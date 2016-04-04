@@ -1,0 +1,7 @@
+#dashboard {
+  /* Enable the loader to be correctly positioned */
+  > .row {
+    position: relative;
+    min-height: 200px;
+  }
+}
