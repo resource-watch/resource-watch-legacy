@@ -34,16 +34,22 @@
 
       /* We build the skeleton of the dashboard */
       this.renderSkeleton();
-      this.setLoadingState(this.$cardsContainer, true);
+      var loader = new App.View.Loader({ el: this.$cardsContainer });
+      loader.state.set({ loading: true });
 
       /* We fetch the configuration of the cards */
       this.fetchConfiguration()
         .then(this.renderCardsSkeleton.bind(this))
         .then(function() {
-          this.setLoadingState(this.$cards, true);
+          /* We add a loader to each card */
+          this.$cards.each(function(index, card) {
+            var loader = new App.View.Loader({ el: card });
+            loader.state.set({ loading: true });
+          }.bind(this));
         }.bind(this))
         .then(this.startInnerCardRendering.bind(this))
-        .fail(this.displayError.bind(this));
+        .fail(this.displayError.bind(this))
+        .always(function() { loader.state.set({ loading: false }); });
     },
 
     /* Render the skeleton of the dashboard and cache the container of the
@@ -149,8 +155,7 @@
 
     /* Display an error that it's been impossible to render the dashboard */
     displayError: function() {
-      /* TODO: the error needs to appear in the UI */
-      console.error('Unable to fetch the configuration of the charts.');
+      this.$cardsContainer.html('<div class="row">Unable to fetch the configuration of the charts</div>');
     },
 
     /* Start the rendering chain of the inner of the cards; it's done one by one
