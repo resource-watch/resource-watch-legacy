@@ -9,13 +9,15 @@
     className: 'chart-selector',
 
     events: {
-      'change .type': '_onTypeChange'
+      'change .type': '_onTypeChange',
+      'change .action .value': '_onValueChange'
     },
 
     template: this.HandlebarsTemplates.chart_selector,
 
     props: {
       elSelectsValues: '.value',
+      activeClass: '_visible',
       chartConfig: [
         {
           name: 'bar',
@@ -80,21 +82,21 @@
 
     render: function() {
       console.log('render');
-      // var recomms = [];
-      // var columns = this._getColumns();
-      //
-      // _.each(this.data.recomms, _.bind(function(d) {
-      //   recomms.push({
-      //     type: d,
-      //     selected: this.state.attributes.type === d
-      //   })
-      // }, this));
-      //
-      // this.$el.html(this.template({
-      //   recomms: recomms,
-      //   columns: columns
-      // }));
-      // this._generateGraph();
+      var recomms = [];
+      var columns = this._getColumns();
+
+      _.each(this.data.recomms, _.bind(function(d) {
+        recomms.push({
+          type: d,
+          selected: this.state.attributes.type === d
+        })
+      }, this));
+
+      this.$el.html(this.template({
+        recomms: recomms,
+        columns: columns
+      }));
+      this._generateGraph();
     },
 
     _getChartsSuggestions: function() {
@@ -103,23 +105,17 @@
       var columns = [];
       var recomm = this.jiminy.recommendation();
 
-      console.log(this.state.attributes.data,
-        this.props.chartConfig);
-      console.log(recomm);
-      //
-      // // console.log(JSON.stringify(this.state.attributes.data), JSON.stringify(this.props.chartConfig));
-      //
-      // if (recomm) {
-      //   columns = this.jiminy.columns(recomm[0]);
-      //   this.state.set({
-      //     type: recomm[0]
-      //   });
-      // }
-      //
-      // this.data = {
-      //   recomms: recomm,
-      //   columns: columns
-      // };
+      if (recomm) {
+        columns = this.jiminy.columns(recomm[0]);
+        this.state.set({
+          type: recomm[0]
+        });
+      }
+
+      this.data = {
+        recomms: recomm,
+        columns: columns
+      };
     },
 
     _generateGraph: function() {
@@ -142,6 +138,7 @@
       }
 
       this.trigger('chart:update', this.state.attributes.type, newData);
+      this._hide();
     },
 
     _getColumns: function() {
@@ -172,6 +169,25 @@
       this.state.set({
         type: type
       });
+    },
+
+    _hide: function() {
+      this.el.classList.remove(this.props.activeClass);
+    },
+
+    toggle: function() {
+      if (!this.el.classList.contains(this.props.activeClass)) {
+        this.el.classList.add(this.props.activeClass);
+      } else {
+        this.el.classList.remove(this.props.activeClass);
+      }
+    },
+
+    _onValueChange: function(ev) {
+      var current = ev.currentTarget;
+      var value = current.value;
+
+      console.log(value);
     }
   });
 

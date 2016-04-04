@@ -61,11 +61,20 @@
         el: '#chartsSelector'
       });
 
-      this.chartBars = new App.View.ChartBars({});
+      this.chartBars = new App.View.ChartBars({
+        mainColor: '#FFFFFF',
+        mainFillColor: '#89E7FF',
+        secondaryColor: '#76C9DE'
+      });
       this.chartPie = new App.View.ChartPie({});
-      this.chartLine = new App.View.ChartLine({});
+      this.chartLine = new App.View.ChartLine({
+        mainColor: '#FFFFFF',
+        buckets: ['#FFFFFF'],
+        secondaryColor: '#76C9DE'  
+      });
 
       // Events
+      this.listenTo(this.cardDetail, 'card:chart:config', this._onChartConfig);
       this.listenTo(this.chartSelector, 'chart:update', this._onChartUpdate);
     },
 
@@ -120,6 +129,10 @@
         data: chartData
       });
       this.chart.render();
+    },
+
+    _onChartConfig: function() {
+      this.chartSelector.toggle();
     }
   });
 

@@ -1,10 +1,19 @@
 .chart-selector {
   width: rem(200);
   background: #FFFFFF;
-  border: 1px solid #E2E2E2;
+  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.30);
   border-radius: rem(5);
-  margin: rem(30);
+  margin: rem(0);
   padding: rem(0) rem(0) rem(12) rem(0);
+  position: absolute;
+  right: rem(12);
+  top: rem(40);
+  z-index: 1;
+  display: none;
+
+  &._visible {
+    display: block;
+  }
 
   > .content {
     width: 100%;
@@ -21,6 +30,7 @@
 
     > .type {
       width: 100%;
+      text-transform: capitalize;
     }
 
     > .action {
@@ -37,6 +47,7 @@
 
       > .value {
         width: 70%;
+        text-transform: capitalize;
       }
     }
 
@@ -44,5 +55,17 @@
       border: 0;
       padding-bottom: 0;
     }
+  }
+
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent $bg-color-4 transparent;
+    position: absolute;
+    top: rem(-8);
+    right: rem(30);
   }
 }

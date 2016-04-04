@@ -1,13 +1,35 @@
 .card-detail {
   width: 100%;
-  padding: rem(15);
+
+  > .chart-content {
+    width: 100%;
+    position: relative;
+    padding: rem(15);
+    background: $bg-color-2;
+
+    > .chart-config {
+      top: rem(12);
+      right: rem(12);
+      position: absolute;
+      z-index: 1;
+      display: flex;
+
+      > .action {
+        color: $bg-color-4;
+        display: flex;
+        font-size: $tiny-font-size;
+
+        > .icon {
+          margin-top: rem(2);
+          margin-right: rem(2);
+        }
+      }
+    }
+  }
 
   .chart {
     width: 100%;
     height: rem(350px);
-    // background: $bg-color-2;
-    border-top: 1px solid $bg-color-6;
-    border-bottom: 1px solid $bg-color-6;
   }
 
   .actions {

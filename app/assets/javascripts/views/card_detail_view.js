@@ -9,7 +9,8 @@
     className: 'card-detail',
 
     events: {
-      'click .js-toggle-layer': '_addToMap'
+      'click .js-toggle-layer': '_addToMap',
+      'click .js-toggle-chart-config': '_chartConfig'
     },
 
     props: {
@@ -27,8 +28,14 @@
     },
 
     render: function() {
-      this.$el.html(this.template(this.data.attributes));
+      this.$el.html(this.template(this._parsedData()));
       return this;
+    },
+
+    _parsedData: function() {
+      var formattedData = this.data.attributes;
+      formattedData.displayDate = moment(formattedData.date).format('MMM, DD YYYY');
+      return formattedData;
     },
 
     /**
@@ -46,8 +53,11 @@
         App.Core.Events.trigger('card:layer:remove', layer);
         el.classList.remove(this.props.activeClass);
       }
-    }
+    },
 
+    _chartConfig: function(ev) {
+      this.trigger('card:chart:config');
+    }
   });
 
 }).call(this, this.App);

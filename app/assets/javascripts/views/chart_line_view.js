@@ -6,8 +6,14 @@
 
     props: {
       mainColor: '#9BA2AA',
-      secondaryColor: '',
+      secondaryColor: '#9BA2AA',
       buckets: ['#72B800', '#F1B900', '#B72A7E', '#D4E329', '#5BB1D2'],
+    },
+
+    initialize: function(props) {
+      if (props) {
+        this.props = _.extend(this.props, props);
+      }
     },
 
     getData: function(data) {
@@ -131,6 +137,14 @@
             "layer": "back",
             "format": "f",
             "properties": {
+              "grid": {
+                "stroke": {
+                  "value": this.props.secondaryColor
+                },
+                "strokeOpacity": {
+                  "value": "0.5"
+                }
+              },
               "ticks": {
                 "stroke": {
                   "value": "steelblue"

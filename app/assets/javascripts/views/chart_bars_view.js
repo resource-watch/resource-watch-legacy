@@ -6,7 +6,14 @@
 
     props: {
       mainColor: '#9BA2AA',
+      secondaryColor: '#9BA2AA',
       mainFillColor: '#5BB1D2'
+    },
+
+    initialize: function(props) {
+      if (props) {
+        this.props = _.extend(this.props, props);
+      }
     },
 
     getData: function(data) {
@@ -150,9 +157,17 @@
             "layer": "back",
             "format": "f",
             "properties": {
+              "grid": {
+                "stroke": {
+                  "value": this.props.secondaryColor
+                },
+                "strokeOpacity": {
+                  "value": "0.5"
+                }
+              },
               "ticks": {
                 "stroke": {
-                  "value": "steelblue"
+                  "value": this.props.mainColor
                 }
               },
               "majorTicks": {
