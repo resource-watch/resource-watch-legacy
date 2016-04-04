@@ -112,35 +112,11 @@
 
     getMapInstance: function(cardModel) {
       var deferred = $.Deferred();
-      deferred.reject();
+
+      cardModel.set('map', true);
+      deferred.resolve(new App.View.ChartCard({ data: cardModel.toJSON() }));
+
       return deferred;
-    },
-
-    /* Fetch the data for the chart of card number renderIndex and render it */
-    renderChart: function() {
-      var cardNb = this.state.get('renderIndex');
-      var cardModel = this.configurationCollection.models[cardNb].toJSON();
-      var cardTypes = _.pluck(cardModel.configuration.y, 'type');
-
-      if(_.contains(cardTypes, 'map')) {
-        console.log(cardModel);
-        this.$cards[cardNb].innerHTML = 'MAP';
-        this.renderNextCard();
-      } else {
-        cardModel.data.fetch()
-          .done(function() {
-            cardModel.chart = this.configurationCollection.models[cardNb].getChartConfiguration(this.data.toJSON());
-            var card = new App.View.ChartCard({ data: cardModel });
-            $(this.$cards[cardNb]).html(card.render().el);
-          }.bind(this))
-          .fail(function() {
-            var configuration = cardModel.configuration;
-            cardModel.chart = this.configurationCollection.models[cardNb].noneParser([], configuration);
-            var card = new App.View.ChartCard({ data: cardModel });
-            $(this.$cards[cardNb]).html(card.render().el);
-          }.bind(this))
-          .always(function() { this.renderNextCard(); }.bind(this));
-      }
     },
 
     /* Prevent future calls to render */

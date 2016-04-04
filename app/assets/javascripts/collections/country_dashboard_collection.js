@@ -26,6 +26,7 @@
           o.data = new (App.Core.Collection.extend({
             url: URL +
               encodeURIComponent(row.endpoint.replace(/{{iso}}/i, this.iso)),
+            query: row.endpoint.replace(/{{iso}}/i, this.iso),
             parse: function(data) { return data.rows; },
             fetchMethod: 'query'
           }))();

@@ -2,6 +2,8 @@
 
   'use strict';
 
+  var CARTODB_USER = 'insights';
+
   App.View.ChartCard = App.Core.View.extend({
 
     tagName: 'div',
@@ -18,7 +20,10 @@
       }
       this.data = new App.Model.Widget(settings.data);
 
-      this.listenTo(this, 'render', this.drawChart);
+      this.listenTo(this, 'render', function() {
+        if(!this.data.attributes.map) this.drawChart();
+        else this.drawMap();
+      }.bind(this));
     },
 
     render: function() {
@@ -31,7 +36,7 @@
      */
     drawChart: function() {
       if(!this.data.attributes.chart) return;
-      // console.trace(this.data.attributes.chart);
+
       if (this.state.attributes.mode === 'grid') {
         this.chart = new App.View.Chart({
           el: this.$('.chart'),
@@ -39,6 +44,27 @@
         });
         this.chart.render();
       }
+    },
+
+    /* Create a map and render it */
+    drawMap: function() {
+      var $mapContainer = this.$el.find('.chart');
+      $mapContainer.addClass('-map');
+
+      var view = new App.View.Geo({
+        props: {
+          elMap: $mapContainer,
+          basemap: 'light',
+          legend: false
+        }
+      });
+
+      view.mapAddLayer({
+        type: 'cartodb',
+        user: 'insights',
+        sql: this.data.get('data').query,
+        cartocss: this.data.get('configuration').y[0].cartocss
+      });
     },
 
     /**
