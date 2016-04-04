@@ -4,6 +4,10 @@
 
   App.View.FullScreen = App.Core.View.extend({
 
+    state: {
+      isFullscreen: false
+    },
+
     initialize: function(settings) {
       this.fullscreenBtn = document.getElementById(settings.fullscreenBtn);
       this.container = document.getElementById(settings.container);
@@ -12,6 +16,10 @@
       if(this.fullscreenBtn){
         this.setListeners();
       }
+    },
+
+    render: function() {
+      return this;
     },
 
     setListeners: function() {
@@ -24,9 +32,9 @@
       var isEnteringFullscreen = this.fullscreenCount % 2 === 0;
       this.fullscreenCount++;
 
-      if(isEnteringFullscreen && !this.getFullscreen()) {
+      if(isEnteringFullscreen && !this.state.attributes.isFullscreen) {
         this.enableFullscreen();
-      } else if(!isEnteringFullscreen && this.getFullscreen()) {
+      } else if(!isEnteringFullscreen && this.state.attributes.isFullscreen) {
         this.disableFullscreen();
       }
     },
@@ -79,12 +87,10 @@
 
     },
 
-    getFullscreen: function() {
-      return this.isFullscreen;
-    },
-
     setFullscreen: function(bool) {
-      this.isFullscreen = bool;
+      this.state.set({
+        isFullscreen: bool
+      });
     }
 
   });

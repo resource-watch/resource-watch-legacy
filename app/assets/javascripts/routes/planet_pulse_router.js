@@ -22,20 +22,37 @@
 
         this.listenTo(this.pulsesView.state, 'change', this.setPulse);
         this.listenTo(this.pulsesView.state, 'change:layerSelected', this.setPlanetLayer);
-        this.listenTo(this.pulsesView, 'pulses:loaded', this.initGlobe);
+        this.listenTo(this.pulsesView, 'pulses:loaded', this.onPulsesLoaded);
       }
 
     },
 
-    initGlobe: function(pulses) {
+    onPulsesLoaded: function(pulses) {
       this.pulses=pulses;
+      this.initFullScreen();
+      this.initGlobe(pulses);
+    },
+
+    initFullScreen: function() {
+      this.fullScreenView = new App.View.FullScreen({
+        fullscreenBtn: 'fullscreenBtn',
+        container: 'content'
+      });
+    },
+
+    initGlobe: function() {
       this.currentLayer = this.getPulseLayer(this.initLayerSlug);
       if (!this.globe){
         this.globe = new App.View.Globe({
           el: '#globeView',
           layer: this.currentLayer
         });
+        this.listenTo(this.fullScreenView.state, 'change', this.onFullscreenChanged);
       }
+    },
+
+    onFullscreenChanged: function() {
+      this.globe.changeSize(screen.width,screen.height);
     },
 
     setPulse: function() {

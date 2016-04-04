@@ -44,7 +44,6 @@
           categorySelected: this.state.attributes.categorySelected,
           categories: this.categories
         }));
-      this.initFullScreen();
       return this;
     },
 
@@ -100,13 +99,6 @@
         }.bind(this));
       }.bind(this));
       this.state.set({layerSelected:layer});
-    },
-
-    initFullScreen: function(){
-      this.fullScreen = new App.View.FullScreen({
-        fullscreenBtn: 'fullscreenBtn',
-        container: 'content'
-      });
     }
 
   });
