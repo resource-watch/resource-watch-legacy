@@ -49,10 +49,19 @@
         });
         this.listenTo(this.fullScreenView.state, 'change', this.onFullscreenChanged);
       }
+      this.updateGlobeAspect();
     },
 
     onFullscreenChanged: function() {
-      this.globe.changeSize(screen.width,screen.height);
+      var size = {};
+      if (this.fullScreenView.state.attributes.isFullscreen) {
+        size.width = screen.width;
+        size.height = screen.height;
+      } else {
+        size = App.helpers.calcSize(this.globe.el);
+      }
+
+      this.globe.changeSceneSize(size.width,size.height);
     },
 
     setPulse: function() {
@@ -60,11 +69,22 @@
         this.pulsesView.state.attributes.categorySelected + '/' + this.pulsesView.state.attributes.layerSelected
         : this.pulsesView.state.attributes.categorySelected;
       this.navigate( route , { trigger: false });
+      this.updateGlobeAspect();
     },
 
     setPlanetLayer: function() {
       this.currentLayer = this.getPulseLayer(this.pulsesView.state.attributes.layerSelected);
       this.globe.updateLayer(this.currentLayer);
+    },
+
+    updateGlobeAspect: function() {
+      if (this.pulsesView.state.attributes.categorySelected) {
+        this.globe.changeSceneZoom(4);
+        this.globe.changePosition(15, 0);
+      } else {
+        this.globe.changeSceneZoom();
+        this.globe.changePosition();
+      }
     },
 
     getPulseLayer: function(slug) {
