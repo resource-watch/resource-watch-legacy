@@ -1,0 +1,12 @@
+.loader {
+  width: rem(50);
+  height: rem(50);
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  @include spinner(30px, 4px, #6DA1DE);
+}
