@@ -16,6 +16,7 @@
 //= require backbone/backbone
 //= require d3
 //= require vega
+//= require moment
 //= require three.js/three
 //= require globe/OrbitControls
 //= require jiminy/datalib.min
