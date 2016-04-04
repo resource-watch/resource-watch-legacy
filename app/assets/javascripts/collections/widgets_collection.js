@@ -5,9 +5,14 @@
   var FIXTURES = [
     // Simple Bars
     {
-      name: 'Tree cover loss',
-      description: 'Centre for Research on Lorem...',
-      slug: 'water-levels-in-northen-california',
+      name: 'Aqueduct: Water stress projections',
+      slug: 'aqueduct-water-stress-projections',
+      verified: true,
+      date: '	2016-03-30T13:23:08+00:00',
+      description: 'This dataset shows projected changes in water stress, a measure of competition for water, through 2040.',
+      source: 'WRI',
+      source_link: 'http://www.wri.org/resources/data-sets/aqueduct-water-stress-projections-data',
+      authors: 'Luck, M., M. Landis, F. Gassert. 2015. “Aqueduct Water Stress Projections: Decadal projections of water supply and demand using CMIP5 GCMs.” Washington, DC: World Resources Institute.',
       layer: {
         type: 'cartodb',
         name: 'ny_policeprecints',
@@ -23,9 +28,14 @@
     },
     // Multiline
     {
-      name: 'Total Greenhouse emissions',
-      description: 'Centre for Research on Lorem...',
-      slug: 'water-levels-in-northen-california',
+      name: 'Water levels in Northern California',
+      slug: 'water-levels-in-northern-california',
+      verified: true,
+      date: '	2016-02-25T13:23:08+00:00',
+      description: 'Reservoirs with daily observational data in the State of California are visualized; monthly averaged reservoir storage as a percent of total storage capacity is plotted through time.',
+      source: 'USGS Center for Integrated Data Analytics',
+      source_link: 'http://www.wri.org/resources/data-sets/aqueduct-water-stress-projections-data',
+      authors: 'Luck, M., M. Landis, F. Gassert. 2015. “Aqueduct Water Stress Projections: Decadal projections of water supply and demand using CMIP5 GCMs.” Washington, DC: World Resources Institute.',
       layer:{
         type: 'cartodb',
         name: 'ny_healthcenter',
@@ -41,9 +51,14 @@
     },
     // Bar with line
     {
-      name: 'Population and GDP',
-      description: 'Centre for Research on Lorem...',
-      slug: 'water-levels-in-northen-california',
+      name: 'Protected Areas',
+      slug: 'protected-areas',
+      verified: true,
+      date: '	2016-01-28T10:23:08+00:00',
+      description: 'This dataset shows the location of terrestrial and marine protected areas around the world.',
+      source: 'IUCN and UNEP',
+      source_link: 'http://protectedplanet.net/',
+      authors: 'IUCN and UNEP-WCMC, The World Database on Protected Areas (WDPA), Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.',
       layer: {
         type: 'cartodb',
         name: 'ny_firebattalions',
@@ -216,8 +231,20 @@
 
     fixtures: function() {
       this.reset(FIXTURES);
-    }
+    },
 
+    getBySlug: function(slug) {
+      var data = this.findWhere({
+        slug: slug
+      });
+
+      if (data) {
+        data = data.toJSON();
+      } else {
+        data = [];
+      }
+      return data;
+    }
   });
 
 }).call(this, this.App);
