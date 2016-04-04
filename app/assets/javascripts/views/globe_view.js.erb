@@ -20,9 +20,8 @@
 
     defaults: {
       baseLayer: {
-        slug:'tree_cover_2000',
-        link: 'http://50.18.182.188:6080/arcgis/rest/services/TreeCover2000/ImageServer/exportImage?bbox=-180%2C-90%2C180%2C90&bboxSR=4326&size=4096%2C+2048&imageSR=4326&time=&format=png8&pixelType=U1&noData=&noDataInterpretation=esriNoDataMatchAll&interpolation=+RSP_BilinearInterpolation&compression=&compressionQuality=&bandIds=&mosaicRule=&renderingRule=&f=image',
-        opacity: 0.2
+        slug:'clouds',
+        link: '<%= asset_path("planet_pulse/fair_clouds_4k.png") %>'
       }
     },
 
@@ -75,9 +74,6 @@
      */
     draw: function() {
       var _this = this;
-      this.currentLayerOptions = {
-        opacity: this.currentLayer.slug === this.defaults.baseLayer.slug ? this.defaults.baseLayer.opacity:1
-      }
 
       this.el.appendChild(this.renderer.domElement);
 
@@ -94,7 +90,7 @@
       $.when(
         this.createStars(),
         this.createEarth(),
-        this.setLayer(this.currentLayer, this.currentLayerOptions)
+        this.setLayer(this.currentLayer)
       ).done(animate);
     },
 
@@ -109,11 +105,9 @@
     updateLayer: function(newLayer, options) {
       newLayer = newLayer || this.defaults.baseLayer;
       if (this.currentLayer.slug!==newLayer.slug) {
-        this.currentLayerOptions = options || {} ;
-        this.currentLayerOptions.opacity = newLayer.slug === this.defaults.baseLayer.slug ? this.defaults.baseLayer.opacity:1;
         this.currentLayer = newLayer;
         this.removeLayer();
-        this.setLayer(newLayer, this.currentLayerOptions);
+        this.setLayer(newLayer, options);
       }
     },
 
@@ -124,12 +118,13 @@
       var deferred = new $.Deferred();
       var _this = this;
       var radius = this.props.initialRadius;
+      var radiusDistance = currentLayer.slug === this.defaults.baseLayer.slug? 0.003:0.001;
       var segments = this.props.segments;
       var settings = options || {};
 
       _this._loadTexture(currentLayer.link)
       .done(function(texture) {
-        var geometry = new THREE.SphereGeometry(radius + 0.001, segments, segments);
+        var geometry = new THREE.SphereGeometry(radius + radiusDistance, segments, segments);
         var material = new THREE.MeshBasicMaterial({
           map: texture,
           side: THREE.DoubleSide,

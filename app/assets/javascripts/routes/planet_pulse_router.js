@@ -5,9 +5,8 @@
   App.Router.PlanetPulse = App.Core.Router.extend({
 
     routes: {
-      '': 'start',
-      '(:category)': 'start',
-      '(:category)/(:layer)': 'start'
+      '(/)': 'start',
+      '(:category)(/)(:layer)(/)': 'start'
     },
 
     start: function(category, layer) {
