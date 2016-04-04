@@ -5,5 +5,7 @@
   top: 0;
   left: 0;
 
-  background-image: url("planet_pulse/galaxy_starfield_4k.png");
+  &.-loading {
+    background-image: url("planet_pulse/galaxy_starfield_4k.png");
+  }
 }

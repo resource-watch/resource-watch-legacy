@@ -77,6 +77,10 @@
 
       this.el.appendChild(this.renderer.domElement);
 
+      var loaded = function() {
+        _this.el.classList.remove('-loading');
+        animate();
+      };
       var animate = function() {
         requestAnimationFrame(animate);
         // _this.earth.rotation.y += 0.0005;
@@ -91,7 +95,7 @@
         this.createStars(),
         this.createEarth(),
         this.setLayer(this.currentLayer)
-      ).done(animate);
+      ).done(loaded);
     },
 
     /**
