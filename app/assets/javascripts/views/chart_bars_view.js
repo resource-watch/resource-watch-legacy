@@ -20,9 +20,9 @@
       return {
         "padding": {
           "top": 25,
-          "left": 30,
+          "left": 38,
           "bottom": 30,
-          "right": 20
+          "right": 40
         },
         "width": 270,
         "height": 240,

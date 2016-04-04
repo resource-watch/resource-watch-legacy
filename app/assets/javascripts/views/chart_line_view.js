@@ -20,8 +20,8 @@
       return {
         "padding": {
           "top": 25,
-          "left": 30,
-          "bottom": 50,
+          "left": 38,
+          "bottom": 30,
           "right": 18
         },
         "data": [
