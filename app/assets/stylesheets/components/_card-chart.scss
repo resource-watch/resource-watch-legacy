@@ -30,14 +30,33 @@
     left: -20px;
     top: 15px;
     width: calc(100% + 2 * 20px);
+    z-index: 0;
   }
 
+  .infobtn {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: $bg-color-6;
+    font-size: $ultra-small-font-size;
+    color: $bg-color-4;
+    font-weight: 700;
+    font-style: italic;
+    font-family: "Georgia", serif;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer
+  }
 
   &.-red {
     background: linear-gradient(48deg, #c4256c, #c4256b, #c90e39);
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     h3, h4 { color: $text-color-3; }
+    .infobtn { background-color: $bg-color-3; color: $text-color-7; }
   }
 
   &.-blue {
@@ -45,6 +64,7 @@
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
     h3, h4 { color: $text-color-3; }
+    .infobtn { background-color: $bg-color-3; color: $text-color-2; }
   }
 
 }
