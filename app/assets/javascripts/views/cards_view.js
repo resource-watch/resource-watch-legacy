@@ -11,7 +11,8 @@
     template: this.HandlebarsTemplates.cards,
 
     state: {
-      mode: 'grid'
+      mode: 'grid',
+      actions: true
     },
 
     initialize: function(settings) {
@@ -19,6 +20,13 @@
         throw new Error('"data" param is required.');
       }
       this.data = new App.Collection.Widgets(settings.data);
+
+      if (typeof settings.actions !== 'undefined') {
+        this.state.set({
+          actions: settings.actions
+        }, { silent: true });
+      }
+
       // Setting events
       this.listenTo(this.data, 'reset', this.render);
       // First render
@@ -30,15 +38,16 @@
       var grid = this.state.attributes.mode === 'grid';
 
       this.$el
-        .html(this.template({ 
+        .html(this.template({
           cards: this.data.toJSON(),
           grid: grid
         }))
         .find('.js-card').each(function(i, el) {
           var m = _this.data.models[i];
-          var card = new App.View.Card({ 
+          var card = new App.View.Card({
             data: m.attributes,
-            mode: _this.state.attributes.mode
+            mode: _this.state.attributes.mode,
+            actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
         });

@@ -19,7 +19,8 @@
     },
 
     state: {
-      mode: 'grid'
+      mode: 'grid',
+      actions: true
     },
 
     initialize: function(settings) {
@@ -27,13 +28,19 @@
         throw new Error('"data" param is required.');
       }
       this.data = new App.Model.Widget(settings.data);
-      this.state.set({ mode: settings.mode });
+      this.state.set({
+        mode: settings.mode,
+        actions: settings.actions
+      });
 
       this.listenTo(this, 'render', this.drawChart);
     },
 
     render: function() {
-      this.$el.html(this.template(this.data.attributes));
+      this.$el.html(this.template({
+        data: this.data.attributes,
+        state: this.state.attributes
+      }));
       this.el.classList.add(this.state.attributes.mode);
       return this;
     },

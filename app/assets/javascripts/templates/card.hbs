@@ -1,7 +1,7 @@
 <div class="chart"></div>
 <div class="detail">
-  <h3><a href="/explore/{{slug}}">{{name}}</a></h3>
-  <p>{{source}}</p>
+  <h3><a href="/explore/{{slug}}">{{data.name}}</a></h3>
+  <p>{{data.source}}</p>
 
   <div class="actions">
     <!-- <button class="action -plain -wicon">
@@ -23,10 +23,12 @@
     </button>
   </div>
 </div>
-<div class="actions">
-  {{#if layer}}
-    <button class="action -gray js-toggle-layer">Add to map</button>
-  {{else}}
-    <button class="action -disabled">Not displayable</button>
-  {{/if}}
-</div>
+{{#if state.actions}}
+  <div class="actions">
+    {{#if data.layer}}
+      <button class="action -gray js-toggle-layer">Add to map</button>
+    {{else}}
+      <button class="action -disabled">Not displayable</button>
+    {{/if}}
+  </div>
+{{/if}}
