@@ -67,6 +67,8 @@
     },
 
     _onModalClick: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       var slug = e.currentTarget.parentNode.id;
       var layer = _.findWhere(this.data, {'slug':slug});
       var html = '<h2 class="title">' + layer.title_dataset +
