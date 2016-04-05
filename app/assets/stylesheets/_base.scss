@@ -53,6 +53,12 @@ p {
   margin: 1rem 0;
 }
 
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
 a, a:visited {
   color: $text-color-2;
   text-decoration: none;
