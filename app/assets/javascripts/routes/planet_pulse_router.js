@@ -79,7 +79,6 @@
 
     updateGlobeAspect: function() {
       if (this.pulsesView.state.attributes.categorySelected) {
-        this.globe.changeSceneZoom(4);
         this.globe.changePosition(15, 0);
       } else {
         this.globe.changeSceneZoom();

@@ -2,7 +2,7 @@
 
   'use strict';
 
-  var SQL = 'SELECT * FROM planetpulse';
+  var SQL = 'SELECT planetpulse.*, planetpulse_categories.description FROM planetpulse LEFT JOIN planetpulse_categories ON (planetpulse.category = planetpulse_categories.category)';
 
   App.Collection.PlanetPulses = App.Core.Collection.extend({
 
