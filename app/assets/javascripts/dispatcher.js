@@ -13,6 +13,7 @@
      * @type {Object}
      */
     routes: {
+      '(/)': 'Homepage',
       'explore(/)': 'Explore',
       'explore/:slug': 'ExploreDetail',
       'countries(/)': 'Countries',

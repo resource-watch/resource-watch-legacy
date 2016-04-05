@@ -34,8 +34,10 @@
 
       /* We build the skeleton of the dashboard */
       this.renderSkeleton();
-      var loader = new App.View.Loader({ el: this.$cardsContainer });
-      loader.state.set({ loading: true });
+      var loader = new App.View.Loader({
+        el: this.$cardsContainer,
+        loading: true
+      });
 
       /* We fetch the configuration of the cards */
       this.fetchConfiguration()
@@ -43,8 +45,10 @@
         .then(function() {
           /* We add a loader to each card */
           this.$cards.each(function(index, card) {
-            var loader = new App.View.Loader({ el: card });
-            loader.state.set({ loading: true });
+            new App.View.Loader({
+              el: card,
+              loading: true
+            });
           }.bind(this));
         }.bind(this))
         .then(this.startInnerCardRendering.bind(this))

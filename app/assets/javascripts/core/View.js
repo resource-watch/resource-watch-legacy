@@ -25,7 +25,7 @@
     // Setting options at beginning
     var options = settings && settings.props ? settings.props : {};
     this.props = _.extend({}, this.props || {}, options);
-    this.state = new StateModel(this.state || {}, settings.state || {});
+    this.state = new StateModel(this.state || {}, settings && settings.state || {});
     Backbone.View.call(this, settings);
     // Trigger 'render' event when DOM change
     domChanged(this.el, _.bind(function() {

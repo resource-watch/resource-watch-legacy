@@ -1,0 +1,37 @@
+(function(App) {
+
+  'use strict';
+
+  App.View.CountryDashboardSelector = App.Core.View.extend({
+
+    el: '.js-country-dashboard-selector',
+
+    events: {
+      'change select': 'onSelectChange'
+    },
+
+    initialize: function() {
+      this.countriesCollection = new App.Collection.Countries();
+
+      this.countriesCollection.fetch()
+        .then(this.setCountryList.bind(this))
+        .fail(function() {
+          console.warn('Unable to fetch the list of countries');
+        });
+    },
+
+    /* Add the list of countries to the selector */
+    setCountryList: function() {
+      var html = this.countriesCollection.toJSON().map(function(country) {
+        return '<option value="' + country.iso + '">' + country.name + '</option>';
+      });
+      this.$el.find('select').append(html);
+    },
+
+    onSelectChange: function(e) {
+      window.location.href = '<%= ResourceWatch::Application.routes.url_helpers.countries_path %>/' + e.currentTarget.value;
+    }
+
+  });
+
+}).call(this, this.App);

@@ -28,6 +28,7 @@
 
     render: function() {
       this.$el.html(this.template(this.data.attributes));
+      this.$el.find('.js-button').on('click', this.openModal.bind(this));
       return this;
     },
 
@@ -65,6 +66,17 @@
         sql: this.data.get('data').query,
         cartocss: this.data.get('configuration').y[0].cartocss
       });
+    },
+
+    /* Create and open the modal */
+    openModal: function() {
+      var configuration = this.data.get('configuration');
+      console.log(configuration);
+      var html = '<h1 class="title">' + configuration.info.title + '</h1>' +
+        '<p>' + (configuration.info.content || '') + '</p>' +
+        (configuration.info.link ? '<p><a href="' + configuration.info.link + '" rel="noreferrer" target="_blank">Online Source</a></p>' : '') +
+        (configuration.info.source ? '<p class="footnote">' + configuration.info.source + '</p>' : '');
+      new App.View.Modal({ html: html });
     },
 
     /**
