@@ -17,6 +17,7 @@
 //= require d3
 //= require vega
 //= require moment
+//= require slick.js/slick.min.js
 //= require three.js/three
 //= require globe/OrbitControls
 //= require jiminy/datalib.min

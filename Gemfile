@@ -28,6 +28,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-vega'
   gem 'rails-assets-three.js'
   gem 'rails-assets-moment'
+  gem 'rails-assets-slick.js'
 end
 
 group :development, :test do
