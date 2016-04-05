@@ -14,14 +14,54 @@
 
   background-color: rgba(0, 0, 0, 0.10);
 
-  .rw-lang-nav {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+  .rw-header-lang {
+    color: $text-color-3;
+    text-transform: uppercase;
+    font-size: $ultra-small-font-size;
+    float: right;
+    padding-right: 18px;
+    position: relative;
+    cursor: pointer;
 
-    list-style: none;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: 0;
+      @include arrow (7px, $text-color-3, 1px, 225deg);
+    }
+
+    > .rw-lang-nav {
+      padding: 5px 0;
+      margin: 0;
+      list-style: none;
+      position: absolute;
+      top: 25px;
+      right: -29px;
+      width: 140px;
+      background-color: $bg-color-3;
+      z-index: 1;
+      border-radius: 3px;
+	    box-shadow: 1px 1px 5px 0 rgba($bg-color-9, .2);
+
+      &:before {
+    		content: "";
+    		position: absolute;
+    		top: -6px;
+    		left: calc(50% - 3px);
+    		@include equi-triangle(7px, $bg-color-3, 'top');
+    	}
+
+      > li {
+        display: block;
+        padding: 5px 0;
+        color: $text-color-4;
+        font-size: $tiny-font-size;
+        text-align: center;
+      }
+
+      &.-hidden { display: none; }
+    }
   }
 }
 

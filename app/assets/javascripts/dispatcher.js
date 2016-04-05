@@ -50,6 +50,7 @@
   });
 
   new App.View.FooterCarousel();
+  new App.View.HeaderLangMenu();
 
   // We need this to detect router pathname
   Backbone.history.start({ pushState: true });
