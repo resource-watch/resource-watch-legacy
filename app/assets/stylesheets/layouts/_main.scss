@@ -7,6 +7,12 @@
     color: $text-color-3;
     background-color: $bg-color-9;
   }
+
+  .main-content {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
 }
 
 .rw-l-section {

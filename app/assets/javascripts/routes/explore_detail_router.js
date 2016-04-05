@@ -9,7 +9,9 @@
     },
 
     props: {
-      numSimilarDatasets: 3
+      numSimilarDatasets: 3,
+      mainContentId: 'mainContent',
+      loadingClass: '_is-content-loading'
     },
 
     /**
@@ -30,6 +32,8 @@
 
       // Creating dashboard
       this._dashboardComponents();
+
+      this._removeLoader();
     },
 
     _getData: function() {
@@ -136,6 +140,10 @@
 
     _onChartConfig: function() {
       this.chartSelector.toggle();
+    },
+
+    _removeLoader: function() {
+      $('#'+ this.props.mainContentId).removeClass(this.props.loadingClass);
     }
   });
 
