@@ -70,7 +70,7 @@
       this.chartLine = new App.View.ChartLine({
         mainColor: '#FFFFFF',
         buckets: ['#FFFFFF'],
-        secondaryColor: '#76C9DE'  
+        secondaryColor: '#76C9DE'
       });
 
       // Events
@@ -85,11 +85,14 @@
       // Limiting collection (TO-DO, get recommended widgets)
       var widgetsData = this.widgetsData.models ?
         this.widgetsData.toJSON() : this.widgetsData;
-      widgetsData.slice(0, this.props.numSimilarDatasets);
+      widgetsData = _.filter(widgetsData, _.bind(function(d) {
+        return d.slug !== this.slug
+      }, this));
+      var data = widgetsData.slice(0, this.props.numSimilarDatasets);
 
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
-        data: widgetsData
+        data: data
       });
 
       // Update Chart selector

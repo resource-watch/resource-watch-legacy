@@ -106,12 +106,12 @@
       var pageRange = this.pagination.getPageRange();
       var widgetsData = this.widgetsData.models ?
         this.widgetsData.toJSON() : this.widgetsData;
-      widgetsData.slice(pageRange.startIndex,
+      var data = widgetsData.slice(pageRange.startIndex,
         pageRange.endIndex);
 
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
-        data: widgetsData
+        data: data
       });
 
       // Events
