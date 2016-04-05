@@ -11,7 +11,8 @@
     events: {
       'click .planet-pulse-nav-link a.category-selector':'_onCategoryClick',
       'click .planet-pulse-content a.layer-selector':'_onLayerClick',
-      'click .planet-pulse-toolbar a':'_onBackClick'
+      'click .planet-pulse-toolbar a':'_onBackClick',
+      'click .modal-link':'_onModalClick'
     },
 
     template: this.HandlebarsTemplates.planet_pulses,
@@ -29,7 +30,8 @@
       this.data = new App.Collection.PlanetPulses();
       this.data.fetch()
         .done(function(data){
-          this.categories = this._parsePulses(data.rows);
+          this.data = data.rows;
+          this.categories = this._parsePulses(this.data);
           this.render();
           this.trigger('pulses:loaded', data.rows);
         }.bind(this))
@@ -64,6 +66,17 @@
       this.setCategorySelected(null);
     },
 
+    _onModalClick: function(e) {
+      var slug = e.currentTarget.parentNode.id;
+      var layer = _.findWhere(this.data, {'slug':slug});
+      var html = '<h2 class="title">' + layer.title_dataset +
+                    '<span>' + layer.source_1 + '</span>'+
+                  '</h2>'+
+                    '<p class="content">' + layer.source_description + '</p>'+
+                    '<p class="footnote">' + layer.source_citation + '</p>';
+      new App.View.Modal({ html: html });
+    },
+
     _parsePulses: function(data){
       var categories = {};
       var pulses = _.groupBy(data,'category');
@@ -78,7 +91,6 @@
           categories[key].layers.push(layer);
         }.bind(this));
       }.bind(this));
-      console.log(categories);
       return categories;
     },
 
