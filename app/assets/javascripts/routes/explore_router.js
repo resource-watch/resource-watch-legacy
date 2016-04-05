@@ -92,6 +92,12 @@
       // Geo map
       this.geo = new App.View.Geo({});
 
+      // Tooltip
+      this.tooltip = new App.View.Tooltip({
+        el: document.body,
+        text: 'Coming soon'
+      });
+
       // Setting events
       this.listenTo(this.searchForm.state, 'change:value', this.setQuery);
       this.listenTo(this.exploreNavigation.state, 'change:mode', this.setMode);
