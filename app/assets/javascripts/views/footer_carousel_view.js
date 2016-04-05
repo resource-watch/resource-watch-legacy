@@ -18,6 +18,8 @@
         autoplaySpeed: 3000,
         slide: 'li'
       });
+
+      this.$el.removeClass('-invisible');
     }
 
   });
