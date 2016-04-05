@@ -81,11 +81,8 @@
     },
 
     render: function() {
-      console.log('render');
       var recomms = [];
       var columns = this._getColumns();
-
-      console.log(columns);
 
       _.each(this.data.recomms, _.bind(function(d) {
         recomms.push({
@@ -188,8 +185,6 @@
     _onValueChange: function(ev) {
       var current = ev.currentTarget;
       var value = current.value;
-
-      console.log(value);
     }
   });
 

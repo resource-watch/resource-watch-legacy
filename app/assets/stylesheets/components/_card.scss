@@ -46,7 +46,13 @@
       > .action {
         margin-right: rem(10px);
 
+        .icon {
+          fill: $bg-color-6;
+        }
+
         &.favorite {
+          display: flex;
+          align-items: center;
           font-size: $small-font-size;
           font-weight: 400;
         }
