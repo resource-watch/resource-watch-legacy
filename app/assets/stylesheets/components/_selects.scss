@@ -1,0 +1,16 @@
+select {
+  height: rem(30);
+  appearance:none;
+  background: $bg-color-4;
+  border: rem(1) solid $bg-color-6;
+  border-radius: 0;
+  padding: rem(4) rem(5);
+  font-size: $small-font-size;
+  color: $text-color-1;
+  padding-right: rem(25);
+  position: relative;
+
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB3aWR0aD0iOHB4IiBoZWlnaHQ9IjRweCIgdmlld0JveD0iMCAwIDggNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4gICAgICAgIDx0aXRsZT5UcmlhbmdsZSAxPC90aXRsZT4gICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+ICAgIDxkZWZzPjwvZGVmcz4gICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+ICAgICAgICA8cGF0aCBkPSJNMCwwIEw4LDAgTDQsNCBMMCwwIFoiIGlkPSJUcmlhbmdsZS0xIiBmaWxsPSIjRDhEOEQ4Ij48L3BhdGg+ICAgIDwvZz48L3N2Zz4=);
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}

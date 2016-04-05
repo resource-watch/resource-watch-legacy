@@ -9,11 +9,16 @@
     },
 
     state: {
-      loading: null
+      loading: false
     },
 
-    initialize: function() {
-      this.listenTo(this.state, 'change', this.render);
+    initialize: function(settings) {
+      if (settings.loading){
+        this.state.set({
+          loading : settings.loading
+        });
+        this.render();
+      }
     },
 
     render: function() {

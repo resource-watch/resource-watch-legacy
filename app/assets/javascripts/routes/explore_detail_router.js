@@ -48,19 +48,40 @@
     _sharedComponents: function() {
       // Geo map
       this.geo = new App.View.Geo({});
+
+      // Creating card detail
+      this.data = this.widgetsData.getBySlug(this.slug);
+      this.cardDetail = new App.View.CardDetail({
+        el: '#cardDetail',
+        data: this.data
+      });
+
+      // Chart selector
+      this.chartSelector = new App.View.ChartSelector({
+        el: '#chartsSelector'
+      });
+
+      this.chartBars = new App.View.ChartBars({
+        mainColor: '#FFFFFF',
+        mainFillColor: '#89E7FF',
+        secondaryColor: '#76C9DE'
+      });
+      this.chartPie = new App.View.ChartPie({});
+      this.chartLine = new App.View.ChartLine({
+        mainColor: '#FFFFFF',
+        buckets: ['#FFFFFF'],
+        secondaryColor: '#76C9DE'  
+      });
+
+      // Events
+      this.listenTo(this.cardDetail, 'card:chart:config', this._onChartConfig);
+      this.listenTo(this.chartSelector, 'chart:update', this._onChartUpdate);
     },
 
     /**
      * Dashboard initialization
      */
     _dashboardComponents: function() {
-      // Creating card detail
-      var data = this.widgetsData.getBySlug(this.slug);
-      this.cardDetail = new App.View.CardDetail({
-        el: '#cardDetail',
-        data: data
-      });
-
       // Limiting collection (TO-DO, get recommended widgets)
       var widgetsData = this.widgetsData.models ?
         this.widgetsData.toJSON() : this.widgetsData;
@@ -71,9 +92,47 @@
         data: widgetsData
       });
 
+      // Update Chart selector
+      var chartData = this.data.data;
+      this.chartSelector.state.set({
+        data: chartData
+      });
+
       // Events
       App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
       App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
+    },
+
+    _onChartUpdate: function(type, data) {
+      if (this.chart) {
+        this.chart.remove();
+      }
+
+      var chartData;
+
+      if (type === 'bar') {
+        chartData = this.chartBars.getData({
+          values: data
+        });
+      } else if (type === 'pie') {
+        chartData = this.chartPie.getData({
+          values: data
+        });
+      } else if (type === 'line') {
+        chartData = this.chartLine.getData({
+          values: data
+        });
+      }
+
+      this.chart = new App.View.Chart({
+        el: this.cardDetail.$('.chart'),
+        data: chartData
+      });
+      this.chart.render();
+    },
+
+    _onChartConfig: function() {
+      this.chartSelector.toggle();
     }
   });
 

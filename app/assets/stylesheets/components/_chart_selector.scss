@@ -1,0 +1,71 @@
+.chart-selector {
+  width: rem(200);
+  background: #FFFFFF;
+  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.30);
+  border-radius: rem(5);
+  margin: rem(0);
+  padding: rem(0) rem(0) rem(12) rem(0);
+  position: absolute;
+  right: rem(12);
+  top: rem(40);
+  z-index: 1;
+  display: none;
+
+  &._visible {
+    display: block;
+  }
+
+  > .content {
+    width: 100%;
+    border-bottom: 1px solid #E2E2E2;
+    padding: rem(18) rem(10) rem(20) rem(10);
+
+    > .heading {
+      margin: 0 0 rem(7) 0;
+      text-transform: uppercase;;
+      color: $text-color-4;
+      font-size: $tiny-font-size;
+      letter-spacing: rem(1);
+    }
+
+    > .type {
+      width: 100%;
+      text-transform: capitalize;
+    }
+
+    > .action {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: rem(8);
+
+      > .label {
+        width: 30%;
+        font-size: $small-font-size;
+      }
+
+      > .value {
+        width: 70%;
+        text-transform: capitalize;
+      }
+    }
+
+    &:last-child {
+      border: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent $bg-color-4 transparent;
+    position: absolute;
+    top: rem(-8);
+    right: rem(30);
+  }
+}
