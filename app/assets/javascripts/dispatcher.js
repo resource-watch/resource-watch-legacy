@@ -53,7 +53,7 @@
   if (document.getElementsByClassName('js-footer-carousel').length > 0) {
     new App.View.FooterCarousel({ el: '.js-footer-carousel' });
   }
-  if (document.getElementsByClassName('js-footer-carousel').length > 0) {
+  if (document.getElementsByClassName('js-header-lang-menu').length > 0) {
     new App.View.HeaderLangMenu({ el: '.js-header-lang-menu' });
   }
 
