@@ -49,7 +49,10 @@
     }
   });
 
-  new App.View.FooterCarousel();
+  // Initializing common modules
+  if (document.getElementsByClassName('js-footer-carousel').length > 0) {
+    new App.View.FooterCarousel({ el: '.js-footer-carousel' });
+  }
 
   // We need this to detect router pathname
   Backbone.history.start({ pushState: true });
