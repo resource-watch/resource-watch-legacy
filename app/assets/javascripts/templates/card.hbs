@@ -4,11 +4,11 @@
   <p>{{source}}</p>
 
   <div class="actions">
-    <button class="action -plain -wicon">
+    <!-- <button class="action -plain -wicon">
       <svg class="icon icon-download">
         <use xlink:href="#icon-download"></use>
       </svg>
-      <span>Download</span>
+      <span>Download</span> -->
     </button>
 
     <button class="action -plain -pink">Map</button>
@@ -19,10 +19,14 @@
       <svg class="icon icon-star">
         <use xlink:href="#icon-star"></use>
       </svg>
-      <span>5,230</span>
+      <span>0</span>
     </button>
   </div>
 </div>
 <div class="actions">
-  <button class="action -gray js-toggle-layer">Add to map</button>
+  {{#if layer}}
+    <button class="action -gray js-toggle-layer">Add to map</button>
+  {{else}}
+    <button class="action -disabled">Not displayable</button>
+  {{/if}}
 </div>

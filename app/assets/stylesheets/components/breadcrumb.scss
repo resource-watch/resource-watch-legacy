@@ -1,0 +1,15 @@
+.breadcrumb {
+  width: 100%;
+  margin: rem(30) rem(15) rem(10) rem(15);
+  font-size: $small-font-size;
+  font-family: $global-font-family;
+  color: $text-color-4;
+
+  > .crumb {
+    color: $text-color-4;
+
+    &:hover {
+      color: $text-color-2;
+    }
+  }
+}
