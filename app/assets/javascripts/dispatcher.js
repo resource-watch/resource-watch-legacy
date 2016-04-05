@@ -49,6 +49,8 @@
     }
   });
 
+  new App.View.FooterCarousel();
+
   // We need this to detect router pathname
   Backbone.history.start({ pushState: true });
 
