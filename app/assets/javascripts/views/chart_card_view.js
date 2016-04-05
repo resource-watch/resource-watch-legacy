@@ -56,7 +56,8 @@
         props: {
           elMap: $mapContainer,
           basemap: 'light',
-          legend: false
+          legend: false,
+          disableZoomControls: true
         }
       });
 

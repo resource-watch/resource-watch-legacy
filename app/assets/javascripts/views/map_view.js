@@ -17,6 +17,7 @@
         scrollWheelZoom: false
       },
       basemap: 'dark',
+      disableZoomControls: false,
       basemapsList: {
         light: {
           url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
@@ -55,7 +56,12 @@
      * Creates the leaflet map
      */
     createMap: function() {
-      this.map = L.map(this.el, this.props.map);
+      var mapProps = this.props.map;
+      if (this.props.disableZoomControls) {
+        mapProps.zoomControl = false;
+        mapProps.doubleClickZoom = false;
+      }
+      this.map = L.map(this.el, mapProps);
       this.setBasemap();
     },
 

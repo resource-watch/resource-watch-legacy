@@ -12,7 +12,8 @@
       elMap: '#map',
       elLegend: '#legend',
       basemap: 'dark',
-      legend: true
+      legend: true,
+      disableZoomControls: false
     },
 
     initialize: function() {
@@ -31,6 +32,7 @@
       this.map = new App.View.Map({
         el: this.props.elMap,
         props: {
+          disableZoomControls: this.props.disableZoomControls,
           basemap: this.props.basemap
         }
       });
