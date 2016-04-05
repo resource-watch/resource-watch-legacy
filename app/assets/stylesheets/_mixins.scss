@@ -85,3 +85,13 @@
   &::-moz-placeholder { @content}
   &:-ms-input-placeholder { @content}
 }
+
+@mixin arrow ($width, $color, $border-width, $deg) {
+  width: $width;
+  height: $width;
+  border-top: $border-width solid $color;
+  border-left: $border-width solid $color;
+  -webkit-transform: rotate($deg);
+  transform: rotate($deg);
+  pointer-events: none;
+}

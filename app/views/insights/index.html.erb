@@ -4,28 +4,15 @@
   </div>
 </div>
 
+
 <div class="row">
-  <div class="col -xs-4">
-    <div class="rw-card">
-      <div class="image">
-        <%= link_to page_path('insights/insights-interactive-edi') do %>
-          <%= image_tag 'http://vizzuality.github.io/WRW-Prototype/img/insight-38-th.jpg' %>
-        <% end %>
-      </div>
-      <div class="content">
-        <h3 class="header">Interactive</h3>
-        <h2 class="title"><%= link_to 'A factory is being built in your neighborhood. Can you do anything about it?', page_path('insights/insights-interactive-edi') %></h2>
-      </div>
-      <div class="info">
-        <div class="source">
-          <img src="http://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
-          <span>by &nbsp;</span>
-          <a href="#">World Resources Institute</a>
-        </div>
-      </div>
-    </div>
+  <div class="col -xs-12">
+    <section class="rw-l-section">
+      <%= render "shared/insights" %>
+    </section>
   </div>
 </div>
+
 
 <div class="row">
   <div class="col -xs-12">

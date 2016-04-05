@@ -1,0 +1,35 @@
+$section-header-color: $text-color-7;
+$section-header-link-color: $text-color-2;
+
+.rw-l-section {
+  margin: 2rem 0;
+  > .header {
+    display: flex;
+    justify-content: space-between;;
+    align-items: center;
+
+    > .title {
+      display: inline-block;
+
+      margin: 0 0 15px 0;
+
+      font-size: 26px;
+      color: $section-header-color;
+    }
+
+    > .link {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: $tiny-font-size;
+      font-weight: 700;
+      cursor: pointer;
+
+      i.right-arrow {
+        display: inline-block;
+        position: relative;
+        top: 2px;
+        @include arrow ($tiny-font-size, $section-header-link-color, 2px, 135deg);
+      }
+    }
+  }
+}
