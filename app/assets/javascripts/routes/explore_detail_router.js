@@ -73,6 +73,12 @@
         secondaryColor: '#76C9DE'
       });
 
+      // Tooltip
+      this.tooltip = new App.View.Tooltip({
+        el: document.body,
+        text: 'Coming soon'
+      });
+
       // Events
       this.listenTo(this.cardDetail, 'card:chart:config', this._onChartConfig);
       this.listenTo(this.chartSelector, 'chart:update', this._onChartUpdate);

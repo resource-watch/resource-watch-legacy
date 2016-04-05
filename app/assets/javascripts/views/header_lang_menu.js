@@ -4,8 +4,6 @@
 
   App.View.HeaderLangMenu = App.Core.View.extend({
 
-    el: '.js-header-lang-menu',
-
     events: {
       'click': 'onToggleMenu'
     },

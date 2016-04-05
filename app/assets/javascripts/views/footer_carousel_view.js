@@ -4,8 +4,6 @@
 
   App.View.FooterCarousel = App.Core.View.extend({
 
-    el: '.js-footer-carousel',
-
     initialize: function() {
       if (!this.$el.length) {
         return;
