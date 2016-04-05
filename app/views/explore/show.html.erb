@@ -1,21 +1,23 @@
-<div class="row -expanded">
-  <div class="col -xs-12 -sm-7 explore">
-    <div class="row">
-      <div class="col -xs-12">
-        <div class="breadcrumb"><%= link_to 'Explore', explore_index_path, class: "crumb"  %> > Dataset</div>
-      </div>
+<div id="mainContent" class="row -expanded _is-content-loading">
+  <div class="main-content">
+    <div class="col -xs-12 -sm-7 explore">
+      <div class="row">
+        <div class="col -xs-12">
+          <div class="breadcrumb"><%= link_to 'Explore', explore_index_path, class: "crumb"  %> > Dataset</div>
+        </div>
 
-      <div id="cardDetail"></div>
+        <div id="cardDetail"></div>
 
-      <div class="col -xs-12">
-        <h2 class="-pink">Similar datasets</h2>
-        <div id="exploreDashboard"></div>
-        <div id="pagination"></div>
+        <div class="col -xs-12">
+          <h2 class="-pink">Similar datasets</h2>
+          <div id="exploreDashboard"></div>
+          <div id="pagination"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col -xs-12 -sm-5">
-    <div id="legend"></div>
-    <div id="map"></div>
+    <div class="col -xs-12 -sm-5">
+      <div id="legend"></div>
+      <div id="map"></div>
+    </div>
   </div>
 </div>

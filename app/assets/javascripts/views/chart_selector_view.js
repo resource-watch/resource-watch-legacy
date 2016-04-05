@@ -22,6 +22,8 @@
         {
           name: 'bar',
           acceptedStatTypes: [
+            [ 'nominal' ],
+            [ 'ordinal' ],
             [ 'quantitative', 'quantitative' ],
             [ 'ordinal', 'quantitative' ],
             [ 'nominal', 'ordinal' ]
@@ -38,8 +40,9 @@
         {
           name: 'pie',
           acceptedStatTypes: [
-            [ 'nominal', 'ordinal' ],
-            [ 'nominal', 'quantitative' ]
+              [ 'nominal' ],
+              [ 'ordinal' ],
+              [ 'quantitative' ]
           ]
         }
       ],
@@ -144,7 +147,6 @@
       var chartTypes = this.props.chartsTypes[this.state.attributes.type];
       var chartColumns = [];
 
-
       _.each(chartTypes, _.bind(function(d, i) {
         var column = {
           label: d.label,
@@ -185,6 +187,8 @@
     _onValueChange: function(ev) {
       var current = ev.currentTarget;
       var value = current.value;
+
+      this._generateGraph();
     }
   });
 

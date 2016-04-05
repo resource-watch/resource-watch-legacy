@@ -9,7 +9,9 @@
     },
 
     props: {
-      numSimilarDatasets: 3
+      numSimilarDatasets: 3,
+      mainContentId: 'mainContent',
+      loadingClass: '_is-content-loading'
     },
 
     /**
@@ -30,6 +32,8 @@
 
       // Creating dashboard
       this._dashboardComponents();
+
+      this._removeLoader();
     },
 
     _getData: function() {
@@ -66,7 +70,10 @@
         mainFillColor: '#89E7FF',
         secondaryColor: '#76C9DE'
       });
-      this.chartPie = new App.View.ChartPie({});
+      this.chartPie = new App.View.ChartPie({
+        mainColor: '#FFFFFF',
+        buckets: ['#25A2C3', '#1A8CAA', '#0F6F89', '#075469', '#C32D7B'],
+      });
       this.chartLine = new App.View.ChartLine({
         mainColor: '#FFFFFF',
         buckets: ['#FFFFFF'],
@@ -142,6 +149,10 @@
 
     _onChartConfig: function() {
       this.chartSelector.toggle();
+    },
+
+    _removeLoader: function() {
+      $('#'+ this.props.mainContentId).removeClass(this.props.loadingClass);
     }
   });
 
