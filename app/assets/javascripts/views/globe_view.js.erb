@@ -72,8 +72,28 @@
     /**
      * Change the rendered scene size
      */
-    changeSize: function(width, height) {
+    changeSceneSize: function(width, height) {
+      this.camera.aspect = width / height;
+      this.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
+    },
+
+    /**
+     * Change the globe size
+     */
+    changeSceneZoom: function(zoom) {
+      this.camera.position.z = zoom || this.props.cameraPosition.z;
+    },
+
+    /**
+     * Change the globe position
+     */
+    changePosition: function(offsetX, offsetY) {
+      var w = this.size.width;
+      var h = this.size.height;
+      offsetX = offsetX ? w*-offsetX/100:0;
+      offsetY = offsetY ? w*-offsetY/100:0;
+      this.camera.setViewOffset( w, h, offsetX, offsetY, w, h );
     },
 
     /**

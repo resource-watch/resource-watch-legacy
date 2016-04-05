@@ -70,7 +70,7 @@
       _.each(pulses, function(pulse, key) {
         categories[key] = {};
         categories[key].category = key;
-        categories[key].description = this.getCatDescription(key);
+        categories[key].description = pulse[0].description;
         categories[key].isActive = this.state.attributes.categorySelected === key;
         categories[key].layers = [];
         _.each(pulse, function(layer) {
@@ -78,11 +78,8 @@
           categories[key].layers.push(layer);
         }.bind(this));
       }.bind(this));
+      console.log(categories);
       return categories;
-    },
-
-    getCatDescription: function(key){
-      return key + ' category description';
     },
 
     setCategorySelected: function(cat){
