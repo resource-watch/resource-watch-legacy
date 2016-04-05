@@ -1,20 +1,20 @@
-.l-header {
+.rw-l-header {
   background-color: $bg-color-1;
   height: $header-height;
 
-  a {
+  a, a:visited {
     color: $text-color-3;
   }
 }
 
-.l-top-header {
+.rw-l-top-header {
   display: flex;
   height: rem(30);
   align-items: center;
 
   background-color: rgba(0, 0, 0, 0.10);
 
-  .lang-nav {
+  .rw-lang-nav {
     display: flex;
     justify-content: flex-end;
     padding: 0;
@@ -25,14 +25,14 @@
   }
 }
 
-.l-nav-header {
+.rw-l-nav-header {
   height: rem(100);
 
-  .brand {
+  .rw-brand {
     display: block;
   }
 
-  .main-nav ul {
+  .rw-main-nav ul {
     display: flex;
     justify-content: flex-end;
     padding: 0;

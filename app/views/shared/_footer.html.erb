@@ -1,16 +1,16 @@
-<footer class="l-footer">
+<footer class="rw-l-footer">
 
   <%# Footer top %>
-  <div class="l-top-footer">
+  <div class="rw-l-top-footer">
     <div class="row">
       <div class="col -xs-12 -sm-1">
-        <svg class="icon icon-symbol-grey">
+        <svg class="rw-icon rw-icon-symbol-grey">
           <use xlink:href="#icon-symbol-grey"></use>
         </svg>
       </div>
       <div class="col -xs-12 -sm-11">
         <%# Footer navigation %>
-        <ul class="footer-nav">
+        <ul class="rw-footer-nav">
           <li>
             <a href="#">Insights</a>
             <ul>
@@ -69,11 +69,11 @@
   </div>
 
   <%# Footer bottom %>
-  <div class="l-bottom-footer">
+  <div class="rw-l-bottom-footer">
     <div class="row">
       <div class="col -xs-12 -sm-6">
         <%# Bottom navigation %>
-        <ul class="bottom-nav">
+        <ul class="rw-bottom-nav">
           <li><%= link_to t('titles.terms'), page_path('terms') %></li>
           <li>-</li>
           <li><%= link_to t('titles.privacy'), page_path('privacy') %></li>
@@ -81,7 +81,7 @@
       </div>
       <div class="col -xs-12 -sm-6">
         <%# Copy %>
-        <p class="copy">© <%= Time.now.strftime('%Y') %> - <%= @site_name %></p>
+        <p class="rw-copy">© <%= Time.now.strftime('%Y') %> - <%= @site_name %></p>
       </div>
     </div>
   </div>

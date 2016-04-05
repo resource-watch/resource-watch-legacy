@@ -1,4 +1,4 @@
-.l-footer {
+.rw-l-footer {
   color: $text-color-4;
   font-size: $small-font-size;
 
@@ -7,7 +7,7 @@
   }
 }
 
-.l-top-footer {
+.rw-l-top-footer {
   padding-top: 2rem;
   padding-bottom: 2rem;
 
@@ -17,7 +17,7 @@
     padding-bottom: 4rem;
   }
 
-  .footer-nav {
+  .rw-footer-nav {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
@@ -63,11 +63,11 @@
   }
 }
 
-.l-bottom-footer {
+.rw-l-bottom-footer {
   padding: .5rem 0;
   background-color: $bg-color-3;
 
-  .bottom-nav {
+  .rw-bottom-nav {
     list-style: none;
     padding: 0;
     margin-top: 0;
@@ -84,7 +84,7 @@
     }
   }
 
-  .copy {
+  .rw-copy {
     margin: 0;
     text-align: center;
 

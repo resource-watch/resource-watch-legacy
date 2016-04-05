@@ -13,7 +13,7 @@
   <body class="-<%= controller_name %> <%= '-fitscreen' if @is_fitscreen %>">
     <%= render "shared/symbol-defs" %>
     <%= render "shared/header" %>
-    <div id="content" class="l-main <%= @content_class if defined?(@content_class) %>">
+    <div class="l-main -static">
       <%= yield %>
     </div>
     <%= render "shared/footer" unless @is_fitscreen %>
