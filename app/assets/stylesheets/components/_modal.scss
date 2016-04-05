@@ -27,7 +27,15 @@
     > .title {
       font-size: $large-font-size;
       font-weight: 700;
+
+      > span {
+        display: block;
+        font-size: $medium-font-size;
+        font-weight: 700;
+        color: $text-color-4;
+      }
     }
+
 
     > .footnote {
       font-style: italic;
