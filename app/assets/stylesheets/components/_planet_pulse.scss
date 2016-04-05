@@ -236,6 +236,7 @@
 
         .btn-info {
           @include modal-info($bg-color-4, $text-color-1);
+          top:7px;
           &:hover{
             background: darken($bg-color-4,5%);
           }
