@@ -70,7 +70,10 @@
         mainFillColor: '#89E7FF',
         secondaryColor: '#76C9DE'
       });
-      this.chartPie = new App.View.ChartPie({});
+      this.chartPie = new App.View.ChartPie({
+        mainColor: '#FFFFFF',
+        buckets: ['#25A2C3', '#1A8CAA', '#0F6F89', '#075469', '#C32D7B'],
+      });
       this.chartLine = new App.View.ChartLine({
         mainColor: '#FFFFFF',
         buckets: ['#FFFFFF'],

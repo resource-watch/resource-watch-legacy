@@ -9,6 +9,12 @@
       mainColor: '#9BA2AA'
     },
 
+    initialize: function(props) {
+      if (props) {
+        this.props = _.extend(this.props, props);
+      }
+    },
+
     getData: function(data) {
       return {
         "name": "arc",
@@ -176,7 +182,7 @@
                 "value": 10
               },
               "fill": {
-                "value": data.color || this.props.mainColor
+                "value": data.mainColor || this.props.mainColor
               },
               "align": {
                 "value": "center"
@@ -243,7 +249,7 @@
                 "value": 10
               },
               "fill": {
-                "value": data.color || this.props.mainColor
+                "value": data.mainColor || this.props.mainColor
               },
               "text": {
                 "template": "{{datum.category|truncate:20}}"
