@@ -34,9 +34,9 @@
             <ul>
               {{#each this.layers}}
               {{#if this.isActive}}
-                <li> <a class="layer-selector is-active" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use></svg></span></a></li>
+                <li> <a class="layer-selector is-active" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link">i</span></a></li>
               {{else}}
-                <li> <a class="layer-selector" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-info"></use></svg></span></a></li>
+                <li> <a class="layer-selector" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link">i</span></a></li>
               {{/if}}
               {{ else }}
                 <p> There are no layers in this category </p>
