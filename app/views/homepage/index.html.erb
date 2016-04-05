@@ -4,8 +4,18 @@
       <%= render "shared/country_dashboard" %>
     </section>
     <section class="rw-l-section">
-      <%= render "shared/planet_pulse" %>
+      <header class="header">
+        <h2 class="title">Features insights</h2>
+        <%= link_to page_path('insights'), class:'link' do %>
+          <%= t('view_more') %>
+          <i class="right-arrow"></i>
+        <% end %>
+      </header>
+      <%= render "shared/insights" %>
     </section>
+
+    <%= render "shared/planet_pulse" %>
+
     <section class="rw-l-section">
       <%= render "shared/explore_dashboard" %>
     </section>

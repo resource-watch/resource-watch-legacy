@@ -1,5 +1,16 @@
-<section>
-  <%= link_to planet_pulse_path, class: 'banner-image' do %>
-    <%= image_tag "/prototype/planet-pulse-1.png" %>
-  <% end %>
+<section class="rw-l-section">
+  <header class="header">
+    <h2 class="title">Planet pulse</h2>
+    <%= link_to planet_pulse_path, class:'link' do %>
+      <%= t('Launch') %>
+      <i class="right-arrow"></i>
+    <% end %>
+  </header>
+  <div class="rw-banner">
+    <%= link_to planet_pulse_path, class: 'image' do %>
+    <%= image_tag "planet_pulse/planet-pulse.jpg" %>
+    <% end %>
+    <h3 class="header"> <%= t('planet_pulse.banner')%> </h3>
+    <%= link_to t('planet_pulse.launch'), planet_pulse_path, class: 'button -large' %>
+  </div>
 </section>

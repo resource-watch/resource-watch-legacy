@@ -5,11 +5,14 @@
     <div class="row">
       <div class="col -xs-12 -sm-6 -sm-offset-6">
         <%# Language navigation %>
-        <ul class="rw-lang-nav">
-          <li><%= link_to 'English', '/en' %></li>
-          <li><%= link_to 'France', '/fr' %></li>
-          <li><%= link_to 'Germany', '/ge' %></li>
-        </ul>
+        <div class="rw-header-lang js-header-lang-menu">
+          English
+          <ul class="rw-lang-nav -hidden js-nav">
+            <li>English</li>
+            <li>Français</li>
+            <li>Deutsche</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
