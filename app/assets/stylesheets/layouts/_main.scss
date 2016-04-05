@@ -1,4 +1,4 @@
-.l-main {
+.l-main, .rw-l-main {
   position: relative;
   flex: 1;
   min-height: 600px;
@@ -7,4 +7,8 @@
     color: $text-color-3;
     background-color: $bg-color-9;
   }
+}
+
+.rw-l-section {
+  margin: 2rem;
 }
