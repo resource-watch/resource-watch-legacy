@@ -59,17 +59,17 @@
       source: 'CAIT',
       source_link: 'http://www.wri.org/resources/data-visualizations/cait-climate-data-explorer',
       authors: 'CAIT Climate Data Explorer. 2015. Washington, DC: World Resources Institute. Available online at: http://cait.wri.org.  Please Note: CAIT data are derived from several sources.',
-      layer:{
-        type: 'cartodb',
-        name: 'Most and least pollutive countries in 2011',
-        color: '#005824',
-        user: 'insights',
-        sql: 'with val as (SELECT iso, sum(total_n2o)::numeric as n2o, sum(total_ch4)::numeric as ch4, sum(total_f_gas)::numeric as fgas, sum(total_ghg_lucf)::numeric as lucf FROM cait_2_0_country_ghg_emissions where year=\'2011\' and iso is not null group by iso (select the_geom_webmercator, val.iso (COALESCE(ch4,0)+COALESCE(fgas,0)+COALESCE(lucf,0)+COALESCE(n2o,0)) as sum_2 from val inner join countries  on val.iso=iso_a3 order by sum_2 desc limit 2)union all (select the_geom_webmercator, val.iso, (COALESCE(ch4,0)+COALESCE(fgas,0)+COALESCE(lucf,0)+COALESCE(n2o,0)) as sum_2 from val inner join countries  on val.iso=iso_a3 order by sum_2 asc limit 2)',
-        cartocss: '#cait_2_0_country_ghg_emissions{ polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}#cait_2_0_country_ghg_emissions [ sum_2 >= 7352.0701197] { polygon-fill: #B40903;}#cait_2_0_country_ghg_emissions [ sum_2 <= -0.965698975] { polygon-fill: #055D00;}',
-        interactivity: false,
-        active: true,
-        zIndex: 0
-      },
+      // layer:{
+      //   type: 'cartodb',
+      //   name: 'Most and least pollutive countries in 2011',
+      //   color: '#005824',
+      //   user: 'insights',
+      //   sql: 'with%20val%20as%20(SELECT%20iso,%20sum(total_n2o)::numeric%20as%20n2o,%20sum(total_ch4)::numeric%20as%20ch4,%20sum(total_f_gas)::numeric%20as%20fgas,%20sum(total_ghg_lucf)::numeric%20as%20lucf%20FROM%20cait_2_0_country_ghg_emissions%20where%20year=%272011%27%20and%20iso%20is%20not%20null%20group%20by%20iso)(select%20the_geom_webmercator,%20the_geom,%20val.iso,%20(COALESCE(ch4,0)%2BCOALESCE(fgas,0)%2BCOALESCE(lucf,0)%2BCOALESCE(n2o,0))%20as%20sum_2%20from%20val%20inner%20join%20countries%20on%20val.iso=iso_a3%20order%20by%20sum_2%20desc%20limit%202)%20union%20all%20(select%20the_geom_webmercator,%20the_geom,%20val.iso,%20(COALESCE(ch4,0)%2BCOALESCE(fgas,0)%2BCOALESCE(lucf,0)%2BCOALESCE(n2o,0))%20as%20sum_2%20from%20val%20inner%20join%20countries%20on%20val.iso=iso_a3%20order%20by%20sum_2%20asc%20limit%202)',
+      //   cartocss: '#cait_2_0_country_ghg_emissions{ polygon-fill: #FFEDA0; polygon-opacity: 0.8; line-color: #FFF; line-width: 0.5; line-opacity: 1;}#cait_2_0_country_ghg_emissions [ sum_2 >= 7352.0701197] { polygon-fill: #B40903;}#cait_2_0_country_ghg_emissions [ sum_2 <= -0.965698975] { polygon-fill: #055D00;}',
+      //   interactivity: false,
+      //   active: true,
+      //   zIndex: 0
+      // },
       data: [{"x":"CHN","y":11777.9492318},{"x":"USA","y":7352.0701197},{"x":"KGZ","y":-0.965698975},{"x":"BTN","y":-6.623514368}],
         chart: {"padding":{"top":40,"left":55,"bottom":30,"right":20},"data":[{"name":"table","values":[{"x":"CHN","y":11777.9492318},{"x":"USA","y":7352.0701197},{"x":"KGZ","y":60.965698975},{"x":"BTN","y":60.623514368}]},{"name":"summary","source":"table","transform":[{"type":"aggregate","summarize":{"y":["min","max"]}},{"type":"formula","field":"difference","expr":"datum.max_y-datum.min_y"},{"type":"formula","field":"min","expr":"datum.min_y === 0 ? 0 : (datum.difference > 0 ? datum.min_y - datum.difference * 0.2  : datum.min_y * 0.8)"},{"type":"formula","field":"min","expr":"datum.min < 0 ? 0 : datum.min"},{"type":"formula","field":"max","expr":"datum.max_y === 0 ? 10 : (datum.difference > 0 ? datum.max_y + datum.difference * 0.2 : datum.max_y * 1.2)"}]},{"name":"computed","source":"table","transform":[{"type":"cross","with":"summary"}]}],"scales":[{"name":"x","type":"ordinal","range":"width","points":false,"padding":2,"domain":{"data":"table","field":"x"}},{"name":"y","type":"linear","range":"height","domain":{"data":"computed","field":"a.y"},"domainMin":{"data":"computed","field":"b.min"},"domainMax":{"data":"computed","field":"b.max"},"zero":false,"nice":true},{"name":"color","type":"ordinal","domain":{"data":"table","field":"data"},"range":["#3bb2d0","#075469","#b9bfc4","#1A8CAA"]}],"axes":[{"type":"x","scale":"x","format":"f","properties":{"ticks":{"strokeWidth":{"value":0}},"majorTicks":{"strokeWidth":{"value":0}},"axis":{"strokeWidth":{"value":0}},"labels":{"fontSize":{"value":10},"fontWeight":{"value":300},"fill":{"value":"#9aa2a9"}}}},{"type":"y","scale":"y","ticks":7,"grid":true,"layer":"back","format":"f","properties":{"ticks":{},"majorTicks":{"strokeWidth":{"value":0}},"axis":{"strokeWidth":{"value":0}},"labels":{"fontSize":{"value":10},"fontWeight":{"value":300},"fill":{"value":"#9aa2a9"}}}}],"marks":[{"type":"rect","from":{"data":"table"},"properties":{"enter":{"x":{"scale":"x","field":"x","offset":-5},"width":{"scale":"x","band":true,"offset":10},"y":{"scale":"y","field":"y"},"y2":{"field":{"group":"height"}}},"update":{"fill":{"scale":"color","field":"x"}}}},{"type":"text","from":{"data":"table","transform":[{"type":"facet","groupby":["unit"]}]},"properties":{"enter":{"x":{"value":-30},"y":{"value":-15},"text":{"template":"{{datum.unit}}"},"fontSize":{"value":10},"fontWeight":{"value":500},"fill":{"value":"#9aa2a9"},"align":{"value":"left"}}}}]}
     },
