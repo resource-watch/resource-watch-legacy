@@ -105,6 +105,7 @@
     draw: function() {
       var _this = this;
       this.initLoader();
+      this.rotate = true;
 
       this.el.appendChild(this.renderer.domElement);
 
@@ -114,11 +115,13 @@
         animate();
       };
       var animate = function() {
-        requestAnimationFrame(animate);
-        // _this.earth.rotation.y += 0.0005;
-        // if (_this.layer) {
-        //   _this.layer.rotation.y += 0.0005;
-        // }
+        _this.animationFrame = requestAnimationFrame(animate);
+        if (_this.rotate) {
+          _this.earth.rotation.y += 0.0004;
+          if (_this.layer) {
+            _this.layer.rotation.y += _this.layer.slug === 'clouds' ? 0.0005:0.0004;
+          }
+        }
         _this.controls.update();
         _this.renderer.render(_this.scene, _this.camera);
       };
@@ -143,6 +146,9 @@
       });
     },
 
+    toggleRotation: function(bool) {
+      this.rotate = bool;
+    },
 
     /**
      * Update current layer
@@ -168,7 +174,7 @@
       var deferred = new $.Deferred();
       var _this = this;
       var radius = this.props.initialRadius;
-      var radiusDistance = currentLayer.slug === this.defaults.baseLayer.slug? 0.003:0.001;
+      var radiusDistance = currentLayer.slug === this.defaults.baseLayer.slug? 0.005:0.001;
       var segments = this.props.segments;
       var settings = options || {};
 
@@ -182,8 +188,16 @@
           side: THREE.DoubleSide,
           transparent: true
         });
+        if (currentLayer.slug === 'clouds'){
+          console.log('clouds');
+          material.opacity= 0.8,
+          material.transparent= true,
+          material.depthWrite= false
+        }
         material.opacity = settings.opacity || 0.5;
         _this.layer = new THREE.Mesh(geometry, material);
+        _this.layer.slug = currentLayer.slug;
+        _this.layer.rotation.y = _this.earth && _this.earth.rotation ? _this.earth.rotation.y : 0;
         _this.scene.add(_this.layer);
         _this.setLoaderState(false);
         deferred.resolve(_this.layer);

@@ -48,6 +48,7 @@
           layer: this.currentLayer
         });
         this.listenTo(this.fullScreenView.state, 'change', this.onFullscreenChanged);
+        this.updateGlobeAspect();
       }
     },
 
@@ -80,9 +81,11 @@
     updateGlobeAspect: function() {
       if (this.pulsesView.state.attributes.categorySelected) {
         this.globe.changePosition(15, 0);
+        this.globe.toggleRotation(false);
       } else {
         this.globe.changeSceneZoom();
         this.globe.changePosition();
+        this.globe.toggleRotation(true);
       }
     },
 
