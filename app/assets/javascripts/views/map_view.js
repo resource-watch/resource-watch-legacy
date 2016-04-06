@@ -35,7 +35,8 @@
             maxZoom: 19
           }
         }
-      }
+      },
+      cartoDBAttribution: 'CartoDB <a href="http://cartodb.com/attributions" target="_blank">attribution</a>'
     },
 
     state: {
@@ -101,6 +102,8 @@
           data: data,
           layer: layer
         };
+
+        this.map.attributionControl.removeAttribution(this.props.cartoDBAttribution);
       }
       this.state.set({
         layers: layers

@@ -62,6 +62,7 @@
       });
 
       view.mapAddLayer({
+        name: this.data.attributes.slug,
         type: 'cartodb',
         user: 'insights',
         sql: this.data.get('data').query,
