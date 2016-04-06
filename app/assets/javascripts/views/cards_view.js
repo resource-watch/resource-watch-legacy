@@ -40,7 +40,8 @@
       this.$el
         .html(this.template({
           cards: this.data.toJSON(),
-          grid: grid
+          grid: grid,
+          gridClasses: this.props.gridClasses
         }))
         .find('.js-card').each(function(i, el) {
           var m = _this.data.models[i];

@@ -45,7 +45,7 @@
       for (var action in actions) {
         var current = actions[action];
         var value = current.dataset.value;
-        if (current && value && (value === mode)) {        
+        if (current && value && (value === mode)) {
           current.classList.add('selected');
           break;
         }
