@@ -50,6 +50,7 @@
             actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
+          card.drawChart();
         });
 
       return this;

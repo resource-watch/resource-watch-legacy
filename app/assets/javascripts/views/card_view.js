@@ -32,8 +32,6 @@
         mode: settings.mode,
         actions: settings.actions
       });
-
-      this.listenTo(this, 'render', this.drawChart);
     },
 
     render: function() {
