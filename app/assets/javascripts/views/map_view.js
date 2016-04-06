@@ -22,7 +22,7 @@
         light: {
           url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
           options: {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 19
           }
@@ -30,7 +30,7 @@
         dark: {
           url: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
           options: {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 19
           }
@@ -73,6 +73,7 @@
       var basemap = this.props.basemapsList[this.props.basemap];
       this.basemap = L.tileLayer(basemap.url, basemap.options);
       this.basemap.addTo(this.map);
+      this._setAttributions();
     },
 
     /**
@@ -103,7 +104,6 @@
           layer: layer
         };
 
-        this.map.attributionControl.removeAttribution(this.props.cartoDBAttribution);
       }
       this.state.set({
         layers: layers
@@ -170,6 +170,13 @@
           layers: newsList
         }, { silent: true });
         this.state.trigger('change');
+      }
+    },
+
+    _setAttributions: function() {
+      var layers = this.state.attributes.layers;
+      if (Object.keys(layers).length === 0) {
+        this.map.attributionControl.addAttribution(this.props.cartoDBAttribution);
       }
     }
   });
