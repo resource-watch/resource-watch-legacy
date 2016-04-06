@@ -113,6 +113,10 @@
   > .detail {
     padding: 1rem;
 
+    > h3 {
+      min-height: 60px;
+    }
+
     > .actions {
       display: flex;
       flex-direction: row;

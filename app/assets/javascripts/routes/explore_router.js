@@ -117,7 +117,10 @@
 
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
-        data: data
+        data: data,
+        props: {
+          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
+        }
       });
 
       // Events
