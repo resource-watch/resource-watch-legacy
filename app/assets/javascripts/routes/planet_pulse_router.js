@@ -21,6 +21,7 @@
         });
 
         this.listenTo(this.pulsesView.state, 'change', this.setPulse);
+        this.listenTo(this.pulsesView.state, 'change:categorySelected', this.updateGlobeAspect);
         this.listenTo(this.pulsesView.state, 'change:layerSelected', this.setPlanetLayer);
         this.listenTo(this.pulsesView, 'pulses:loaded', this.onPulsesLoaded);
       }
@@ -35,7 +36,6 @@
 
     initFullScreen: function() {
       this.fullScreenView = new App.View.FullScreen({
-        fullscreenBtn: 'fullscreenBtn',
         container: 'content'
       });
     },
@@ -49,19 +49,20 @@
         });
         this.listenTo(this.fullScreenView.state, 'change', this.onFullscreenChanged);
       }
-      this.updateGlobeAspect();
     },
 
     onFullscreenChanged: function() {
-      var size = {};
-      if (this.fullScreenView.state.attributes.isFullscreen) {
-        size.width = screen.width;
-        size.height = screen.height;
-      } else {
-        size = App.helpers.calcSize(this.globe.el);
-      }
-
-      this.globe.changeSceneSize(size.width,size.height);
+      setTimeout(function(){
+        var size = {};
+        if (this.fullScreenView.state.attributes.isFullscreen) {
+          size.width = screen.width;
+          size.height = screen.height;
+        } else {
+          size = App.helpers.calcSize(this.globe.el);
+        }
+        this.globe.changeSceneSize(size.width,size.height);
+        this.updateGlobeAspect();
+      }.bind(this),150);
     },
 
     setPulse: function() {
@@ -69,7 +70,6 @@
         this.pulsesView.state.attributes.categorySelected + '/' + this.pulsesView.state.attributes.layerSelected
         : this.pulsesView.state.attributes.categorySelected;
       this.navigate( route , { trigger: false });
-      this.updateGlobeAspect();
     },
 
     setPlanetLayer: function() {

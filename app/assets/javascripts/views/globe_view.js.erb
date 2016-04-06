@@ -73,9 +73,12 @@
      * Change the rendered scene size
      */
     changeSceneSize: function(width, height) {
+      this.size.width = width;
+      this.size.height = height;
       this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
+      this.renderer.setPixelRatio(window.devicePixelRatio);
     },
 
     /**

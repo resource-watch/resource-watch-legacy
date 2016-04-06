@@ -9,13 +9,9 @@
     },
 
     initialize: function(settings) {
-      this.fullscreenBtn = document.getElementById(settings.fullscreenBtn);
       this.container = document.getElementById(settings.container);
-      this.isFullscreen = false;
       this.fullscreenCount = 0;
-      if(this.fullscreenBtn){
-        this.setListeners();
-      }
+      this.setListeners();
     },
 
     render: function() {
@@ -23,15 +19,14 @@
     },
 
     setListeners: function() {
+      App.Core.Events.on('fullscreen:clicked', this.toggleFullscreen.bind(this));
       var fullscreenEvents = 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange';
       $(document).on(fullscreenEvents, _.bind(this.fullscreenWatcher, this));
-      this.fullscreenBtn.addEventListener('click', _.bind(this.toggleFullscreen, this), false);
     },
 
     fullscreenWatcher: function() {
       var isEnteringFullscreen = this.fullscreenCount % 2 === 0;
       this.fullscreenCount++;
-
       if(isEnteringFullscreen && !this.state.attributes.isFullscreen) {
         this.enableFullscreen();
       } else if(!isEnteringFullscreen && this.state.attributes.isFullscreen) {
@@ -42,13 +37,15 @@
     enableFullscreen: function() {
       this.setFullscreen(true);
       this.container.classList.add('is-fullscreen');
-      this.fullscreenBtn.textContent = 'Exit Full screen';
+
+      App.Core.Events.trigger('fullscreen:change', true);
     },
 
     disableFullscreen: function() {
       this.setFullscreen(false);
       this.container.classList.remove('is-fullscreen');
-      this.fullscreenBtn.textContent = 'Full screen';
+
+      App.Core.Events.trigger('fullscreen:change', false);
     },
 
 
@@ -64,8 +61,7 @@
         } else if (this.container.webkitRequestFullscreen) {
           this.container.webkitRequestFullscreen();
         }
-
-        this.fullscreenBtn.textContent = 'Exit Full screen';
+        this.enableFullscreen();
 
       } else {
 
@@ -78,13 +74,9 @@
         } else if (document.webkitExitFullscreen) {
           document.webkitExitFullscreen();
         }
-
-        this.fullscreenBtn.textContent = 'Full screen';
+        this.disableFullscreen();
 
       }
-
-      this.container.classList.toggle('is-fullscreen');
-
     },
 
     setFullscreen: function(bool) {

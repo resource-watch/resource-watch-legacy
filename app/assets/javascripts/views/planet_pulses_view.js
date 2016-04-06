@@ -12,14 +12,16 @@
       'click .planet-pulse-nav-link a.category-selector':'_onCategoryClick',
       'click .planet-pulse-content a.layer-selector':'_onLayerClick',
       'click .planet-pulse-toolbar a':'_onBackClick',
-      'click .modal-link':'_onModalClick'
+      'click .modal-link':'_onModalClick',
+      'click #fullscreenBtn':'_onFullScreenClick'
     },
 
     template: this.HandlebarsTemplates.planet_pulses,
 
     state: {
       categorySelected: null,
-      layerSelected: null
+      layerSelected: null,
+      isFullscreen: false
     },
 
     initialize: function(settings) {
@@ -33,6 +35,7 @@
           this.data = data.rows;
           this.categories = this._parsePulses(this.data);
           this.render();
+          this.setListeners();
           this.trigger('pulses:loaded', data.rows);
         }.bind(this))
         .error(function(error){
@@ -44,7 +47,8 @@
       this.$el
         .html(this.template({
           categorySelected: this.state.attributes.categorySelected,
-          categories: this.categories
+          categories: this.categories,
+          isFullscreen: this.state.attributes.isFullscreen
         }));
       return this;
     },
@@ -77,6 +81,26 @@
                     '<p class="content">' + layer.source_description + '</p>'+
                     '<p class="footnote">' + layer.source_citation + '</p>';
       new App.View.Modal({ html: html });
+    },
+
+    setListeners: function() {
+      App.Core.Events.on('fullscreen:change', this._onFullScreenChange.bind(this));
+    },
+
+    _onFullScreenChange: function(bool) {
+      if (this.state.attributes.isFullscreen !== bool){
+        this.state.set({
+          isFullscreen:bool
+        });
+      }
+    },
+
+    _onFullScreenClick: function(e) {
+      e.preventDefault();
+      this.state.set({
+        isFullscreen:!this.state.attributes.isFullscreen
+      });
+      App.Core.Events.trigger('fullscreen:clicked');
     },
 
     _parsePulses: function(data){
