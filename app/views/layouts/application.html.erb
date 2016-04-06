@@ -15,6 +15,11 @@
     <%= render "shared/symbol-defs" %>
     <%= render "shared/header" %>
     <div id="content" class="l-main <%= @content_class if defined?(@content_class) %>">
+      <div class="row">
+        <div class="col-xs-12">
+          <%= breadcrumbs %>
+        </div>
+      </div>
       <%= yield %>
     </div>
     <%= render "shared/footer" unless @is_fitscreen %>
