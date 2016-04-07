@@ -18,7 +18,11 @@
         </ul>
         <div class="planet-pulse-toolbar">
           <a href="#">Back</a>
-          <!-- <button id="fullscreenBtn">Fullscreen</button> -->
+          {{#if isFullscreen}}
+            <button id="fullscreenBtn">Exit full screen</button>
+          {{else}}
+            <button id="fullscreenBtn">Full screen</button>
+          {{/if}}
         </div>
       </header>
       <div class="planet-pulse-content">
