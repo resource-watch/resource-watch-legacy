@@ -4,5 +4,6 @@ class ExploreController < ApplicationController
   end
 
   def show
+    @exploreSlug = params["id"]
   end
 end

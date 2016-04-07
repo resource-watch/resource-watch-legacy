@@ -31,6 +31,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-slick.js'
 end
 
+#Breadcrumbs
+gem 'gretel'
+
 group :development, :test do
   gem 'teaspoon-mocha', github: 'modeset/teaspoon', branch: 'rails_5'
 end
