@@ -14,10 +14,20 @@ crumb :explore do
   parent :root
 end
 
+crumb :explore_detail do |id|
+  link "#{id}"
+  parent :explore
+end
+
 # Dashboard list
-crumb :dashboard do
+crumb :countries do
   link "Dashboard", countries_path
   parent :root
+end
+
+crumb :country do |id|
+  link "#{id}"
+  parent :countries
 end
 
 # crumb :projects do

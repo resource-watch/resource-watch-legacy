@@ -2,3 +2,7 @@
   overflow-y: scroll;
   height: calc(100vh - #{$header-height});
 }
+
+.explore-map {
+  margin-top: rem(-61px);
+}
