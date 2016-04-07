@@ -15,11 +15,7 @@
     <%= render "shared/symbol-defs" %>
     <%= render "shared/header" %>
     <div id="content" class="l-main <%= @content_class if defined?(@content_class) %>">
-      <% if params[:controller] == "explore" %>
-        <%= render "shared/breadcrumbs/explore" %>
-      <% else %>
-        <%= render "shared/breadcrumbs/application" %>
-      <% end %>
+      <%= render "shared/breadcrumbs", controller: params[:controller] %>
       <%= yield %>
     </div>
     <%= render "shared/footer" unless @is_fitscreen %>
