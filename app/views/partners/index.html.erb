@@ -1,34 +1,42 @@
 <% breadcrumb :partners %>
 
-<div class="row">
-  <div class="col -xs-12">
-    <h1>Partners</h1>
-  </div>
-</div>
+<div class="rw-partners">
 
-<div class="row">
-  <div class="col -xs-12">
-    <div class="partners--intro">
-      <h3>We have a massive opportunity
-        <br>
-        to build a sustainable society</h3>
-      <p>
-        We cannot undertake this endeavour alone. Resource Watch requires leading experts to work across data collection, processing, storage and visualisation. To achieve our ambitious goals we want to gather the top minds from around the world and work at
-        pace, to complete our work before it’s too late.<br>Just take a look at who we’ve got joining us on the journey already!<br>If you see yourself as part of this team, just get in touch!</p>
+  <div class="row">
+    <div class="col -xs-12">
+      <div class="container">
+        <h1>Partners</h1>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col -xs-12">
-    <%= render "shared/partners", partners: @partners%>
+  <div class="partners-intro">
+    <div class="container">
+      <h3>We have a massive opportunity
+        <br>
+        to build a sustainable society
+      </h3>
+      <p>
+        We cannot undertake this endeavour alone. Resource Watch requires leading experts to work across data collection, processing, storage and visualisation. To achieve our ambitious goals we want to gather the top minds from around the world and work at
+        pace, to complete our work before it’s too late.<br>Just take a look at who we’ve got joining us on the journey already!<br>If you see yourself as part of this team, just get in touch!
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col -xs-12">
-    <section class="rw-l-section">
-      <%= render "shared/contact" %>
-    </section>
+  <div class="row">
+    <div class="container">
+      <div class="col -xs-12">
+        <%= render "shared/partners", partners: @partners%>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col -xs-12">
+      <section class="rw-l-section">
+        <%= render "shared/contact" %>
+      </section>
+    </div>
   </div>
 </div>

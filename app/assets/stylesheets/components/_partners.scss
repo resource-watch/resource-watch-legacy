@@ -1,28 +1,59 @@
 .rw-partners {
-  .partner-card {
-    margin-top: 120px;
-    padding: 0 60px;
-    flex-basis: 50%;
-    font-size: 18px;
-    line-height: 28px;
+
+  .partners-intro {
+    padding: 60px 0;
+    background-color: $bg-color-3;
   }
 
-  .partner-card p {
-    margin-top: 30px;
-    text-align: center;
+  .partners-intro h3 {
+    font-size: 42px;
+    font-weight: 300;
+    color: $text-color-7;
+    margin-top: 0;
+  }
+
+  .partners-intro p {
+    column-count: 2;
+    font-size: 18px;
+    line-height: 28px;
     color: #6c7379;
   }
 
-  .partner-card a {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-}
-
-  .partner-card a:first-of-type {
+  .partners-cards {
     display: flex;
-    height: 80px;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 120px;
+
+    .partner-card {
+      margin-top: 120px;
+      padding: 0 60px;
+      flex-basis: 100%;
+      font-size: 18px;
+      line-height: 28px;
+
+      @media screen and (min-width: 768px) {
+        flex-basis: 50%;
+      }
+    }
+
+    .partner-card p {
+      margin-top: 30px;
+      text-align: center;
+      color: #6c7379;
+    }
+
+    .partner-card a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .partner-card a:first-of-type {
+      display: flex;
+      height: 80px;
+      justify-content: center;
+      align-items: flex-end;
+    }
   }
 }

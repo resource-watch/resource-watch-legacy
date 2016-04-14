@@ -30,6 +30,18 @@ body {
   }
 }
 
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+
+  @media screen and (min-width: 1040px) {
+    width: 1040px;
+    padding: 0;
+  }
+}
+
 h1,
 h2,
 h3 {
