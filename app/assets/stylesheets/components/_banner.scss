@@ -5,6 +5,7 @@
   opacity: 1;
   filter: grayscale(0%);
   transition: filter 0.3s, opacity 0.3s;
+  text-align: center;
 
   > .image {
     width: 100%;

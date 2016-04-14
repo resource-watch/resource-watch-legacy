@@ -18,7 +18,8 @@
       'explore/:slug': 'ExploreDetail',
       'countries(/)': 'Countries',
       'countries/:iso': 'CountryDashboard',
-      'planet-pulse(/)': 'PlanetPulse'
+      'planet-pulse(/)': 'PlanetPulse',
+      'partners(/)': 'Partners'
     }
 
   });
