@@ -35,7 +35,7 @@ end
 gem 'gretel'
 
 group :development, :test do
-  gem 'teaspoon-mocha', github: 'modeset/teaspoon', branch: 'rails_5'
+  gem 'teaspoon-mocha'
 end
 
 group :development do
