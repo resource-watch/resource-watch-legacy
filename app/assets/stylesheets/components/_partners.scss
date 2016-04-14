@@ -1,0 +1,28 @@
+.rw-partners {
+  .partner-card {
+    margin-top: 120px;
+    padding: 0 60px;
+    flex-basis: 50%;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .partner-card p {
+    margin-top: 30px;
+    text-align: center;
+    color: #6c7379;
+  }
+
+  .partner-card a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+  .partner-card a:first-of-type {
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}

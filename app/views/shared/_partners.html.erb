@@ -1,0 +1,14 @@
+<div class="rw-partners">
+  <% @partners.each do |p| %>
+  <div class="partner-card">
+    <%= link_to page_path(p[:url]) do %>
+      <%= image_tag p[:image] %>
+    <% end %>
+    <p><%= p[:description] %></p>
+
+    <%= link_to page_path(p[:url]) do %>
+      Read more
+    <% end %>
+  </div>
+  <% end %>
+</div>
