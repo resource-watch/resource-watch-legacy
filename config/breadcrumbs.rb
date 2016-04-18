@@ -8,6 +8,12 @@ crumb :insights do
   parent :root
 end
 
+# Partners list
+crumb :partners do
+  link "Partners", page_path('partners')
+  parent :root
+end
+
 # Explore list
 crumb :explore do
   link "Explore", explore_index_path

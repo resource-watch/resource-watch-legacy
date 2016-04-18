@@ -1,0 +1,17 @@
+<div class="partners-cards">
+  <% @partners.each do |p| %>
+    <%= content_tag(:div, :class =>  p[:disabled] ? "partner-card is-disabled" : 'partner-card') do %>
+
+      <%= link_to page_path(p[:url]) do %>
+        <%= image_tag p[:image] %>
+      <% end %>
+
+      <p><%= p[:description] %></p>
+
+      <%= link_to page_path(p[:url]) do %>
+        Read more
+      <% end %>
+
+    <% end %>
+  <% end %>
+</div>
