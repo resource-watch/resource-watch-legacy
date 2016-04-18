@@ -6,7 +6,7 @@
 
     tagName: 'div',
 
-    className: 'rw-categories',
+    className: 'rw-mc-form',
 
     events: {
       'click .modal-signup':'_onContactClick'
