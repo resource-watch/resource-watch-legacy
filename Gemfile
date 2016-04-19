@@ -7,9 +7,10 @@ gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 # Rails plugins
 gem 'puma'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'gretel', '~> 3.0.8'
 
 # Serving static files
-gem 'high_voltage', github: 'thoughtbot/high_voltage', branch: 'master'
+gem 'high_voltage', '~> 3.0.0'
 
 # Assets pipeline
 gem 'uglifier', '>= 1.3.0'
@@ -30,9 +31,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-moment'
   gem 'rails-assets-slick.js'
 end
-
-#Breadcrumbs
-gem 'gretel'
 
 group :development, :test do
   gem 'teaspoon-mocha'
