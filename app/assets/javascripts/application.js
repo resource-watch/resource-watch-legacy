@@ -5,7 +5,7 @@
 //= require d3
 //= require vega
 //= require moment
-//= require slick-carousel/slick.js
+//= require slick.js/slick
 //= require three.js/three
 //= require globe/OrbitControls
 //= require jiminy/datalib.min
