@@ -1,6 +1,7 @@
 .rw-l-footer {
   color: $text-color-4;
   font-size: $small-font-size;
+  margin-top: 2rem;
 
   a {
     color: $text-color-4;
@@ -35,6 +36,12 @@
     padding-bottom: 4rem;
   }
 
+  .rw-footer-logo {
+    text-align: center;
+    @media screen and (min-width: $medium-screen) {
+      text-align: left;
+    }
+  }
   .rw-footer-nav {
     display: flex;
     flex-wrap: wrap;
