@@ -2,7 +2,12 @@
 
 <div class="row">
   <div class="col -xs-12">
-    <h1>Countries dashboard</h1>
+    <header class="main-header">
+      <h1>Countries dashboard</h1>
+      <a class="link" href="#">
+        Full screen
+      </a>
+    </header>
     <%= form_tag nil, id: 'searchForm' do %>
       <div class="input-group">
         <%= search_field_tag :q, nil, placeholder: 'Search country' %>

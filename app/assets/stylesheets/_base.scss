@@ -71,4 +71,19 @@ a, a:visited {
   &:hover {
     text-decoration: underline;
   }
+
+  &.link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: $tiny-font-size;
+    font-weight: 700;
+    cursor: pointer;
+
+    i.right-arrow {
+      display: inline-block;
+      position: relative;
+      top: 2px;
+      @include arrow ($tiny-font-size, $text-color-2, 2px, 135deg);
+    }
+  }
 }
