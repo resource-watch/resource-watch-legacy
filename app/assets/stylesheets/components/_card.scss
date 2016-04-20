@@ -1,3 +1,5 @@
+$card-shadow-color: $real-black;
+
 .cards, .rw-cards {
   margin-bottom: 1rem;
 }
@@ -7,8 +9,16 @@
 
   background: $bg-color-4;
   border: 1px solid $border-color-1;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.09);
+  box-shadow: 0 1px 2px 0 rgba($card-shadow-color, 0.09);
   transition: border .2s;
+
+  &.insight {
+    box-shadow: 0 1px 5px rgba($card-shadow-color, 0.15);
+
+    >.image{
+      background-color: transparent;
+    }
+  }
 
   &:hover {
     border: 1px solid $border-color-2;

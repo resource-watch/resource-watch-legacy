@@ -93,7 +93,7 @@
         text-decoration: none
       }
 
-      &.-active {
+      &.-active, &:hover {
         position: relative;
         &:after {
           content: '';
