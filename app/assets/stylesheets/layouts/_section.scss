@@ -2,7 +2,7 @@ $section-header-color: $text-color-7;
 $section-header-link-color: $text-color-2;
 
 .rw-l-section {
-  margin: 2rem 0;
+  margin: rem(60) 0 2rem;
   > .header {
     display: flex;
     justify-content: space-between;;
@@ -11,9 +11,9 @@ $section-header-link-color: $text-color-2;
     > .title {
       display: inline-block;
 
-      margin: 0 0 15px 0;
+      margin: 0 0 1rem 0;
 
-      font-size: 26px;
+      font-size: $large-font-size;
       color: $section-header-color;
     }
 
