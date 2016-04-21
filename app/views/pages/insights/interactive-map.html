@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css">
 <style>
   body {display: block;}
+  .story--breadcrumbs li a {
+    color: #3bb2d0;
+  }
   /* Custom styles for input range */
   input[type=range] {
     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
@@ -168,9 +171,7 @@
     <!-- Content -->
     <div id="content" class="insights--interactive-map">
       <div id="js-map" class="insights--interactive-map-container"></div>
-      <div class="breadcrumbs">
-        <a class="crumb" href="/insights">Insights</a> &gt; Interactive
-      </div>
+      <ul class="story--breadcrumbs insights--interactive--breacrumbs"><li><a href="/">Home</a><li><a href="insights.html">&nbsp;Insights</a></li><li>&nbsp;Interactive</li></ul>
       <div class="insights--interactive-scenario-legend">
         <h2>Farms to feel squeeze as competition for water increases</h2>
         <p>Farmers are facing increasing competition for water from the growth of cities and industrialization, and are likely to see big changes in rainfall because of climate change. This map shows the world’s irrigated farmland, color-coded by the rate at which water stress, a measure of competition for water, is likely to change. In total, 35 percent of irrigated farmland is likely to see substantial increases in water stress by 2040.</p>
