@@ -10,6 +10,8 @@
 
     initialize: function(settings) {
       this.container = document.getElementById(settings.container);
+      // we can pass the trigger element id if the content is static
+      // if not we need to use the events like is done in the planet pulse example
       this.trigger = settings.triggerId ? document.getElementById(settings.triggerId) : false;
       this.fullscreenCount = 0;
       this.setListeners();
