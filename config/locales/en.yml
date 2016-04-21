@@ -20,14 +20,46 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  languages:
+    english: English
+    french: Français
+    deutsche: Deutsche
   titles:
-    explore: 'Explore'
-    dashboards: 'Dashboards'
-    terms: 'Terms of service'
-    privacy: 'Privacy'
-    partners: 'Partners'
+    explore: Explore
+    dashboards: Dashboards
+    terms: Terms of service
+    privacy: Privacy
+    partners: Partners
+    planet_pulse: Planet pulse
+    insights: Insights
+  explore:
+    header: Explore the data
+  countries:
+    title: Countries dashboard
+    header: Analyze country data easily
+    choose: Choose country
+  insights:
+    title: Discover insights
+    features: Features insights
   planet_pulse:
     banner: Real-time data monitoring the planet
     launch: Launch Planet Pulse
+  apps: Apps
+  dashboard: Dasboard
+  read_more: Read more
   view_more: View more
+  more: More
+  help: Help
   launch: Launch
+  search: Search
+  lets_go: Let's go!
+  get_involved: Get Involved
+  datasets:
+    search: Search datasets
+    similar: Similar datasets
+  fullscreen:
+    set: Full screen
+    unset: Exit full screen
+  contact:
+    header: See yourself as part of this team?
+    link: GET IN TOUCH

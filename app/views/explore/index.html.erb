@@ -5,8 +5,8 @@
     <h1><%= t('titles.explore') %></h1>
     <%= form_tag nil, id: 'searchForm' do %>
       <div class="input-group">
-        <%= search_field_tag :q, nil, placeholder: 'Search datasets' %>
-        <%= submit_tag "Search" %>
+        <%= search_field_tag :q, nil, placeholder: t('datasets.search') %>
+        <%= submit_tag t('search') %>
       </div>
     <% end %>
     <div id="exploreNavigation"></div>
