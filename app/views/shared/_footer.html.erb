@@ -1,7 +1,7 @@
 <footer class="rw-l-footer">
 
   <div class="rw-footer-separator">
-    <h3><%= link_to t('title.partners'), page_path('partners') %></h3>
+    <h3><%= link_to t('titles.partners'), page_path('partners') %></h3>
   </div>
 
   <div class="row">
@@ -43,7 +43,7 @@
         <%# Footer navigation %>
         <ul class="rw-footer-nav">
           <li>
-            <a href="#">Insights</a>
+            <%= link_to t('titles.insights'), insights_path %>
             <ul>
               <li><a href="#">Popular insights</a></li>
               <li><a href="#">Collections</a></li>
@@ -58,7 +58,7 @@
             </ul>
           </li>
           <li>
-            <a href="#">Apps</a>
+            <a href="#"><%= t('apps') %></a>
             <ul>
               <li><a href="#">Popular apps</a></li>
               <li><a href="#">iOS apps</a></li>
@@ -67,7 +67,7 @@
             </ul>
           </li>
           <li>
-            <a href="#">Get Involved</a>
+            <a href="#"><%= t('get_involved') %></a>
             <ul>
               <li><a href="#">Create insights</a></li>
               <li><a href="#">Share data</a></li>
@@ -77,7 +77,7 @@
             </ul>
           </li>
           <li>
-            <a href="#">Help</a>
+            <a href="#"><%= t('help') %></a>
             <ul>
               <li><a href="#">Site tour</a></li>
               <li><a href="#">Help center</a></li>
@@ -85,10 +85,10 @@
             </ul>
           </li>
           <li>
-            <a href="#">More</a>
+            <a href="#"><%= t('more') %></a>
             <ul>
               <li><%= link_to t('titles.dashboards'), countries_path %></li>
-              <li><a href="#">Planet pulse</a></li>
+              <li><%= link_to t('titles.planet_pulse'), planet_pulse_path %></li>
               <li><a href="#">About us</a></li>
               <li><a href="#">Team</a></li>
               <li><a href="#">Contact</a></li>

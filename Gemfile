@@ -37,6 +37,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'i18n-tasks', '~> 0.9.5'
   gem 'spring', '~> 1.6.4'
   gem 'quiet_assets', '~> 1.1.0'
 end

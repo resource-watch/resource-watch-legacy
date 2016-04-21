@@ -1,7 +1,7 @@
 <div class="row -expanded">
   <div class="col -xs-6 -sm-6 -md-6 -lg-6">
     <div class="results">
-      {{results}} datasets
+      {{results}}<%= I18n.t('datasets.datasets') %>
     </div>
   </div>
 
@@ -21,7 +21,7 @@
     </div>
 
     <div class="filter">
-      <button class="action -disabled tooltip-cs">Filter</button>
+      <button class="action -disabled tooltip-cs"><%= I18n.t('filter') %></button>
     </div>
   </div>
 </div>

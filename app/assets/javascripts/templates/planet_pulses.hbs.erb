@@ -3,7 +3,7 @@
     <div class="rw-planet-pulse">
       <header class="planet-pulse-header">
         {{#unless categorySelected}}
-          <h1 class="planet-pulse-title">Planet pulse</h1>
+          <h1 class="planet-pulse-title"><%= I18n.t('titles.planet_pulse') %></h1>
         {{/unless}}
         <ul class="planet-pulse-nav">
           {{#each categories}}
@@ -19,9 +19,9 @@
         <div class="planet-pulse-toolbar">
           <a href="#">Back</a>
           {{#if isFullscreen}}
-            <button id="fullscreenBtn">Exit full screen</button>
+            <button id="fullscreenBtn"><%= I18n.t('fullscreen.unset') %></button>
           {{else}}
-            <button id="fullscreenBtn">Full screen</button>
+            <button id="fullscreenBtn"><%= I18n.t('fullscreen.set') %></button>
           {{/if}}
         </div>
       </header>
@@ -34,7 +34,7 @@
         {{/if}}
             <h2>{{this.category}}</h2>
             <p> {{description}} </p>
-            <h3> Layers </h3>
+            <h3> <%= I18n.t('layers') %> </h3>
             <ul>
               {{#each this.layers}}
               {{#if this.isActive}}
@@ -43,12 +43,12 @@
                 <li> <a class="layer-selector" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link">i</span></a></li>
               {{/if}}
               {{ else }}
-                <p> There are no layers in this category </p>
+                <p> <%= I18n.t('planet_pulse.no_layers') %> </p>
               {{/each}}
             </ul>
           </article>
         {{else}}
-          <p> There are no pulses in this category </p>
+          <p> <%= I18n.t('planet_pulse.no_pulses') %> </p>
         {{/each}}
     </div>
   </div>
