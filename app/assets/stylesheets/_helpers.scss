@@ -17,3 +17,17 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.is-fullscreen {
+  height: 100vh;
+  width: 100%;
+}
+
+._is-content-loading {
+
+  @include spinner(30px, 4px, #6DA1DE);
+
+  .main-content {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col -xs-12">
+    <div class="rw-planet-pulse">
+      <header class="planet-pulse-header">
+        {{#unless categorySelected}}
+          <h1 class="planet-pulse-title"><%= I18n.t('titles.planet_pulse') %></h1>
+        {{/unless}}
+        <ul class="planet-pulse-nav">
+          {{#each categories}}
+            <li class="planet-pulse-nav-link">
+            {{#if this.isActive}}
+              <a class="category-selector is-active" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
+            {{else}}
+              <a class="category-selector" href="#{{this.category}}" id="{{this.category}}">{{this.category}}</a>
+            {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+        <div class="planet-pulse-toolbar">
+          <a href="#">Back</a>
+          {{#if isFullscreen}}
+            <button id="fullscreenBtn"><%= I18n.t('fullscreen.unset') %></button>
+          {{else}}
+            <button id="fullscreenBtn"><%= I18n.t('fullscreen.set') %></button>
+          {{/if}}
+        </div>
+      </header>
+      <div class="planet-pulse-content">
+        {{#each categories}}
+        {{#if this.isActive}}
+          <article class="is-active" id="{{this.category}}">
+        {{else}}
+          <article id="{{this.category}}">
+        {{/if}}
+            <h2>{{this.category}}</h2>
+            <p> {{description}} </p>
+            <h3> <%= I18n.t('layers') %> </h3>
+            <ul>
+              {{#each this.layers}}
+              {{#if this.isActive}}
+                <li> <a class="layer-selector is-active" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link">i</span></a></li>
+              {{else}}
+                <li> <a class="layer-selector" id="{{this.slug}}" href="#{{../category}}/{{this.slug}}">{{this.title_dataset}}<span class="btn-info modal-link">i</span></a></li>
+              {{/if}}
+              {{ else }}
+                <p> <%= I18n.t('planet_pulse.no_layers') %> </p>
+              {{/each}}
+            </ul>
+          </article>
+        {{else}}
+          <p> <%= I18n.t('planet_pulse.no_pulses') %> </p>
+        {{/each}}
+    </div>
+  </div>
+</div>

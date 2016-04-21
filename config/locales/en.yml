@@ -1,27 +1,70 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
+  CSV: CSV
+  add_to_map: Add to map
+  apps: Apps
+  chart: Chart
+  chart_type: Chart type
+  comments: Comments
+  configure: Configure
+  contact:
+    header: See yourself as part of this team?
+    link: GET IN TOUCH
+  countries:
+    change: Change country
+    choose: Choose country
+    header: Analyze country data easily
+    title: Countries dashboard
+  dashboard: Dasboard
+  datasets:
+    datasets: datasets
+    search: Search datasets
+    similar: Similar datasets
+  download: Download
+  email: Email
+  explore:
+    header: Explore the data
+  filter: Filter
+  fullscreen:
+    set: Full screen
+    unset: Exit full screen
+  get_involved: Get Involved
+  help: Help
+  insights:
+    features: Features insights
+    title: Discover insights
+  join_mail_list: Join our mailing list
+  languages:
+    deutsche: Deutsche
+    english: English
+    french: Français
+  last_update: Last update
+  launch: Launch
+  layers: Layers
+  lets_go: Let's go!
+  map: Map
+  more: More
+  name: Name
+  no_countries_found: No countries found
+  not_dataset_found: Not dataset found
+  not_displayable: Not displayable
+  online_source: Online source
+  organization: Organization
+  planet_pulse:
+    banner: Real-time data monitoring the planet
+    launch: Launch Planet Pulse
+    no_layers: There are no layers in this category
+    no_pulses: There are no pulses in this category
+  read_more: Read more
+  search: Search
+  select: Select
   titles:
-    explore: 'Explore'
-    dashboards: 'Dashboards'
-    terms: 'Terms of service'
-    privacy: 'Privacy'
+    dashboards: Dashboards
+    explore: Explore
+    insights: Insights
+    partners: Partners
+    planet_pulse: Planet pulse
+    privacy: Privacy
+    terms: Terms of service
+  verified: Verified
+  view_more: View more

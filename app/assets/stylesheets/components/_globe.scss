@@ -1,0 +1,11 @@
+.globe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  &.-loading {
+    background-image: image-url("planet_pulse/galaxy_starfield_4k.png");
+  }
+}

@@ -1,0 +1,183 @@
+(function(App) {
+
+  'use strict';
+
+  App.View.CountryDashboard = App.Core.View.extend({
+
+    tagName: 'div',
+
+    className: 'dashboard',
+
+    template: this.HandlebarsTemplates.country_dashboard,
+
+    state: {
+      /* Index of the card currently rendering */
+      renderIndex: null,
+      rendered: false
+    },
+
+    initialize: function(settings) {
+      if (!settings.data) {
+        throw new Error('"data" param is required.');
+      }
+      this.data = settings.data;
+      this.configurationCollection = new App.Collection.CountryDashboard();
+
+      this.listenTo(this.state, 'change:renderIndex', this.renderInnerCard);
+      // First render
+      this.render();
+    },
+
+    render: function() {
+      if(!this.canRender()) return;
+      this.preventFutureRender();
+
+      /* We build the skeleton of the dashboard */
+      this.renderSkeleton();
+      var loader = new App.View.Loader({
+        el: this.$cardsContainer,
+        loading: true
+      });
+
+      /* We fetch the configuration of the cards */
+      this.fetchConfiguration()
+        .then(this.renderCardsSkeleton.bind(this))
+        .then(function() {
+          /* We add a loader to each card */
+          this.$cards.each(function(index, card) {
+            new App.View.Loader({
+              el: card,
+              loading: true
+            });
+          }.bind(this));
+        }.bind(this))
+        .then(this.startInnerCardRendering.bind(this))
+        .fail(this.displayError.bind(this))
+        .always(function() { loader.state.set({ loading: false }); });
+    },
+
+    /* Render the skeleton of the dashboard and cache the container of the
+     * cards */
+    renderSkeleton: function() {
+      this.$el.html(this.template({ country: this.data.toJSON() }));
+      this.$cardsContainer = this.$el.find('.js-cards');
+    },
+
+    /* Render all the cards skeleton and cache them */
+    renderCardsSkeleton: function() {
+      this.$el.html(this.template({
+        country: this.data.toJSON(),
+        cards: this.configurationCollection.toJSON().map(function(card) {
+          /* Depending on each card's configuration, we need to set some
+           * classes to the container in order to change its styles */
+          return {
+            class: card.configuration.importance ?
+              (card.configuration.importance === 1 ? '-red': '-blue') : ''
+          };
+        })
+      }));
+
+      this.$cards = this.$el.find('.js-card');
+    },
+
+    /* Render the inner of a card with a chart or a map */
+    renderInnerCard: function() {
+      var cardNb = this.state.get('renderIndex');
+      var cardModel = this.configurationCollection.models[cardNb];
+      var cardTypes = _.pluck(cardModel.get('configuration').y, 'type');
+
+      var createInnerView = _.contains(cardTypes, 'map') ?
+        this.getMapInstance : this.getChartInstance;
+
+      $.when(createInnerView.call(this, cardModel))
+        .then(function(view) {
+          $(this.$cards[cardNb]).html(view.render().el);
+        }.bind(this))
+        /* There's no fail callback because createInnerView will always return
+         * an inner view */
+        .always(this.renderNextInnerCard.bind(this));
+    },
+
+    /* Instance a chart view and return a deferred object with it */
+    getChartInstance: function(cardModel) {
+      var deferred = $.Deferred();
+
+      cardModel.get('data').fetch()
+        .done(function() {
+          cardModel.set('chart',
+            cardModel.getChartConfiguration(this.data.toJSON()));
+        }.bind(this))
+
+        .fail(function() {
+          var configuration = cardModel.get('configuration');
+          cardModel.set('chart', cardModel.noneParser([], configuration));
+        }.bind(this))
+
+        .always(function() {
+          deferred.resolve(new App.View.ChartCard({ data: cardModel.toJSON() }));
+        });
+
+      return deferred;
+    },
+
+    getMapInstance: function(cardModel) {
+      var deferred = $.Deferred();
+
+      cardModel.set('map', true);
+      deferred.resolve(new App.View.ChartCard({ data: cardModel.toJSON() }));
+
+      return deferred;
+    },
+
+    /* Prevent future calls to render */
+    preventFutureRender: function() {
+      /* We don't want to render the view again if we update the renderIndex
+       * attribute */
+      if(this.state.get('rendered')) return this;
+      this.state.set('rendered', true);
+    },
+
+    /* Return whether the dashboard can be rendered depening on if it's been
+     * previously rendered */
+    canRender: function() {
+      return !this.state.get('rendered');
+    },
+
+    /* Toggle the loading state of the passed element */
+    setLoadingState: function($el, isLoading) {
+      /* TODO: use the real component; shouldn't remove the content */
+      if(isLoading) { $el.html('Loading'); }
+    },
+
+    /* Fetch the configuration of the cards; return a jqXHR object */
+    fetchConfiguration: function() {
+      /* We need to pass the ISO to the collection so it can return for each
+       * card the associated model with the data for the selected country */
+      this.configurationCollection.iso = this.data.toJSON().iso;
+      return this.configurationCollection.fetch();
+    },
+
+    /* Display an error that it's been impossible to render the dashboard */
+    displayError: function() {
+      this.$cardsContainer.html('<div class="row">Unable to fetch the configuration of the charts</div>');
+    },
+
+    /* Start the rendering chain of the inner of the cards; it's done one by one
+     * to avoid requests congestion */
+    startInnerCardRendering: function() {
+      this.state.set({ renderIndex: 0 });
+    },
+
+    /* Check if renderIndex doesn't point to the last card number and if don't,
+     * update renderIndex to renderIndex + 1 to trigger the rendering of the
+     * next card's inner content */
+    renderNextInnerCard: function() {
+      var cardNb = this.state.get('renderIndex');
+      if(cardNb < this.configurationCollection.models.length - 1) {
+        this.state.set({ renderIndex: cardNb + 1 });
+      }
+    }
+
+  });
+
+}).call(this, this.App);

@@ -1,17 +1,20 @@
+<% breadcrumb :explore %>
+
 <div class="row -expanded">
-  <div class="col -xs-12 -sm-7">
+  <div class="col -xs-12 -sm-7 explore">
     <h1><%= t('titles.explore') %></h1>
     <%= form_tag nil, id: 'searchForm' do %>
       <div class="input-group">
-        <%= search_field_tag :q, nil, placeholder: 'Search datasets' %>
-        <%= submit_tag "Search" %>
+        <%= search_field_tag :q, nil, placeholder: t('datasets.search') %>
+        <%= submit_tag t('search') %>
       </div>
     <% end %>
     <div id="exploreNavigation"></div>
     <div id="exploreDashboard"></div>
     <div id="pagination"></div>
   </div>
-  <div class="col -xs-12 -sm-5">
-    <div id="map"></div>
+  <div class="col -xs-12 -sm-5 explore-map">
+    <div id="legend"></div>
+    <div id="map" class="-dark"></div>
   </div>
 </div>

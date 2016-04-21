@@ -4,5 +4,6 @@ class CountriesController < ApplicationController
   end
 
   def show
+    @countrySlug = params["id"]
   end
 end

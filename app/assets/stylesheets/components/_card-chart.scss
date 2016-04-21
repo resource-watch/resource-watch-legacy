@@ -1,0 +1,89 @@
+.card-chart {
+  margin-bottom: 2rem;
+  border-radius: 4px;
+	background-color: $bg-color-4;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.09);
+	border: solid 1px rgba($border-color-1, 0.85);
+  padding: 20px;
+  max-height: 320px;
+  /* Needed for the loader to correctly position itself */
+  min-height: 100px;
+  position: relative;
+
+  h4 {
+    width: auto;
+    display: inline-block;
+    color: $text-color-4;
+    text-transform: uppercase;
+    font-size: $ultra-small-font-size;
+    line-height: 2;
+    margin: 0;
+  }
+
+  h3 {
+    color: $text-color-7;
+    font-size: $medium-font-size;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  .chart.-map {
+    position: relative;
+    left: -20px;
+    top: 15px;
+    width: calc(100% + 2 * 20px);
+    z-index: 0;
+  }
+
+  .infobtn {
+    @include modal-info();
+    position: relative;
+    top: auto;
+    right: auto;
+    display: inline-block;
+    margin-left: rem(2);
+  }
+
+  .verified {
+    width: rem(37);
+    height: rem(37);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+
+    > .icon {
+      width: 100%;
+      height: 100%;
+      fill: rgba($bg-color-1, 0.4);
+    }
+  }
+
+  &.-red {
+    background: linear-gradient(48deg, #c4256c, #c4256b, #c90e39);
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    h3, h4 { color: $text-color-3; }
+    .infobtn { background-color: $bg-color-3; color: $text-color-7; }
+    .verified {
+      > .icon {
+        fill: rgba($bg-color-4, 0.7);
+      }
+    }
+  }
+
+  &.-blue {
+    background: linear-gradient(48deg, #3bb2d0, #3dc3e5);
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    h3, h4 { color: $text-color-3; }
+    .infobtn { background-color: $bg-color-3; color: $text-color-2; }
+    .verified {
+      > .icon {
+        fill: rgba($bg-color-4, 0.7);
+      }
+    }
+  }
+
+}

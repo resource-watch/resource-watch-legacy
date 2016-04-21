@@ -1,0 +1,22 @@
+<div class="content">
+  <h4 class="heading"><%= I18n.t('chart_type') %></h4>
+  <select class="type">
+    {{#each recomms}}
+      <option value="{{type}}" {{#if selected}}selected{{/if}}>{{type}}<%= I18n.t('chart') %></option>
+    {{/each}}
+  </select>
+</div>
+
+<div class="content">
+  {{#each columns}}
+    <div class="action">
+      <label class="label">{{label}}:</label>
+      <select class="value" data-name="{{name}}">
+        <option value=""><%= I18n.t('select') %>...</option>
+        {{#each options}}
+          <option value="{{column}}" {{#if selected}}selected{{/if}}>{{column}}</option>
+        {{/each}}
+      </select>
+    </div>
+  {{/each}}
+</div>

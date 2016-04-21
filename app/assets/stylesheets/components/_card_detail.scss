@@ -1,10 +1,71 @@
 .card-detail {
   width: 100%;
 
+  .title {
+    margin: rem(20) rem(10) rem(0) rem(15);
+  }
+
+  .status {
+    width: 100%;
+    display: flex;
+    margin: rem(10) rem(15) rem(30) rem(15);
+
+    > .info {
+      font-size: $small-font-size;
+      color: $text-color-4;
+      margin-right: rem(50);
+    }
+
+    > .verify {
+      display: flex;
+      align-items: center;
+
+      > .icon {
+        width: rem(18);
+        height: rem(18);
+        margin-right: rem(5);
+        fill: $bg-color-8;
+      }
+    }
+  }
+
+  .authors {
+    font-size: $small-font-size;
+    color: $text-color-4;
+    font-style: italic;
+  }
+
+  > .chart-content {
+    width: 100%;
+    position: relative;
+    padding: rem(15);
+    background: $bg-color-2;
+    margin-bottom: rem(20);
+
+    > .chart-config {
+      top: rem(12);
+      right: rem(12);
+      position: absolute;
+      z-index: 1;
+      display: flex;
+
+      > .action {
+        color: $bg-color-4;
+        display: flex;
+        font-size: $tiny-font-size;
+
+        > .icon {
+          margin-top: rem(2);
+          margin-right: rem(2);
+          fill: $text-color-3;
+        }
+      }
+    }
+  }
+
   .chart {
     width: 100%;
     height: rem(350px);
-    background: $bg-color-2;
   }
 
   .actions {

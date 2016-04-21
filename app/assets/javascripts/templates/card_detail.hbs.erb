@@ -1,0 +1,55 @@
+<div class="col -xs-12 -sm-12">
+  <h1 class="title">{{name}}</h1>
+
+  <div class="row">
+    <div class="col -xs-12 -sm-12">
+      <div class="status">
+        <div class="info">{{source}}</div>
+        <div class="info"><%= I18n.t('last_update') %>: {{displayDate}}</div>
+        {{#if verified}}
+          <div class="info verify">
+            <svg class="icon icon-verify">
+              <use xlink:href="#icon-verify"></use>
+            </svg>
+            <%= I18n.t('verified') %></div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chart-content">
+  <div class="chart-config js-toggle-chart-config">
+    <button class="action -wicon -plain">
+      <svg class="icon icon-settings">
+        <use xlink:href="#icon-settings"></use>
+      </svg>
+      <span><%= I18n.t('configure') %></span>
+    </button>
+  </div>
+  <div id="chartsSelector"></div>
+  <div id="cardDetailChart" class="chart"></div>
+</div>
+
+<div class="col -xs-12 -sm-12">
+  <div class="row">
+    <div class="col -xs-12 -sm-2">
+      <!-- <p>Social links</p> -->
+    </div>
+    <div class="col -xs-12 -sm-7">
+      <div class="col -xs-12 -sm-12">
+        <p>{{description}}</p>
+      </div>
+      <div class="col -xs-12 -sm-12">
+        <h3><a target="_blank" href="{{source_link}}"><%= I18n.t('online_source') %></a></h3>
+        <div class="authors">{{authors}}</div>
+      </div>
+    </div>
+    <div class="col -xs-12 -sm-3">
+      <div class="actions">
+        <button class="action js-toggle-layer"><%= I18n.t('add_to_map') %></button>
+        <button class="action -disabled tooltip-cs"><%= I18n.t('download') %></button>
+      </div>
+    </div>
+  </div>
+</div>

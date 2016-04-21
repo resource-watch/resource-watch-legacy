@@ -1,36 +1,41 @@
-<header class="l-header">
+<header class="rw-l-header">
 
   <%# Header top %>
-  <div class="l-top-header">
+  <div class="rw-l-top-header">
     <div class="row">
       <div class="col -xs-12 -sm-6 -sm-offset-6">
         <%# Language navigation %>
-        <ul class="lang-nav">
-          <li><%= link_to 'English', '/en' %></li>
-          <li><%= link_to 'France', '/fr' %></li>
-          <li><%= link_to 'Germany', '/ge' %></li>
-        </ul>
+        <div class="rw-header-lang js-header-lang-menu">
+          <%= t('languages.english') %>
+          <ul class="rw-lang-nav -hidden js-nav">
+            <li><%= t('languages.english') %></li>
+            <li><%= t('languages.french') %></li>
+            <li><%= t('languages.deutsche') %></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
   <%# Header navigation bar %>
-  <div class="l-nav-header -vcenter">
+  <div class="rw-l-nav-header -vcenter">
     <div class="row -vcenter">
       <div class="col -xs-12 -sm-4">
         <%# Brand zone %>
-        <%= link_to root_path, class: "brand" do %>
-          <svg class="icon icon-logo">
+        <%= link_to root_path, class: "rw-brand" do %>
+          <svg class="rw-icon rw-icon-logo">
             <use xlink:href="#icon-logo"></use>
           </svg>
         <% end %>
       </div>
       <div class="col -xs-12 -sm-8">
         <%# Main navigation %>
-        <nav class="main-nav">
+        <nav class="rw-main-nav">
           <ul>
-            <li><%= link_to t('titles.explore'), explore_index_path %></li>
-            <li><%= link_to t('titles.dashboards'), countries_path %></li>
+            <li class="<%= active_page_class?(page_path('insights')) %>"><%= link_to t('titles.insights'), page_path('insights') %></li>
+            <li class="<%= active_page_class?(explore_index_path) %>"><%= link_to t('titles.explore'), explore_index_path %></li>
+            <li class="<%= active_page_class?(countries_path) %>"><%= link_to t('titles.dashboards'), countries_path %></li>
+            <li class="<%= active_page_class?(planet_pulse_path) %>"><%= link_to t('titles.planet_pulse'), planet_pulse_path %></li>
           </ul>
         </nav>
       </div>

@@ -19,14 +19,21 @@ Install project dependencies:
 
 ## Usage
 
-First time execute:
-
-    bundle exec rake db:create
-    bundle exec rake db:migrate
-
 To run application:
 
     bundle exec rails server
+
+To manage localisation texts:
+
+    i18n-tasks 'comand'
+
+    Useful commands
+    'health' (check the status)
+    'normalize' (sort by name)
+    'add-missing' (add to file.yml the missing keys)
+
+    More info in https://github.com/glebm/i18n-tasks
+
 
 ## Contributing
 

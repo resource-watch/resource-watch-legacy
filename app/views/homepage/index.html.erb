@@ -1,1 +1,24 @@
-<h1>Homepage</h1>
+<% breadcrumb :root %>
+<div class="row">
+  <div class="col -xs-12">
+    <section class="rw-l-section">
+      <%= render "shared/country_dashboard" %>
+    </section>
+    <section class="rw-l-section">
+      <header class="header">
+        <h2 class="title"><%= t('insights.features') %></h2>
+        <%= link_to page_path('insights'), class:'link' do %>
+          <%= t('view_more') %>
+          <i class="right-arrow"></i>
+        <% end %>
+      </header>
+      <%= render "shared/insights" %>
+    </section>
+
+    <%= render "shared/planet_pulse" %>
+
+    <section class="rw-l-section">
+      <%= render "shared/explore_dashboard" %>
+    </section>
+  </div>
+</div>

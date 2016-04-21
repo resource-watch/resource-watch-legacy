@@ -1,0 +1,299 @@
+(function(App) {
+
+  'use strict';
+
+  App.View.Globe = App.Core.View.extend({
+
+    tagName: 'div',
+
+    className: 'globe',
+
+    props: {
+      perspective: 45,
+      maxRadius: 1000,
+      minRadius: 1,
+      initialRadius: 1,
+      segments: 32,
+      renderer: { antialias: true, alpha: true },
+      cameraPosition: { z: 3 }
+    },
+
+    defaults: {
+      baseLayer: {
+        slug:'clouds',
+        link: '<%= asset_path("planet_pulse/fair_clouds_4k.png") %>'
+      }
+    },
+
+    initialize: function(settings) {
+      this.currentLayer = settings.layer || this.defaults.baseLayer;
+      this.data = new App.Model.PlanetLayer();
+      this._createScene();
+      this._addAmbientLight();
+      this.draw();
+    },
+
+    /**
+     * Creating Three js scene
+     * http://threejs.org/docs/index.html
+     */
+    _createScene: function() {
+      this.size = App.helpers.calcSize(this.el);
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.PerspectiveCamera(
+        this.props.perspective,
+        this.size.width / this.size.height,
+        this.props.minRadius,
+        this.props.maxRadius
+      );
+      this.controls = new THREE.OrbitControls(this.camera);
+      this.renderer = new THREE.WebGLRenderer(this.props.renderer);
+
+      // Initial settings
+      this.controls.minDistance = 2;
+      this.controls.maxDistance = 10;
+      this.camera.position.z = this.props.cameraPosition.z;
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(this.size.width, this.size.height);
+    },
+
+    /**
+     * An ambient light
+     */
+    _addAmbientLight: function() {
+      var light = new THREE.HemisphereLight( 0xffffff, 0x080808, 1 );
+      // var ambientLight = new THREE.AmbientLight(0x444444);
+
+      light.position.set(-10, 3, 5);
+      this.scene.add(light);
+      // this.scene.add(ambientLight);
+
+      var sunLight = new THREE.DirectionalLight(0xffffff, 0.2);
+      sunLight.position.set(-5, 3, 2);
+      this.scene.add(sunLight);
+    },
+
+    /**
+     * Change the rendered scene size
+     */
+    changeSceneSize: function(width, height) {
+      this.size.width = width;
+      this.size.height = height;
+      this.camera.aspect = width / height;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(width, height);
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+    },
+
+    /**
+     * Change the globe size
+     */
+    changeSceneZoom: function(zoom) {
+      this.camera.position.z = zoom || this.props.cameraPosition.z;
+    },
+
+    /**
+     * Change the globe position
+     */
+    changePosition: function(offsetX, offsetY) {
+      var w = this.size.width;
+      var h = this.size.height;
+      offsetX = offsetX ? w*-offsetX/100:0;
+      offsetY = offsetY ? w*-offsetY/100:0;
+      this.camera.setViewOffset( w, h, offsetX, offsetY, w, h );
+    },
+
+    /**
+     * Draw all the elements in canvas
+     */
+    draw: function() {
+      var _this = this;
+      this.initLoader();
+      this.rotate = true;
+
+      this.el.appendChild(this.renderer.domElement);
+
+      var loaded = function() {
+        _this.el.classList.remove('-loading');
+        _this.setLoaderState(false);
+        animate();
+      };
+      var animate = function() {
+        _this.animationFrame = requestAnimationFrame(animate);
+        if (_this.rotate) {
+          _this.earth.rotation.y += 0.0004;
+          if (_this.layer) {
+            _this.layer.rotation.y += _this.layer.slug === 'clouds' ? 0.0005:0.0004;
+          }
+        }
+        _this.controls.update();
+        _this.renderer.render(_this.scene, _this.camera);
+      };
+
+      $.when(
+        this.createStars(),
+        this.createEarth(),
+        this.setLayer(this.currentLayer)
+      ).done(loaded);
+    },
+
+    initLoader: function() {
+      this.loader = new App.View.Loader({
+        el: this.el,
+        loading: true
+      });
+    },
+
+    setLoaderState: function(state) {
+      this.loader.state.set({
+        loading: state
+      });
+    },
+
+    toggleRotation: function(bool) {
+      this.rotate = bool;
+    },
+
+    /**
+     * Update current layer
+     */
+    render: function() {},
+
+    /**
+     * Update current layer
+     */
+    updateLayer: function(newLayer, options) {
+      newLayer = newLayer || this.defaults.baseLayer;
+      if (this.currentLayer.slug!==newLayer.slug) {
+        this.currentLayer = newLayer;
+        this.removeLayer();
+        this.setLayer(newLayer, options);
+      }
+    },
+
+    /**
+     * Setting planet layer from API
+     */
+    setLayer: function(currentLayer, options) {
+      var deferred = new $.Deferred();
+      var _this = this;
+      var radius = this.props.initialRadius;
+      var radiusDistance = currentLayer.slug === this.defaults.baseLayer.slug? 0.005:0.001;
+      var segments = this.props.segments;
+      var settings = options || {};
+
+      _this.setLoaderState(true);
+
+      _this._loadTexture(currentLayer.link)
+      .done(function(texture) {
+        var geometry = new THREE.SphereGeometry(radius + radiusDistance, segments, segments);
+        var material = new THREE.MeshBasicMaterial({
+          map: texture,
+          side: THREE.DoubleSide,
+          transparent: true
+        });
+        if (currentLayer.slug === 'clouds'){
+          material.opacity= 0.8,
+          material.transparent= true,
+          material.depthWrite= false
+        }
+        material.opacity = settings.opacity || 0.5;
+        _this.layer = new THREE.Mesh(geometry, material);
+        _this.layer.slug = currentLayer.slug;
+        _this.layer.rotation.y = _this.earth && _this.earth.rotation ? _this.earth.rotation.y : 0;
+        _this.scene.add(_this.layer);
+        _this.setLoaderState(false);
+        deferred.resolve(_this.layer);
+      });
+      return deferred.promise();
+    },
+
+    /**
+     * Method to remove current layer
+     */
+    removeLayer: function() {
+      if (this.layer) {
+        this.scene.remove(this.layer);
+      }
+    },
+
+    /**
+     * Create stars in background
+     * @return {[type]} [description]
+     */
+    createStars: function() {
+      var deferred = new $.Deferred();
+      var radius = this.props.maxRadius;
+      var segments = this.props.segments;
+      var scene = this.scene;
+
+      this._loadTexture('<%= asset_path("planet_pulse/galaxy_starfield_4k.png") %>')
+        .done(function(texture) {
+          var geometry = new THREE.SphereGeometry(radius, segments, segments);
+          var material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.BackSide
+          });
+          this.stars = new THREE.Mesh(geometry, material);
+          this.scene.add(this.stars);
+          deferred.resolve(this.stars);
+        }.bind(this));
+      return deferred.promise();
+    },
+
+    /**
+     * Create earth
+     */
+    createEarth: function() {
+      var deferred = new $.Deferred();
+      var scene = this.scene;
+      var radius = this.props.initialRadius;
+      var segments = this.props.segments;
+      var geometry = new THREE.SphereGeometry(radius, segments, segments);
+
+      $.when(
+        this._loadTexture('<%= asset_path("planet_pulse/earth_no_clouds_4k.jpg") %>'),
+        this._loadTexture('<%= asset_path("planet_pulse/elev_bump_4k.jpg") %>'),
+        this._loadTexture('<%= asset_path("planet_pulse/water_4k.png") %>')
+      ).done(function(basemapTexture, bumpTexture, specularTexture) {
+          var geometry = new THREE.SphereGeometry(radius, segments, segments);
+          var material = new THREE.MeshPhongMaterial({
+            map: basemapTexture,
+            bumpMap: bumpTexture,
+            bumpScale: 0.001,
+            specularMap: specularTexture,
+            specular: new THREE.Color('grey')
+          });
+          this.earth = new THREE.Mesh(geometry, material);
+          this.scene.add(this.earth);
+          deferred.resolve(this.earth);
+        }.bind(this));
+
+      return deferred.promise();
+    },
+
+    /**
+     * A promise to load textures
+     * @param  {String} texturePath
+     * @return {Promise}
+     */
+    _loadTexture: function(texturePath) {
+      var deferred = new $.Deferred();
+      var loader = new THREE.TextureLoader();
+      loader.setCrossOrigin('*');
+      loader.load(
+        texturePath,
+        function(texture) {
+          deferred.resolve(texture);
+        }, // Success
+        function(xhr) {
+          console.log( (xhr.loaded / xhr.total * 100) + '% loaded' )
+        },
+        function() { console.log('And error happened') }
+      );
+      return deferred.promise();
+    }
+
+  });
+
+}).call(this, this.App);

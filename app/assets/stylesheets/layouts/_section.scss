@@ -1,0 +1,20 @@
+$section-header-color: $text-color-7;
+$section-header-link-color: $text-color-2;
+
+.rw-l-section {
+  margin: rem(60) 0 2rem;
+  > .header {
+    display: flex;
+    justify-content: space-between;;
+    align-items: center;
+
+    > .title {
+      display: inline-block;
+
+      margin: 0 0 1rem 0;
+
+      font-size: $large-font-size;
+      color: $section-header-color;
+    }
+  }
+}

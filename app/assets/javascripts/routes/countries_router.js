@@ -24,6 +24,12 @@
         }
       });
 
+      // Init the full screen and set listener
+      this.fullScreenView = new App.View.FullScreen({
+        container: 'content',
+        triggerId: 'fullscreenBtn'
+      });
+
       this.countriesData.fetch().done(_.bind(function() {
         var countriesData;
         if (this.params.attributes.q) {

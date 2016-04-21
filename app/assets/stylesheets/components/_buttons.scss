@@ -1,5 +1,5 @@
 // http://bourbon.io/docs/#buttons-variable
-#{$all-buttons} {
+#{$all-buttons}, a.button {
   min-width: rem(144);
   height: rem(45);
   padding: 0;
@@ -55,7 +55,12 @@
     text-shadow: none;
     background: $bg-color-5;
     cursor: default;
-    pointer-events: none;
+    // pointer-events: none;
+  }
+
+  &.-active {
+    color: $text-color-3;
+    background: $bg-color-8;
   }
 
   &.-green {
@@ -69,4 +74,14 @@
 
 #{$all-buttons-focus} {
   outline: 0;
+}
+
+a.button {
+  height: auto;
+  padding: 1rem;
+  text-decoration: none;
+
+  &.-large {
+    width: rem(250px);
+  }
 }

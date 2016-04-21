@@ -1,15 +1,34 @@
-.cards {
+$card-shadow-color: $real-black;
+
+.cards, .rw-cards {
   margin-bottom: 1rem;
+  padding: .5rem 0;
 }
 
-.card {
+.card, .rw-card {
   margin-bottom: 2rem;
 
   background: $bg-color-4;
-
   border: 1px solid $border-color-1;
+  box-shadow: 0 1px 2px 0 rgba($card-shadow-color, 0.09);
+  transition: border .2s;
 
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.09);
+  &.insight {
+    box-shadow: 0 1px 5px rgba($card-shadow-color, 0.15);
+
+    >.image{
+      background-color: transparent;
+    }
+  }
+
+  &:hover {
+    border: 1px solid $border-color-2;
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.12);
+
+    >.content > .title a {
+      border-bottom: 2px solid $bg-color-2;
+    }
+  }
 
   h3,
   p {
@@ -30,23 +49,100 @@
     line-height: $normal-font-size;
   }
 
-  .chart {
+  > .image {
+    height: rem(180px);
+    background-color: $bg-color-5;
+    overflow: hidden;
+
+    img {
+      position: relative;
+
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  > .content {
+    height: rem(150px);
+    padding: 1rem;
+
+    border-bottom: 0;
+    box-sizing: border-box;
+    > .header{
+      font-size: $ultra-small-font-size;
+      font-weight: 400;
+      -webkit-font-smoothing: subpixel-antialiased;
+      color: $text-color-4;
+      text-transform: uppercase;
+    }
+    > .title {
+      font-size: $medium-font-size;
+      font-weight: 700;
+      color: $text-color-1;
+
+      a {
+        line-height: 1.3;
+        color: $text-color-1;
+        text-decoration: none;
+
+        transition: border .2s;
+        border-bottom: 2px solid transparent;
+        border-color: transparent;
+      }
+    }
+  }
+
+  > .info {
+    height: rem(65px);
+    padding: 0 1rem;
+    margin: 0;
+    list-style-type: none;
+    font-size: $small-font-size;
+
+    .source {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      max-width: rem(200px);
+      img {
+        width: 38px;
+        height: 38px;
+        float: left;
+        margin-right: 5px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  > .chart {
+    width: 100%;
     height: 190px;
+    overflow: hidden;
     background-color: $bg-color-3;
   }
 
-  .detail {
+  > .detail {
     padding: 1rem;
+
+    > h3 {
+      min-height: 60px;
+    }
 
     > .actions {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      
+
       > .action {
         margin-right: rem(10px);
 
+        .icon {
+          fill: $bg-color-6;
+        }
+
         &.favorite {
+          display: flex;
+          align-items: center;
           font-size: $small-font-size;
           font-weight: 400;
         }
@@ -73,11 +169,11 @@
     border-bottom-width: 0;
     margin-bottom: 0;
 
-    .chart {
+    > .chart {
       display: none;
     }
 
-    .detail {
+    > .detail {
       width: 50%;
       display: inline-block;
       float: left;

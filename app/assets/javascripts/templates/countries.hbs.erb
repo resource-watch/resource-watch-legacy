@@ -1,0 +1,15 @@
+<div class="row">
+  {{#if countries.length}}
+    {{#each countries}}
+      <div class="col -xs-12 -sm-6 -md-4 -lg-3">
+        <a href="{{../baseUrl}}/{{iso}}">
+          <div class="js-country"></div>
+        </a>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="col -xs-12">
+      <p><%= I18n.t('no_countries_found') %>.</p>
+    </div>
+  {{/if}}
+</div>

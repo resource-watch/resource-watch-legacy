@@ -6,93 +6,157 @@
 
     routes: {
       '(/)': 'exploreDetail',
-      'page:page(/)': 'exploreDetail'
+    },
+
+    props: {
+      numSimilarDatasets: 3,
+      mainContentId: 'mainContent',
+      loadingClass: '_is-content-loading'
     },
 
     /**
-     * Render cards and charts
-     * @param {Number} page
+     * Router initializations
+     * It stores the current url data
+     * @param {String} url param
      */
-    exploreDetail: function(page) {
-      var ITEMS_PER_PAGE = 3;
+    initialize: function(slug) {
+      this.slug = slug;
+    },
 
-      this.params.set({ page: Number(page || 1) });
+    exploreDetail: function() {
+      // Get data
+      this._getData();
 
-      // Creating card detail
-      this.cardDetail =new App.View.CardDetail({ 
-        el: '#cardDetail',
-        data: {}
-      });
+      // Shared components
+      this._sharedComponents();
 
-      // Creating map
-      this.map = new App.View.Map({ el: '#map' });
+      // Creating dashboard
+      this._dashboardComponents();
 
+      this._removeLoader();
+    },
+
+    _getData: function() {
       // Complete widgets collection
       // TODO: fetch data instead fixtures data
-      var widgetsData = this.widgets = new App.Collection.Widgets();
+      this.widgets = new App.Collection.Widgets();
       // Generating fixtures
-      widgetsData.fixtures();
+      this.widgets.fixtures();
+      this.widgetsData = this.widgets;
+    },
 
-      // Creating pagination
-      this.pagination = new App.View.Pagination({
-        el: '#pagination',
+    /**
+     * Intializes shared components
+     * and sets their events
+     */
+    _sharedComponents: function() {
+      // Geo map
+      this.geo = new App.View.Geo({});
+
+      // Creating card detail
+      this.data = this.widgetsData.getBySlug(this.slug);
+      this.cardDetail = new App.View.CardDetail({
+        el: '#cardDetail',
+        data: this.data
+      });
+
+      // Chart selector
+      this.chartSelector = new App.View.ChartSelector({
+        el: '#chartsSelector'
+      });
+
+      this.chartBars = new App.View.ChartBars({
+        mainColor: '#FFFFFF',
+        mainFillColor: '#89E7FF',
+        secondaryColor: '#76C9DE'
+      });
+      this.chartPie = new App.View.ChartPie({
+        mainColor: '#FFFFFF',
+        buckets: ['#25A2C3', '#1A8CAA', '#0F6F89', '#075469', '#C32D7B'],
+      });
+      this.chartLine = new App.View.ChartLine({
+        mainColor: '#FFFFFF',
+        buckets: ['#FFFFFF'],
+        secondaryColor: '#76C9DE'
+      });
+
+      // Tooltip
+      this.tooltip = new App.View.Tooltip({
+        el: document.body,
+        text: 'Coming soon'
+      });
+
+      // Events
+      this.listenTo(this.cardDetail, 'card:chart:config', this._onChartConfig);
+      this.listenTo(this.chartSelector, 'chart:update', this._onChartUpdate);
+    },
+
+    /**
+     * Dashboard initialization
+     */
+    _dashboardComponents: function() {
+      // Limiting collection (TO-DO, get recommended widgets)
+      var widgetsData = this.widgetsData.models ?
+        this.widgetsData.toJSON() : this.widgetsData;
+      widgetsData = _.filter(widgetsData, _.bind(function(d) {
+        return d.slug !== this.slug
+      }, this));
+      var data = widgetsData.slice(0, this.props.numSimilarDatasets);
+
+      this.cards = new App.View.Cards({
+        el: '#exploreDashboard',
+        data: data,
         props: {
-          itemsPerPage: ITEMS_PER_PAGE,
-          current: this.params.attributes.page,
-          pages: Math.ceil(widgetsData.length / ITEMS_PER_PAGE)
+          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
         }
       });
 
-      // Creating dashboard
-      var pageRange = this.pagination.getPageRange();
-      // Slicing collection by current page
-      widgetsData = widgetsData
-        .slice(pageRange.startIndex, pageRange.endIndex);
-      this.cards = new App.View.Cards({
-        el: '#exploreDashboard',
-        data: widgetsData
+      // Update Chart selector
+      var chartData = this.data.data;
+      this.chartSelector.state.set({
+        data: chartData
       });
 
-      // Settings events
-      this.listenTo(this.pagination.state, 'change:current', this.setPage);
-      this.listenTo(this.params, 'change', this.updateParams);
+      // Events
+      App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
+      App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
     },
 
-    /**
-     * Update router params, this action doesn't trigger
-     */
-    updateParams: function() {
-      var route = '';
-      var page = this.params.attributes.page;
-      if (page) {
-        route = 'page:' + page;
+    _onChartUpdate: function(type, data) {
+      if (this.chart) {
+        this.chart.remove();
       }
-      this.navigate(route, { trigger: false });
-      this.updateCards();
+
+      var chartData;
+
+      if (type === 'bar') {
+        chartData = this.chartBars.getData({
+          values: data
+        });
+      } else if (type === 'pie') {
+        chartData = this.chartPie.getData({
+          values: data
+        });
+      } else if (type === 'line') {
+        chartData = this.chartLine.getData({
+          values: data
+        });
+      }
+
+      this.chart = new App.View.Chart({
+        el: this.cardDetail.$('.chart'),
+        data: chartData
+      });
+      this.chart.render();
     },
 
-    /**
-     * Set page param in model
-     */
-    setPage: function() {
-      this.params.set('page', this.pagination.state.attributes.current);
+    _onChartConfig: function() {
+      this.chartSelector.toggle();
     },
 
-    /**
-     * Update and render cards
-     */
-    updateCards: function() {
-      var pageRange = this.pagination.getPageRange();
-      var widgetsData = this.widgets;
-      var itemsPerPage = this.pagination.state.attributes.itemsPerPage;
-      this.pagination.state
-          .set('pages', Math.ceil(widgetsData.length / itemsPerPage));
-      widgetsData= widgetsData
-        .slice(pageRange.startIndex, pageRange.endIndex);
-      // Reseting cards collection and render it
-      this.cards.collection.reset(widgetsData);
+    _removeLoader: function() {
+      $('#'+ this.props.mainContentId).removeClass(this.props.loadingClass);
     }
-
   });
 
 }).call(this, this.App);
