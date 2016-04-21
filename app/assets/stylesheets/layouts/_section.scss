@@ -16,20 +16,5 @@ $section-header-link-color: $text-color-2;
       font-size: $large-font-size;
       color: $section-header-color;
     }
-
-    > .link {
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: $tiny-font-size;
-      font-weight: 700;
-      cursor: pointer;
-
-      i.right-arrow {
-        display: inline-block;
-        position: relative;
-        top: 2px;
-        @include arrow ($tiny-font-size, $section-header-link-color, 2px, 135deg);
-      }
-    }
   }
 }

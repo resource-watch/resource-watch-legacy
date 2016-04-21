@@ -10,6 +10,7 @@
 
     initialize: function(settings) {
       this.container = document.getElementById(settings.container);
+      this.trigger = settings.triggerId ? document.getElementById(settings.triggerId) : false;
       this.fullscreenCount = 0;
       this.setListeners();
     },
@@ -22,6 +23,13 @@
       App.Core.Events.on('fullscreen:clicked', this.toggleFullscreen.bind(this));
       var fullscreenEvents = 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange';
       $(document).on(fullscreenEvents, _.bind(this.fullscreenWatcher, this));
+      if(this.trigger) {
+        this.trigger.addEventListener('click', function(e){
+          e.preventDefault();
+          this.toggleFullscreen();
+          this.toggleTriggerText();
+        }.bind(this));
+      }
     },
 
     fullscreenWatcher: function() {
@@ -49,8 +57,20 @@
     },
 
 
+    isFullScreen: function() {
+      return !this.container.fullscreenElement && !this.container.mozFullScreenElement && !this.container.webkitFullscreenElement && !this.container.msFullscreenElement && !document.webkitIsFullScreen;
+    },
+
+    toggleTriggerText: function() {
+      if (this.state.attributes.isFullscreen) {
+        this.trigger.innerHTML = 'Exit full screen';
+      } else {
+        this.trigger.innerHTML = 'Full screen';
+      }
+    },
+
     toggleFullscreen: function() {
-      if (!this.container.fullscreenElement && !this.container.mozFullScreenElement && !this.container.webkitFullscreenElement && !this.container.msFullscreenElement && !document.webkitIsFullScreen) {
+      if (this.isFullScreen()) {
 
         if (this.container.requestFullscreen) {
           this.container.requestFullscreen();
