@@ -29,7 +29,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-vega', '~> 2.5.2'
   gem 'rails-assets-three.js', '~> 0.75.0'
   gem 'rails-assets-moment', '~> 2.12.0'
-  gem 'rails-assets-slick.js', '~> 1.5.9'
+  gem 'rails-assets-slick-carousel', '~> 1.5.9'
 end
 
 group :development, :test do

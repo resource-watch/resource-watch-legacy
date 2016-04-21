@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require underscore/underscore
 //= require backbone/backbone
-//= require slick.js/slick
+//= require slick-carousel/slick
 //= require_self
 //= require_tree ./core/
 //= require ./views/footer_carousel_view
