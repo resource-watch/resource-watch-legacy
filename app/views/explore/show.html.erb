@@ -1,22 +1,31 @@
 <% breadcrumb :explore_detail, @exploreSlug %>
 
-<div id="mainContent" class="row -expanded _is-content-loading">
-  <div class="main-content">
-    <div class="col -xs-12 -sm-7 explore">
-      <div class="row">
+<div class="rw-explore-content">
+  <div id="mainContent" class="row -expanded _is-content-loading">
+    <div class="main-content">
+      <div class="col -xs-12 -sm-7 rw-explore">
+        <div class="row">
+          <%= breadcrumbs %>
 
-        <div id="cardDetail"></div>
+          <div id="cardDetail"></div>
 
-        <div class="col -xs-12">
-          <h2 class="-pink">Similar datasets</h2>
-          <div id="exploreDashboard"></div>
-          <div id="pagination"></div>
+          <div class="col -xs-12">
+            <h2 class="-pink">Similar datasets</h2>
+            <div id="exploreDashboard"></div>
+            <div id="pagination"></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col -xs-12 -sm-5 explore-map">
-      <div id="legend"></div>
-      <div id="map" class="-dark"></div>
+  </div>
+
+  <div class="rw-explore-map">
+    <div id="mapToggle" class="rw-map-toggle">
+      <svg class="rw-icon rw-icon-arrow">
+        <use xlink:href="#icon-arrow"></use>
+      </svg>
     </div>
+    <div id="legend"></div>
+    <div id="map" class="-dark"></div>
   </div>
 </div>

@@ -14,7 +14,8 @@
         zoom: 2,
         maxZoom: 19,
         minZoom: 2,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        zoomControl: false
       },
       basemap: 'dark',
       disableZoomControls: false,
@@ -36,7 +37,8 @@
           }
         }
       },
-      cartoDBAttribution: 'CartoDB <a href="http://cartodb.com/attributions" target="_blank">attribution</a>'
+      cartoDBAttribution: 'CartoDB <a href="http://cartodb.com/attributions" target="_blank">attribution</a>',
+      refreshTimer: null
     },
 
     state: {
@@ -58,12 +60,16 @@
      */
     createMap: function() {
       var mapProps = this.props.map;
-      if (this.props.disableZoomControls) {
-        mapProps.zoomControl = false;
-        mapProps.doubleClickZoom = false;
-      }
       this.map = L.map(this.el, mapProps);
       this.setBasemap();
+
+      if (this.props.disableZoomControls) {
+        map.doubleClickZoom.disable();
+      } else {
+        this.map.addControl(L.control.zoom({
+          position: 'topright'
+        }));
+      }
     },
 
     /**
@@ -178,6 +184,17 @@
       if (Object.keys(layers).length === 0) {
         this.map.attributionControl.addAttribution(this.props.cartoDBAttribution);
       }
+    },
+
+    update: function() {
+      if (this.props.refreshTimer) {
+        clearTimeout(this.props.refreshTimer);
+        this.props.refreshTimer = null;
+      }
+
+      this.props.refreshTimer = setTimeout(function(){
+        this.map.invalidateSize(true);
+      }.bind(this), 400);
     }
   });
 

@@ -11,7 +11,11 @@
     },
 
     props: {
-      itemsPerPage: 6
+      itemsPerPage: 6,
+      elMapToggle: '#mapToggle',
+      elGoToMapToggle: '.js-go-to-map',
+      elExploreContent: '.rw-explore-content',
+      mapToggleClass: '_map-mode'
     },
 
     /**
@@ -41,7 +45,13 @@
       this._dashboardComponents();
 
       // Settings events
+      this.setListeners();
       this.listenTo(this.params, 'change', this.updateParams);
+    },
+
+    setListeners: function() {
+      $(this.props.elMapToggle).on('click', this._onMapToggle.bind(this));
+      $(this.props.elGoToMapToggle).on('click', this._onMapToggle.bind(this));
     },
 
     /**
@@ -72,6 +82,7 @@
           value: this.params.attributes.q
         }
       });
+
 
       // Filters navigation
       this.exploreNavigation = new App.View.ExploreNavigation({
@@ -192,6 +203,13 @@
         // Reseting cards collection and render it
         this.cards.data.reset(widgetsData);
       }
+    },
+
+    _onMapToggle: function() {
+      var $exploreContent = document.querySelector(this.props.elExploreContent);
+      $exploreContent.classList.toggle(this.props.mapToggleClass);
+
+      this.geo.refresh();
     }
   });
 

@@ -1,19 +1,32 @@
 <% breadcrumb :explore %>
 
-<div class="row -expanded">
-  <div class="col -xs-12 -sm-7 explore">
-    <h1><%= t('titles.explore') %></h1>
-    <%= form_tag nil, id: 'searchForm' do %>
-      <div class="input-group">
-        <%= search_field_tag :q, nil, placeholder: 'Search datasets' %>
-        <%= submit_tag "Search" %>
-      </div>
-    <% end %>
-    <div id="exploreNavigation"></div>
-    <div id="exploreDashboard"></div>
-    <div id="pagination"></div>
+<div class="rw-explore-content">
+  <div class="rw-go-to-map">
+    <button class="action -plain js-go-to-map">Go to the map ></button>
   </div>
-  <div class="col -xs-12 -sm-5 explore-map">
+  <div id="exploreContent" class="row -expanded">
+    <div class="col -xs-12 -sm-12 -md-12 -lg-7 rw-explore">
+      <%= breadcrumbs %>
+
+      <h1><%= t('titles.explore') %></h1>
+      <%= form_tag nil, id: 'searchForm' do %>
+        <div class="input-group">
+          <%= search_field_tag :q, nil, placeholder: 'Search datasets' %>
+          <%= submit_tag "Search" %>
+        </div>
+      <% end %>
+      <div id="exploreNavigation"></div>
+      <div id="exploreDashboard"></div>
+      <div id="pagination"></div>
+    </div>
+  </div>
+
+  <div class="rw-explore-map">
+    <div id="mapToggle" class="rw-map-toggle">
+      <svg class="rw-icon rw-icon-arrow">
+        <use xlink:href="#icon-arrow"></use>
+      </svg>
+    </div>
     <div id="legend"></div>
     <div id="map" class="-dark"></div>
   </div>
