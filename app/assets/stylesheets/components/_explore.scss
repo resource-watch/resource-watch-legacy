@@ -1,6 +1,9 @@
 .explore {
-  overflow-y: scroll;
-  height: calc(100vh - #{$header-height});
+  @media screen and (min-width: $medium-screen) {
+    overflow-y: scroll;
+    height: calc(100vh - #{$header-height});
+    padding-bottom: 5rem;
+  }
 }
 
 .explore-map {
