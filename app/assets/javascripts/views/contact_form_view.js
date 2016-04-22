@@ -16,7 +16,6 @@
 
     _onContactClick: function(e) {
       e.preventDefault();
-      console.log('clicked');
       var html = this.template();
       new App.View.Modal({ html: html });
     }

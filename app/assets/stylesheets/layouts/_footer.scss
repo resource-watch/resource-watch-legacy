@@ -37,11 +37,11 @@
   }
 
   .rw-footer-logo {
-    text-align: center;
-    @media screen and (min-width: $medium-screen) {
-      text-align: left;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   .rw-footer-nav {
     display: flex;
     flex-wrap: wrap;
@@ -51,13 +51,21 @@
 
     list-style: none;
 
+    flex-direction: column;
+    @media screen and (min-width: $medium-screen) {
+      flex-direction: row;
+    }
+
     > li._brand {
       width: 100%;
     }
 
     > li {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
+      margin: 0 0 rem(5px);
+      @media screen and (min-width: $medium-screen) {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
 
       > a {
         color: $text-color-1;
@@ -67,6 +75,10 @@
         padding: 0;
         margin: 0;
         list-style: none;
+        display: none;
+        @media screen and (min-width: $medium-screen) {
+          display: block;
+        }
       }
     }
 
@@ -124,6 +136,7 @@
   list-style-type: none;
   width: 100%;
   height: 54px;
+  padding: 0;
 
   &.-invisible { opacity: 0; }
 
