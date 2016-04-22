@@ -29,5 +29,10 @@
     width: 100%;
     position: relative;
     display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: $small-screen) {
+      flex-direction: row;
+    }
   }
 }

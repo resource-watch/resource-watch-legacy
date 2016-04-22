@@ -4,5 +4,9 @@
 }
 
 .explore-map {
-  margin-top: rem(-61px);
+  display: none;
+  @media screen and (min-width: $medium-screen) {
+    display: block;
+    margin-top: rem(-61px);
+  }
 }
