@@ -8,6 +8,11 @@
     h1 {
       margin: 2rem 0 1rem 0;
       font-size: $xlarge-font-size;
+      padding-top: 3rem;
+
+      @media screen and (min-width: $small-screen) {
+        padding-top: 0;
+      }
     }
 
     > .planet-pulse-nav {
