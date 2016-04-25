@@ -1,11 +1,12 @@
 <% breadcrumb :explore %>
 
 <div class="rw-explore-content">
-  <div class="rw-go-to-map">
+  <div class="rw-explore-mobile-nav">
+    <button class="action -plain back js-go-to-explore">< Go to the explore</button>
     <button class="action -plain js-go-to-map">Go to the map ></button>
   </div>
   <div id="exploreContent" class="row -expanded">
-    <div class="col -xs-12 -sm-12 -md-12 -lg-7 rw-explore">
+    <div class="col -xs-12 -sm-12 -md-7 -lg-7 rw-explore">
       <%= breadcrumbs %>
 
       <h1><%= t('titles.explore') %></h1>

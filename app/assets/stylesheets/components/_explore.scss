@@ -1,31 +1,41 @@
 .rw-explore-content {
   width: 100%;
   transition: transform .7s ease;
-  float: left;
+  position: relative;
 
   .rw-explore {
     overflow-y: scroll;
     height: calc(100vh - #{$header-height});
     background: $bg-color-4;
+
+    @media screen and (min-device-width: $small-screen) and (max-device-width: $large-screen) {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
   }
 
-  > .rw-go-to-map {
+  > .rw-explore-mobile-nav {
     width: 100%;
-    height: rem(34);
+    height: $explore-mobile-nav-height;
     background: $bg-color-2;
     text-transform: uppercase;
-    display: flex;
     align-items: center;
     justify-content: flex-end;
     font-size: $ultra-small-font-size;
-    padding-right: rem(10);
+    padding: 0 rem(10);
+    display: none;
 
     .action {
       color: $text-color-3;
+
+      &.back {
+        display: none;
+      }
     }
 
-    @media screen and (min-width: $large-screen) {
-      display: none;
+    @media screen and (max-width: $medium-screen) {
+      display: flex;
     }
   }
 
@@ -52,6 +62,10 @@
       cursor: pointer;
       transition: left .5s ease;
 
+      @media screen and (max-width: $medium-screen) {
+        display: none;
+      }
+
       > .rw-icon-arrow {
         width: rem(7);
         fill: $bg-color-4;
@@ -65,28 +79,54 @@
       }
     }
 
-    > .map{
-        width: auto;
-        height: auto;
-        left: 58.33333%;
-        right: 0;
-        position: fixed;
-        top: 130px;
-        bottom: 0;
-        transition: left .5s ease;
-        z-index: 1;
+    > .map {
+      width: auto;
+      left: 58.33333%;
+      right: 0;
+      position: absolute;;
+      height: calc(100vh - #{$header-height});
+      bottom: 0;
+      transition: left .5s ease;
+      z-index: 1;
 
+      @media screen and (max-width: $medium-screen) {
+        left: 100%;
+        top: rem(34);
+        height: calc((100vh - #{$header-mobile-height}) - #{$explore-mobile-nav-height});
+      }
+    }
+
+    > .legend {
+      > .content {
         @media screen and (max-width: $medium-screen) {
           left: 100%;
         }
       }
+    }
   }
 
   &._map-mode {
 
+    > .rw-explore-mobile-nav {
+      justify-content: flex-start;
+      .action {
+        display: none;
+        &.back {
+          display: block;
+        }
+      }
+    }
+
     > .rw-explore-map {
       > .map {
-        left: 0!important;
+        left: 0;
+      }
+      > .legend {
+        > .content {
+          @media screen and (max-width: $medium-screen) {
+            left: auto;
+          }
+        }
       }
     }
 

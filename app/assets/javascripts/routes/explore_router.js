@@ -14,6 +14,7 @@
       itemsPerPage: 6,
       elMapToggle: '#mapToggle',
       elGoToMapToggle: '.js-go-to-map',
+      elGoToExploreToggle: '.js-go-to-explore',
       elExploreContent: '.rw-explore-content',
       mapToggleClass: '_map-mode'
     },
@@ -51,6 +52,7 @@
 
     setListeners: function() {
       $(this.props.elMapToggle).on('click', this._onMapToggle.bind(this));
+      $(this.props.elGoToExploreToggle).on('click', this._onMapToggle.bind(this));
       $(this.props.elGoToMapToggle).on('click', this._onMapToggle.bind(this));
     },
 
@@ -130,7 +132,7 @@
         el: '#exploreDashboard',
         data: data,
         props: {
-          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
+          gridClasses: 'col -xs-12 -sm-6 -md-6 -lg-4'
         }
       });
 
