@@ -1,7 +1,7 @@
 <header class="header">
-  <h1>{{country.name}} Dashboard</h1>
+  <h1>{{country.name}} <%= I18n.t('dashboard') %> </h1>
   <ul class="header-menu">
-    <li><a href="<%= ResourceWatch::Application.routes.url_helpers.countries_path %>">Change Country</a></li>
+    <li><a href="<%= ResourceWatch::Application.routes.url_helpers.countries_path %>"><%= I18n.t('countries.change') %></a></li>
   </ul>
 </header>
 <div class="row js-cards">

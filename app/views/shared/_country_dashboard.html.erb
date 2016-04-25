@@ -1,14 +1,14 @@
 <section>
   <div class="rw-country-dashboard-selector js-country-dashboard-selector">
       <header>
-        <h2>Dashboard</h2>
-        <p>Analyze country data easily</p>
+        <h2><%= t('dashboard') %></h2>
+        <p><%= t('countries.header') %></p>
       </header>
       <div class="country-selector">
         <select>
-          <option value="" disabled="true" selected="true">Choose country</option>
+          <option value="" disabled="true" selected="true"><%= t('countries.choose') %></option>
         </select>
-        <button type="submit">Let's go!</button>
+        <button type="submit"><%= t('lets_go') %></button>
       </div>
   </div>
 </section>

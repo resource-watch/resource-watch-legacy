@@ -26,7 +26,9 @@ body {
   background-color: $body-background;
 
   &.-fitscreen {
-    overflow: hidden;
+    @media screen and (min-width: $medium-screen){
+      overflow: hidden;
+    }
   }
 }
 
