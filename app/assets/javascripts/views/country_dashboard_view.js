@@ -56,6 +56,26 @@
         .always(function() { loader.state.set({ loading: false }); });
     },
 
+    /* Grab countries from the collection*/
+    fetchCountries: function() {
+      this.countriesCollection = new App.Collection.Countries();
+      this.countriesCollection.fetch()
+        .then(this.setCountryList.bind(this))
+        .fail(function() {
+          console.warn('Unable to fetch the list of countries');
+        });
+    },
+
+    /* Add the list of countries to the selector */
+    setCountryList: function() {
+      var targetSelect = this.$el.find('#select_countries');
+      var html = this.countriesCollection.toJSON().map(function(country) {
+        return '<option value="' + country.iso + '">' + country.name + '</option>';
+      });
+      targetSelect.append(html);
+      targetSelect.chosen({no_results_text: "Oops, nothing found!"});
+    },
+
     /* Render the skeleton of the dashboard and cache the container of the
      * cards */
     renderSkeleton: function() {
@@ -165,6 +185,8 @@
     /* Start the rendering chain of the inner of the cards; it's done one by one
      * to avoid requests congestion */
     startInnerCardRendering: function() {
+      this.fetchCountries();
+      
       this.state.set({ renderIndex: 0 });
     },
 
