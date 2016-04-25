@@ -10,6 +10,9 @@
   }
 
   .leaflet-control-zoom {
+    top: rem(50);
+    right: rem(20);
+
     a {
       width: rem(30);
       height: rem(30);
@@ -19,6 +22,10 @@
       text-indent: -99999px;
       background-repeat: no-repeat;
       background-position: center;
+
+      &.leaflet-disabled {
+        opacity: 0.8;
+      }
 
       &:first-child {
         margin-bottom: rem(5);
@@ -33,4 +40,7 @@
     }
   }
 
+  .leaflet-control-attribution {
+    min-width: rem(250);
+  }
 }

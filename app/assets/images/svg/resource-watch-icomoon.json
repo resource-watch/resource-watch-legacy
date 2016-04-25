@@ -9,6 +9,12 @@
 			"selection": [
 				{
 					"order": 4,
+					"id": 7,
+					"prevSize": 32,
+					"name": "arrow"
+				},
+				{
+					"order": 0,
 					"id": 6,
 					"prevSize": 32,
 					"name": "verified"
@@ -54,13 +60,26 @@
 			"metadata": {
 				"name": "Icons",
 				"importSize": {
-					"width": 38,
-					"height": 38
+					"width": 8,
+					"height": 12
 				}
 			},
 			"height": 1024,
 			"prevSize": 32,
 			"icons": [
+				{
+					"id": 7,
+					"paths": [
+						"M89.6 451.669l422.4-422.4 120.661 120.661-361.984 362.069 361.984 362.069-120.661 120.661-482.731-482.731z"
+					],
+					"attrs": [],
+					"isMulticolor": false,
+					"width": 683,
+					"grid": 16,
+					"tags": [
+						"arrow"
+					]
+				},
 				{
 					"id": 6,
 					"paths": [
