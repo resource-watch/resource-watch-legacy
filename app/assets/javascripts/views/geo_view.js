@@ -45,7 +45,7 @@
         this._createLegend();
       }
 
-      // Providers*/
+      // Providers
       this._mapProviders();
 
       // Events
@@ -103,6 +103,10 @@
      */
     mapRemoveLayer: function(layer) {
       this.map.removeLayer(layer);
+    },
+
+    refresh: function() {
+      this.map.update();
     }
 
   });

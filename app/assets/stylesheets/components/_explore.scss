@@ -1,15 +1,143 @@
-.explore {
-  @media screen and (min-width: $medium-screen) {
+.rw-explore-content {
+  width: 100%;
+  transition: transform .7s ease;
+  position: relative;
+
+  .rw-explore {
     overflow-y: scroll;
     height: calc(100vh - #{$header-height});
-    padding-bottom: 5rem;
-  }
-}
+    background: $bg-color-4;
 
-.explore-map {
-  display: none;
-  @media screen and (min-width: $medium-screen) {
-    display: block;
-    margin-top: rem(-61px);
+    @media screen and (min-device-width: $small-screen) and (max-device-width: $large-screen) {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+
+  > .rw-explore-mobile-nav {
+    width: 100%;
+    height: $explore-mobile-nav-height;
+    background: $bg-color-2;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: $ultra-small-font-size;
+    padding: 0 rem(10);
+    display: none;
+
+    .action {
+      color: $text-color-3;
+
+      &.back {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: $medium-screen) {
+      display: flex;
+    }
+  }
+
+  > .rw-explore-map {
+    background: $basemap-1;
+
+    > .rw-map-toggle {
+      width: rem(28);
+      height: rem(40);
+      -webkit-border-top-right-radius: rem(2);
+      -webkit-border-bottom-right-radius: rem(2);
+      -moz-border-radius-topright: rem(2);
+      -moz-border-radius-bottomright: rem(2);
+      border-top-right-radius: rem(2);
+      border-bottom-right-radius: rem(2);
+      background-color: rgba($bg-color-4, 0.3);
+      position: absolute;
+      z-index: 2;
+      left: 58.33333%;
+      top: rem(20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: left .5s ease;
+
+      @media screen and (max-width: $medium-screen) {
+        display: none;
+      }
+
+      > .rw-icon-arrow {
+        width: rem(7);
+        fill: $bg-color-4;
+        fill-opacity: 0.6;
+        margin-right: rem(1.5);
+        transition: transform .2s ease;
+      }
+
+      @media screen and (max-width: $medium-screen) {
+        left: 100%;
+      }
+    }
+
+    > .map {
+      width: auto;
+      left: 58.33333%;
+      right: 0;
+      position: absolute;;
+      height: calc(100vh - #{$header-height});
+      bottom: 0;
+      transition: left .5s ease;
+      z-index: 1;
+
+      @media screen and (max-width: $medium-screen) {
+        left: 100%;
+        top: rem(34);
+        height: calc((100vh - #{$header-mobile-height}) - #{$explore-mobile-nav-height});
+      }
+    }
+
+    > .legend {
+      > .content {
+        @media screen and (max-width: $medium-screen) {
+          left: 100%;
+        }
+      }
+    }
+  }
+
+  &._map-mode {
+
+    > .rw-explore-mobile-nav {
+      justify-content: flex-start;
+      .action {
+        display: none;
+        &.back {
+          display: block;
+        }
+      }
+    }
+
+    > .rw-explore-map {
+      > .map {
+        left: 0;
+      }
+      > .legend {
+        > .content {
+          @media screen and (max-width: $medium-screen) {
+            left: auto;
+          }
+        }
+      }
+    }
+
+    > .rw-explore-map {
+      > .rw-map-toggle {
+        left: 0;
+
+        > .rw-icon-arrow {
+          transform: scaleX(-1);
+        }
+      }
+    }
   }
 }

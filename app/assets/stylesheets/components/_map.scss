@@ -8,4 +8,8 @@
   &.-dark {
     background: $basemap-1;
   }
+
+  .leaflet-control-attribution {
+    min-width: rem(250);
+  }
 }
