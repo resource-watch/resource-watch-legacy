@@ -10,6 +10,10 @@
 
     template: this.HandlebarsTemplates.country_dashboard,
 
+    events: {
+      'change #select_countries': 'onSelectChange'
+    },
+
     state: {
       /* Index of the card currently rendering */
       renderIndex: null,
@@ -74,6 +78,11 @@
       });
       targetSelect.append(html);
       targetSelect.chosen({no_results_text: "Oops, nothing found!"});
+    },
+
+    /* Fly to another country */
+    onSelectChange: function(e) {
+      window.location.href = '<%= ResourceWatch::Application.routes.url_helpers.countries_path %>/' + e.currentTarget.value;
     },
 
     /* Render the skeleton of the dashboard and cache the container of the
@@ -186,7 +195,7 @@
      * to avoid requests congestion */
     startInnerCardRendering: function() {
       this.fetchCountries();
-      
+
       this.state.set({ renderIndex: 0 });
     },
 
