@@ -4,6 +4,11 @@
     <li><a href="<%= ResourceWatch::Application.routes.url_helpers.countries_path %>"><%= I18n.t('countries.change') %></a></li>
   </ul>
 </header>
+<div class="select countries">
+  <select>
+    <option>Choose country</option>
+  </select>
+</div>
 <div class="row js-cards">
   {{#each cards}}
     <div class="col -xs-12 -sm-6 -md-4 -lg-3">
