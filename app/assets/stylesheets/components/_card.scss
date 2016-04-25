@@ -178,6 +178,10 @@ $card-shadow-color: $real-black;
       display: inline-block;
       float: left;
 
+      > h3 {
+        min-height: auto;
+      }
+
       > .actions {
         > .action {
           margin-left: 0;

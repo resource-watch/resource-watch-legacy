@@ -5,7 +5,7 @@
   App.View.ExploreNavigation = App.Core.View.extend({
 
     events: {
-      'click .action': 'setMode'
+      'click .js-filter': 'setMode'
     },
 
     tagName: 'div',
