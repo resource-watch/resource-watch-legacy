@@ -46,5 +46,23 @@ select {
         background-position: 0px 100%; 
       }
     }
+    .chosen-search {
+      padding: 3px 15px;
+      input[type="text"] {
+        height: 55px;
+        font-size: 18px;
+        background: none;
+        background-image: none !important;
+      }
+    }
+    .chosen-results li {
+      padding: 5px 15px;
+      font-size: 15px;
+      &.highlighted {
+        background-image: linear-gradient(#f1f2f3 20%, #f1f2f3 90%);
+        color: #555;
+        background-color: #f1f2f3;
+      }
+    }
   }
 }
