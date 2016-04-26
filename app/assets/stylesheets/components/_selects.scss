@@ -38,6 +38,13 @@ select {
     width: 100% !important;
     .chosen-single {
       height: 55px;
+      line-height: 55px;
+      font-size: 18px;
+      background: #fff;
+      padding: 0 0 0 15px;
+      div b {
+        background-position: 0px 100%; 
+      }
     }
   }
 }
