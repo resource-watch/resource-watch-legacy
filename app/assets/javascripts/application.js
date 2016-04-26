@@ -4,6 +4,7 @@
 //= require backbone/backbone
 //= require d3
 //= require vega
+//= require chosen
 //= require moment
 //= require slick-carousel/slick
 //= require three.js/three

@@ -2,8 +2,16 @@
   <h1>{{country.name}} <%= I18n.t('dashboard') %> </h1>
   <ul class="header-menu">
     <li><a href="<%= ResourceWatch::Application.routes.url_helpers.countries_path %>"><%= I18n.t('countries.change') %></a></li>
+    <!-- <li><a href="#"><%= I18n.t('topics') %></a></li> -->
+    <li><a href="#" id="fullscreenBtn"><%= I18n.t('fullscreen.set') %></a></li>
+
   </ul>
 </header>
+<div class="select select-countries-dropdown">
+  <select id="select_countries">
+    <option>Choose country</option>
+  </select>
+</div>
 <div class="row js-cards">
   {{#each cards}}
     <div class="col -xs-12 -sm-6 -md-4 -lg-3">
