@@ -34,6 +34,14 @@ select {
     left: 105%;
     display: block;
   }
+  &.dropdown-index {
+    height: auto;
+    background-color: transparent; 
+    &:before,
+    &:after {
+      display: none;
+    }
+  }
   .chosen-container-single {
     width: 100% !important;
     .chosen-single {
