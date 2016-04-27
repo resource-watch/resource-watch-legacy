@@ -76,9 +76,11 @@
       if (!el.classList.contains(this.props.activeClass)) {
         App.Core.Events.trigger('card:layer:add', layer);
         el.classList.add(this.props.activeClass);
+        el.innerHTML = el.dataset.i18active;
       } else {
         App.Core.Events.trigger('card:layer:remove', layer);
         el.classList.remove(this.props.activeClass);
+        el.innerHTML = el.dataset.i18default;
       }
     }
 
