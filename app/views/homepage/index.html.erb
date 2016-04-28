@@ -1,4 +1,7 @@
 <% breadcrumb :root %>
+<div class="rw-l-banner">
+  <%= render "shared/featured_insight_banner" %>
+</div>
 <div class="row">
   <div class="col -xs-12">
     <section class="rw-l-section">
@@ -8,8 +11,8 @@
       <header class="header">
         <h2 class="title"><%= t('insights.features') %></h2>
         <%= link_to page_path('insights'), class:'link' do %>
-          <%= t('view_more') %>
-          <i class="right-arrow"></i>
+        <%= t('view_more') %>
+        <i class="right-arrow"></i>
         <% end %>
       </header>
       <%= render "shared/insights" %>
