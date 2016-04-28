@@ -18,6 +18,8 @@
 
     template: this.HandlebarsTemplates.planet_pulses,
 
+    templateModal: this.HandlebarsTemplates.planet_pulses_modal,
+
     state: {
       categorySelected: null,
       layerSelected: null,
@@ -75,11 +77,7 @@
       e.stopPropagation();
       var slug = e.currentTarget.parentNode.id;
       var layer = _.findWhere(this.data, {'slug':slug});
-      var html = '<h2 class="title">' + layer.title_dataset +
-                    '<span>' + layer.source_1 + '</span>'+
-                  '</h2>'+
-                    '<p class="content">' + layer.source_description + '</p>'+
-                    '<p class="footnote">' + layer.source_citation + '</p>';
+      var html = this.templateModal({layer:layer});
       new App.View.Modal({ html: html });
     },
 
