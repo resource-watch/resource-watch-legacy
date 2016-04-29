@@ -45,14 +45,47 @@
             "values": data.values
           },
           {
-            "name": "categories",
+            "name": "summary",
             "source": "table",
             "transform": [
               {
-                "type": "facet",
-                "groupby": [
-                  "c"
-                ]
+                "type": "aggregate",
+                "summarize": {
+                  "y": [
+                    "min",
+                    "max"
+                  ]
+                }
+              },
+              {
+                "type": "formula",
+                "field": "difference",
+                "expr": "datum.max_y-datum.min_y"
+              },
+              {
+                "type": "formula",
+                "field": "min",
+                "expr": "datum.min_y === 0 ? 0 : (datum.difference > 0 ? datum.min_y - datum.difference * 0.2  : datum.min_y * 0.8)"
+              },
+              {
+                "type": "formula",
+                "field": "min",
+                "expr": "datum.min < 0 ? 0 : datum.min"
+              },
+              {
+                "type": "formula",
+                "field": "max",
+                "expr": "datum.max_y === 0 ? 10 : (datum.difference > 0 ? datum.max_y + datum.difference * 0.2 : datum.max_y * 1.2)"
+              }
+            ]
+          },
+          {
+            "name": "computed",
+            "source": "table",
+            "transform": [
+              {
+                "type": "cross",
+                "with": "summary"
               }
             ]
           }
@@ -67,19 +100,31 @@
         "scales": [
           {
             "name": "x",
-            "type": "linear",
+            "type": "time",
             "range": "width",
-            "round": true,
-            "nice": true,
-            "domain": {"data": "table", "field": "x"}
+            "domain": {
+              "data": "table",
+              "field": "x"
+            }
           },
           {
             "name": "y",
             "type": "linear",
             "range": "height",
-            "round": true,
-            "nice": true,
-            "domain": {"data": "table", "field": "y"}
+            "domain": {
+              "data": "computed",
+              "field": "a.y"
+            },
+            "domainMin": {
+              "data": "computed",
+              "field": "b.min"
+            },
+            "domainMax": {
+              "data": "computed",
+              "field": "b.max"
+            },
+            "zero": false,
+            "nice": true
           },
           {
             "name": "color", 
@@ -93,7 +138,6 @@
             "type": "x", 
             "scale": "x", 
             "ticks": 5,
-            "format": "f",
             "layer": "back",
             "properties": {
              "ticks": {
