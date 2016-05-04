@@ -2,6 +2,7 @@
 en:
   CSV: CSV
   add_to_map: Add to map
+  active: Active
   apps: Apps
   chart: Chart
   chart_type: Chart type
@@ -66,5 +67,6 @@ en:
     planet_pulse: Planet pulse
     privacy: Privacy
     terms: Terms of service
+  topics: Topics
   verified: Verified
   view_more: View more

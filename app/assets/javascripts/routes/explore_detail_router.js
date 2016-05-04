@@ -11,7 +11,10 @@
     props: {
       numSimilarDatasets: 3,
       mainContentId: 'mainContent',
-      loadingClass: '_is-content-loading'
+      loadingClass: '_is-content-loading',
+      elMapToggle: '#mapToggle',
+      elExploreContent: '.rw-explore-content',
+      mapToggleClass: '_map-mode'
     },
 
     /**
@@ -34,6 +37,12 @@
       this._dashboardComponents();
 
       this._removeLoader();
+
+      this.setListeners();
+    },
+
+    setListeners: function() {
+      $(this.props.elMapToggle).on('click', this._onMapToggle.bind(this));
     },
 
     _getData: function() {
@@ -156,6 +165,13 @@
 
     _removeLoader: function() {
       $('#'+ this.props.mainContentId).removeClass(this.props.loadingClass);
+    },
+
+    _onMapToggle: function() {
+      var $exploreContent = document.querySelector(this.props.elExploreContent);
+      $exploreContent.classList.toggle(this.props.mapToggleClass);
+
+      this.geo.refresh();
     }
   });
 

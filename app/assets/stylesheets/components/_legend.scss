@@ -10,8 +10,8 @@
     width: rem(200);
     max-height: rem(150);
     background: $bg-legend;
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 2;
     bottom: rem(40);
     right: rem(20);
     color: $color-legend;

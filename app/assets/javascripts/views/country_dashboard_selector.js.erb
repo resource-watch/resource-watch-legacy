@@ -26,6 +26,7 @@
         return '<option value="' + country.iso + '">' + country.name + '</option>';
       });
       this.$el.find('select').append(html);
+      this.$el.find('select').chosen({no_results_text: "Oops, nothing found!"});
     },
 
     onSelectChange: function(e) {

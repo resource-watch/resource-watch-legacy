@@ -1,10 +1,4 @@
-<% if controller == "explore" %>
-  <div class="row -expanded">
-    <div class="col -xs-12 -sm-7">
-      <%= breadcrumbs %>
-    </div>
-  </div>
-<% else %>
+<% if controller != "explore" %>
   <div class="row">
     <div class="col-xs-12">
       <%= breadcrumbs %>

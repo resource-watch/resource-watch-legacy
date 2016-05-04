@@ -1,23 +1,61 @@
+$top-header-height: rem(30);
+$nav-header-height: rem(100);
+
 .rw-l-header {
   background-color: $bg-color-1;
-  height: $header-height;
+  height: auto;
 
-  background-image: image-url("header-bg-texture@2x.png"), linear-gradient(86deg, $bg-color-1, $bg-color-10);
+  background-image: image-url("header-bg-mobile.png"), linear-gradient(90deg, $bg-color-1, $bg-color-10);
   background-position: left top;
   background-repeat: no-repeat;
-  background-size: 140%;
+  background-size: cover;
+
+  @media screen and (min-width: $medium-screen) {
+    height: $header-height;
+    background-image: image-url("header-bg-texture.png"), linear-gradient(86deg, $bg-color-1, $bg-color-10);
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: 140%;
+  }
 
   a, a:visited {
     color: $text-color-3;
   }
+
+  &.is-menu-open {
+    position: fixed;
+    left:0;
+    right:0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    margin: 0;
+    z-index: 1001;
+    .rw-l-top-header {
+      display: flex;
+    }
+    .rw-main-nav {
+      display: block;
+      z-index: 1;
+    }
+  }
 }
 
 .rw-l-top-header {
-  display: flex;
-  height: rem(30);
+  display: none;
+  height: $top-header-height;
   align-items: center;
+  width: 100%;
+  position: absolute;
+  top: $nav-header-height;
 
   background-color: rgba(0, 0, 0, 0.10);
+
+  @media screen and (min-width: $medium-screen) {
+    display: flex;
+    position: relative;
+    top: auto;
+  }
 
   .rw-header-lang {
     color: $text-color-3;
@@ -71,39 +109,110 @@
 }
 
 .rw-l-nav-header {
-  height: rem(100);
+  height: $nav-header-height;
 
   .rw-brand {
     display: block;
   }
 
-  .rw-main-nav ul {
+  .rw-top-nav {
     display: flex;
-    justify-content: flex-end;
-    padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    list-style: none;
+  .rw-icon-logo {
+    @media screen and (max-width: $medium-screen) {
+      width: 90%;
+    }
+  }
+  .rw-menu-btn {
+    display:block;
 
-    li {
-      margin-left: 2rem;
+    @media screen and (min-width: $medium-screen) {
+      display: none;
+    }
 
-      a, a:hover {
-        text-decoration: none
+    button {
+      padding: rem(10px) rem(15px);
+      min-width: rem(75px);
+      height: auto;
+
+      color: $text-color-3;
+      border: 1px solid $text-color-3;
+      border-radius: 3px;
+      background: transparent;
+
+      font-size: $tiny-font-size;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+  }
+
+  .rw-main-nav {
+    display: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50px;
+    margin-top: 2rem;
+
+    @media screen and (min-width: $medium-screen) {
+      display: block;
+      position: relative;
+      width: auto;
+      left: auto;
+      top: auto;
+      margin-top: 0;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      list-style: none;
+
+      @media screen and (min-width: $medium-screen) {
+        flex-direction: row;
+        justify-content: flex-end;
       }
 
-      &.-active, &:hover {
-        position: relative;
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          bottom: -5px;
-          background-color: $text-color-3;
+      li {
+        margin-left: 2rem;
+        margin-bottom: 2rem;
+        display: block;
+
+        @media screen and (min-width: $medium-screen) {
+          margin-bottom: 0;
+        }
+
+        a {
+          font-size: $large-font-size;
+          text-decoration: none;
+          line-height: 22px;
+
+          @media screen and (min-width: $medium-screen) {
+            margin-bottom: 0;
+            font-size: $normal-font-size;
+            text-decoration: none;
+          }
+
+          &.-active, &:hover {
+            position: relative;
+            &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              left: 0;
+              width: 100%;
+              height: 2px;
+              bottom: -5px;
+              background-color: $text-color-3;
+            }
+          }
         }
       }
     }

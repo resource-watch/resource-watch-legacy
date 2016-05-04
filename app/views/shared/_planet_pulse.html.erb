@@ -7,8 +7,8 @@
     <% end %>
   </header>
   <div class="rw-banner">
-    <%= link_to planet_pulse_path, class: 'image' do %>
-    <%= image_tag "planet_pulse/planet-pulse.jpg" %>
+    <%= link_to planet_pulse_path do %>
+    <%= image_tag "planet_pulse/planet-pulse.jpg", class: 'image' %>
     <% end %>
     <h3 class="header"> <%= t('planet_pulse.banner')%> </h3>
     <%= link_to t('planet_pulse.launch'), planet_pulse_path, class: 'button -large' %>
