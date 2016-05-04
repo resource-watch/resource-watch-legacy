@@ -21,7 +21,7 @@
       disableZoomControls: false,
       basemapsList: {
         light: {
-          url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+          url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
           options: {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
@@ -29,7 +29,7 @@
           }
         },
         dark: {
-          url: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+          url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
           options: {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
