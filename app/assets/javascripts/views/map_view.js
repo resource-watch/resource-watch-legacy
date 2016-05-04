@@ -23,7 +23,7 @@
         light: {
           url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
           options: {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 19
           }
@@ -31,13 +31,13 @@
         dark: {
           url: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
           options: {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 19
           }
         }
       },
-      cartoDBAttribution: 'CartoDB <a href="http://cartodb.com/attributions" target="_blank">attribution</a>',
+      cartoDBAttribution: 'CartoDB <a href="https://cartodb.com/attributions" target="_blank">attribution</a>',
       refreshTimer: null
     },
 

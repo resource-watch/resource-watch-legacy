@@ -22,14 +22,16 @@
       opts['user_name'] = data.user;
       opts['sublayers'] = [];
       opts['sublayers'].push(subLayer);
+      opts['maps_api_template'] = 'https://{user}.cartodb.com';
 
       var sqlBounds = new cartodb.SQL({
-        user: data.user
+        user: data.user,
+        sql_api_template: 'https://{user}.cartodb.com'
       });
 
       sqlBounds.getBounds(subLayer.sql).done(function(bounds) {
         map.fitBounds(bounds);
-        cartodb.createLayer(map, opts)
+        cartodb.createLayer(map, opts, {https: true})
           .addTo(map)
           .done(function(layer) {
             if (data.interactivity) {
