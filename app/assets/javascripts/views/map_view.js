@@ -64,7 +64,7 @@
       this.setBasemap();
 
       if (this.props.disableZoomControls) {
-        map.doubleClickZoom.disable();
+        this.map.doubleClickZoom.disable();
       } else {
         this.map.addControl(L.control.zoom({
           position: 'topright'
