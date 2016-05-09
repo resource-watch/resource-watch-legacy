@@ -57,7 +57,10 @@
         }.bind(this))
         .then(this.startInnerCardRendering.bind(this))
         .fail(this.displayError.bind(this))
-        .always(function() { loader.state.set({ loading: false }); });
+        .always(function() {
+          loader.state.set({ loading: false });
+          this.initFullScreen();
+        }.bind(this));
     },
 
     /* Grab countries from the collection*/
@@ -207,8 +210,14 @@
       if(cardNb < this.configurationCollection.models.length - 1) {
         this.state.set({ renderIndex: cardNb + 1 });
       }
-    }
+    },
 
+    initFullScreen: function() {
+      this.fullScreenView = new App.View.FullScreen({
+        container: 'dashboard',
+        triggerId: 'fullscreenBtn'
+      });
+    }
   });
 
 }).call(this, this.App);

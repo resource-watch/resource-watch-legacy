@@ -42,6 +42,9 @@
       } else if(!isEnteringFullscreen && this.state.attributes.isFullscreen) {
         this.disableFullscreen();
       }
+      if(this.trigger) {
+        this.toggleTriggerText();
+      }
     },
 
     enableFullscreen: function() {

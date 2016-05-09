@@ -10,10 +10,6 @@
 
     template: this.HandlebarsTemplates.countries,
 
-    events: {
-      'click #fullscreenBtn':'_onFullScreenClick'
-    },
-
     initialize: function(settings) {
       if (!settings.data) {
         throw new Error('"data" param is required.');
@@ -36,10 +32,6 @@
           country.draw();
         });
       return this;
-    },
-
-    _onFullScreenClick: function() {
-      console.log('clicked');
     }
 
   });
