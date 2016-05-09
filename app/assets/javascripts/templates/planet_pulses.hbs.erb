@@ -19,9 +19,9 @@
         <div class="planet-pulse-toolbar">
           <a href="#">Back</a>
           {{#if isFullscreen}}
-            <button id="fullscreenBtn"><%= I18n.t('fullscreen.unset') %></button>
+            <button id="fullscreenBtn" class="fullscreen-btn"><%= I18n.t('fullscreen.unset') %></button>
           {{else}}
-            <button id="fullscreenBtn"><%= I18n.t('fullscreen.set') %></button>
+            <button id="fullscreenBtn" class="fullscreen-btn"><%= I18n.t('fullscreen.set') %></button>
           {{/if}}
         </div>
       </header>
