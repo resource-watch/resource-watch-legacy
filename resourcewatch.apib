@@ -1,0 +1,617 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Resource Watch API
+
+TODO: Make a description
+
+## Datasets collection [/datasets]
+
+### List all datasets [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+            "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+            "provider": "CartoDb",
+            "format": "JSON",
+            "name": "Aves 2"
+          },
+          {
+            "id": "0ffe5ad6-c920-421b-b69c-bc8893155df4",
+            "provider": null,
+            "format": "JSON",
+            "name": "Aves"
+          }
+        ]
+
+
+### Create CartoDB dataset [POST]
+
++ Request
+
+
+        {
+            "dataset": {
+                "connector_type": "rest",
+                "connector_provider": 0,
+                "table_name": "public.aves",
+                "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+                "dataset_attributes": {
+                    "name": "Aves 2",
+                    "data_path": "rows",
+                    "attributes_path": "fields"
+                }
+            }
+        }
+
+
+
++ Response 201 (application/json)
+
+        {
+          "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+          "name": "Aves 2",
+          "data_path": "rows",
+          "attributes_path": "fields",
+          "provider": "CartoDb",
+          "format": "JSON",
+          "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+          "table_name": "public.aves",
+          "cloned_host": {
+            "host_provider": null,
+            "host_url": null,
+            "host_id": null,
+            "host_type": null,
+            "host_path": null
+          },
+          "meta": {
+            "status": "pending",
+            "updated_at": "2016-05-09T10:36:37.117Z",
+            "created_at": "2016-05-09T10:36:37.117Z",
+            "rows": null
+          }
+        }
+
+
+### Create JSON dataset [POST]
+
++ Request
+
+
+        {
+          "dataset": {
+            "connector_type": "json",
+            "dataset_attributes": {
+              "name": "Json test api"
+            },
+            "data_attributes": {
+              "pcpuid": {
+                "type": "string"
+              },
+              "the_geom": {
+                "type": "geometry"
+              },
+              "cartodb_id": {
+                "type": "number"
+              },
+              "the_geom_webmercator": {
+                "type": "geometry"
+              }
+            },
+            "data": [{
+              "pcpuid": "350558",
+              "the_geom": "0101000020E610000000000000786515410000000078651541",
+              "cartodb_id": 2,
+              "the_geom_webmercator": null
+            }, {
+              "pcpuid": "350659",
+              "the_geom": "0101000020E6100000000000000C671541000000000C671541",
+              "cartodb_id": 3,
+              "the_geom_webmercator": null
+            }, {
+              "pcpuid": "481347",
+              "the_geom": "0101000020E6100000000000000C611D41000000000C611D41",
+              "cartodb_id": 4,
+              "the_geom_webmercator": null
+            }, {
+              "pcpuid": "120171",
+              "the_geom": "0101000020E610000000000000B056FD4000000000B056FD40",
+              "cartodb_id": 5,
+              "the_geom_webmercator": null
+            }, {
+              "pcpuid": "500001",
+              "the_geom": "0101000020E610000000000000806EF84000000000806EF840",
+              "cartodb_id": 1,
+              "the_geom_webmercator": null
+            }]
+          }
+        }
+
+
++ Response 201 (application/json)
+
+        {
+          "id": "110f6a6a-3403-4917-8732-920df16577f2",
+          "name": "Json test api",
+          "data_path": "data",
+          "attributes_path": null,
+          "provider": "RwJson",
+          "format": "JSON",
+          "connector_url": null,
+          "table_name": null,
+          "cloned_host": {
+            "host_provider": null,
+            "host_url": null,
+            "host_id": null,
+            "host_type": null,
+            "host_path": null
+          },
+          "meta": {
+            "status": "pending",
+            "updated_at": "2016-05-17T11:05:26.199Z",
+            "created_at": "2016-05-17T11:05:26.199Z",
+            "rows": null
+          }
+        }
+
+
+## Show dataset [/datasets/{dataset_id}]
+
++ Parameters
+    + dataset_id (number) - ID of the dataset
+
+### Show dataset [GET]
+
++ Response 200 (application/json)
+
+        {
+          "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+          "name": "Aves 2",
+          "data_path": "rows",
+          "attributes_path": "fields",
+          "provider": "CartoDb",
+          "format": "JSON",
+          "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+          "table_name": "public.aves",
+          "cloned_host": {
+            "host_provider": null,
+            "host_url": null,
+            "host_id": null,
+            "host_type": null,
+            "host_path": null
+          },
+          "meta": {
+            "status": "pending",
+            "updated_at": "2016-05-09T10:36:37.117Z",
+            "created_at": "2016-05-09T10:36:37.117Z",
+            "rows": null
+          }
+        }
+
+### Update dataset [PUT]
+
++ Request
+
+
+        {
+            "dataset": {
+                "connector_type": "rest",
+                "connector_provider": 0,
+                "table_name": "public.aves",
+                "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+                "dataset_attributes": {
+                    "name": "Aves 2",
+                    "data_path": "rows",
+                    "attributes_path": "fields"
+                }
+            }
+        }
+
++ Response 200 (application/json)
+
+        {
+          "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+          "name": "Aves 2",
+          "data_path": "rows",
+          "attributes_path": "fields",
+          "provider": "CartoDb",
+          "format": "JSON",
+          "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+          "table_name": "public.aves",
+          "cloned_host": {
+            "host_provider": null,
+            "host_url": null,
+            "host_id": null,
+            "host_type": null,
+            "host_path": null
+          },
+          "meta": {
+            "status": "pending",
+            "updated_at": "2016-05-09T10:36:37.117Z",
+            "created_at": "2016-05-09T10:36:37.117Z",
+            "rows": null
+          }
+        }
+
+### Delete dataset [DELETE]
+
++ Response 200 (application/json)
+
+        {
+          "success": true,
+          "message": "Dataset would be deleted!"
+        }
+
+## Dataset query [/query/{dataset_id}]
+
+### Apply query [GET]
+
++ Parameters
+    + dataset_id (number) - ID of the dataset
+    + limit (number)
+    + select[] (array)
+    + order[] (array)
+    + filter (string) - (id==1,2,3,4<and>iso><2000..3000)
+    + aggr_by (string)
+    + aggr_func (string)
+
++ Response 200 (application/json)
+
+        {
+          "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+          "name": "Aves 2",
+          "provider": "CartoDb",
+          "format": "JSON",
+          "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+          "data_path": "rows",
+          "table_name": "public.aves",
+          "data_horizon": 0,
+          "clone_url": {
+            "http_method": "POST",
+            "url": "http://ec2-52-23-163-254.compute-1.amazonaws.com/datasets/67806d4a-142d-4b03-8fc9-1a1057e9992e/clone",
+            "body": {
+              "dataset": {
+                "dataset_url": "http://ec2-52-23-163-254.compute-1.amazonaws.com/query/67806d4a-142d-4b03-8fc9-1a1057e9992e?select%5B%5D=cartodb_id"
+              }
+            }
+          },
+          "data_attributes": {
+            "dn": {
+              "type": "number"
+            },
+            "max": {
+              "type": "string"
+            },
+            "min": {
+              "type": "string"
+            },
+            "max_km2": {
+              "type": "number"
+            },
+            "min_km2": {
+              "type": "number"
+            },
+            "orig_fid": {
+              "type": "number"
+            },
+            "the_geom": {
+              "type": "geometry"
+            },
+            "cartodb_id": {
+              "type": "number"
+            },
+            "cartodb_id_0": {
+              "type": "number"
+            },
+            "the_geom_webmercator": {
+              "type": "geometry"
+            }
+          },
+          "data": [
+            {
+              "cartodb_id": 1
+            }
+          ]
+        }
+
+
+## Dataset clonation [/query/{dataset_id}/clone]
+
+### Clone dataset [POST]
+
++ Request
+
+        {
+          "dataset": {
+            "dataset_url": "http://ec2-52-23-163-254.compute-1.amazonaws.com/query/67806d4a-142d-4b03-8fc9-1a1057e9992e?select%5B%5D=cartodb_id"
+          }
+        }
+
++ Response 201 (application/json)
+
+        {
+          "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+          "name": "Aves 2",
+          "data_path": "rows",
+          "attributes_path": "fields",
+          "provider": "CartoDb",
+          "format": "JSON",
+          "connector_url": "https://simbiotica.cartodb.com/api/v2/sql?q=select * from public.aves limit 1",
+          "table_name": "public.aves",
+          "cloned_host": {
+            "host_provider": null,
+            "host_url": null,
+            "host_id": null,
+            "host_type": null,
+            "host_path": null
+          },
+          "meta": {
+            "status": "pending",
+            "updated_at": "2016-05-09T10:36:37.117Z",
+            "created_at": "2016-05-09T10:36:37.117Z",
+            "rows": null
+          }
+        }
+
+## Widget collection [/widget]
+
+### Create widget [POST]
+
++ Request
+
+        {
+            name: 'Total CO2 emissions by year',
+            slug: 'total-co2-emissions-by-year',
+            verified: true,
+            date: '2016-03-30T13:23:08+00:00',
+            description: 'This dateset shows the total CO2 emission per country for the years 1990-2011. ',
+            source: 'CAIT',
+            source_link: 'http://www.wri.org/resources/data-visualizations/cait-climate-data-explorer',
+            authors: 'CAIT Climate Data Explorer. 2015. Washington, DC: World Resources Institute. Available online at: http://cait.wri.org.  Please Note: CAIT data are derived from several sources.',
+            data: {
+                "id": 3,
+                "url": "http://ec2-52-23-163-254.compute-1.amazonaws.com/query/67806d4a-142d-4b03-8fc9-1a1057e9992e?select%5B%5D=cartodb_id"
+            },
+            chart: {
+              "data": [{
+                "name": "table",
+                "values": [], // a sustituir
+                "format": {
+                  "parse": {
+                    "x": "date"
+                  }
+                }
+              }, {
+                "name": "summary",
+                "source": "table",
+                "transform": [{
+                  "type": "aggregate",
+                  "summarize": {
+                    "y": ["min", "max"]
+                  }
+                }, {
+                  "type": "formula",
+                  "field": "difference",
+                  "expr": "datum.max_y-datum.min_y"
+                }, {
+                  "type": "formula",
+                  "field": "min",
+                  "expr": "datum.min_y === 0 ? 0 : (datum.difference > 0 ? datum.min_y - datum.difference * 0.2  : datum.min_y * 0.8)"
+                }, {
+                  "type": "formula",
+                  "field": "min",
+                  "expr": "datum.min < 0 ? 0 : datum.min"
+                }, {
+                  "type": "formula",
+                  "field": "max",
+                  "expr": "datum.max_y === 0 ? 10 : (datum.difference > 0 ? datum.max_y + datum.difference * 0.2 : datum.max_y * 1.2)"
+                }]
+              }, {
+                "name": "computed",
+                "source": "table",
+                "transform": [{
+                  "type": "cross",
+                  "with": "summary"
+                }]
+              }],
+              "scales": [{
+                "name": "x",
+                "type": "time",
+                "range": "width",
+                "domain": {
+                  "data": "table",
+                  "field": "x"
+                }
+              }, {
+                "name": "y",
+                "type": "linear",
+                "range": "height",
+                "domain": {
+                  "data": "computed",
+                  "field": "a.y"
+                },
+                "domainMin": {
+                  "data": "computed",
+                  "field": "b.min"
+                },
+                "domainMax": {
+                  "data": "computed",
+                  "field": "b.max"
+                },
+                "zero": false,
+                "nice": true
+              }],
+              "axes": [{
+                "name": "lbl",
+                "type": "x",
+                "scale": "x",
+                "ticks": 5,
+                "format": "%Y",
+                "properties": {
+                  "ticks": {
+                    "strokeWidth": {
+                      "value": 0
+                    }
+                  },
+                  "axis": {
+                    "stroke": {
+                      "value": "#333"
+                    },
+                    "strokeWidth": {
+                      "value": 0
+                    }
+                  },
+                  "labels": {
+                    "fontSize": {
+                      "value": 10
+                    },
+                    "fontWeight": {
+                      "value": 300
+                    },
+                    "fill": {
+                      "value": "#9BA2AA"
+                    },
+                    "dx": {
+                      "value": 5
+                    }
+                  }
+                }
+              }, {
+                "type": "y",
+                "ticks": 7,
+                "scale": "y",
+                "grid": true,
+                "layer": "back",
+                "format": "f",
+                "properties": {
+                  "ticks": {
+                    "stroke": {
+                      "value": "steelblue"
+                    }
+                  },
+                  "majorTicks": {
+                    "strokeWidth": {
+                      "value": 0
+                    }
+                  },
+                  "axis": {
+                    "stroke": {
+                      "value": "#333"
+                    },
+                    "strokeWidth": {
+                      "value": 0
+                    }
+                  },
+                  "labels": {
+                    "fontSize": {
+                      "value": 10
+                    },
+                    "fontWeight": {
+                      "value": 300
+                    },
+                    "fill": {
+                      "value": "#9BA2AA"
+                    }
+                  }
+                }
+              }],
+              "marks": [{
+                "type": "rect",
+                "from": {
+                  "data": "table"
+                },
+                "properties": {
+                  "enter": {
+                    "x": {
+                      "scale": "x",
+                      "field": "x"
+                    },
+                    "width": {
+                      "field": {
+                        "group": "width"
+                      },
+                      "mult": 0.03
+                    },
+                    "y": {
+                      "scale": "y",
+                      "field": "y"
+                    },
+                    "y2": {
+                      "field": {
+                        "group": "height"
+                      }
+                    }
+                  },
+                  "update": {
+                    "fill": {
+                      "value": "#5BB1D2"
+                    }
+                  },
+                  "hover": {
+                    "fill": {
+                      "value": "#c32d7b"
+                    }
+                  }
+                }
+              }, {
+                "type": "text",
+                "from": {
+                  "data": "table",
+                  "transform": [{
+                    "type": "facet",
+                    "groupby": ["unit"]
+                  }]
+                },
+                "properties": {
+                  "enter": {
+                    "x": {
+                      "value": -30
+                    },
+                    "y": {
+                      "value": -15
+                    },
+                    "text": {
+                      "template": "{{datum.unit}}"
+                    },
+                    "fontSize": {
+                      "value": 10
+                    },
+                    "fontWeight": {
+                      "value": 300
+                    },
+                    "fill": {
+                      "value": "#9BA2AA"
+                    },
+                    "align": {
+                      "value": "left"
+                    }
+                  }
+                }
+              }]
+            }
+        }
+
+## Embeds collection [/embeds]
+
+Use for planet pulse and insights
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "67806d4a-142d-4b03-8fc9-1a1057e9992e",
+                "source_type": "application", // application, image
+                "title": "Natural disaster",
+                "slug": "natural-disaster",
+                "summary": "Lorem ipsum",
+                "description": "Lorem ipsum very large",
+                "slug": "natural_disaster_hotspots",
+                "source_url": "http://sedac.ciesin.columbia.edu/arcgis/rest/services/sedac/natural_disaster_hotspots/MapServer/export?bbox=-180%2C-90%2C180%2C90&bboxSR=4326&layers=show%3A1&layerDefs=&size=4096%2C+2048&imageSR=4326&format=png8&transparent=true&dpi=&time=&layerTimeOptions=&dynamicLayers=&gdbVersion=&mapScale=&f=image",
+                "thumbnail": "thumb.jpg",
+                "status": "active",
+                "published": true
+            }
+        ]
+
