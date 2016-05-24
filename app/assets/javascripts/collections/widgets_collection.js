@@ -136,6 +136,8 @@
 
   App.Collection.Widgets = App.Core.Collection.extend({
 
+    url: App.Helpers.Globals.apiUrl+'/widgets',
+
     model: App.Model.Widget,
 
     /**

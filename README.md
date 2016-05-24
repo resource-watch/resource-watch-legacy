@@ -17,6 +17,9 @@ Install project dependencies:
 
     bundle install
 
+
+Set up environment variables using .env.sample
+
 ## Usage
 
 To run application:

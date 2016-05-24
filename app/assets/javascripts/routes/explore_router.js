@@ -65,6 +65,7 @@
       this.widgets = new App.Collection.Widgets();
       // Generating fixtures
       this.widgets.fixtures();
+      this.widgets.get();
       this.widgetsData = this.widgets;
 
       if (this.params.attributes.q) {
