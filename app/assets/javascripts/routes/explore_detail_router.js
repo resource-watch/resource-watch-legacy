@@ -28,17 +28,26 @@
 
     exploreDetail: function() {
       // Get data
-      this._getData();
+      this._getData()
+        .done(function(widgetData) {
+          this.widgetData=widgetData;
+          this.startComponents();
+          this.setListeners();
+        }.bind(this))
+        .fail(function(err){
+          console.error(err);
+        }.bind(this))
+        .always(function() {
+          this._removeLoader();
+        }.bind(this));
+    },
 
+    startComponents: function() {
       // Shared components
       this._sharedComponents();
 
       // Creating dashboard
       this._dashboardComponents();
-
-      this._removeLoader();
-
-      this.setListeners();
     },
 
     setListeners: function() {
@@ -46,12 +55,36 @@
     },
 
     _getData: function() {
-      // Complete widgets collection
-      // TODO: fetch data instead fixtures data
-      this.widgets = new App.Collection.Widgets();
-      // Generating fixtures
-      this.widgets.fixtures();
-      this.widgetsData = this.widgets;
+      var widgetData = {};
+      var promise = $.Deferred();
+
+      this.widget = new App.Model.Widget({slug:this.slug});
+      this.widget.fetch()
+        .done(function(data) {
+          widgetData = data;
+          if (data.query_url){
+            this._getDataSet(data.query_url)
+              .done(function(dataset) {
+                widgetData.data = dataset.data;
+                promise.resolve(widgetData);
+              }.bind(this))
+              .fail(function(err) {
+                promise.reject(err);
+              }.bind(this));
+          } else {
+            widgetData.data = [];
+            promise.resolve(widgetData);
+          }
+        }.bind(this))
+        .fail(function(err) {
+          promise.reject(err);
+        }.bind(this));
+
+      return promise;
+    },
+
+    _getDataSet: function(url) {
+      return $.get(url);
     },
 
     /**
@@ -63,10 +96,9 @@
       this.geo = new App.View.Geo({});
 
       // Creating card detail
-      this.data = this.widgetsData.getBySlug(this.slug);
       this.cardDetail = new App.View.CardDetail({
         el: '#cardDetail',
-        data: this.data
+        data: this.widgetData
       });
 
       // Chart selector
@@ -105,26 +137,28 @@
      */
     _dashboardComponents: function() {
       // Limiting collection (TO-DO, get recommended widgets)
-      var widgetsData = this.widgetsData.models ?
-        this.widgetsData.toJSON() : this.widgetsData;
-      widgetsData = _.filter(widgetsData, _.bind(function(d) {
-        return d.slug !== this.slug
-      }, this));
-      var data = widgetsData.slice(0, this.props.numSimilarDatasets);
+      this.similarWidgets = new App.Collection.Widgets();
+      this.similarWidgets.fetch({limit:this.props.numSimilarDatasets})
+        .done(function(){
+          var similarWidgetsData = this.similarWidgets.toJSON();
 
-      this.cards = new App.View.Cards({
-        el: '#exploreDashboard',
-        data: data,
-        props: {
-          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
-        }
-      });
+          this.cards = new App.View.Cards({
+            el: '#exploreDashboard',
+            data: similarWidgetsData,
+            props: {
+              gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
+            }
+          });
+        }.bind(this))
+        .fail(function(err){
+          console.log(err);
+        }.bind(this));
 
       // Update Chart selector
-      var chartData = this.data.data;
       this.chartSelector.state.set({
-        data: chartData
+        data: this.widgetData.data
       });
+
 
       // Events
       App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));

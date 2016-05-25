@@ -136,7 +136,7 @@
 
   App.Collection.Widgets = App.Core.Collection.extend({
 
-    url: App.Helpers.Globals.apiUrl+'/widgets',
+    url: App.Helpers.Globals.apiUrl+'widgets',
 
     model: App.Model.Widget,
 
@@ -153,19 +153,6 @@
 
     fixtures: function() {
       this.reset(FIXTURES);
-    },
-
-    getBySlug: function(slug) {
-      var data = this.findWhere({
-        slug: slug
-      });
-
-      if (data) {
-        data = data.toJSON();
-      } else {
-        data = [];
-      }
-      return data;
     }
   });
 
