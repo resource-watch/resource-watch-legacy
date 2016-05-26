@@ -153,6 +153,21 @@
 
     fixtures: function() {
       this.reset(FIXTURES);
+    },
+
+    getWithModelData: function() {
+      this.fetch();
+      this.listenTo(this, 'update', this._getModelData.bind(this));
+    },
+
+    _getModelData: function(){
+      var modelPromises = [];
+      this.models.forEach(function(model){
+        modelPromises.push(model.getData());
+      });
+      App.Helpers.allPromises(modelPromises).then(function() {
+        this.trigger('models:updated');
+      }.bind(this));
     }
   });
 

@@ -29,8 +29,8 @@
     exploreDetail: function() {
       // Get data
       this._getData()
-        .done(function(widgetData) {
-          this.widgetData=widgetData;
+        .done(function() {
+          this.widgetData=this.widget.toJSON();
           this.startComponents();
           this.setListeners();
         }.bind(this))
@@ -55,36 +55,8 @@
     },
 
     _getData: function() {
-      var widgetData = {};
-      var promise = $.Deferred();
-
       this.widget = new App.Model.Widget({slug:this.slug});
-      this.widget.fetch()
-        .done(function(data) {
-          widgetData = data;
-          if (data.query_url){
-            this._getDataSet(data.query_url)
-              .done(function(dataset) {
-                widgetData.data = dataset.data;
-                promise.resolve(widgetData);
-              }.bind(this))
-              .fail(function(err) {
-                promise.reject(err);
-              }.bind(this));
-          } else {
-            widgetData.data = [];
-            promise.resolve(widgetData);
-          }
-        }.bind(this))
-        .fail(function(err) {
-          promise.reject(err);
-        }.bind(this));
-
-      return promise;
-    },
-
-    _getDataSet: function(url) {
-      return $.get(url);
+      return this.widget.getData();
     },
 
     /**
@@ -152,7 +124,7 @@
         }.bind(this))
         .fail(function(err){
           console.log(err);
-        }.bind(this));
+        });
 
       // Update Chart selector
       this.chartSelector.state.set({

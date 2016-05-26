@@ -37,7 +37,37 @@
       chart: {},
       layers: [],
       dataSource: null
-    }
+    },
+
+    getData:function() {
+      var defer = $.Deferred();
+
+      this.fetch()
+        .done(function(data) {
+          if (data.query_url){
+            this._getDataSet(data.query_url)
+              .done(function(dataset) {
+                this.attributes.data = dataset.data;
+                defer.resolve();
+              }.bind(this))
+              .fail(function(err) {
+                defer.reject(err);
+              }.bind(this));
+          } else {
+            this.attributes.data = [];
+            defer.resolve();
+          }
+        }.bind(this))
+        .fail(function(err) {
+          defer.reject(err);
+        }.bind(this));
+
+      return defer.promise();
+    },
+
+    _getDataSet: function(url) {
+      return $.get(url);
+    },
 
   });
 

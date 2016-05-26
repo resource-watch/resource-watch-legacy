@@ -39,14 +39,28 @@
       // Get data
       this._getData();
 
+      // Settings events
+      this.setListeners();
+    },
+
+    /**
+     * Gets main data for the components
+     */
+    _getData: function() {
+      this.widgets = new App.Collection.Widgets();
+      this.widgets.getWithModelData();
+      this.listenTo(this.widgets,'models:updated', this.onModelsUpdated.bind(this));
+    },
+
+
+    onModelsUpdated: function() {
+      this.widgetsData = this.widgets.toJSON();
       // Shared components
       this._sharedComponents();
 
       // Creating dashboard
       this._dashboardComponents();
 
-      // Settings events
-      this.setListeners();
       this.listenTo(this.params, 'change', this.updateParams);
     },
 
@@ -54,23 +68,6 @@
       $(this.props.elMapToggle).on('click', this._onMapToggle.bind(this));
       $(this.props.elGoToExploreToggle).on('click', this._onMapToggle.bind(this));
       $(this.props.elGoToMapToggle).on('click', this._onMapToggle.bind(this));
-    },
-
-    /**
-     * Gets main data for the components
-     */
-    _getData: function() {
-      // Complete widgets collection
-      // TODO: fetch data instead fixtures data
-      this.widgets = new App.Collection.Widgets();
-      // Generating fixtures
-      this.widgets.fixtures();
-      this.widgets.get();
-      this.widgetsData = this.widgets;
-
-      if (this.params.attributes.q) {
-        this.widgetsData = this.widgets.search(this.params.attributes.q);
-      }
     },
 
     /**
