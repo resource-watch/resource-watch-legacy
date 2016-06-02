@@ -40,6 +40,7 @@
       this._getData();
 
       // Settings events
+      this.listenTo(this.params, 'change', this.updateParams);
       this.setListeners();
     },
 
@@ -48,20 +49,25 @@
      */
     _getData: function() {
       this.widgets = new App.Collection.Widgets();
-      this.widgets.getWithModelData();
-      this.listenTo(this.widgets,'models:updated', this.onModelsUpdated.bind(this));
+      this.widgets.getWithWidgetData();
+      this.listenTo(this.widgets,'collection:gotWidget', this.onCollectionGotWidget.bind(this));
+      this.listenTo(this.widgets,'collection:gotWidgetData', this.onCollectionGotWidgetData.bind(this));
     },
 
-
-    onModelsUpdated: function() {
+    onCollectionGotWidget: function() {
       this.widgetsData = this.widgets.toJSON();
+
       // Shared components
       this._sharedComponents();
 
       // Creating dashboard
       this._dashboardComponents();
+    },
+    
+    onCollectionGotWidgetData: function() {
+      this.widgetsData = this.widgets.toJSON();
 
-      this.listenTo(this.params, 'change', this.updateParams);
+      this.updateCards();
     },
 
     setListeners: function() {

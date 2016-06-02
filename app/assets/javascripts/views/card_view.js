@@ -27,7 +27,8 @@
       if (!settings.data) {
         throw new Error('"data" param is required.');
       }
-      this.data = new App.Model.Widget(settings.data);
+      this.chartEl = this.$('.chart');
+      this.data = settings.data;
       this.state.set({
         mode: settings.mode,
         actions: settings.actions

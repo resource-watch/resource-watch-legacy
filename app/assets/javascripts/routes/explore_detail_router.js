@@ -123,7 +123,7 @@
           });
         }.bind(this))
         .fail(function(err){
-          console.log(err);
+          console.error(err);
         });
 
       // Update Chart selector

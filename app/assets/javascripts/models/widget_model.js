@@ -39,35 +39,19 @@
       dataSource: null
     },
 
-    getData:function() {
-      var defer = $.Deferred();
-
-      this.fetch()
-        .done(function(data) {
-          if (data.query_url){
-            this._getDataSet(data.query_url)
-              .done(function(dataset) {
-                this.attributes.data = dataset.data;
-                defer.resolve();
-              }.bind(this))
-              .fail(function(err) {
-                defer.reject(err);
-              }.bind(this));
-          } else {
-            this.attributes.data = [];
-            defer.resolve();
-          }
-        }.bind(this))
-        .fail(function(err) {
-          defer.reject(err);
+    getWidgetData:function() {
+      var url = this.attributes.query_url;
+      var promise = null;
+      if (url){
+        promise= $.get(url);
+        promise.done(function(dataset) {
+          this.attributes.data = dataset.data;
         }.bind(this));
-
-      return defer.promise();
-    },
-
-    _getDataSet: function(url) {
-      return $.get(url);
-    },
+      } else {
+        this.attributes.data = [];
+      }
+      return promise;
+    }
 
   });
 

@@ -155,18 +155,24 @@
       this.reset(FIXTURES);
     },
 
-    getWithModelData: function() {
-      this.fetch();
-      this.listenTo(this, 'update', this._getModelData.bind(this));
+    getWithWidgetData: function() {
+      this.fetch().done(this._getWidgetData.bind(this));
     },
 
-    _getModelData: function(){
+    _getWidgetData: function(){
       var modelPromises = [];
       this.models.forEach(function(model){
-        modelPromises.push(model.getData());
+        modelPromises.push(model.fetch());
       });
-      App.Helpers.allPromises(modelPromises).then(function() {
-        this.trigger('models:updated');
+      App.Helpers.allPromises(modelPromises).done(function() {
+        this.trigger('collection:gotWidget');
+        modelPromises = [];
+        this.models.forEach(function(model){
+          modelPromises.push(model.getWidgetData());
+        });
+        App.Helpers.allPromises(modelPromises).done(function() {
+          this.trigger('collection:gotWidgetData');
+        }.bind(this));
       }.bind(this));
     }
   });

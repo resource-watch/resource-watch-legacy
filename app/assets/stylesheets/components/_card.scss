@@ -119,6 +119,7 @@ $card-shadow-color: $real-black;
     height: 190px;
     overflow: hidden;
     background-color: $bg-color-3;
+    position: relative;
   }
 
   > .detail {

@@ -51,7 +51,10 @@
             actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
-          card.drawChart();
+          if(m.attributes.data){
+            console.log('draw chart');
+            card.drawChart();
+          }
         });
 
       return this;
