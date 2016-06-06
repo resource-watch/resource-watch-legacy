@@ -49,9 +49,9 @@
      */
     _getData: function() {
       this.widgets = new App.Collection.Widgets();
-      this.widgets.getWithWidgetData();
       this.listenTo(this.widgets,'collection:gotWidget', this.onCollectionGotWidget.bind(this));
       this.listenTo(this.widgets,'collection:gotWidgetData', this.onCollectionGotWidgetData.bind(this));
+      this.widgets.getWithWidgetData();
     },
 
     onCollectionGotWidget: function() {
@@ -63,7 +63,7 @@
       // Creating dashboard
       this._dashboardComponents();
     },
-    
+
     onCollectionGotWidgetData: function() {
       this.widgetsData = this.widgets.toJSON();
 

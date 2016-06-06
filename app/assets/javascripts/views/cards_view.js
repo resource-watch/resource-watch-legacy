@@ -52,7 +52,6 @@
           });
           $(el).html(card.render().el);
           if(m.attributes.data){
-            console.log('draw chart');
             card.drawChart();
           }
         });

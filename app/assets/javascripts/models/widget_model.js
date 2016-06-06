@@ -26,9 +26,9 @@
    */
   App.Model.Widget = App.Core.Model.extend({
 
-    urlRoot: App.Helpers.Globals.apiUrl+'widgets',
+    urlRoot: App.Helpers.Globals.apiUrl + 'widgets',
 
-    idAttribute: 'slug',
+    idAttribute: 'id',
 
     default: {
       title: null,
@@ -42,7 +42,7 @@
     getWidgetData:function() {
       var url = this.attributes.query_url;
       var promise = null;
-      if (url){
+      if (url) {
         promise= $.get(url);
         promise.done(function(dataset) {
           this.attributes.data = dataset.data;
