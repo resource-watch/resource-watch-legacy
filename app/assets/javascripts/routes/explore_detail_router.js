@@ -14,7 +14,8 @@
       loadingClass: '_is-content-loading',
       elMapToggle: '#mapToggle',
       elExploreContent: '.rw-explore-content',
-      mapToggleClass: '_map-mode'
+      mapToggleClass: '_map-mode',
+      maxData: 40
     },
 
     /**
@@ -30,12 +31,12 @@
       // Get data
       this._getData()
         .done(function() {
-          this.widgetData=this.widget.toJSON();
+          this.widgetData = this.widget.toJSON();
           this.startComponents();
           this.setListeners();
         }.bind(this))
         .fail(function(err){
-          console.error(err);
+          console.warn(err);
         }.bind(this))
         .always(function() {
           this._removeLoader();
@@ -55,8 +56,16 @@
     },
 
     _getData: function() {
+      var defer = $.Deferred();
       this.widget = new App.Model.Widget({slug:this.slug});
-      return this.widget.getData();
+
+      this.widget.fetch().done(function() {
+        this.widget.getWidgetData().done(function() {
+          defer.resolve();
+        });
+      }.bind(this));
+
+      return defer.promise();
     },
 
     /**
@@ -83,10 +92,19 @@
         mainFillColor: '#89E7FF',
         secondaryColor: '#76C9DE'
       });
+
+      this.chartGroupBars = new App.View.ChartGroupBars({
+        mainColor: '#FFFFFF',
+        mainFillColor: '#89E7FF',
+        secondaryColor: '#76C9DE',
+        buckets: ['#25A2C3', '#1A8CAA', '#0F6F89', '#075469', '#C32D7B']
+      });
+
       this.chartPie = new App.View.ChartPie({
         mainColor: '#FFFFFF',
         buckets: ['#25A2C3', '#1A8CAA', '#0F6F89', '#075469', '#C32D7B'],
       });
+
       this.chartLine = new App.View.ChartLine({
         mainColor: '#FFFFFF',
         buckets: ['#FFFFFF'],
@@ -110,31 +128,38 @@
     _dashboardComponents: function() {
       // Limiting collection (TO-DO, get recommended widgets)
       this.similarWidgets = new App.Collection.Widgets();
-      this.similarWidgets.fetch({limit:this.props.numSimilarDatasets})
-        .done(function(){
-          var similarWidgetsData = this.similarWidgets.toJSON();
-
-          this.cards = new App.View.Cards({
-            el: '#exploreDashboard',
-            data: similarWidgetsData,
-            props: {
-              gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
-            }
-          });
-        }.bind(this))
-        .fail(function(err){
-          console.error(err);
-        });
 
       // Update Chart selector
-      this.chartSelector.state.set({
-        data: this.widgetData.data
-      });
-
+      if (this.widgetData.data && this.widgetData.data.length < this.props.maxData) {
+        this.chartSelector.state.set({
+          data: this.widgetData.data,
+          data_attributes: this.widgetData.data_attributes
+        });
+      }
 
       // Events
       App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
       App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
+
+      this.listenTo(this.similarWidgets,'collection:gotWidget', this._onCollectionGotWidget.bind(this));
+      this.listenTo(this.similarWidgets,'collection:gotWidgetData', this._onCollectionGotWidgetData.bind(this));
+      this.similarWidgets.getWithWidgetData();
+    },
+
+    _onCollectionGotWidget: function() {
+      this.similarWidgetsData = this.similarWidgets.toJSON();
+      this.cards = new App.View.Cards({
+        el: '#exploreDashboard',
+        data: this.similarWidgetsData,
+        props: {
+          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
+        }
+      });
+    },
+
+    _onCollectionGotWidgetData: function() {
+      this.similarWidgetsData = this.similarWidgets.toJSON();
+      this.cards.data.reset(this.similarWidgetsData);
     },
 
     _onChartUpdate: function(type, data) {
@@ -144,18 +169,29 @@
 
       var chartData;
 
-      if (type === 'bar') {
-        chartData = this.chartBars.getData({
-          values: data
-        });
-      } else if (type === 'pie') {
-        chartData = this.chartPie.getData({
-          values: data
-        });
-      } else if (type === 'line') {
-        chartData = this.chartLine.getData({
-          values: data
-        });
+      switch(type) {
+        case 'bar':
+          chartData = this.chartBars.getData({
+            values: data
+          });
+          break;
+        case 'groupBar':
+          chartData = this.chartGroupBars.getData({
+            values: data
+          });
+          break;
+        case 'pie':
+          chartData = this.chartPie.getData({
+            values: data
+          });
+          break;
+        case 'line':
+          chartData = this.chartLine.getData({
+            values: data
+          });
+          break;
+        default:
+          chartData = [];
       }
 
       this.chart = new App.View.Chart({

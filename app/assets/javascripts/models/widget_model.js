@@ -28,7 +28,7 @@
 
     urlRoot: App.Helpers.Globals.apiUrl + 'widgets',
 
-    idAttribute: 'id',
+    idAttribute: 'slug',
 
     default: {
       title: null,
@@ -46,6 +46,7 @@
         promise= $.get(url);
         promise.done(function(dataset) {
           this.attributes.data = dataset.data;
+          this.attributes.data_attributes = dataset.data_attributes;
         }.bind(this));
       } else {
         this.attributes.data = [];

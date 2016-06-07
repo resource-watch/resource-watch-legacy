@@ -2,9 +2,6 @@
 
   'use strict';
 
-  var FIXTURES = [
-  ];
-
   App.Collection.Widgets = App.Core.Collection.extend({
 
     url: App.Helpers.Globals.apiUrl + 'widgets',
@@ -20,10 +17,6 @@
       return this.filter(function(m) {
         return m.attributes.name.search(regex) !== -1;
       });
-    },
-
-    fixtures: function() {
-      this.reset(FIXTURES);
     },
 
     getWithWidgetData: function() {
