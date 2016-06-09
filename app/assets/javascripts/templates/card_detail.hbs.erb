@@ -19,16 +19,22 @@
 </div>
 
 <div class="chart-content">
-  <div class="chart-config js-toggle-chart-config">
-    <button class="action -wicon -plain">
-      <svg class="icon icon-settings">
-        <use xlink:href="#icon-settings"></use>
-      </svg>
-      <span><%= I18n.t('configure') %></span>
-    </button>
-  </div>
+  {{#if acceptedData}}
+    <div class="chart-config js-toggle-chart-config">
+      <button class="action -wicon -plain">
+        <svg class="icon icon-settings">
+          <use xlink:href="#icon-settings"></use>
+        </svg>
+        <span><%= I18n.t('configure') %></span>
+      </button>
+    </div>
+  {{/if}}
   <div id="chartsSelector"></div>
-  <div id="cardDetailChart" class="chart"></div>
+  <div id="cardDetailChart" class="chart">
+    {{#unless acceptedData}}
+      This dataset contains too much data and can't be analyzed
+    {{/unless}}
+  </div>
 </div>
 
 <div class="col -xs-12 -sm-12">

@@ -27,7 +27,8 @@
       if (!settings.data) {
         throw new Error('"data" param is required.');
       }
-      this.data = new App.Model.Widget(settings.data);
+      this.chartEl = this.$('.chart');
+      this.data = settings.data;
       this.state.set({
         mode: settings.mode,
         actions: settings.actions
@@ -36,7 +37,7 @@
 
     render: function() {
       this.$el.html(this.template({
-        data: this.data.attributes,
+        data: this.data,
         state: this.state.attributes
       }));
       this.el.classList.add(this.state.attributes.mode);
@@ -47,10 +48,18 @@
      * Create charts and render it
      */
     drawChart: function() {
+      var chart = this.data.chart;
+
+      _.each(chart.data, function(d) {
+        if (d.name === 'table') {
+          d.values = this.data.data;
+        }
+      }.bind(this));
+
       if (this.state.attributes.mode === 'grid') {
         this.chart = new App.View.Chart({
           el: this.$('.chart'),
-          data: this.data.attributes.chart
+          data: chart
         });
         this.chart.render();
       }

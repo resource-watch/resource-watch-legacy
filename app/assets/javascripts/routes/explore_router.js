@@ -39,37 +39,41 @@
       // Get data
       this._getData();
 
-      // Shared components
-      this._sharedComponents();
-
-      // Creating dashboard
-      this._dashboardComponents();
-
       // Settings events
-      this.setListeners();
       this.listenTo(this.params, 'change', this.updateParams);
-    },
-
-    setListeners: function() {
-      $(this.props.elMapToggle).on('click', this._onMapToggle.bind(this));
-      $(this.props.elGoToExploreToggle).on('click', this._onMapToggle.bind(this));
-      $(this.props.elGoToMapToggle).on('click', this._onMapToggle.bind(this));
+      this.setListeners();
     },
 
     /**
      * Gets main data for the components
      */
     _getData: function() {
-      // Complete widgets collection
-      // TODO: fetch data instead fixtures data
       this.widgets = new App.Collection.Widgets();
-      // Generating fixtures
-      this.widgets.fixtures();
-      this.widgetsData = this.widgets;
+      this.listenTo(this.widgets,'collection:gotWidget', this.onCollectionGotWidget.bind(this));
+      this.listenTo(this.widgets,'collection:gotWidgetData', this.onCollectionGotWidgetData.bind(this));
+      this.widgets.getWithWidgetData();
+    },
 
-      if (this.params.attributes.q) {
-        this.widgetsData = this.widgets.search(this.params.attributes.q);
-      }
+    onCollectionGotWidget: function() {
+      this.widgetsData = this.widgets.toJSON();
+
+      // Shared components
+      this._sharedComponents();
+
+      // Creating dashboard
+      this._dashboardComponents();
+    },
+
+    onCollectionGotWidgetData: function() {
+      this.widgetsData = this.widgets.toJSON();
+
+      this.updateCards();
+    },
+
+    setListeners: function() {
+      $(this.props.elMapToggle).on('click', this._onMapToggle.bind(this));
+      $(this.props.elGoToExploreToggle).on('click', this._onMapToggle.bind(this));
+      $(this.props.elGoToMapToggle).on('click', this._onMapToggle.bind(this));
     },
 
     /**

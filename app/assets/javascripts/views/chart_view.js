@@ -4,6 +4,10 @@
 
   App.View.Chart = App.Core.View.extend({
 
+    props: {
+      loadingClassEl: '_is-content-loading'
+    },
+
     initialize: function(settings) {
       if (!settings.data) {
         throw new Error('"data" param is required.');
@@ -33,6 +37,7 @@
           throw err;
         }
         _this.chart = chart({ el:  _this.el });
+        _this.el.classList.remove(_this.props.loadingClassEl);
         _this.chart.update();
       });
     },

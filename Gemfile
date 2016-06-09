@@ -8,6 +8,7 @@ gem 'rails', '>= 5.0.0.beta3', '< 5.1'
 gem 'puma', '~> 3.2.0'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'gretel', '~> 3.0.8'
+gem 'dotenv-rails', '~> 2.1.1'
 
 # Serving static files
 gem 'high_voltage', '~> 3.0.0'
