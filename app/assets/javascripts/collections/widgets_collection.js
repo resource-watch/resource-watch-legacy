@@ -4,7 +4,7 @@
 
   App.Collection.Widgets = App.Core.Collection.extend({
 
-    url: App.Helpers.Globals.apiUrl + 'widgets',
+    url: App.globals.apiUrl + 'widgets',
 
     model: App.Model.Widget,
 

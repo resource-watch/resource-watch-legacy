@@ -4,7 +4,7 @@
 
   App.Model.DataSet = App.Core.Model.extend({
 
-    urlRoot: App.Helpers.Globals.apiUrl+'datasets',
+    urlRoot: App.globals.apiUrl + 'datasets',
 
     default: {
       "id": null,

@@ -26,7 +26,7 @@
    */
   App.Model.Widget = App.Core.Model.extend({
 
-    urlRoot: App.Helpers.Globals.apiUrl + 'widgets',
+    urlRoot: App.globals.apiUrl + 'widgets',
 
     idAttribute: 'slug',
 
