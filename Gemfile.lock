@@ -55,6 +55,10 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
+    dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
     easy_translate (0.5.0)
       json
       thread
@@ -199,6 +203,7 @@ DEPENDENCIES
   autoprefixer-rails (~> 6.3.5)
   bourbon (~> 4.2.6)
   coffee-rails (~> 4.1.0)
+  dotenv-rails (~> 2.1.1)
   gretel (~> 3.0.8)
   handlebars_assets (~> 0.23.0)
   high_voltage (~> 3.0.0)
@@ -223,5 +228,8 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.4

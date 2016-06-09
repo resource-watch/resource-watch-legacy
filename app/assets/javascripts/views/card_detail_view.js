@@ -14,7 +14,8 @@
     },
 
     props: {
-      activeClass: '-active'
+      activeClass: '-active',
+      maxResults: 40
     },
 
     template: this.HandlebarsTemplates.card_detail,
@@ -35,6 +36,8 @@
     _parsedData: function() {
       var formattedData = this.data.attributes;
       formattedData.displayDate = moment(formattedData.date).format('MMM, DD YYYY');
+      formattedData.acceptedData = formattedData.data &&
+        formattedData.data.length < this.props.maxResults;
       return formattedData;
     },
 

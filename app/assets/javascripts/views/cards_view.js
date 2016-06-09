@@ -51,7 +51,9 @@
             actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
-          card.drawChart();
+          if(m.attributes.data){
+            card.drawChart();
+          }
         });
 
       return this;
