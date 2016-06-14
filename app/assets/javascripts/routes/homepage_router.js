@@ -9,28 +9,41 @@
     },
 
     props: {
-      exploreCards: 6
+      exploreCards: 6,
+      loadingClass: '_is-content-loading'
     },
 
     default: function() {
       new App.View.CountryDashboardSelector();
 
-      this._renderExploreDashboard();
+      this._initExploreDashboard();
     },
 
-    _renderExploreDashboard: function() {
-      var exploreWidgets = new App.Collection.Widgets();
-      exploreWidgets.fixtures();
+    _initExploreDashboard:function(){
+      this.dashboardEl = $('#exploreDashboard');
+      this.dashboardEl.addClass(this.props.loadingClass);
 
-      exploreWidgets = exploreWidgets.toJSON();
-      var data = exploreWidgets.slice(0,
-        this.props.exploreCards);
+      this.widgets = new App.Collection.Widgets();
+      this.listenTo(this.widgets,'collection:gotWidget', this._renderExploreDashboard.bind(this));
+      this.listenTo(this.widgets,'collection:gotWidgetData', this._updateExploreDashboard.bind(this));
+      this.widgets.getWithWidgetData();
+    },
 
+    _getWidgetData: function(){
+      return this.widgets.toJSON().slice(0, this.props.exploreCards);
+    },
+
+    _renderExploreDashboard:function(){
       this.cards = new App.View.Cards({
-        el: '#exploreDashboard',
-        data: data,
+        el: this.dashboardEl,
+        data: this._getWidgetData(),
         actions: false
       });
+      this.dashboardEl.removeClass(this.props.loadingClass);
+    },
+
+    _updateExploreDashboard:function(){
+      this.cards.data.reset(this._getWidgetData());
     }
 
   });

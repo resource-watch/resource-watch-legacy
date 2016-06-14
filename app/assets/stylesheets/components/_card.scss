@@ -3,6 +3,11 @@ $card-shadow-color: $real-black;
 .cards, .rw-cards {
   margin-bottom: 1rem;
   padding: .5rem 0;
+  position: relative;
+
+  &._minh{
+    min-height: 345px
+  }
 }
 
 .card, .rw-card {
