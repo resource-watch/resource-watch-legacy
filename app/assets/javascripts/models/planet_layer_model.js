@@ -4,7 +4,7 @@
 
   App.Model.PlanetLayer = App.Core.Model.extend({
 
-    url: 'https://manuela-st.cartodb.com/api/v2/sql',
+    url: 'https://insights.cartodb.com/api/v2/sql',
 
     getDataParams: function(properties) {
       return {

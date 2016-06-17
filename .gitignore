@@ -18,8 +18,9 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/tmp/*
 !/log/.keep
-/tmp
+!/tmp/.keep
 
 # Ignore history files
 /.byebug_history

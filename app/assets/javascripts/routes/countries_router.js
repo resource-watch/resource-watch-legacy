@@ -24,7 +24,7 @@
         }
       });
 
-      // Init the full screen and set listener
+      // Init the full screen with trigger button
       this.fullScreenView = new App.View.FullScreen({
         container: 'content',
         triggerId: 'fullscreenBtn'

@@ -12,7 +12,6 @@
     <div class="action">
       <label class="label">{{label}}:</label>
       <select class="value" data-name="{{name}}">
-        <option value=""><%= I18n.t('select') %>...</option>
         {{#each options}}
           <option value="{{column}}" {{#if selected}}selected{{/if}}>{{column}}</option>
         {{/each}}

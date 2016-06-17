@@ -26,6 +26,10 @@
    */
   App.Model.Widget = App.Core.Model.extend({
 
+    urlRoot: App.globals.apiUrl + 'widgets',
+
+    idAttribute: 'slug',
+
     default: {
       title: null,
       description: null,
@@ -33,6 +37,21 @@
       chart: {},
       layers: [],
       dataSource: null
+    },
+
+    getWidgetData:function() {
+      var url = this.attributes.query_url;
+      var promise = null;
+      if (url) {
+        promise= $.get(url);
+        promise.done(function(dataset) {
+          this.attributes.data = dataset.data;
+          this.attributes.data_attributes = dataset.data_attributes;
+        }.bind(this));
+      } else {
+        this.attributes.data = [];
+      }
+      return promise;
     }
 
   });

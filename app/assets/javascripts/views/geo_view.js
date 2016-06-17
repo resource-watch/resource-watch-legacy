@@ -93,7 +93,7 @@
      * the map after checking its type
      */
     mapAddLayer: function(layer) {
-      if (layer.type === 'cartodb') {
+      if (layer && layer.type === 'cartodb') {
         this.mapCartoDB.createLayer(this.map.getMap(), layer);
       }
     },
@@ -102,7 +102,9 @@
      * Removes the layer from the map
      */
     mapRemoveLayer: function(layer) {
-      this.map.removeLayer(layer);
+      if (layer){
+        this.map.removeLayer(layer);
+      }
     },
 
     refresh: function() {
