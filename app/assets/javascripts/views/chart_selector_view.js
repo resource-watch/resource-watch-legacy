@@ -207,7 +207,9 @@
       var resultList = [];
 
       _.each(columnsList, function(d) {
-        var attrs = dataAttributes[d];
+        if (dataAttributes) {
+          var attrs = dataAttributes[d];
+        }
         var item = {
           column: d,
           selected: false

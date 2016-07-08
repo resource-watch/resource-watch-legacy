@@ -40,7 +40,7 @@
     },
 
     getWidgetData:function() {
-      var url = this.attributes.query_url;
+      var url = App.globals.apiUrl + this.attributes.query_url;
       var promise = null;
       if (url) {
         promise= $.get(url);
