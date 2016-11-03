@@ -4,9 +4,13 @@
 
   App.Collection.Widgets = App.Core.Collection.extend({
 
-    url: App.globals.apiUrl + 'widgets',
+    url: App.globals.apiUrl + 'widgets?app=rw',
 
     model: App.Model.Widget,
+
+    parse: function(res) {
+      return res.data;
+    },
 
     /**
      * Method to search a string in name
@@ -24,11 +28,11 @@
     },
 
     _getWidgetData: function() {
-
       var modelPromises = [];
       this.models.forEach(function(model){
         modelPromises.push(model.fetch());
       });
+
       App.Helpers.allPromises(modelPromises).done(function() {
         this.trigger('collection:gotWidget');
         modelPromises = [];
@@ -37,8 +41,10 @@
         });
         App.Helpers.allPromises(modelPromises).done(function() {
           this.trigger('collection:gotWidgetData');
+
         }.bind(this));
       }.bind(this));
+
     }
   });
 

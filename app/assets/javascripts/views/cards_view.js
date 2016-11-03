@@ -20,7 +20,6 @@
         throw new Error('"data" param is required.');
       }
       this.data = new App.Collection.Widgets(settings.data);
-
       if (typeof settings.actions !== 'undefined') {
         this.state.set({
           actions: settings.actions

@@ -66,7 +66,6 @@
 
     onCollectionGotWidgetData: function() {
       this.widgetsData = this.widgets.toJSON();
-
       this.updateCards();
     },
 

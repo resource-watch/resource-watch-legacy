@@ -48,18 +48,18 @@
      * Create charts and render it
      */
     drawChart: function() {
-      var chart = this.data.chart;
+      var chart_data = typeof this.data !== 'undefined' ? this.data.widgetConfig : null;
 
-      _.each(chart.data, function(d) {
+      if (this.state.attributes.mode === 'grid' && chart_data) {
+      _.each(chart_data.data, function(d) {
         if (d.name === 'table') {
           d.values = this.data.data;
         }
       }.bind(this));
 
-      if (this.state.attributes.mode === 'grid') {
         this.chart = new App.View.Chart({
           el: this.$('.chart'),
-          data: chart
+          data: chart_data.data
         });
         this.chart.render();
       }
