@@ -23,15 +23,15 @@
      * It stores the current url data
      * @param {String} url param
      */
-    initialize: function(slug) {
-      this.slug = slug;
+    initialize: function(id) {
+      this.id = id;
     },
 
     exploreDetail: function() {
       // Get data
       this._getData()
         .done(function() {
-          this.widgetData = this.widget.toJSON();
+          this.datasetData = this.dataset.toJSON();
           this.startComponents();
           this.setListeners();
         }.bind(this))
@@ -57,15 +57,18 @@
 
     _getData: function() {
       var defer = $.Deferred();
-      this.widget = new App.Model.Widget({slug:this.slug});
+      this.dataset = new App.Model.Dataset({ id: this.id });
 
-      this.widget.fetch().done(function() {
-        this.widget.getWidgetData().done(function() {
-          defer.resolve();
-        });
-      }.bind(this));
+      // TODO: uncomment and do this again when fetchig widgets and layers is needed
+      // this.dataset.fetch().done(function() {
+      //   this.dataset.getDatasetData().done(function() {
+      //     defer.resolve();
+      //   });
+      // }.bind(this));
+      //
+      // return defer.promise();
 
-      return defer.promise();
+      return this.dataset.fetch();
     },
 
     /**
@@ -79,7 +82,7 @@
       // Creating card detail
       this.cardDetail = new App.View.CardDetail({
         el: '#cardDetail',
-        data: this.widgetData
+        data: this.datasetData
       });
 
       // Chart selector
@@ -126,14 +129,14 @@
      * Dashboard initialization
      */
     _dashboardComponents: function() {
-      // Limiting collection (TO-DO, get recommended widgets)
-      this.similarWidgets = new App.Collection.Widgets();
+      // Limiting collection (TO-DO, get recommended datasets)
+      this.similarDatasets = new App.Collection.Datasets();
 
       // Update Chart selector
-      if (this.widgetData.data && this.widgetData.data.length < this.props.maxData) {
+      if (this.datasetData.data && this.datasetData.data.length < this.props.maxData) {
         this.chartSelector.state.set({
-          data: this.widgetData.data,
-          data_attributes: this.widgetData.data_attributes
+          data: this.datasetData.data,
+          data_attributes: this.datasetData.data_attributes
         });
       }
 
@@ -141,25 +144,25 @@
       App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
       App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
 
-      this.listenTo(this.similarWidgets,'collection:gotWidget', this._onCollectionGotWidget.bind(this));
-      this.listenTo(this.similarWidgets,'collection:gotWidgetData', this._onCollectionGotWidgetData.bind(this));
-      this.similarWidgets.getWithWidgetData();
+      this.listenTo(this.similarDatasets,'collection:gotDataset', this._onCollectionGotDataset.bind(this));
+      this.listenTo(this.similarDatasets,'collection:gotDatasetData', this._onCollectionGotDatasetData.bind(this));
+      this.similarDatasets.getWithDatasetData();
     },
 
-    _onCollectionGotWidget: function() {
-      this.similarWidgetsData = this.similarWidgets.toJSON();
+    _onCollectionGotDataset: function() {
+      this.similarDatasetsData = this.similarDatasets.toJSON();
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
-        data: this.similarWidgetsData,
+        data: this.similarDatasetsData,
         props: {
           gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
         }
       });
     },
 
-    _onCollectionGotWidgetData: function() {
-      this.similarWidgetsData = this.similarWidgets.toJSON();
-      this.cards.data.reset(this.similarWidgetsData);
+    _onCollectionGotDatasetData: function() {
+      this.similarDatasetsData = this.similarDatasets.toJSON();
+      this.cards.data.reset(this.similarDatasetsData);
     },
 
     _onChartUpdate: function(type, data) {

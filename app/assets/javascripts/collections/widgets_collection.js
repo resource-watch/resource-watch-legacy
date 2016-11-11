@@ -23,11 +23,11 @@
       });
     },
 
-    getWithWidgetData: function() {
-      this.fetch().done(this._getWidgetData.bind(this));
+    getWithDatasetData: function() {
+      this.fetch().done(this._getDatasetData.bind(this));
     },
 
-    _getWidgetData: function() {
+    _getDatasetData: function() {
       var modelPromises = [];
       this.models.forEach(function(model){
         modelPromises.push(model.fetch());
@@ -37,7 +37,7 @@
         this.trigger('collection:gotWidget');
         modelPromises = [];
         this.models.forEach(function(model){
-          modelPromises.push(model.getWidgetData());
+          modelPromises.push(model.getDatasetData());
         });
         App.Helpers.allPromises(modelPromises).done(function() {
           this.trigger('collection:gotWidgetData');

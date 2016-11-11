@@ -2,9 +2,13 @@
 
   'use strict';
 
-  App.Model.DataSet = App.Core.Model.extend({
+  App.Model.Dataset = App.Core.Model.extend({
 
-    urlRoot: App.globals.apiUrl + 'datasets',
+    urlRoot: App.globals.apiUrl + 'dataset/',
+
+    parse: function(data) {
+      return _.extend({}, { id: data.id }, data.attributes);
+    },
 
     default: {
       "id": null,
