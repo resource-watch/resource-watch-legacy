@@ -4,7 +4,7 @@
 
   App.Collection.Datasets = App.Core.Collection.extend({
 
-    url: App.globals.apiUrl + 'dataset?app=rw',
+    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget',
 
     model: App.Model.Dataset,
 
@@ -27,30 +27,42 @@
       var self = this;
 
       this.fetch().done(function() {
+        self.filterDatasetsWithWidget();
         self.trigger('collection:gotDataset');
+        self._getDatasetData();
+      });
+    },
+
+    /*
+      Remove datasets with no widget.
+      TODO: move dataset filtering to backend
+    */
+    filterDatasetsWithWidget: function() {
+      var filteredModels = [];
+      this.models.forEach(function(model) {
+        if (model.get('widget').length)
+          filteredModels.push(model);
+      });
+      this.reset(filteredModels);
+    },
+
+    _getDatasetData: function() {
+
+      var modelPromises = [];
+      var self = this;
+
+      this.models.forEach(function(model){
+        var promise = $.get(model.get('connectorUrl')).then(function(data) {
+          model.set('data', data);
+        });
+        modelPromises.push(promise);
+      });
+
+      App.Helpers.allPromises(modelPromises).done(function() {
         self.trigger('collection:gotDatasetData');
       });
-    }
 
-    // _getDatasetData: function() {
-    //   var modelPromises = [];
-    //   this.models.forEach(function(model){
-    //     modelPromises.push(model.fetch());
-    //   });
-    //
-    //   App.Helpers.allPromises(modelPromises).done(function() {
-    //     this.trigger('collection:gotDataset');
-    //     modelPromises = [];
-    //     this.models.forEach(function(model){
-    //       modelPromises.push(model.getDatasetData());
-    //     });
-    //     App.Helpers.allPromises(modelPromises).done(function() {
-    //       this.trigger('collection:gotDatasetData');
-    //
-    //     }.bind(this));
-    //   }.bind(this));
-    //
-    // }
+    }
   });
 
 }).call(this, this.App);

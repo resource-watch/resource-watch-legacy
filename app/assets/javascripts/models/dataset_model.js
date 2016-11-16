@@ -10,6 +10,13 @@
       return _.extend({}, { id: data.id }, data.attributes);
     },
 
+    getDatasetData: function() {
+      // TODO: finish method
+      // return $.get(this.get(), function(data) {
+      //
+      // }).then();
+    },
+
     default: {
       "id": null,
       "name": null,

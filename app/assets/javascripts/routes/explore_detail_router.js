@@ -59,16 +59,14 @@
       var defer = $.Deferred();
       this.dataset = new App.Model.Dataset({ id: this.id });
 
-      // TODO: uncomment and do this again when fetchig widgets and layers is needed
-      // this.dataset.fetch().done(function() {
-      //   this.dataset.getDatasetData().done(function() {
-      //     defer.resolve();
-      //   });
-      // }.bind(this));
-      //
-      // return defer.promise();
+      // TODO: work in progress
+      this.dataset.fetch().done(function() {
+        this.dataset.getDatasetData().done(function() {
+          defer.resolve();
+        });
+      }.bind(this));
 
-      return this.dataset.fetch();
+      return defer.promise();
     },
 
     /**

@@ -48,12 +48,16 @@
      * Create charts and render it
      */
     drawChart: function() {
-      var chart_data = typeof this.data !== 'undefined' ? this.data.widgetConfig : null;
+      var chart_data = typeof this.data !== 'undefined' ? this.data.widget[0].attributes.widgetConfig : null;
+
+      if (chart_data) {
+        chart_data.data = chart_data.data || this.data.data.rows;
+      }
 
       if (this.state.attributes.mode === 'grid' && chart_data) {
       _.each(chart_data.data, function(d) {
         if (d.name === 'table') {
-          d.values = this.data.data;
+          d.values = this.data.data.rows;
         }
       }.bind(this));
 
