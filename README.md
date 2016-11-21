@@ -6,6 +6,7 @@ Resource Watch is an open platform for everyone to explore accurate, up-to-date 
 
 For more information visit [resourcewatch.org](http://resourcewatch.org/)
 
+
 ## Installation
 
 Requirements:
@@ -23,6 +24,7 @@ Install project dependencies:
 
 
 Set up environment variables using .env.sample
+
 
 ## Usage
 
