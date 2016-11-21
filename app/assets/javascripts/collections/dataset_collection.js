@@ -4,7 +4,7 @@
 
   App.Collection.Datasets = App.Core.Collection.extend({
 
-    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget',
+    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget,layer',
 
     model: App.Model.Dataset,
 
@@ -52,10 +52,7 @@
       var self = this;
 
       this.models.forEach(function(model){
-        var promise = $.get(model.get('connectorUrl')).then(function(data) {
-          model.set('data', data);
-        });
-        modelPromises.push(promise);
+        modelPromises.push(model.getDatasetData());
       });
 
       App.Helpers.allPromises(modelPromises).done(function() {

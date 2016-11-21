@@ -59,8 +59,7 @@
       var defer = $.Deferred();
       this.dataset = new App.Model.Dataset({ id: this.id });
 
-      // TODO: work in progress
-      this.dataset.fetch().done(function() {
+      this.dataset.fetch({data: $.param({includes: 'widget'})}).done(function() {
         this.dataset.getDatasetData().done(function() {
           defer.resolve();
         });
