@@ -10,7 +10,7 @@
 /.rbenv-gemsets
 
 # Ignore MacOSX files
-/.DS_Store
+**/.DS_Store
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

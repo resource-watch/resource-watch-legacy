@@ -23,27 +23,27 @@
       this.dashboardEl = $('#exploreDashboard');
       this.dashboardEl.addClass(this.props.loadingClass);
 
-      this.widgets = new App.Collection.Widgets();
-      this.listenTo(this.widgets,'collection:gotWidget', this._renderExploreDashboard.bind(this));
-      this.listenTo(this.widgets,'collection:gotWidgetData', this._updateExploreDashboard.bind(this));
-      this.widgets.getWithWidgetData();
+      this.datasets = new App.Collection.Datasets();
+      this.listenTo(this.datasets,'collection:gotDataset', this._renderExploreDashboard.bind(this));
+      this.listenTo(this.datasets,'collection:gotDatasetData', this._updateExploreDashboard.bind(this));
+      this.datasets.getWithDatasetData();
     },
 
-    _getWidgetData: function(){
-      return this.widgets.toJSON().slice(0, this.props.exploreCards);
+    _getDatasetData: function(){
+      return this.datasets.toJSON().slice(0, this.props.exploreCards);
     },
 
     _renderExploreDashboard:function(){
       this.cards = new App.View.Cards({
         el: this.dashboardEl,
-        data: this._getWidgetData(),
+        data: this._getDatasetData(),
         actions: false
       });
       this.dashboardEl.removeClass(this.props.loadingClass);
     },
 
     _updateExploreDashboard:function(){
-      this.cards.data.reset(this._getWidgetData());
+      this.cards.data.reset(this._getDatasetData());
     }
 
   });

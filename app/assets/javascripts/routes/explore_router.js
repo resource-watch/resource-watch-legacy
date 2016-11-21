@@ -48,14 +48,14 @@
      * Gets main data for the components
      */
     _getData: function() {
-      this.widgets = new App.Collection.Widgets();
-      this.listenTo(this.widgets,'collection:gotWidget', this.onCollectionGotWidget.bind(this));
-      this.listenTo(this.widgets,'collection:gotWidgetData', this.onCollectionGotWidgetData.bind(this));
-      this.widgets.getWithWidgetData();
+      this.datasets = new App.Collection.Datasets();
+      this.listenTo(this.datasets,'collection:gotDataset', this.onCollectionGotDataset.bind(this));
+      this.listenTo(this.datasets,'collection:gotDatasetData', this.onCollectionGotDatasetData.bind(this));
+      this.datasets.getWithDatasetData();
     },
 
-    onCollectionGotWidget: function() {
-      this.widgetsData = this.widgets.toJSON();
+    onCollectionGotDataset: function() {
+      this.datasetsData = this.datasets.toJSON();
 
       // Shared components
       this._sharedComponents();
@@ -64,9 +64,8 @@
       this._dashboardComponents();
     },
 
-    onCollectionGotWidgetData: function() {
-      this.widgetsData = this.widgets.toJSON();
-
+    onCollectionGotDatasetData: function() {
+      this.datasetsData = this.datasets.toJSON();
       this.updateCards();
     },
 
@@ -93,7 +92,7 @@
       // Filters navigation
       this.exploreNavigation = new App.View.ExploreNavigation({
         el: '#exploreNavigation',
-        data: this.widgets.toJSON()
+        data: this.datasets.toJSON()
       });
 
       // Pagination
@@ -102,7 +101,7 @@
         props: {
           itemsPerPage: this.props.itemsPerPage,
           current: this.params.attributes.page,
-          pages: Math.ceil(this.widgetsData.length / this.props.itemsPerPage)
+          pages: Math.ceil(this.datasetsData.length / this.props.itemsPerPage)
         }
       });
 
@@ -127,9 +126,9 @@
     _dashboardComponents: function() {
       // Slicing collection by current page
       var pageRange = this.pagination.getPageRange();
-      var widgetsData = this.widgetsData.models ?
-        this.widgetsData.toJSON() : this.widgetsData;
-      var data = widgetsData.slice(pageRange.startIndex,
+      var datasetData = this.datasetsData.models ?
+        this.datasetsData.toJSON() : this.datasetsData;
+      var data = datasetData.slice(pageRange.startIndex,
         pageRange.endIndex);
 
       this.cards = new App.View.Cards({
@@ -193,21 +192,21 @@
      */
     updateCards: function() {
       var pageRange = this.pagination.getPageRange();
-      var widgetsData = this.widgets;
+      var datasetData = this.datasets;
       var itemsPerPage = this.pagination.state.attributes.itemsPerPage;
       if (this.params.attributes.q && this.params.hasChanged('q')) {
-        widgetsData = widgetsData.search(this.params.attributes.q);
+        datasetData = datasetData.search(this.params.attributes.q);
         // Reseting to page 1 when user search by query
         this.pagination.state.set('current', 1);
-        this.exploreNavigation.data.reset(widgetsData);
+        this.exploreNavigation.data.reset(datasetData);
       }
       if (itemsPerPage) {
         this.pagination.state
-          .set('pages', Math.ceil(widgetsData.length / itemsPerPage));
-        widgetsData = widgetsData
+          .set('pages', Math.ceil(datasetData.length / itemsPerPage));
+        datasetData = datasetData
           .slice(pageRange.startIndex, pageRange.endIndex);
         // Reseting cards collection and render it
-        this.cards.data.reset(widgetsData);
+        this.cards.data.reset(datasetData);
       }
     },
 
