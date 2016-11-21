@@ -20,7 +20,6 @@
         throw new Error('"data" param is required.');
       }
       this.data = new App.Collection.Widgets(settings.data);
-
       if (typeof settings.actions !== 'undefined') {
         this.state.set({
           actions: settings.actions
@@ -51,7 +50,7 @@
             actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
-          if(m.attributes.data){
+          if (m.attributes.data) {
             card.drawChart();
           }
         });
