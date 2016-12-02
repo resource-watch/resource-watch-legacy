@@ -22,11 +22,11 @@
       opts['user_name'] = data.user;
       opts['sublayers'] = [];
       opts['sublayers'].push(subLayer);
-      opts['maps_api_template'] = 'https://{user}.cartodb.com';
+      opts['maps_api_template'] = 'https://{user}.carto.com';
 
       var sqlBounds = new cartodb.SQL({
         user: data.user,
-        sql_api_template: 'https://{user}.cartodb.com'
+        sql_api_template: 'https://{user}.carto.com'
       });
 
       sqlBounds.getBounds(subLayer.sql).done(function(bounds) {

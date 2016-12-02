@@ -84,7 +84,11 @@
      */
     _addToMap: function(ev) {
       var el = ev.currentTarget;
-      var layer = _.clone(this.data.layer[0].attributes.layerConfig);
+      var user = this.data.layer[0].attributes.layerConfig.account;
+      var name = this.data.layer[0].attributes.name;
+      var layer = _.clone(this.data.layer[0].attributes.layerConfig.body.layers[0].options);
+      layer.user = user;
+      layer.name = name;
 
       if (!el.classList.contains(this.props.activeClass)) {
         App.Core.Events.trigger('card:layer:add', layer);
