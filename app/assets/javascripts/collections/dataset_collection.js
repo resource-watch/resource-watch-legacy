@@ -29,7 +29,6 @@
       this.fetch().done(function() {
         self.filterDatasetsWithWidget();
         self.trigger('collection:gotDataset');
-        self._getDatasetData();
       });
     },
 

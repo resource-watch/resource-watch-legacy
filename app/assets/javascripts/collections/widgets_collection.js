@@ -4,7 +4,7 @@
 
   App.Collection.Widgets = App.Core.Collection.extend({
 
-    url: App.globals.apiUrl + 'widgets?app=rw',
+    url: App.globals.apiUrl + 'widget?app=rw&includes=layer',
 
     model: App.Model.Widget,
 
@@ -37,14 +37,12 @@
         this.trigger('collection:gotWidget');
         modelPromises = [];
         this.models.forEach(function(model){
-          modelPromises.push(model.getDatasetData());
+          modelPromises.push(model.getWidgetData());
         });
         App.Helpers.allPromises(modelPromises).done(function() {
           this.trigger('collection:gotWidgetData');
-
         }.bind(this));
       }.bind(this));
-
     }
   });
 
