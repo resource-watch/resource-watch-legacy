@@ -38,6 +38,7 @@
     render: function() {
       this.$el.html(this.template({
         data: this.data,
+        widgetName: this.data.widget[0].attributes.name,
         state: this.state.attributes
       }));
       this.el.classList.add(this.state.attributes.mode);
@@ -48,10 +49,10 @@
      * Create charts and render it
      */
     drawChart: function() {
-      var chart_data = typeof this.data !== 'undefined' ? this.data.widget[0].attributes.widgetConfig : null;
+      var chart_data = typeof this.data !== 'undefined' ? (this.data.widgetConfig || this.data.widget[0].attributes.widgetConfig) : null;
 
       if (chart_data) {
-        chart_data.data = chart_data.data || this.data.data;
+        chart_data.data = chart_data.data || this.data.data || this.data.widgetConfig.data;
       }
 
       if (this.state.attributes.mode === 'grid' && chart_data) {
