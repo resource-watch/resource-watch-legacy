@@ -89,7 +89,7 @@
       var layer = _.clone(this.data.layer[0].attributes);
 
       if (!el.classList.contains(this.props.activeClass)) {
-        App.Core.Events.trigger('card:layer:add', layer);
+        App.Core.Events.trigger('card:layer:add', layer, el);
         el.classList.add(this.props.activeClass);
         el.innerHTML = el.dataset.i18active;
       } else {

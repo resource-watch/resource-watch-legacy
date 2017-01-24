@@ -11,7 +11,8 @@
       sublayers: []
     },
 
-    createLayer: function(map, layerSpecs) {
+    createLayer: function(map, layerSpecs, el) {
+      this.button = el;
       var data = layerSpecs.layerConfig;
       var layers = data.body.layers;
       var layerOptions = layers[0].options;
@@ -31,6 +32,7 @@
         user: data.account,
         sql_api_template: 'https://{user}.cartodb.com'
       });
+
       sqlBounds.getBounds(subLayer.sql).done(function(bounds) {
         map.fitBounds(bounds);
         cartodb.createLayer(map, opts, {https: true})
@@ -40,8 +42,21 @@
               _this._activateInteractivity(map, layer);
             }
             _this.trigger('cartodb:addLayer', layerSpecs, layer);
+          })
+          .error(function(msg) {
+            console.error('Error adding layer');
+            this.disableButton(this.el);
           });
-      });
+      })
+      .error(function(msg) {
+        console.error('Error adding layer');
+        this.disableButton(this.button);
+      }.bind(this));
+    },
+
+    disableButton: function(el) {
+      el.classList.remove('-active');
+      el.innerHTML = el.dataset.i18default;
     },
 
     _activateInteractivity: function(map, layer) {

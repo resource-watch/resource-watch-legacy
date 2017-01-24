@@ -47,13 +47,6 @@
     },
 
     initialize: function() {
-      this.mapLayers = {};
-      // this.mapRequests = {};
-      // this.layersLoading = {};
-      // this.rejectLayersLoading = false;
-      // this.onLayerAddedSuccess = options.onLayerAddedSuccess;
-      // this.onLayerAddedError = options.onLayerAddedError;
-
       // At the beginning create map
       this.createMap();
       this.listenTo(this.state, 'change', this._onLayersChange);

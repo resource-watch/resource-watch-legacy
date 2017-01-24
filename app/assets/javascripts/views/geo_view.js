@@ -92,9 +92,9 @@
      * Creates a layer and adds it to
      * the map after checking its type
      */
-    mapAddLayer: function(layer) {
+    mapAddLayer: function(layer, el) {
       if (layer && layer.provider === 'cartodb') {
-        this.mapCartoDB.createLayer(this.map.getMap(), layer);
+        this.mapCartoDB.createLayer(this.map.getMap(), layer, el);
       }
     },
 
