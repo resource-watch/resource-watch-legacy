@@ -50,7 +50,7 @@
             actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
-          if (m.attributes.data) {
+          if (m.attributes.data || m.attributes.widget || m.attributes.widgetConfig.data) {
             card.drawChart();
           }
         });
