@@ -93,7 +93,7 @@
      * the map after checking its type
      */
     mapAddLayer: function(layer) {
-      if (layer && layer.type === 'cartodb') {
+      if (layer && layer.provider === 'cartodb') {
         this.mapCartoDB.createLayer(this.map.getMap(), layer);
       }
     },
