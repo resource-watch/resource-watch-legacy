@@ -38,7 +38,7 @@
     render: function() {
       this.$el.html(this.template({
         data: this.data,
-        widgetName: this.data.widget[0].attributes.name,
+        widget: this.data.widget[0].attributes,
         state: this.state.attributes
       }));
       this.el.classList.add(this.state.attributes.mode);

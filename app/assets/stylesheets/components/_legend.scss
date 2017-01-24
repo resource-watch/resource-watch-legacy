@@ -52,6 +52,12 @@
           font-size: $tiny-font-size;
         }
 
+        > .close {
+          width: rem(15);
+          height: rem(15);
+          cursor: pointer;
+        }
+
         > .switch {
           width: rem(20);
           position: relative;
@@ -83,7 +89,7 @@
               position: absolute;
               top: rem(1);
               bottom: 0;
-              right: rem(11);
+              right: rem(5);
               border: rem(1) solid $bg-handle;
               border-radius: rem(7);
               transition: all 0.2s ease-in 0s;
