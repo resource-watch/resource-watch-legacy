@@ -15,7 +15,13 @@
     bottom: rem(40);
     right: rem(20);
     color: $color-legend;
-    border-radius: rem(5);
+
+    > .title {
+      padding: 0 rem(15);
+      margin: rem(16) 0 0;
+      font-size: rem(11);
+      text-transform: uppercase;
+    }
 
     > .list {
       display: flex;;
@@ -24,13 +30,14 @@
 
       > .item {
         width: 98%;
-        padding-left: 1%;
+        padding: 0 rem(5);
         min-height: rem(30);
         user-select: none;
-        cursor: grab;
+        cursor: move;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
+
 
         &.empty {
           background: $bg-empty;
@@ -53,9 +60,10 @@
         }
 
         > .close {
-          width: rem(15);
-          height: rem(15);
+          width: rem(19);
+          height: rem(19);
           cursor: pointer;
+          fill: $lipstick;
         }
 
         > .switch {
