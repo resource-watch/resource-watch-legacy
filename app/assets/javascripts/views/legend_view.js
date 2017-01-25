@@ -21,7 +21,7 @@
       emptyClass: 'empty',
       visibleClass: 'visible',
       overClass: 'over',
-      layerClass: 'layerSwitch',
+      layerClass: 'layerClose',
       draggingClass: 'dragging',
       dropEffect: 'move'
     },
@@ -226,6 +226,7 @@
           newList[current.dataset.name] = data[current.dataset.name];
         }
       }
+
       this.state.set({
         data: newList,
         orderChanged: true
