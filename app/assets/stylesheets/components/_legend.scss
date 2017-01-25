@@ -15,7 +15,13 @@
     bottom: rem(40);
     right: rem(20);
     color: $color-legend;
-    border-radius: rem(5);
+
+    > .title {
+      padding: 0 rem(15);
+      margin: rem(16) 0 0;
+      font-size: rem(11);
+      text-transform: uppercase;
+    }
 
     > .list {
       display: flex;;
@@ -24,13 +30,15 @@
 
       > .item {
         width: 98%;
-        padding-left: 1%;
+        padding: 0 rem(5);
         min-height: rem(30);
         user-select: none;
-        cursor: grab;
+        cursor: move;
         display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: rem(4);
+
 
         &.empty {
           background: $bg-empty;
@@ -50,6 +58,13 @@
 
         > .name {
           font-size: $tiny-font-size;
+        }
+
+        > div .close {
+          width: rem(16);
+          height: rem(16);
+          cursor: pointer;
+          fill: $lipstick;
         }
 
         > .switch {
@@ -83,7 +98,7 @@
               position: absolute;
               top: rem(1);
               bottom: 0;
-              right: rem(11);
+              right: rem(5);
               border: rem(1) solid $bg-handle;
               border-radius: rem(7);
               transition: all 0.2s ease-in 0s;

@@ -47,7 +47,7 @@
     },
 
     initialize: function() {
-      // At beginning create map
+      // At the beginning create map
       this.createMap();
       this.listenTo(this.state, 'change', this._onLayersChange);
     },
@@ -96,7 +96,7 @@
     addLayer: function(data, layer) {
       var layers = this.state.attributes.layers;
 
-      if (!layers[data.name]) {
+      if (!layers[data.slug]) {
         if (data.zIndex === 0) {
           var newIndex = this.state.attributes.lastZIndex + 1;
           data.zIndex = newIndex;
@@ -105,7 +105,7 @@
           }, { silent: true });
         }
 
-        layers[data.name] = {
+        layers[data.slug] = {
           data: data,
           layer: layer
         };
@@ -123,7 +123,7 @@
     setOrder: function(data) {
       var layers = this.state.attributes.layers;
       _.each(data, function(d) {
-        var currentLayer = layers[d.name];
+        var currentLayer = layers[d.slug];
         currentLayer.data.zIndex = d.zIndex;
         if (currentLayer) {
           currentLayer.layer.setZIndex(d.zIndex);
@@ -136,7 +136,7 @@
      */
     setActive: function(layer) {
       var layers = this.state.attributes.layers;
-      var selectedLayer = layers[layer.name];
+      var selectedLayer = layers[layer.slug];
 
       if (selectedLayer) {
         selectedLayer.data.active = layer.active;
@@ -161,15 +161,14 @@
      */
     removeLayer: function(layer) {
       var layers = this.state.attributes.layers;
-      var selectedLayer = layers[layer.name];
-
+      var selectedLayer = layers[layer.slug];
       if (selectedLayer) {
         var newsList = {};
         this.map.removeLayer(selectedLayer.layer);
 
         _.each(layers, function(lay) {
-          if (lay.data.name !== layer.name) {
-            newsList[lay.data.name] = lay;
+          if (lay.data.slug !== layer.slug) {
+            newsList[lay.data.slug] = lay;
           }
         });
         this.state.set({
