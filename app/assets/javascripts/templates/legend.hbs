@@ -6,9 +6,11 @@
       {{#each data}}
         <div class="item" draggable="{{../isDraggable}}">
           <div class="name">{{name}}</div>
-          <svg class="icon-circle-remove close js-layer-close" id="switch-{{@index}}" data-name="{{name}}">
-            <use xlink:href="#icon-circle-remove"></use>
-          </svg>
+          <div>
+            <svg class="icon-circle-remove close js-layer-close" id="switch-{{@index}}" data-name="{{name}}">
+              <use xlink:href="#icon-circle-remove"></use>
+            </svg>
+          </div>
         </div>
       {{/each}}
     </div>

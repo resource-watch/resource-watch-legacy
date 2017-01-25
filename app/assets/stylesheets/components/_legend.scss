@@ -36,7 +36,8 @@
         cursor: move;
         display: flex;
         align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: space-between;
+        margin-bottom: rem(4);
 
 
         &.empty {
@@ -59,9 +60,9 @@
           font-size: $tiny-font-size;
         }
 
-        > .close {
-          width: rem(19);
-          height: rem(19);
+        > div .close {
+          width: rem(16);
+          height: rem(16);
           cursor: pointer;
           fill: $lipstick;
         }
