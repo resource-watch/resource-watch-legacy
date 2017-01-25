@@ -57,11 +57,11 @@
       }
 
       if (this.state.attributes.mode === 'grid' && chart_data) {
-      _.each(chart_data.data, function(d) {
-        if (d.name === 'table') {
-          d.values = this.data.data;
-        }
-      }.bind(this));
+        _.each(chart_data.data, function(d) {
+          if (d.name === 'table') {
+            d.values = this.data.data;
+          }
+        }.bind(this));
 
         this.chart = new App.View.Chart({
           el: this.$('.chart'),
