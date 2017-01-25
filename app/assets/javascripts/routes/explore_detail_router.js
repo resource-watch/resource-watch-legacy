@@ -147,7 +147,15 @@
     },
 
     _onCollectionGotDataset: function() {
-      this.similarDatasetsData = this.similarDatasets.toJSON();
+      var similarDatasetsData = this.similarDatasetsData = [];
+      var id = this.id;
+
+      _.each(this.similarDatasets.toJSON(), function (dataset) {
+        if (dataset.id !== id) {
+          similarDatasetsData.push(dataset);
+        }
+      });
+
       this.cards = new App.View.Cards({
         el: '#exploreDashboard',
         data: this.similarDatasetsData,

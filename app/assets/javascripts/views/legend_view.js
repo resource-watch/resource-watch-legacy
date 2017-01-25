@@ -253,7 +253,7 @@
     },
 
     _removeLayer: function(ev) {
-      var name = ev.target.dataset.name;
+      var name = ev.currentTarget.dataset.name;
       var layer = this.state.attributes.data[name];
       var el = document.querySelector('[data-slug="btn-' + layer.slug + '"] .js-toggle-layer');
 
