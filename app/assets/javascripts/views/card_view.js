@@ -38,7 +38,7 @@
     render: function() {
       this.$el.html(this.template({
         data: this.data,
-        widgetName: this.data.widget[0].attributes.name,
+        widget: this.data.widget[0].attributes,
         state: this.state.attributes
       }));
       this.el.classList.add(this.state.attributes.mode);
@@ -49,18 +49,19 @@
      * Create charts and render it
      */
     drawChart: function() {
-      var chart_data = typeof this.data !== 'undefined' ? (this.data.widgetConfig || this.data.widget[0].attributes.widgetConfig) : null;
+      var chart_data = typeof this.data !== 'undefined' ? (this.data.widgetConfig ||
+        this.data.widget[0].attributes.widgetConfig) : null;
 
       if (chart_data) {
         chart_data.data = chart_data.data || this.data.data || this.data.widgetConfig.data;
       }
 
       if (this.state.attributes.mode === 'grid' && chart_data) {
-      _.each(chart_data.data, function(d) {
-        if (d.name === 'table') {
-          d.values = this.data.data;
-        }
-      }.bind(this));
+        _.each(chart_data.data, function(d) {
+          if (d.name === 'table') {
+            d.values = this.data.data;
+          }
+        }.bind(this));
 
         this.chart = new App.View.Chart({
           el: this.$('.chart'),
@@ -85,10 +86,10 @@
      */
     _addToMap: function(ev) {
       var el = ev.currentTarget;
-      var layer = _.clone(this.data.layer[0].attributes.layerConfig);
+      var layer = _.clone(this.data.layer[0].attributes);
 
       if (!el.classList.contains(this.props.activeClass)) {
-        App.Core.Events.trigger('card:layer:add', layer);
+        App.Core.Events.trigger('card:layer:add', layer, el);
         el.classList.add(this.props.activeClass);
         el.innerHTML = el.dataset.i18active;
       } else {

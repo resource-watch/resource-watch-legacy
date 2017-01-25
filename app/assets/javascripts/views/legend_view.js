@@ -11,7 +11,7 @@
     template: this.HandlebarsTemplates.legend,
 
     events: {
-      'change .layerSwitch': '_onSwitch'
+      'click .js-layer-close': '_removeLayer'
     },
 
     props: {
@@ -250,6 +250,16 @@
         name: ev.currentTarget.dataset.name,
         active: active
       });
+    },
+
+    _removeLayer: function(ev) {
+      var name = ev.currentTarget.dataset.name;
+      var layer = this.state.attributes.data[name];
+      var el = document.querySelector('[data-slug="btn-' + layer.slug + '"] .js-toggle-layer');
+
+      App.Core.Events.trigger('card:layer:remove', layer);
+      el.classList.remove('-active');
+      el.innerHTML = el.dataset.i18default;
     },
 
     /**
