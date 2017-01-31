@@ -72,7 +72,8 @@
             // GET image
             this.render();
           } else {
-
+            console.error('image could not be loaded');
+            this.el.classList.remove(this.props.loadingClassEl);
           }
         }
       }.bind(this);
