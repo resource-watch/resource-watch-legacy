@@ -48,7 +48,7 @@
 
     loadImage: function() {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open('POST', `https://${this.data.account}.carto.com/api/v1/map`);
+      xmlhttp.open('POST', 'https://'+ this.data.account +'.carto.com/api/v1/map');
       xmlhttp.setRequestHeader('Content-Type', 'application/json');
       xmlhttp.send(JSON.stringify(this.data.body));
 
