@@ -7,8 +7,8 @@
   $color-legend: $text-color-1;
 
   > .content {
-    width: rem(200);
-    max-height: rem(150);
+    width: rem(300);
+    max-height: rem(165);
     background: $bg-legend;
     position: fixed;
     z-index: 2;
@@ -19,6 +19,7 @@
     > .title {
       padding: 0 rem(15);
       margin: rem(16) 0 0;
+      color: #9aa2a9;
       font-size: rem(11);
       text-transform: uppercase;
     }
@@ -27,6 +28,8 @@
       display: flex;;
       padding: rem(10);
       flex-wrap: wrap;
+      max-height: rem(125);
+      overflow: auto;
 
       > .item {
         width: 98%;
@@ -37,7 +40,7 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        margin-bottom: rem(4);
+        margin-bottom: rem(12);
 
 
         &.empty {
@@ -56,18 +59,29 @@
         &.over {
         }
 
-        > .name {
-          font-size: $tiny-font-size;
+        .item-info {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+          justify-content: space-between;
+          margin-right: rem(6);
         }
 
-        > div .close {
+        .name {
+          color: $black;
+          font-size: $small-font-size;
+        }
+
+        div .close {
           width: rem(16);
           height: rem(16);
           cursor: pointer;
           fill: $lipstick;
         }
 
-        > .switch {
+        .switch {
           width: rem(20);
           position: relative;
           user-select: none;
@@ -113,6 +127,35 @@
           }
         }
       }
+    }
+  }
+
+  /* Colors */
+
+  .legend-spec {
+
+  }
+
+  .-choropleth {
+    .row {
+      flex-flow: row nowrap !important;
+    }
+
+    .column {
+      flex: 1 1 0px;
+    }
+
+    span {
+      display: inline-block;
+      width: 100%;
+    }
+
+    .color {
+      height: rem(7);
+    }
+
+    .value {
+      font-size: rem(10);
     }
   }
 }

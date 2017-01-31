@@ -2,6 +2,8 @@
 
   'use strict';
 
+
+
   App.View.Legend = App.Core.View.extend({
 
     tagName: 'div',
@@ -9,6 +11,10 @@
     className: 'legend',
 
     template: this.HandlebarsTemplates.legend,
+
+    legendType: {
+      choropleth: this.HandlebarsTemplates.choropleth
+    },
 
     events: {
       'click .js-layer-close': '_removeLayer'
@@ -32,6 +38,8 @@
     },
 
     initialize: function(settings) {
+
+
       if (settings.data) {
         this.state.set({
           data: settings.data
@@ -77,6 +85,29 @@
       if (this.props.isDraggable) {
         this._setDragListeners();
       }
+
+      this.renderItemLegend(data);
+    },
+
+    renderItemLegend: function(data) {
+      _.each(data, function(item) {
+        var type = item.legendConfig.type;
+        var template = this.legendType[type];
+        var element = $('#lg-' + item.slug);
+
+        // var parsedItems = this.parseDataValues(item.legendConfig.items);
+        element.html(template({
+          items: item.legendConfig.items
+        }));
+
+      }.bind(this));
+    },
+
+    parseDataValues: function(parts) {
+      return _.map(parts, function(part) {
+        var value = d3.format(".2s")(part.value);
+        return _.extend({}, part, {value: value});
+      }.bind(this));
     },
 
     /**
