@@ -7,8 +7,8 @@
   $color-legend: $text-color-1;
 
   > .content {
-    width: rem(200);
-    max-height: rem(150);
+    width: rem(300);
+    max-height: rem(165);
     background: $bg-legend;
     position: fixed;
     z-index: 2;
@@ -18,7 +18,8 @@
 
     > .title {
       padding: 0 rem(15);
-      margin: rem(16) 0 0;
+      margin: rem(16) 0 rem(10) 0;
+      color: #9aa2a9;
       font-size: rem(11);
       text-transform: uppercase;
     }
@@ -26,7 +27,10 @@
     > .list {
       display: flex;;
       padding: rem(10);
+      padding-top: 0;
       flex-wrap: wrap;
+      max-height: rem(125);
+      overflow: auto;
 
       > .item {
         width: 98%;
@@ -37,8 +41,13 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        margin-bottom: rem(4);
+        padding-bottom: rem(4);
+        margin-bottom: rem(10);
+        box-shadow: 0px 1px 0px #e3e4e6;
 
+        &:last-child {
+          box-shadow: none;
+        }
 
         &.empty {
           background: $bg-empty;
@@ -56,18 +65,30 @@
         &.over {
         }
 
-        > .name {
-          font-size: $tiny-font-size;
+        .item-info {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+          justify-content: space-between;
+          margin-right: rem(6);
         }
 
-        > div .close {
+        .name {
+          color: $black;
+          font-size: $small-font-size;
+          margin-bottom: rem(5);
+        }
+
+        div .close {
           width: rem(16);
           height: rem(16);
           cursor: pointer;
           fill: $lipstick;
         }
 
-        > .switch {
+        .switch {
           width: rem(20);
           position: relative;
           user-select: none;
@@ -113,6 +134,89 @@
           }
         }
       }
+    }
+  }
+
+  /* Colors */
+  .legend-spec {
+    width: 100%;
+
+    span {
+      display: inline-block;
+    }
+  }
+
+  // Choropleth and gradient
+  .-choropleth, .-gradient {
+    .row {
+      flex-flow: row nowrap;
+    }
+
+    .column {
+      flex: 1 1 0px;
+    }
+
+    .range {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        width: auto;
+        font-size: rem(11);
+      }
+    }
+
+    span {
+      width: 100%;
+    }
+
+    .color {
+      height: rem(7);
+    }
+  }
+
+  .-gradient {
+    .color {
+      width: 100%;
+    }
+  }
+
+
+  // Basic and lines
+  .-basic, .-lines {
+    .column {
+      display: flex;
+      align-items: center;
+      width: 50%;
+    }
+
+    span {
+      font-size: rem(12);
+
+      &.color { margin-right: rem(10); }
+    }
+  }
+
+  .-basic {
+    .color {
+      width: rem(12);
+      height: rem(12);
+      border-radius: 50%;
+    }
+  }
+
+  .-lines {
+    .color {
+      width: rem(15);
+      border-top-width: 2px;
+      border-bottom-width: 0;
+      border-right-width: 0;
+      border-left-width: 0;
+      border-style: solid;
+
+      &.-dash { border-style: dashed; }
+      &.-dot { border-style: dotted; }
     }
   }
 }

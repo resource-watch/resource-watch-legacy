@@ -1,0 +1,8 @@
+<div class="row">
+  {{#each items}}
+    <div class="column">
+      <div><span class="color" style="background-color: {{color}}; {{#if icon}}background-image: asset-url('{{icon}}'){{/if}}"></span></div>
+      <span class="value">{{#if name}}{{name}}{{else}}{{value}}{{/if}}</span>
+    </div>
+  {{/each}}
+</div>

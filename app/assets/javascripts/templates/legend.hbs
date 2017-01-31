@@ -5,7 +5,10 @@
       <div class="item empty"></div>
       {{#each data}}
         <div class="item" draggable="{{../isDraggable}}">
-          <div class="name">{{name}}</div>
+          <div class="item-info">
+            <div class="name">{{name}}</div>
+            <div id="lg-{{slug}}" class="legend-spec -{{legendConfig.type}}"></div>
+          </div>
           <div>
             <svg class="icon-circle-remove close js-layer-close layerClose" id="switch-{{@index}}" data-name="{{name}}">
               <use xlink:href="#icon-circle-remove"></use>

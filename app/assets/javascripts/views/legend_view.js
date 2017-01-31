@@ -10,6 +10,13 @@
 
     template: this.HandlebarsTemplates.legend,
 
+    legendType: {
+      choropleth: this.HandlebarsTemplates.choropleth,
+      basic: this.HandlebarsTemplates.basic,
+      lines: this.HandlebarsTemplates.lines,
+      gradient: this.HandlebarsTemplates.gradient
+    },
+
     events: {
       'click .js-layer-close': '_removeLayer'
     },
@@ -77,6 +84,66 @@
       if (this.props.isDraggable) {
         this._setDragListeners();
       }
+
+      this.renderItemLegend(data);
+    },
+
+    renderItemLegend: function(data) {
+      _.each(data, function(item) {
+        var type = item.legendConfig.type;
+
+        if (type) {
+          var template = this.legendType[type];
+          var element = $('#lg-' + item.slug);
+          var items = item.legendConfig.items;
+
+          element.html(template({
+            items: items,
+            options: this.setOptions(type, items)
+          }));
+        }
+      }.bind(this));
+    },
+
+    setOptions: function(type, items) {
+      var options = {};
+
+      if (type === 'choropleth' || type === 'gradient') {
+        options = {
+          start: items[0].value || items[0].name,
+          end: items[items.length-1].value || items[items.length-1].name
+        };
+
+        if (type === 'gradient') {
+          options.colorsList = this.setGradientColors(items);
+        }
+      }
+      return options;
+    },
+
+    setGradientColors: function(items) {
+      var colors = _.map(items, function(item) {
+        return item.color;
+      });
+
+      return colors.join(', ');
+    },
+
+    parseChoroplethValues: function(values) {
+      return _.map(values, function(value, i) {
+        var parsed = '';
+        if (i == 0 || i == values.length - 1) {
+          parsed = value.value
+        }
+        return _.extend({}, value, {value: parsed});
+      }.bind(this));
+    },
+
+    parseNumberValues: function(values) {
+      return _.map(values, function(value) {
+        var parsed = d3.format(".2s")(value.value);
+        return _.extend({}, value, {value: parsed});
+      }.bind(this));
     },
 
     /**

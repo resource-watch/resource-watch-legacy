@@ -1,0 +1,8 @@
+<div class="row">
+  {{#each items}}
+    <div class="column">
+      <span class="color {{#if lineType}}-{{lineType}}{{/if}}" style="border-color: {{color}}"></span>
+      <span class="value">{{#if name}}{{name}}{{else}}{{value}}{{/if}}</span>
+    </div>
+  {{/each}}
+</div>
