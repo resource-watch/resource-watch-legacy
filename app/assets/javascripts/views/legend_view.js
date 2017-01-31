@@ -94,19 +94,38 @@
         var type = item.legendConfig.type;
         var template = this.legendType[type];
         var element = $('#lg-' + item.slug);
+        var items = item.legendConfig.items
+        var options = {};
 
-        // var parsedItems = this.parseDataValues(item.legendConfig.items);
+        if (type === 'choropleth') {
+          items = this.parseChoroplethValues(items);
+          options = {
+            start: items[0].value,
+            end: items[items.length-1].value
+          };
+        }
         element.html(template({
-          items: item.legendConfig.items
+          items: items,
+          options: options
         }));
 
       }.bind(this));
     },
 
-    parseDataValues: function(parts) {
-      return _.map(parts, function(part) {
-        var value = d3.format(".2s")(part.value);
-        return _.extend({}, part, {value: value});
+    parseChoroplethValues: function(values) {
+      return _.map(values, function(value, i) {
+        var parsed = '';
+        if (i == 0 || i == values.length - 1) {
+          parsed = value.value
+        }
+        return _.extend({}, value, {value: parsed});
+      }.bind(this));
+    },
+
+    parseNumberValues: function(values) {
+      return _.map(values, function(value) {
+        var parsed = d3.format(".2s")(value.value);
+        return _.extend({}, value, {value: parsed});
       }.bind(this));
     },
 

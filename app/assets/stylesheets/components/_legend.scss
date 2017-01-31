@@ -133,16 +133,27 @@
   /* Colors */
 
   .legend-spec {
-
+    width: 100%;
   }
 
   .-choropleth {
     .row {
-      flex-flow: row nowrap !important;
+      flex-flow: row nowrap;
     }
 
     .column {
       flex: 1 1 0px;
+    }
+
+    .range {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        width: auto;
+        font-size: rem(11);
+      }
     }
 
     span {
@@ -152,10 +163,6 @@
 
     .color {
       height: rem(7);
-    }
-
-    .value {
-      font-size: rem(10);
     }
   }
 }
