@@ -95,23 +95,25 @@
     renderItemLegend: function(data) {
       _.each(data, function(item) {
         var type = item.legendConfig.type;
-        var template = this.legendType[type];
-        var element = $('#lg-' + item.slug);
-        var items = item.legendConfig.items
-        var options = {};
 
-        if (type === 'choropleth' || type === 'gradient') {
-          options = {
-            start: items[0].value,
-            end: items[items.length-1].value
-          };
+        if (type) {
+          var template = this.legendType[type];
+          var element = $('#lg-' + item.slug);
+          var items = item.legendConfig.items
+          var options = {};
+
+          if (type === 'choropleth' || type === 'gradient') {
+            options = {
+              start: items[0].value || items[0].name,
+              end: items[items.length-1].value || items[items.length-1].name
+            };
+          }
+
+          element.html(template({
+            items: items,
+            options: options
+          }));
         }
-
-        element.html(template({
-          items: items,
-          options: options
-        }));
-
       }.bind(this));
     },
 

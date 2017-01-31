@@ -4,7 +4,7 @@
 
   App.Collection.Datasets = App.Core.Collection.extend({
 
-    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget,layer&page[size]=' +Date.now(),
+    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget,layer&page[size]=' + Date.now(),
 
     model: App.Model.Dataset,
 
@@ -39,7 +39,8 @@
     filterDatasetsWithWidget: function() {
       var filteredModels = [];
       this.models.forEach(function(model) {
-        if (model.get('widget').length)
+        // Get datasets with widget or layer present
+        if (model.get('widget').length || (model.get('layer').length && model.get('layer')[0].attributes.provider === 'cartodb'))
           filteredModels.push(model);
       });
       this.reset(filteredModels);
