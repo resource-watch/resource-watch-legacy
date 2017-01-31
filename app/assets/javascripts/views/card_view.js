@@ -75,8 +75,9 @@
      * Create static map and render it
      */
     drawMapPreview: function() {
-      console.log(this.data.layer);
       var layer_data = typeof this.data !== 'undefined' ? this.data.layer[0].attributes.layerConfig: null;
+
+      // Load basemap
       var basemapBody = {
         "maxzoom":18,
         "minzoom":3,

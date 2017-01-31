@@ -29,7 +29,7 @@
     render: function() {
       this.el.classList.remove(this.props.loadingClassEl);
       this.$el.css({
-        background: 'url('+ this.background +') , url('+ this.basemap +')'
+        backgroundImage: 'url('+ this.background +') , url('+ this.basemap +')'
       });
 
     },
