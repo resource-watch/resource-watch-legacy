@@ -50,9 +50,14 @@
             actions: _this.state.attributes.actions
           });
           $(el).html(card.render().el);
-          if (m.attributes.data || m.attributes.widget || m.attributes.widgetConfig.data) {
+          if (m.attributes.data || (m.attributes.widget && m.attributes.widget.length) || (m.attributes.widgetConfig && m.attributes.widgetConfig.data)) {
             card.drawChart();
           }
+
+          if ((m.attributes.widget && !m.attributes.widget.length) && (m.attributes.layer && m.attributes.layer.length)) {
+            card.drawMapPreview();
+          }
+
         });
 
       return this;

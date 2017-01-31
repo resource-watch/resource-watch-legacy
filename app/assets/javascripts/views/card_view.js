@@ -38,7 +38,7 @@
     render: function() {
       this.$el.html(this.template({
         data: this.data,
-        widget: this.data.widget[0].attributes,
+        widget: this.getWidgetAttributes(),
         state: this.state.attributes
       }));
       this.el.classList.add(this.state.attributes.mode);
@@ -72,12 +72,66 @@
     },
 
     /**
+     * Create static map and render it
+     */
+    drawMapPreview: function() {
+      console.log(this.data.layer);
+      var layer_data = typeof this.data !== 'undefined' ? this.data.layer[0].attributes.layerConfig: null;
+      var basemapBody = {
+        "maxzoom":18,
+        "minzoom":3,
+        "layers":[{
+          "type": "mapnik",
+          "options": {
+            "sql": "SELECT * FROM gadm28_countries",
+            "cartocss": "#gadm28_countries{ polygon-fill: #bbbbbb; polygon-opacity: 1; line-color: #FFFFFF; line-width: 0.5; line-opacity: 0.5;}",
+            "cartocss_version":"2.3.0"
+          }
+        }]
+      };
+
+
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open('POST', 'https://wri-01.carto.com/api/v1/map');
+      xmlhttp.setRequestHeader('Content-Type', 'application/json');
+      xmlhttp.send(JSON.stringify(basemapBody));
+
+      xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4) {
+          if (xmlhttp.status === 200) {
+            var data = JSON.parse(xmlhttp.responseText);
+
+            this.mapPreview = new App.View.MapPreview({
+              el: this.$('.chart'),
+              data: layer_data,
+              basemapId: data.layergroupid
+            });
+
+            this.mapPreview.loadImage();
+          } else {
+            console.error('error');
+          }
+        }
+      }.bind(this);
+    },
+
+    /**
      * Method to update chart
      */
     updateChart: function() {
       if (this.chart) {
         this.chart.update();
       }
+    },
+
+    getWidgetAttributes: function() {
+      if (this.data.widget && this.data.widget.length)
+        return this.data.widget[0].attributes;
+
+      if (this.data.layer && this.data.layer.length)
+        return this.data.layer[0].attributes;
+
+      return {};
     },
 
     /**
