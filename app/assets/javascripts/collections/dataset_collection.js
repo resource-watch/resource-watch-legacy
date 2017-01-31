@@ -39,7 +39,8 @@
     filterDatasetsWithWidget: function() {
       var filteredModels = [];
       this.models.forEach(function(model) {
-        if (model.get('widget').length)
+        // Get datasets with widget or layer present
+        if (model.get('widget').length || (model.get('layer').length && model.get('layer')[0].attributes.provider === 'cartodb'))
           filteredModels.push(model);
       });
       this.reset(filteredModels);

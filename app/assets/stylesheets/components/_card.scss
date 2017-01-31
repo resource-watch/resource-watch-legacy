@@ -124,6 +124,8 @@ $card-shadow-color: $real-black;
     height: 190px;
     overflow: hidden;
     background-color: $bg-color-3;
+    background-size: cover;
+    background-position: center;    
     position: relative;
   }
 
