@@ -14,7 +14,9 @@
 
     legendType: {
       choropleth: this.HandlebarsTemplates.choropleth,
-      basic: this.HandlebarsTemplates.basic
+      basic: this.HandlebarsTemplates.basic,
+      lines: this.HandlebarsTemplates.lines,
+      gradient: this.HandlebarsTemplates.gradient
     },
 
     events: {
@@ -98,13 +100,13 @@
         var items = item.legendConfig.items
         var options = {};
 
-        if (type === 'choropleth') {
-          items = this.parseChoroplethValues(items);
+        if (type === 'choropleth' || type === 'gradient') {
           options = {
             start: items[0].value,
             end: items[items.length-1].value
           };
         }
+
         element.html(template({
           items: items,
           options: options

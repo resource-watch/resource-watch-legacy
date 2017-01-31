@@ -141,7 +141,7 @@
     }
   }
 
-  .-choropleth {
+  .-choropleth, .-gradient {
     .row {
       flex-flow: row nowrap;
     }
@@ -170,19 +170,39 @@
     }
   }
 
-  .-basic {
+  .-basic, .-lines {
     .column {
+      display: flex;
+      align-items: center;
       width: 50%;
     }
 
     span {
+      font-size: rem(14);
+
+      &.color { margin-right: rem(10); }
+    }
+  }
+
+  .-basic {
+    .color {
       width: rem(12);
       height: rem(12);
       border-radius: 50%;
-      font-size: rem(14);
+    }
+  }
 
-      &.color { margin-right: rem(4); }
+  .-lines {
+    .color {
+      width: rem(15);
+      border-top-width: 2px;
+      border-bottom-width: 0;
+      border-right-width: 0;
+      border-left-width: 0;
+      border-style: solid;
 
+      &.-dash { border-style: dashed; }
+      &.-dot { border-style: dotted; }
     }
   }
 }
