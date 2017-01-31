@@ -2,8 +2,6 @@
 
   'use strict';
 
-
-
   App.View.Legend = App.Core.View.extend({
 
     tagName: 'div',
@@ -41,8 +39,6 @@
     },
 
     initialize: function(settings) {
-
-
       if (settings.data) {
         this.state.set({
           data: settings.data
@@ -99,22 +95,38 @@
         if (type) {
           var template = this.legendType[type];
           var element = $('#lg-' + item.slug);
-          var items = item.legendConfig.items
-          var options = {};
-
-          if (type === 'choropleth' || type === 'gradient') {
-            options = {
-              start: items[0].value || items[0].name,
-              end: items[items.length-1].value || items[items.length-1].name
-            };
-          }
+          var items = item.legendConfig.items;
 
           element.html(template({
             items: items,
-            options: options
+            options: this.setOptions(type, items)
           }));
         }
       }.bind(this));
+    },
+
+    setOptions: function(type, items) {
+      var options = {};
+
+      if (type === 'choropleth' || type === 'gradient') {
+        options = {
+          start: items[0].value || items[0].name,
+          end: items[items.length-1].value || items[items.length-1].name
+        };
+
+        if (type === 'gradient') {
+          options.colorsList = this.setGradientColors(items);
+        }
+      }
+      return options;
+    },
+
+    setGradientColors: function(items) {
+      var colors = _.map(items, function(item) {
+        return item.color;
+      });
+
+      return colors.join(', ');
     },
 
     parseChoroplethValues: function(values) {
