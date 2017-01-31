@@ -72,6 +72,7 @@
         .name {
           color: $black;
           font-size: $small-font-size;
+          margin-bottom: rem(5);
         }
 
         div .close {
@@ -134,6 +135,10 @@
 
   .legend-spec {
     width: 100%;
+
+    span {
+      display: inline-block;
+    }
   }
 
   .-choropleth {
@@ -157,12 +162,27 @@
     }
 
     span {
-      display: inline-block;
       width: 100%;
     }
 
     .color {
       height: rem(7);
+    }
+  }
+
+  .-basic {
+    .column {
+      width: 50%;
+    }
+
+    span {
+      width: rem(12);
+      height: rem(12);
+      border-radius: 50%;
+      font-size: rem(14);
+
+      &.color { margin-right: rem(4); }
+
     }
   }
 }

@@ -13,7 +13,8 @@
     template: this.HandlebarsTemplates.legend,
 
     legendType: {
-      choropleth: this.HandlebarsTemplates.choropleth
+      choropleth: this.HandlebarsTemplates.choropleth,
+      basic: this.HandlebarsTemplates.basic
     },
 
     events: {
