@@ -1,87 +1,91 @@
 <div class="row">
-  <div class="col -xs-12 -sm-6 -md-4 -lg-4">
-    <div class="rw-card insight">
-      <div class="image">
+  <div class="col -xs-12">
+    <div class="rw-card insight -vertical">
+      <div class="container">
+        <div class="content">
+          <h3 class="header">Story of the week</h3>
+          <h2 class="title"><%= link_to 'A factory is being built in your neighborhood. Can you do anything about it?', page_path('insights/interactive-edi') %></h2>
+        </div>
+        <div class="info">
+          <div class="source">
+            <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
+            <p>
+              <span>by</span>
+              <a href="#">World Resources Institute</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="image col -xs-12 -sm-6 -md-4 -lg-4">
         <%= link_to page_path('insights/interactive-edi') do %>
-          <%= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-38-th.jpg' %>
+          <%#= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-38-th.jpg' %>
         <% end %>
       </div>
-      <div class="content">
-        <h3 class="header">Interactive</h3>
-        <h2 class="title"><%= link_to 'A factory is being built in your neighborhood. Can you do anything about it?', page_path('insights/interactive-edi') %></h2>
-      </div>
-      <div class="info">
-        <div class="source">
-          <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
-          <p>
-            <span>by</span>
-            <a href="#">World Resources Institute</a>
-          </p>
+    </div>
+  </div>
+  <div class="col -xs-12 -sm-6 -md-4 -lg-4">
+    <div class="rw-card insight -hz -hz-bg">
+      <div class="container">
+        <div class="content">
+          <h3 class="header">Slideshow</h3>
+          <h2 class="title"><%= link_to 'The Water Guardians of the Andes', page_path('insights/slideshow-peru') %></h2>
+        </div>
+        <div class="info">
+          <div class="source">
+            <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
+            <p>
+              <span>by</span>
+              <a href="#">World Resources Institute</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="col -xs-12 -sm-6 -md-4 -lg-4">
-    <div class="rw-card insight">
-      <div class="image">
-        <%= link_to page_path('insights/slideshow-peru') do %>
-          <%= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-40-th.jpg' %>
-        <% end %>
-      </div>
-      <div class="content">
-        <h3 class="header">Slideshow</h3>
-        <h2 class="title"><%= link_to 'The Water Guardians of the Andes', page_path('insights/slideshow-peru') %></h2>
-      </div>
-      <div class="info">
-        <div class="source">
-          <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
-          <p>
-            <span>by</span>
-            <a href="#">World Resources Institute</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col -xs-12 -sm-6 -md-4 -lg-4">
-    <div class="rw-card insight">
-      <div class="image">
+    <div class="rw-card insight -hz -hz-img">
+      <div class="image" id="intMap">
         <%= link_to page_path('insights/interactive-map') do %>
-          <%= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-39-th.jpg' %>
+          <%#= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-39-th.jpg' %>
         <% end %>
       </div>
-      <div class="content">
-        <h3 class="header">Interactive</h3>
-        <h2 class="title"><%= link_to 'Farms to feel squeeze as competition for water increases', page_path('insights/interactive-map') %></h2>
-      </div>
-      <div class="info">
-        <div class="source">
-          <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
-          <p>
-            <span>by</span>
-            <a href="#">World Resources Institute</a>
-          </p>
+      <div class="container">
+        <div class="content">
+          <h3 class="header">Interactive</h3>
+          <h2 class="title"><%= link_to 'Farms to feel squeeze as competition for water increases', page_path('insights/interactive-map') %></h2>
+        </div>
+        <div class="info">
+          <div class="source">
+            <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
+            <p>
+              <span>by</span>
+              <a href="#">World Resources Institute</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="col -xs-12 -sm-6 -md-4 -lg-4">
-    <div class="rw-card insight">
-      <div class="image">
+    <div class="rw-card insight -hz -hz-img">
+      <div class="image" id="sustain">
         <%= link_to page_path('insights/story') do %>
-          <%= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-21-th.jpg' %>
+          <%#= image_tag 'https://vizzuality.github.io/WRW-Prototype/img/insight-21-th.jpg' %>
         <% end %>
       </div>
-      <div class="content">
-        <h3 class="header">Story</h3>
-        <h2 class="title"><%= link_to 'Zooming In: “Sustainable” Cocoa Producer Destroys Pristine Forest in Peru', page_path('insights/story') %></h2>
-      </div>
-      <div class="info">
-        <div class="source">
-          <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
-          <p>
-            <span>by</span>
-            <a href="#">World Resources Institute</a>
+      <div class="container">
+        <div class="content">
+          <h3 class="header">Story</h3>
+          <h2 class="title"><%= link_to 'Zooming In: “Sustainable” Cocoa Producer Destroys Pristine Forest in Peru', page_path('insights/story') %></h2>
+        </div>
+        <div class="info">
+          <div class="source">
+            <img src="https://vizzuality.github.io/WRW-Prototype/img/avatar-wri.png">
+            <p>
+              <span>by</span>
+              <a href="#">World Resources Institute</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

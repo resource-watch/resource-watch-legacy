@@ -19,10 +19,76 @@ $card-shadow-color: $real-black;
   transition: border .2s;
 
   &.insight {
-    box-shadow: 0 1px 5px rgba($card-shadow-color, 0.15);
 
     >.image{
       background-color: transparent;
+    }
+
+    &.-vertical {
+      display: flex;
+      background-color: $light-blue;
+
+      & * { color: $white; }
+
+      & .image {
+        height: auto;
+        max-width: calc(33.33333% - 21px);
+        background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-38-th.jpg');
+        background-position: center;
+        background-size: cover;
+
+        a {
+          display: inline-block;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    &.-hz {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      justify-content: space-between;
+
+      .header { margin-bottom: rem(20); }
+      .title { margin-bottom: rem(28); }
+      .description { margin-bottom: rem(32); }
+    }
+
+    &.-hz-bg {
+      & * { color: $white; }
+      background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-40-th.jpg');
+      background-position: 58%;
+      background-size: cover;
+    }
+
+    &.-hz-img {
+      & * { color: #393f44; }
+
+      .source a { color: $light-blue; }
+
+      .header { color: #c3c8cc; }
+
+      #intMap {
+        background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-39-th.jpg');
+      }
+
+      #sustain {
+        background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-21-th.jpg');
+      }
+
+      .image {
+        background-position: 22%;
+        background-size: cover;
+        height: 300px;
+
+        a {
+          display: inline-block;
+          height: 100%;
+          width: 100%;
+        }
+      }
     }
   }
 
@@ -54,7 +120,7 @@ $card-shadow-color: $real-black;
     line-height: $normal-font-size;
   }
 
-  > .image {
+  .image {
     height: rem(180px);
     background-color: $bg-color-5;
     overflow: hidden;
@@ -67,39 +133,50 @@ $card-shadow-color: $real-black;
     }
   }
 
-  > .content {
-    height: rem(150px);
-    padding: 1rem;
+  .container {
+    padding: rem(50) rem(50) rem(40) rem(40);
+    display: flex;
+    flex-grow: 1;
+    flex-flow: column;
+    justify-content: space-between;
+  }
 
+  .content {
+    height: rem(150px);
     border-bottom: 0;
     box-sizing: border-box;
+
     > .header{
+      letter-spacing: 1.7px;
       font-size: $ultra-small-font-size;
       font-weight: 400;
-      -webkit-font-smoothing: subpixel-antialiased;
-      color: $text-color-4;
       text-transform: uppercase;
+      margin-bottom: rem(60);
+
     }
     > .title {
       font-size: $medium-font-size;
       font-weight: 700;
-      color: $text-color-1;
+      // color: $text-color-1;
+      margin-bottom: rem(28);
 
       a {
         line-height: 1.3;
-        color: $text-color-1;
+        // color: $text-color-1;
         text-decoration: none;
-
         transition: border .2s;
         border-bottom: 2px solid transparent;
         border-color: transparent;
       }
     }
+
+    > .description {
+      margin-bottom: rem(38);
+    }
   }
 
-  > .info {
+  .info {
     height: rem(65px);
-    padding: 0 1rem;
     margin: 0;
     list-style-type: none;
     font-size: $small-font-size;
@@ -115,6 +192,7 @@ $card-shadow-color: $real-black;
         float: left;
         margin-right: 5px;
         border-radius: 50%;
+        margin-right: rem(10);
       }
     }
   }
@@ -125,7 +203,7 @@ $card-shadow-color: $real-black;
     overflow: hidden;
     background-color: $bg-color-3;
     background-size: cover;
-    background-position: center;    
+    background-position: center;
     position: relative;
   }
 
