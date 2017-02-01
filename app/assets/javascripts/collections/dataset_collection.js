@@ -40,8 +40,18 @@
       var filteredModels = [];
       this.models.forEach(function(model) {
         // Get datasets with widget or layer present
-        if (model.get('widget').length || (model.get('layer').length && model.get('layer')[0].attributes.provider === 'cartodb'))
+        if (model.get('widget').length) {
           filteredModels.push(model);
+        }
+
+        // Get only layers by default
+        if (!model.get('widget').length && model.get('layer').length) {
+          var layerAttributes = model.get('layer')[0].attributes;
+          if (layerAttributes.default && layerAttributes.provider === 'cartodb'){
+            filteredModels.push(model);
+          }
+        }
+
       });
       this.reset(filteredModels);
     },
