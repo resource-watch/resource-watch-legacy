@@ -8,15 +8,18 @@
       <%= render "shared/country_dashboard" %>
     </section>
     <section class="rw-l-section">
-      <header class="header">
+      <header class="header -col">
         <h2 class="title"><%= t('insights.latest') %></h2>
-        <%= link_to page_path('insights'), class:'link' do %>
-        <%= t('view_more') %>
-        <i class="right-arrow"></i>
-        <% end %>
+        <p>Our community of collaborators introduce some of the insights the data is already telling us</p>
       </header>
         <!-- <p>Our community of collaborators introduce some of the insights the data is already telling us</p> -->
       <%= render "shared/insights" %>
+
+      <button class="action -gray">
+        <%= link_to page_path('insights'), class:'link' do %>
+          <%= t('insights.explore') %>
+        <% end %>
+      </button>
     </section>
 
     <%= render "shared/planet_pulse" %>
