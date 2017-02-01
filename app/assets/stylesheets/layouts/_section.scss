@@ -8,6 +8,18 @@ $section-header-link-color: $text-color-2;
     justify-content: space-between;;
     align-items: center;
 
+    &.-col {
+      flex-flow: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      p {
+        margin-top: 0;
+        color: #9aa2a9;
+        font-style: italic;
+      }
+    }
+
     > .title {
       display: inline-block;
 
@@ -15,6 +27,19 @@ $section-header-link-color: $text-color-2;
 
       font-size: $large-font-size;
       color: $section-header-color;
+    }
+  }
+
+  .action {
+    width: 100%;
+    margin-top: rem(32);
+
+    a {
+      color: #b9bfc4;
+    }
+
+    &:hover {
+      a { color: $white; }
     }
   }
 }
