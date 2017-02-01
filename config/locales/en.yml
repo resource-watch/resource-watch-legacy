@@ -32,8 +32,10 @@ en:
   get_involved: Get Involved
   help: Help
   insights:
+    latest: Latest Insights
     features: Features insights
     title: Discover insights
+    explore: Explore all insights
   join_mail_list: Join our mailing list
   languages:
     deutsche: Deutsche
