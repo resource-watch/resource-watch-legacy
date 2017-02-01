@@ -32,8 +32,10 @@ en:
   get_involved: Get Involved
   help: Help
   insights:
+    latest: Latest Insights
     features: Features insights
     title: Discover insights
+    explore: Explore all insights
   join_mail_list: Join our mailing list
   languages:
     deutsche: Deutsche
@@ -64,6 +66,7 @@ en:
     explore: Explore
     insights: Insights
     partners: Partners
+    places: Places
     planet_pulse: Planet pulse
     privacy: Privacy
     terms: Terms of service

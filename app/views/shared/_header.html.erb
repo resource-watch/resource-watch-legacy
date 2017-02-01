@@ -36,9 +36,9 @@
         <nav class="rw-main-nav">
           <ul>
             <li ><%= link_to t('titles.insights'), page_path('insights'), class: active_page_class?(page_path('insights')) %></li>
-            <li ><%= link_to t('titles.explore'), explore_index_path, class: active_page_class?(explore_index_path) %></li>
-            <li ><%= link_to t('titles.dashboards'), countries_path, class: active_page_class?(countries_path) %></li>
             <li ><%= link_to t('titles.planet_pulse'), planet_pulse_path, class: active_page_class?(planet_pulse_path) %></li>
+            <li ><%= link_to t('titles.places'), countries_path, class: active_page_class?(countries_path) %></li>
+            <li ><%= link_to t('titles.explore'), explore_index_path, class: active_page_class?(explore_index_path) %></li>
           </ul>
         </nav>
       </div>
