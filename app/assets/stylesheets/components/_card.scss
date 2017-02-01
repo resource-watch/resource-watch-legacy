@@ -15,13 +15,34 @@ $card-shadow-color: $real-black;
 
   background: $bg-color-4;
   border: 1px solid $border-color-1;
-  box-shadow: 0 1px 2px 0 rgba($card-shadow-color, 0.09);
   transition: border .2s;
 
   &.insight {
+    position: relative;
 
     >.image{
       background-color: transparent;
+    }
+
+    .content {
+      height: auto;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+
+      .action.favorite {
+        display: flex;
+        align-items: center;
+
+        span {
+          color: $light-medium-gray;
+          margin-left: rem(2);
+        }
+      }
+
+      .icon { fill: $light-medium-gray; }
     }
 
     &.-vertical {
@@ -61,6 +82,21 @@ $card-shadow-color: $real-black;
       background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-40-th.jpg');
       background-position: 74%;
       background-size: cover;
+
+      .viel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        background-color: $black;
+        opacity: .7;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+      }
     }
 
     &.-hz-img {

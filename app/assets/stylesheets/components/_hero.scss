@@ -40,7 +40,15 @@
         font-weight: 300;
         -webkit-font-smoothing: subpixel-antialiased;
       }
+
+      &.-center{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-flow: column;
+      }
     }
+
 
     > .info {
       height: 38px;
