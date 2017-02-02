@@ -1,10 +1,12 @@
 <section class="rw-l-section">
   <header class="header">
     <h2 class="title"><%= t('explore.header') %></h2>
-    <%= link_to explore_index_path, class:'link' do %>
-      <%= t('view_more') %>
-      <i class="right-arrow"></i>
-    <% end %>
   </header>
   <div id="exploreDashboard" class="cards _minh"></div>
+
+  <button class="action -gray -no-mg">
+    <%= link_to explore_index_path, class:'link' do %>
+      <%= t('explore.header') %>
+    <% end %>
+  </button>
 </section>

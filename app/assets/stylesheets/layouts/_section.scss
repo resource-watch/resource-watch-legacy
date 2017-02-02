@@ -35,6 +35,10 @@ $section-header-link-color: $text-color-2;
     width: 100%;
     margin-top: rem(32);
 
+    &.-no-mg {
+      margin: 0;
+    }
+
     a {
       color: #b9bfc4;
     }
