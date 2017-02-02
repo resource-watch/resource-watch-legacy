@@ -13,45 +13,67 @@
 
     createLayer: function(map, layerSpecs, el) {
       this.button = el;
-      var data = layerSpecs.layerConfig;
-      var layers = data.body.layers;
-      var layerOptions = layers[0].options;
-      var _this = this;
-      var opts = _.clone(this.props);
-      var subLayer = {
-        sql: layerOptions.sql,
-        cartocss: layerOptions.cartocss,
-        interactivity: layerOptions.interactivity
-      };
-      opts['user_name'] = data.account;
-      opts['sublayers'] = [];
-      opts['sublayers'].push(subLayer);
-      opts['maps_api_template'] = 'https://{user}.cartodb.com';
+      var dataOptions = {};
+      dataOptions.data = layerSpecs.layerConfig;
+      dataOptions.layerOptions = dataOptions.data.body.layers[0].options;
+      dataOptions.opts = _.clone(this.props);
+      dataOptions.subLayer = _.extend({}, dataOptions.layerOptions);
 
-      var sqlBounds = new cartodb.SQL({
-        user: data.account,
+      var raster = dataOptions.subLayer.geom_type && dataOptions.subLayer.geom_type == 'raster';
+
+      if (raster)
+        dataOptions.subLayer.raster = true;
+
+      dataOptions.opts['user_name'] = dataOptions.data.account;
+      dataOptions.opts['sublayers'] = [dataOptions.subLayer];
+      dataOptions.opts['maps_api_template'] = 'https://{user}.cartodb.com';
+
+      dataOptions.sqlBounds = new cartodb.SQL({
+        user: dataOptions.data.account,
         sql_api_template: 'https://{user}.cartodb.com'
       });
 
-      sqlBounds.getBounds(subLayer.sql).done(function(bounds) {
-        map.fitBounds(bounds);
-        cartodb.createLayer(map, opts, {https: true})
-          .addTo(map)
-          .done(function(layer) {
-            if (data.interactivity) {
-              _this._activateInteractivity(map, layer);
-            }
-            _this.trigger('cartodb:addLayer', layerSpecs, layer);
-          })
-          .error(function(msg) {
-            console.error('Error adding layer');
-            this.disableButton(this.el);
-          });
-      })
-      .error(function(msg) {
-        console.error('Error adding layer');
-        this.disableButton(this.button);
-      }.bind(this));
+      if (raster) {
+        this.handleRasterLayer(map, layerSpecs, dataOptions);
+      } else {
+        this.handleLayer(map, layerSpecs, dataOptions);
+      }
+    },
+
+    handleRasterLayer: function(map, layerSpecs, data) {
+      data.sqlBounds.execute(data.subLayer.sql).done(function() {
+          this.createAddLayer(map, layerSpecs, data);
+        }.bind(this))
+        .error(function(msg) {
+          console.error('Error adding layer');
+          this.disableButton(this.button);
+        }.bind(this));
+    },
+
+    handleLayer: function(map, layerSpecs, data) {
+      data.sqlBounds.getBounds(data.subLayer.sql).done(function(bounds) {
+          map.fitBounds(bounds);
+          this.createAddLayer(map, layerSpecs, data);
+        }.bind(this))
+        .error(function(msg) {
+          console.error('Error adding layer');
+          this.disableButton(this.button);
+        }.bind(this));
+    },
+
+    createAddLayer: function(map, layerSpecs, data) {
+      cartodb.createLayer(map, data.opts, {https: true})
+        .addTo(map)
+        .done(function(layer) {
+          if (data.data.interactivity) {
+            this._activateInteractivity(map, layer);
+          }
+          this.trigger('cartodb:addLayer', layerSpecs, layer);
+        }.bind(this))
+        .error(function(msg) {
+          console.error('Error adding layer');
+          this.disableButton(this.el);
+        });
     },
 
     disableButton: function(el) {
