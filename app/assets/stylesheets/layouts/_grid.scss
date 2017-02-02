@@ -86,3 +86,14 @@ $grid-gutter: 1.875rem;
     }
   }
 }
+
+@media screen and (min-width: $ultra-large-screen) {
+  @for $column from 1 through $grid-columns {
+    .col.-ul-lg-#{$column} {
+      @include column($column);
+    }
+    .col.-ul-lg-offset-#{$column} {
+      @include offset($column);
+    }
+  }
+}

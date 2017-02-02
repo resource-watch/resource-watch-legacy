@@ -160,7 +160,7 @@
         el: '#exploreDashboard',
         data: this.similarDatasetsData,
         props: {
-          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-4'
+          gridClasses: 'col -xs-12 -sm-12 -md-6 -lg-6 -ul-lg-4'
         }
       });
     },
