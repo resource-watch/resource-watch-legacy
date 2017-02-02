@@ -8,7 +8,7 @@
 
   > .content {
     width: rem(300);
-    max-height: rem(165);
+    max-height: rem(195);
     background: $bg-legend;
     position: fixed;
     z-index: 2;
@@ -29,7 +29,7 @@
       padding: rem(10);
       padding-top: 0;
       flex-wrap: wrap;
-      max-height: rem(125);
+      max-height: rem(160);
       overflow: auto;
 
       > .item {
