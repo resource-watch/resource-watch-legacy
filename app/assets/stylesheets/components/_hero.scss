@@ -20,6 +20,17 @@
     background-position: 30% 0;
   }
 
+  .provisional-updates {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: rem(70);
+    background-image: url('/images/header-banner-updates.png');
+    background-position: left;
+    background-size: cover;
+  }
+
   .rw-hero-content {
     > .title {
       margin-bottom: 40px;
@@ -27,11 +38,12 @@
       a {
         display: block;
         width: 100%;
-        max-width: 550px;
+        // max-width: 550px;
         font-size: $mlarge-font-size;
         font-weight: 300;
         text-decoration: none;
         -webkit-font-smoothing: subpixel-antialiased;
+        opacity: .8;
       }
 
       > .sub-title {
@@ -39,6 +51,12 @@
         text-transform: uppercase;
         font-weight: 300;
         -webkit-font-smoothing: subpixel-antialiased;
+      }
+
+      .desc {
+        color: $white;
+        font-size: rem(21);
+        opacity: .8
       }
 
       &.-center{
