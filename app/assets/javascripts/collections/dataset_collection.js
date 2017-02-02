@@ -38,20 +38,25 @@
     */
     filterDatasetsWithWidget: function() {
       var filteredModels = [];
+
       this.models.forEach(function(model) {
         // Get datasets with widget or layer present
         if (model.get('widget').length) {
           filteredModels.push(model);
-        }
-
-        // Get only layers by default
-        if (!model.get('widget').length && model.get('layer').length) {
-          var layerAttributes = model.get('layer')[0].attributes;
-          if (layerAttributes.default && layerAttributes.provider === 'cartodb'){
-            filteredModels.push(model);
+        } else {
+          var layer = model.get('layer');
+          if (layer.length) {
+            var defaultLayer = _.filter(layer, function(l) {
+              return l.attributes.default
+            })[0];
+            if (defaultLayer.attributes.default && defaultLayer.attributes.provider === 'cartodb'){
+              if (layer.length > 1) {
+                var defaultModel = new App.Model.Dataset(model.attributes);
+                filteredModels.push(defaultModel.set('layer', [defaultLayer]));
+              } else { filteredModels.push(model); }
+            }
           }
         }
-
       });
       this.reset(filteredModels);
     },
