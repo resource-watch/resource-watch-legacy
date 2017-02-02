@@ -17,7 +17,7 @@ $section-header-link-color: $text-color-2;
         margin-top: 0;
         color: #9aa2a9;
         font-style: italic;
-        margin-bottom: rem(50);
+        margin-bottom: rem(40);
       }
     }
 
@@ -29,6 +29,15 @@ $section-header-link-color: $text-color-2;
       font-size: $large-font-size;
       color: $section-header-color;
     }
+  }
+
+  .subtitle {
+    color: $black;
+    padding-bottom: rem(13);
+    font-size: $small-font-size;
+    font-weight: normal;
+    border-bottom: rem(1) solid #e7e8ea;
+    margin-bottom: rem(36);
   }
 
   > .action {

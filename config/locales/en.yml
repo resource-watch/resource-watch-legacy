@@ -25,6 +25,7 @@ en:
   email: Email
   explore:
     header: Explore the data
+    button: Explore all data
   filter: Filter
   fullscreen:
     set: Full screen

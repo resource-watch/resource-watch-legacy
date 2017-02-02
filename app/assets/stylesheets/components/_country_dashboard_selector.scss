@@ -7,6 +7,7 @@
   color: $text-color-3;
   border-radius: 3px;
   align-items: flex-start;
+  margin-bottom: rem(75);
 
   @media screen and (min-width: $medium-screen) {
     flex-direction: row;
