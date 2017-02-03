@@ -190,6 +190,7 @@ $nav-header-height: rem(100);
         line-height: 22px;
         color: $white;
         position: relative;
+        cursor: pointer;
 
         @media screen and (min-width: $medium-screen) {
           font-size: $normal-font-size;

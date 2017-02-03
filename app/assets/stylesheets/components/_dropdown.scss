@@ -1,0 +1,23 @@
+.dropdown {
+  display: none;
+  position: absolute;
+  top: rem(50);
+  right: rem(17);
+  background-color: $white;
+  z-index: 3;
+  border-radius: 10px;
+
+  > ul {
+    flex-flow: column;
+
+    li {
+      a {
+        color: $black;
+      }
+    }
+  }
+
+  &.-active {
+    display: flex;
+  }
+}
