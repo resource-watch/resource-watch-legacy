@@ -1,25 +1,19 @@
 <section class="rw-hero" style="background-image: url(<%= image_path 'banners/interactive-map.jpg' %>)">
-  <div class="provisional-updates"></div>
+  <div class="ticker">
+    <div class="provisional-updates"></div>
+  </div>
   <div class="row">
     <div class="col -xs-12 rw-hero-content">
       <div class="title -center">
         <%= link_to 'Quick and easy access to a world of data', page_path('insights/interactive-edi') %>
         <p class="desc">Explore the latest data, make insights, and help build a more sustainable planet</p>
       </div>
-      <div class="info">
-        <div class="source">
-          <%= image_tag 'partners/wwf-logo.png' %>
-          <span>by &nbsp;
-            <%= link_to 'World Resources Institute', page_path('partners/wri')%>
-          </span>
-        </div>
-        <div class="stars active">
-          <svg class="icon icon-star">
-            <use xmlns:xlink="https://www.w3.org/1999/xlink" xlink:href="#icon-star"></use>
-          </svg>
-          <span>6,574</span>
-        </div>
-      </div>
     </div>
+  </div>
+  <div class="footer">
+    <p>Dive into Resource Watch findings</p>
+    <%= link_to page_path('planet-pulse'), class:'link' do %>
+      Explore the planet
+    <% end %>
   </div>
 </section>

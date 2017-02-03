@@ -20,20 +20,29 @@
     background-position: 30% 0;
   }
 
-  .provisional-updates {
+
+  .ticker {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
-    height: rem(70);
-    background-image: url('/images/header-banner-updates.png');
-    background-position: left;
-    background-size: cover;
+    height: rem(80);
+    padding: 0 rem(35) rem(20);
+    background-color: rgba(0, 0, 0, .3);
+
+    .provisional-updates {
+      width: 100%;
+      height: rem(70);
+      background-image: url('/images/ticker.png');
+      background-position: left top;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
   }
 
   .rw-hero-content {
     > .title {
-      margin-bottom: 40px;
+      margin-bottom: rem(190);
 
       a {
         display: block;
@@ -110,6 +119,45 @@
             color: $text-color-9;
           }
         }
+      }
+    }
+
+  }
+
+  > .footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: rem(1) solid rgba(255, 255, 255, .3);
+    padding: rem(32);
+
+    & * {color: $white;}
+
+    p {
+      margin: 0;
+      margin-right: rem(22);
+    }
+
+    a {
+      position: relative;
+      color: $dark-pink;
+      margin-top: rem(4);
+
+      &:after {
+        content: '';
+        width: rem(10);
+        height: rem(10);
+        position: absolute;
+        top: rem(3);
+        right: rem(-19);
+        transform: rotate(45deg);
+        border-right: rem(2) solid $dark-pink;
+        border-top: rem(2) solid $dark-pink;
       }
     }
   }
