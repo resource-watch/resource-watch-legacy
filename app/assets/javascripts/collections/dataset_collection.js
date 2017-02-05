@@ -58,7 +58,19 @@
           }
         }
       });
-      this.reset(filteredModels);
+      
+      this.reset(this.sortByRwWidget(filteredModels));
+    },
+
+    sortByRwWidget: function(collection) {
+      var sorted = [];
+      _.each(collection, function(model) {
+        var attr = model.attributes;
+        attr.application.length == 1 && attr.widget.length ?
+          sorted.unshift(model) :
+          sorted.push(model);
+      });
+      return sorted;
     },
 
     _getDatasetData: function() {
