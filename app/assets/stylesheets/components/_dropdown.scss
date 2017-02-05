@@ -7,10 +7,28 @@
   z-index: 3;
   border-radius: 10px;
 
-  > ul {
+  &:before {
+    content: '';
+    position: absolute;
+    top: rem(-12);
+    right: rem(21);
+    border-bottom: rem(6) solid $white;
+    border-right: rem(6) solid transparent;
+    border-top: rem(6) solid transparent;
+    border-left: rem(6) solid transparent;
+  }
+
+  > ul.list {
     flex-flow: column;
+    padding: rem(8) 0;
 
     li {
+      margin: rem(5) rem(30);
+
+      &:hover {
+        opacity: .5;
+      }
+
       a {
         color: $black;
       }

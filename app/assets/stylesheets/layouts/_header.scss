@@ -242,7 +242,6 @@ $nav-header-height: rem(100);
 
       .-dropdown {
         position: relative;
-        padding-left: rem(20);
         padding-right: rem(40);
         width: auto;
 
@@ -262,6 +261,9 @@ $nav-header-height: rem(100);
             border-top: rem(4) solid $white;
           }
         }
+      }
+      button.-dropdown {
+        padding-left: rem(20);
       }
     }
   }

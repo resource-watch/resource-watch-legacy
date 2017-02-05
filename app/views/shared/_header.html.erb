@@ -38,10 +38,17 @@
             <li class="-dropdown -white js-dropdown">
               Explore the data
               <div class="dropdown">
-                <ul>
+                <ul class="list">
                   <li ><%= link_to t('titles.planet_pulse'), planet_pulse_path, class: active_page_class?(planet_pulse_path) %></li>
-                  <li ><%= link_to t('titles.places'), countries_path, class: active_page_class?(countries_path) %></li>
                   <li ><%= link_to t('titles.explore'), explore_index_path, class: active_page_class?(explore_index_path) %></li>
+                </ul>
+              </div>
+            </li>
+            <li class="-dropdown -white js-dropdown">
+              Dashboards
+              <div class="dropdown">
+                <ul class="list">
+                  <li ><%= link_to t('titles.places'), countries_path, class: active_page_class?(countries_path) %></li>
                 </ul>
               </div>
             </li>
