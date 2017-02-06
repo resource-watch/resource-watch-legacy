@@ -42,4 +42,10 @@
   .row.-last {
     margin-bottom: rem(100);
   }
+
+  .image {
+    display: inherit;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
