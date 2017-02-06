@@ -1,12 +1,13 @@
 <section class="rw-l-section">
-  <header class="header">
-    <h2 class="title"><%= t('titles.planet_pulse') %></h2>
-  </header>
-  <div class="rw-banner">
-    <%= link_to planet_pulse_path do %>
-    <%= image_tag "planet_pulse/planet-pulse.jpg", class: 'image' %>
-    <% end %>
-    <h3 class="header"> <%= t('planet_pulse.banner')%> </h3>
-    <%= link_to t('planet_pulse.launch'), planet_pulse_path, class: 'button -large' %>
+  <div class="rw-banner" style="background-image: url('/images/planetpulse.png'); background-size: cover; background-position: center">
+    
+    <div class="row">
+      <div class="col -xs-6">
+        <h3 class="header">Real time monitoring data</h3>
+        <h4 class="tab">Planet Pulse</h4>
+        <p class="desc">Fores ecosystems also play a critical role in stabilizing the climate; prividing food, water, wood products and medicines; and supporting much of the world’s biodiversity.</p>
+        <div class="btn"><%= link_to t('planet_pulse.launch'), planet_pulse_path, class: 'button -large' %></div>
+      </div>
+    </div>
   </div>
 </section>

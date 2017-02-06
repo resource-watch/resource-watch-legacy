@@ -5,9 +5,6 @@
 <div class="row">
   <div class="col -xs-12">
     <section class="rw-l-section">
-      <%= render "shared/country_dashboard" %>
-    </section>
-    <section class="rw-l-section">
       <header class="header -col">
         <h2 class="title">Read the latest stories, findings, and analysis from our community</h2>
         <p>Our community of collaborators introduce some of the insights the data is already telling us</p>
@@ -21,11 +18,42 @@
         <% end %>
       </button>
     </section>
+  </div>
+</div>
 
-    <%= render "shared/planet_pulse" %>
+<%= render "shared/planet_pulse" %>
 
+<div class="row">
+  <div class="col -xs-12">
     <section class="rw-l-section">
       <%= render "shared/explore_dashboard" %>
     </section>
   </div>
 </div>
+
+<!-- Provisional images -->
+<div class="row">
+  <div class="col -xs-12">
+    <section class="rw-l-section">
+      <header class="header -col">
+        <h2 class="title">Get involved</h2>
+      </header>
+
+      <%= image_tag "/images/get_involved.png", class: 'image' %>
+    </section>
+  </div>
+</div>
+
+<div class="row -last">
+  <div class="col -xs-12">
+    <section class="rw-l-section">
+      <header class="header -col">
+        <h2 class="title">Social Media</h2>
+      </header>
+
+      <%= image_tag "/images/social.png", class: 'image' %>
+    </section>
+  </div>
+</div>
+
+<%= image_tag "/images/apps.png", class: 'image' %>
