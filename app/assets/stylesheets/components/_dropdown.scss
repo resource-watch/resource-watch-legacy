@@ -24,6 +24,7 @@
   > ul.list {
     flex-flow: column;
     padding: rem(15) 0;
+    width: 100%;
 
     li {
       margin: rem(4) rem(15);
@@ -33,6 +34,7 @@
       }
 
       a {
+        width: 100%;
         font-size: 12px;
         font-weight: bold;
         color: $dark-gray;
