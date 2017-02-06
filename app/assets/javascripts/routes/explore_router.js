@@ -140,8 +140,26 @@
       });
 
       // Events
-      App.Core.Events.on('card:layer:add', this.geo.mapAddLayer.bind(this.geo));
-      App.Core.Events.on('card:layer:remove', this.geo.mapRemoveLayer.bind(this.geo));
+      App.Core.Events.on('card:layer:add', function(layer, el){
+        this.toogleLayers(layer, el);
+        this.geo.mapAddLayer(layer, el);
+      }.bind(this));
+      App.Core.Events.on('card:layer:remove', function(layer, el){
+        this.toogleLayers(layer, el);
+        this.geo.mapRemoveLayer(layer, el);
+      }.bind(this));
+    },
+
+    toogleLayers: function(layer, el) {
+      var layers = this.layers || [];
+      var index = layers.indexOf(layer.id);
+
+      // Toggle layers
+      (index !== -1) ? layers.splice(index, 1) : layers.push(layer.id);
+
+      // Save layers
+      this.layers = layers;
+      this.setLayers(this.layers);
     },
 
     /**
@@ -181,10 +199,21 @@
     },
 
     /**
+     * Set layers param in model
+     */
+    setLayers: function(layers) {
+      this.cards.state.set({
+        layers: layers
+      }, { silent: true });
+    },
+
+    /**
      * Set mode param in model
      */
     setMode: function(state) {
-      this.cards.state.set('mode', state.attributes.mode);
+      this.cards.state.set({
+        mode: state.attributes.mode
+      });
     },
 
     /**

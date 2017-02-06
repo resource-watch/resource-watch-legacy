@@ -31,7 +31,8 @@
       this.data = settings.data;
       this.state.set({
         mode: settings.mode,
-        actions: settings.actions
+        actions: settings.actions,
+        active: settings.active
       });
     },
 
