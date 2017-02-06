@@ -1,7 +1,7 @@
 .rw-banner {
   position: relative;
   overflow: hidden;
-  height: rem(280px);
+  height: rem(550);
   opacity: 1;
   filter: grayscale(0%);
   transition: filter 0.3s, opacity 0.3s;
@@ -11,9 +11,18 @@
     @include nogutter()
   }
 
+  .row {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .image {
     width: 100%;
     float: left;
+    height: 100%;
 
     transition: transform 1s ease;
     transform: scale(1.1);
@@ -29,36 +38,53 @@
     }
   }
 
-  > .header {
+  .header {
     color: $text-color-3;
 
     font-size: $large-font-size;
     line-height: 1.2;
     text-shadow: 0px 2px 4px rgba($bg-color-9,0.50);
-    text-align: center;
+    text-align: left;
+    font-weight: lighter;
 
-    width: 80%;
-    margin-top: 60px;
-    max-width: rem(400px);
+    width: 100%;
+    margin-top: rem(100);
+    margin-bottom: rem(28);
+    // max-width: rem(400px);
 
     @media only screen and (min-width:$medium-screen) {
       font-size: $mlarge-font-size;
     }
   }
 
-  >.header,
-  > a.button.button {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+  .header,
+  a.button.button {
+    // position: absolute;
+    // left: rem(90);
+    // right: 0;
   }
 
-  > a.button {
-    top: 175px;
+  a.button {
+    // top: 175px;
     text-shadow: 0px 1px 2px rgba(0,0,0,0.24);
     text-align: center;
     -webkit-font-smoothing: subpixel-antialiased;
+    margin-bottom: rem(160);
+  }
+
+  .btn {
+    text-align: left;
+  }
+
+  .tab {
+    text-align: left;
+    color: $text-color-3;
+    margin-bottom: rem(5);
+  }
+
+  .desc {
+    text-align: left;
+    color: $text-color-3;
+    margin-bottom: rem(52);
   }
 }

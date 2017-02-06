@@ -38,4 +38,8 @@
       flex-direction: row;
     }
   }
+
+  .row.-last {
+    margin-bottom: rem(100);
+  }
 }

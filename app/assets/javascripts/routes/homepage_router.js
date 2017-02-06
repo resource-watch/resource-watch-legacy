@@ -9,7 +9,7 @@
     },
 
     props: {
-      exploreCards: 6,
+      exploreCards: 3,
       loadingClass: '_is-content-loading'
     },
 
@@ -20,8 +20,11 @@
     },
 
     _initExploreDashboard:function(){
-      this.dashboardEl = $('#exploreDashboard');
-      this.dashboardEl.addClass(this.props.loadingClass);
+      this.latestEl = $('#latestDashboard');
+      this.latestEl.addClass(this.props.loadingClass);
+
+      this.popularEl = $('#popularDashboard');
+      this.popularEl.addClass(this.props.loadingClass);
 
       this.datasets = new App.Collection.Datasets();
       this.listenTo(this.datasets,'collection:gotDataset', this._renderExploreDashboard.bind(this));
@@ -29,17 +32,24 @@
       this.datasets.getWithDatasetData();
     },
 
-    _getDatasetData: function(){
-      return this.datasets.toJSON().slice(0, this.props.exploreCards);
+    _getDatasetData: function(start){
+      return this.datasets.toJSON().slice(start, this.props.exploreCards + start);
     },
 
     _renderExploreDashboard:function(){
       this.cards = new App.View.Cards({
-        el: this.dashboardEl,
-        data: this._getDatasetData(),
+        el: this.latestEl,
+        data: this._getDatasetData(1),
         actions: false
       });
-      this.dashboardEl.removeClass(this.props.loadingClass);
+      this.latestEl.removeClass(this.props.loadingClass);
+
+      this.popular = new App.View.Cards({
+        el: this.popularEl,
+        data: this._getDatasetData(4),
+        actions: false
+      });
+      this.popularEl.removeClass(this.props.loadingClass);
     },
 
     _updateExploreDashboard:function(){
