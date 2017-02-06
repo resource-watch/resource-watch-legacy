@@ -46,7 +46,7 @@
 
       this.popular = new App.View.Cards({
         el: this.popularEl,
-        data: this._getDatasetData(4),
+        data: this._getDatasetData(8),
         actions: false
       });
       this.popularEl.removeClass(this.props.loadingClass);
