@@ -56,4 +56,14 @@ $section-header-link-color: $text-color-2;
       a { color: $white; }
     }
   }
+
+  &.-cut {
+    .rw-banner {
+      background-position: 60%;
+
+      .row {
+        padding: 0 rem(40);
+      }
+    }
+  }
 }
