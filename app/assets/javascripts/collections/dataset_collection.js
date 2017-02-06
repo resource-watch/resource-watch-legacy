@@ -58,7 +58,7 @@
           }
         }
       });
-      
+
       this.reset(this.sortByRwWidget(filteredModels));
     },
 
@@ -66,7 +66,7 @@
       var sorted = [];
       _.each(collection, function(model) {
         var attr = model.attributes;
-        attr.application.length == 1 && attr.widget.length ?
+        attr.widget.length ?
           sorted.unshift(model) :
           sorted.push(model);
       });
