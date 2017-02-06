@@ -1,12 +1,18 @@
 <section class="rw-l-section">
-  <header class="header">
+  <header class="header -col">
     <h2 class="title"><%= t('explore.header') %></h2>
+    <p>Explore the data, create visualizations, and tell the world your story</p>
   </header>
-  <div id="exploreDashboard" class="cards _minh"></div>
+  <%= render "shared/country_dashboard" %>
+  <h4 class="subtitle">Latest</h4>
+  <div id="latestDashboard" class="cards _minh"></div>
+
+  <h4 class="subtitle">Popular</h4>
+  <div id="popularDashboard" class="cards _minh"></div>
 
   <button class="action -gray -no-mg">
     <%= link_to explore_index_path, class:'link' do %>
-      <%= t('explore.header') %>
+      <%= t('explore.button') %>
     <% end %>
   </button>
 </section>

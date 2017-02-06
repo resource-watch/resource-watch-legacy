@@ -54,7 +54,7 @@ $card-shadow-color: $real-black;
       & .image {
         height: auto;
         max-width: calc(33.33333% - 21px);
-        background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-38-th.jpg');
+        background-image: url('/images/image_01.png');
         background-position: center;
         background-size: cover;
 
@@ -79,7 +79,7 @@ $card-shadow-color: $real-black;
 
     &.-hz-bg {
       & * { color: $white; }
-      background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-40-th.jpg');
+      background-image: url('/images/image_04.png');
       background-position: 74%;
       background-size: cover;
 
@@ -107,11 +107,11 @@ $card-shadow-color: $real-black;
       .header { color: #c3c8cc; }
 
       #intMap {
-        background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-39-th.jpg');
+        background-image: url('/images/image_02.jpg');
       }
 
       #sustain {
-        background-image: url('https://vizzuality.github.io/WRW-Prototype/img/insight-21-th.jpg');
+        background-image: url('/images/image_03.jpg');
       }
 
       .image {
