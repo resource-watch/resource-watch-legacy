@@ -183,7 +183,7 @@ $nav-header-height: rem(100);
       li {
         display: flex;
         align-items: center;
-        margin-left: 2rem;
+        margin-left: rem(36);
         margin-bottom: 2rem;
         font-size: $large-font-size;
         text-decoration: none;
@@ -205,6 +205,7 @@ $nav-header-height: rem(100);
           text-transform: none;
           font-weight: normal;
           color: $dark-pink;
+          height: rem(35);
 
           @media screen and (min-width: $medium-screen) {
             margin-bottom: 0;
@@ -242,18 +243,27 @@ $nav-header-height: rem(100);
 
       .-dropdown {
         position: relative;
-        padding-right: rem(40);
+        padding-right: rem(20);
+        margin-left: rem(22);
         width: auto;
+        letter-spacing: .9px;
 
         &:after {
           position: absolute;
           content: '';
-          top: rem(21);
-          right: rem(18);
+          top: rem(17);
+          right: 0;
           border-top: rem(4) solid $dark-pink;
           border-right: rem(4) solid transparent;
           border-bottom: rem(4) solid transparent;
           border-left: rem(4) solid transparent;
+        }
+
+        &.-active {
+          &:after {
+            transform: rotate(180deg);
+            top: rem(10);
+          }
         }
 
         &.-white {
