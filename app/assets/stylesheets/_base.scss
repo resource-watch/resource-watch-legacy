@@ -88,4 +88,22 @@ a, a:visited {
       @include arrow ($tiny-font-size, $text-color-2, 2px, 135deg);
     }
   }
+
+  &.-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  button {
+    &.-disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+
+      &:hover {
+        background-color: $blue-gray;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    }
+  }
 }

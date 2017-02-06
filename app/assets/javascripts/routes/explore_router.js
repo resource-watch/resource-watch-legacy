@@ -135,7 +135,7 @@
         el: '#exploreDashboard',
         data: data,
         props: {
-          gridClasses: 'col -xs-12 -sm-6 -md-6 -lg-6'
+          gridClasses: 'col -xs-12 -sm-6 -md-6 -lg-6 -ul-lg-4'
         }
       });
 

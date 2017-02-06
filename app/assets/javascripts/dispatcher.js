@@ -57,6 +57,9 @@
   if (document.getElementsByClassName('js-header-lang-menu').length > 0) {
     new App.View.HeaderLangMenu({ el: '.js-header-lang-menu' });
   }
+  if (document.getElementsByClassName('rw-l-nav-header').length > 0) {
+    new App.View.Dropdown({ el: '.rw-l-nav-header' });
+  }
   if (document.getElementsByClassName('rw-menu-btn').length > 0) {
     new App.View.MenuButton({ el: '.rw-menu-btn' });
   }

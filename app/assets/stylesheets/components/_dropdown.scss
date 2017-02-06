@@ -1,0 +1,45 @@
+.dropdown {
+  display: none;
+  width: rem(200);
+  position: absolute;
+  top: rem(43);
+  right: rem(32);
+  background-color: $white;
+  z-index: 3;
+  border-radius: rem(5);
+  text-transform: uppercase;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: rem(-12);
+    right: rem(21);
+    border-bottom: rem(6) solid $white;
+    border-right: rem(6) solid transparent;
+    border-top: rem(6) solid transparent;
+    border-left: rem(6) solid transparent;
+  }
+
+  > ul.list {
+    flex-flow: column;
+    padding: rem(15) 0;
+
+    li {
+      margin: rem(4) rem(15);
+
+      &:hover {
+        opacity: .5;
+      }
+
+      a {
+        font-size: 12px;
+        font-weight: bold;
+        color: $dark-gray;
+      }
+    }
+  }
+
+  &.-active {
+    display: flex;
+  }
+}
