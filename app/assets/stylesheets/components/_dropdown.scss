@@ -1,11 +1,13 @@
 .dropdown {
   display: none;
+  width: rem(200);
   position: absolute;
-  top: rem(50);
-  right: rem(17);
+  top: rem(43);
+  right: rem(32);
   background-color: $white;
   z-index: 3;
-  border-radius: 10px;
+  border-radius: rem(5);
+  text-transform: uppercase;
 
   &:before {
     content: '';
@@ -20,17 +22,19 @@
 
   > ul.list {
     flex-flow: column;
-    padding: rem(8) 0;
+    padding: rem(15) 0;
 
     li {
-      margin: rem(5) rem(30);
+      margin: rem(4) rem(15);
 
       &:hover {
         opacity: .5;
       }
 
       a {
-        color: $black;
+        font-size: 12px;
+        font-weight: bold;
+        color: $dark-gray;
       }
     }
   }

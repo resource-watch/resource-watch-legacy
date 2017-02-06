@@ -15,6 +15,7 @@
     _setListeners: function() {
       $(document).on('click', function(e) {
         if (this.element && !e.target.classList.contains('-dropdown')) {
+          this.element.classList.toggle('-active');
           this.element.getElementsByClassName('dropdown')[0].classList.toggle('-active');
           this.element = null;
         }
@@ -23,10 +24,13 @@
 
     _handleClick: function(e) {
       if (this.element != e.currentTarget) {
+        this.element && this.element.classList.toggle('-active');
         this.element && this.element.getElementsByClassName('dropdown')[0].classList.toggle('-active');
         this.element = e.currentTarget;
+        this.element.classList.toggle('-active');
         this.element.getElementsByClassName('dropdown')[0].classList.toggle('-active');
       } else {
+        this.element.classList.toggle('-active');
         this.element && this.element.getElementsByClassName('dropdown')[0].classList.toggle('-active');
         this.element = null;
       }

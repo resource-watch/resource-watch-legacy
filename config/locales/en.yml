@@ -62,6 +62,7 @@ en:
   search: Search
   select: Select
   titles:
+    all_data: All Data
     dashboards: Dashboards
     explore: Explore
     insights: Insights
