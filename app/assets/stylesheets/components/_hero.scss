@@ -160,5 +160,13 @@
         border-top: rem(2) solid $dark-pink;
       }
     }
+
+    .icon {
+      width: rem(22);
+      height: rem(22);
+      margin-right: rem(15);
+
+      &.-first { fill: $dark-pink; }
+    }
   }
 }
