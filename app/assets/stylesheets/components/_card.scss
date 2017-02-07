@@ -188,7 +188,23 @@ $card-shadow-color: $real-black;
       text-transform: uppercase;
       margin-bottom: rem(60);
 
+      &.-middle {
+        display: flex;
+        align-items: center;
+      }
+
+      .icon {
+        width: rem(16);
+        height: rem(16);
+        margin-left: rem(12);
+        margin-bottom: rem(4);
+
+        &.-light {
+          fill: $white;
+        }
+      }
     }
+
     > .title {
       font-size: $medium-font-size;
       font-weight: 700;
@@ -221,6 +237,7 @@ $card-shadow-color: $real-black;
       align-items: center;
       height: 100%;
       max-width: rem(200px);
+
       img {
         width: 38px;
         height: 38px;
@@ -228,6 +245,10 @@ $card-shadow-color: $real-black;
         margin-right: 5px;
         border-radius: 50%;
         margin-right: rem(10);
+      }
+
+      a {
+        text-decoration: underline;
       }
     }
   }
