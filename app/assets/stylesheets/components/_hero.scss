@@ -48,7 +48,7 @@
         display: block;
         width: 100%;
         // max-width: 550px;
-        font-size: $mlarge-font-size;
+        font-size: 44px;
         font-weight: 300;
         text-decoration: none;
         -webkit-font-smoothing: subpixel-antialiased;
@@ -65,6 +65,7 @@
       .desc {
         color: $white;
         font-size: rem(21);
+        letter-spacing: -0.2px;
         opacity: .8
       }
 
@@ -133,7 +134,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-top: rem(1) solid rgba(255, 255, 255, .3);
+    border-top: rem(2) solid rgba(255, 255, 255, .3);
     padding: rem(32);
 
     & * {color: $white;}
@@ -143,10 +144,12 @@
       margin-right: rem(22);
     }
 
-    a {
+    a.link {
       position: relative;
       color: $dark-pink;
       margin-top: rem(4);
+      letter-spacing: 1.2px;
+      font-weight: bold;
 
       &:after {
         content: '';
