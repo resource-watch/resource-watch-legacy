@@ -1,7 +1,12 @@
 <div class="chart _is-content-loading"></div>
 <div class="detail">
   <h3><a href="/explore/{{data.id}}">{{widget.name}}</a></h3>
-  <p>{{data.source}}</p>
+
+  {{#if data.metadata}}
+    {{#if data.metadata.length}}
+      <p>{{data.metadata.0.attributes.info.subtitle}}</p>
+    {{/if}}
+  {{/if}}
 
   <div class="actions">
     <!-- <button class="action -plain -wicon">
