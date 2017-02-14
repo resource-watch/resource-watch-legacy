@@ -4,7 +4,7 @@
 
   App.Collection.Datasets = App.Core.Collection.extend({
 
-    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget,layer&page[size]=1000',
+    url: App.globals.apiUrl + 'dataset?app=rw&includes=widget,layer,metadata&page[size]=1000',
 
     model: App.Model.Dataset,
 
