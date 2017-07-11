@@ -46,55 +46,35 @@
           <li>
             <%= link_to t('titles.insights'), insights_path %>
             <ul>
-              <li><a href="#">Popular insights</a></li>
-              <li><a href="#">Collections</a></li>
-              <li><a href="#">Create an insight</a></li>
+              <li><a href="#">Recent insights</a></li>
+              <li><a href="#">Highlighted insights</a></li>
             </ul>
           </li>
+
           <li>
-            <%= link_to t('titles.explore'), explore_index_path %>
+            <a href="/about">About</a>
             <ul>
-              <li><a href="#">Data map</a></li>
-              <li><a href="#">Dataset</a></li>
+              <li><%= link_to 'Partners', '/partners' %></li>
             </ul>
           </li>
+
           <li>
-            <a href="#"><%= t('apps') %></a>
+            <%= link_to 'Data', '/data' %>
             <ul>
-              <li><a href="#">Popular apps</a></li>
-              <li><a href="#">iOS apps</a></li>
-              <li><a href="#">Android apps</a></li>
-              <li><a href="#">Web apps</a></li>
+              <li><a href="/data/explore">Explore datasets</a></li>
+              <li><a href="/data/dashboards">Dashboards</a></li>
             </ul>
           </li>
+
           <li>
-            <a href="#"><%= t('get_involved') %></a>
+            <a href="/get-involved"><%= t('get_involved') %></a>
             <ul>
-              <li><a href="#">Create insights</a></li>
-              <li><a href="#">Share data</a></li>
-              <li><a href="#">Develop an app</a></li>
-              <li><a href="#">Help improve the data</a></li>
-              <li><a href="#">Become a partner</a></li>
+              <li><a href="#">Submit an insight</a></li>
+              <li><a href="#">Contibute data</a></li>
+              <li><a href="#">Join community</a></li>
             </ul>
           </li>
-          <li>
-            <a href="#"><%= t('help') %></a>
-            <ul>
-              <li><a href="#">Site tour</a></li>
-              <li><a href="#">Help center</a></li>
-              <li><a href="#">FAQ</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#"><%= t('more') %></a>
-            <ul>
-              <li><%= link_to t('titles.dashboards'), countries_path %></li>
-              <li><%= link_to t('titles.planet_pulse'), planet_pulse_path %></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Team</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </li>
+
         </ul>
       </div>
     </div>
