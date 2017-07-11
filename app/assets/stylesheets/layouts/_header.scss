@@ -1,5 +1,5 @@
 $top-header-height: rem(30);
-$nav-header-height: rem(100);
+$nav-header-height: rem(75);
 
 .rw-l-header {
   background-color: $bg-color-1;
@@ -113,6 +113,8 @@ $nav-header-height: rem(100);
 
   .rw-brand {
     display: block;
+    width: 200px;
+    height: 35px;
   }
 
   .rw-top-nav {
@@ -183,8 +185,9 @@ $nav-header-height: rem(100);
       li {
         display: flex;
         align-items: center;
-        margin-left: rem(36);
+        margin-left: rem(15);
         margin-bottom: 2rem;
+        padding: 0 rem(15px);
         font-size: $large-font-size;
         text-decoration: none;
         line-height: 22px;
@@ -241,40 +244,41 @@ $nav-header-height: rem(100);
         }
       }
 
-      .-dropdown {
-        position: relative;
-        padding-right: rem(20);
-        margin-left: rem(22);
-        width: auto;
-        letter-spacing: .9px;
+      // .-dropdown {
+      //   position: relative;
+      //   padding-right: rem(20);
+      //   margin-left: rem(22);
+      //   width: auto;
+      //   letter-spacing: .9px;
 
-        &:after {
-          position: absolute;
-          content: '';
-          top: rem(17);
-          right: 0;
-          border-top: rem(4) solid $dark-pink;
-          border-right: rem(4) solid transparent;
-          border-bottom: rem(4) solid transparent;
-          border-left: rem(4) solid transparent;
-        }
+      //   &:after {
+      //     position: absolute;
+      //     content: '';
+      //     top: rem(17);
+      //     right: 0;
+      //     border-top: rem(4) solid $dark-pink;
+      //     border-right: rem(4) solid transparent;
+      //     border-bottom: rem(4) solid transparent;
+      //     border-left: rem(4) solid transparent;
+      //   }
 
-        &.-active {
-          &:after {
-            transform: rotate(180deg);
-            top: rem(10);
-          }
-        }
+      //   &.-active {
+      //     &:after {
+      //       transform: rotate(180deg);
+      //       top: rem(10);
+      //     }
+      //   }
 
-        &.-white {
-          &:after {
-            border-top: rem(4) solid $white;
-          }
-        }
-      }
-      button.-dropdown {
-        padding-left: rem(20);
-      }
+      //   &.-white {
+      //     &:after {
+      //       border-top: rem(4) solid $white;
+      //     }
+      //   }
+      // }
+
+      // button.-dropdown {
+      //   padding-left: rem(20);
+      // }
     }
   }
 }

@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   resources :partners, only: [:index]
 
   # Planet pulse
-  get 'planet-pulse', to: 'planet_pulse#index', as: 'planet_pulse'
+  get 'pulse', to: 'planet_pulse#index', as: 'planet_pulse'
 
 end
