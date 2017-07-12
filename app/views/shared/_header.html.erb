@@ -39,15 +39,15 @@
               Data
               <div class="dropdown">
                 <ul class="list">
-                  <li ><%= link_to t('titles.all_data'), explore_index_path, class: active_page_class?(explore_index_path) %></li>
-                  <li ><%= link_to 'Dashboards', '/dashboards' %></li>
+                  <li ><%= link_to t('titles.all_data'), data_explore_index_path, class: active_page_class?(data_explore_index_path) %></li>
+                  <li ><%= link_to 'Dashboards', '/data/dashboards' %></li>
                   <li ><%= link_to t('titles.planet_pulse'), planet_pulse_path, class: active_page_class?(planet_pulse_path) %></li>
                 </ul>
               </div>
             </li>
             <li ><%= link_to t('titles.insights'), page_path('insights'), class: active_page_class?(page_path('insights')) %></li>
             <li class="-dropdown -white js-dropdown">
-              About
+              <%# link_to t('titles.about'), '/about' %> About
               <div class="dropdown">
                 <ul class="list">
                   <li ><%= link_to t('titles.partners'), partners_path, class: active_page_class?(partners_path) %></li>

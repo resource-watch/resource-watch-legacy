@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root 'homepage#index'
 
   # Explore page
-  resources :explore, only: [:index, :show]
+  namespace :data do
+    resources :explore, only: [:index, :show]
+  end
 
   # Countries dashboard
   resources :countries, only: [:index, :show]
@@ -17,6 +19,6 @@ Rails.application.routes.draw do
   resources :partners, only: [:index]
 
   # Planet pulse
-  get 'pulse', to: 'planet_pulse#index', as: 'planet_pulse'
+  get '/data/pulse', to: 'planet_pulse#index', as: 'planet_pulse'
 
 end
