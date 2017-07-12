@@ -13,7 +13,7 @@
     model: App.Model.Country,
 
     // url: 'https://wri-01.cartodb.com/api/v2/sql?q=' + encodeURIComponent(SQL),
-    url: '/data/countries.json',
+    url: '/temporal-data/countries.json',
 
     parse: function(data) {
       return _.map(data.features, function(m) {
